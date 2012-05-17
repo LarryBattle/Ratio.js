@@ -1,4 +1,2 @@
-Rational.js
+Ratio.js
 ===========
-
-Rational numbers for Javascript
