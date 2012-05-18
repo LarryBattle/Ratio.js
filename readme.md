@@ -1,8 +1,8 @@
 ﻿# Ratio.js #
-By Larry Battle <http://bateru.com/news/contact-me>
-Version Beta 0.1, 2012.05.12
-**Work in progress**
-<a href="http://jsfiddle.net/jKu4q/1/" title="Testcases">Current Testcases result</a>
+By Larry Battle <http://bateru.com/news/contact-me><br/>
+Version Beta 0.1, 2012.05.12<br/>
+**Work in progress**<br/>
+<a href="http://jsfiddle.net/jKu4q/1/" title="Testcases">Current Testcases result</a><br/>
 
 License: MIT and GPL 3.0 <br/>
 [MIT License] <http://www.opensource.org/licenses/mit-license><br/>
