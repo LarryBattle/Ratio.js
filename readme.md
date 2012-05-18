@@ -15,7 +15,7 @@ Why is this called Ratio.js?<br/>
 Because Rational.js and Fraction.js are taken. 
 
 Why should I use Ratio.js?<br/>
-Floating points operations are a b*tch in javascript. Why not use a Ratio.js?
+By keeping values in a rational form, you can maintain the precision and can avoid common floating point operation errors in javascript.
 
 Examples:
 
@@ -37,7 +37,12 @@ Examples:
     var a = new Ratio(1,10);
     var b = new Ratio(2,10);
     var c = new Ratio(3,10);
-    a.add( b ).toString() === "3/10"
+    a.add( b ).toString() === c.toString() // true!
+    
+    a.toString() === "1/10"
+    +a === 0.1
+    ( +a === a.valueOf() ) 
+    a.toArray() // returns [ 1, 10 ]
 
 Browser Support:
 Firefox, Chrome, IE 6+, Safari and Opera.
