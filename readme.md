@@ -1,16 +1,12 @@
 ﻿# Ratio.js #
-Version Beta 0.1, 2012.05.12
-
-Provides a Ratio/Rational/Fraction object for Javascript. Similar to Fraction.py for Python.<br/>
 By Larry Battle <http://bateru.com/news/contact-me>
+Version Beta 0.1, 2012.05.12
+**Work in progress**
+<a href="http://jsfiddle.net/jKu4q/1/" title="Testcases">Current Testcases result</a>
 
 License: MIT and GPL 3.0 <br/>
 [MIT License] <http://www.opensource.org/licenses/mit-license><br/>
 [GPL v3] <http://opensource.org/licenses/GPL-3.0>
-
-Project page: <https://github.com/LarryBattle/Ratio.js/><br/>
-
-**Work in progress**
 
 What's Ratio.js?<br/>
 Provides a Fraction/Rational/Ratio object for javascript.
@@ -49,6 +45,8 @@ Firefox, Chrome, IE 6+, Safari and Opera.
 Tutorial:
 Read the annotated source code or the test cases for help.
 -Work in Progress-
+
+Project page: <https://github.com/LarryBattle/Ratio.js/><br/>
 
 Alternatives:
 1. [Fraction.js](http://hypervolu.me/~erik/fraction.js/)
