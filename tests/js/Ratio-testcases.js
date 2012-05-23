@@ -2,12 +2,12 @@
 * @project Ratio.js
 * @purpose Testcases for new Ratio.js
 * @author Larry Battle , <http://bateru.com/news/>
-* @date May 10, 2012
+* @date May 23, 2012
 * @license MIT and GPL 3.0 
 * MIT License <http://www.opensource.org/licenses/mit-license>
 * GPL v3 <http://opensource.org/licenses/GPL-3.0>
 * @info Project page: <https://github.com/LarryBattle/Ratio.js/>
-* @version Beta 0.1.1, 2012.05.23
+* @version Beta 0.1.2, 2012.05.23
 */
 $(function(){
 	test( "test Ratio.getRepeatingDecimals", function(){
@@ -90,13 +90,18 @@ $(function(){
 		deepEqual( Ratio.parseToArray( (new Ratio(-4,-3)) ), [4,3 ]);
 		
 		deepEqual( Ratio.parseToArray(Number(1.12)), [112,100 ]);
-		deepEqual( Ratio.parseToArray(1e3), [1000, 1 ]);
-		deepEqual( Ratio.parseToArray("1e-5"), [1,10000 ]);
-		
-		deepEqual( Ratio.parseToArray("-1e-5"), [-1,10000 ]);
-		deepEqual( Ratio.parseToArray(1.01e3), [ 1010,1 ]);
-		deepEqual( Ratio.parseToArray(1.01e-3), [-1, 0.00101 ]);
 		deepEqual( Ratio.parseToArray(0.771), [771,1000 ]);
+		deepEqual( Ratio.parseToArray(1e3), [1000, 1 ]);
+		
+		deepEqual( Ratio.parseToArray("1e-5"), [1,100000 ]);
+		deepEqual( Ratio.parseToArray("-1e-5"), [-1,100000 ]);
+		deepEqual( Ratio.parseToArray(1.01e3), [ 1010,1 ]);
+		
+		deepEqual( Ratio.parseToArray(1e101), [ 1e101, 1 ]);
+		deepEqual( Ratio.parseToArray(1.01e-3), [101, 100000]);
+		deepEqual( Ratio.parseToArray(1.01e-30), [101, 1e32]);
+		
+		deepEqual( Ratio.parseToArray(-1.01e-30), [-101, 1e32]);
 	});
 	test( "test Ratio creation with invalid input", function(){
 		equal( (new Ratio()).toString(), "0" );
