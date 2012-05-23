@@ -7,7 +7,7 @@
 * MIT License <http://www.opensource.org/licenses/mit-license>
 * GPL v3 <http://opensource.org/licenses/GPL-3.0>
 * @info Project page: <https://github.com/LarryBattle/Ratio.js/>
-* @version Beta 0.1, 2012.05.12
+* @version Beta 0.1.1, 2012.05.23
 */
 $(function(){
 	test( "test Ratio.getRepeatingDecimals", function(){
@@ -64,25 +64,39 @@ $(function(){
 		equal( new Ratio(new Ratio(-4),new Ratio(3)).toString(), "-4/3" );
 		equal( new Ratio(new Ratio(4,5).toString(),new Ratio(-3,2).toString()).toString(), "-4/3" );
 	});
-	test( "test Ratio.prototype.parse()", function(){
-		equal( Ratio.parse(), "0" );
-		equal( Ratio.parse( "3" ).toString(), "3" );
-		equal( Ratio.parse(" 3/1").toString(), "3" );
-		equal( Ratio.parse("3/ 2").toString(), "3/2" );
-		equal( Ratio.parse("1 / 3").toString(), "1/3" );
-		equal( Ratio.parse("-4/ 3").toString(), "-4/3" );
-		equal( Ratio.parse(" 4 /-3").toString(), "-4/3" );
-		equal( Ratio.parse("-4 /-3").toString(), "4/3" );
-		equal( Ratio.parse( (new Ratio(4,3)).toString() ).toString(), "4/3" );
-		equal( Ratio.parse( (new Ratio(-4,3)).toString() ).toString(), "-4/3" );
-		equal( Ratio.parse( (new Ratio(4,-3)).toString() ).toString(), "-4/3" );
-		equal( Ratio.parse( (new Ratio(-4,-3)).toString() ).toString(), "4/3" );
+	test( "test Ratio.parseToArray()", function(){
+		deepEqual( Ratio.parseToArray("apples"), []);
+		deepEqual( Ratio.parseToArray(true), []);
+		deepEqual( Ratio.parseToArray([]), [] );
 		
-		equal( Ratio.parse(new Number(1.12)).toString(), "112/100" );
-		equal( Ratio.parse(1e3).toString(), "1000" );
-		equal( Ratio.parse("1e-5").toString(), "1/10000" );
-		equal( Ratio.parse("-1e-5").toString(), "-1/10000" );
-		equal( Ratio.parse(0.125).toString(), "3" );
+		deepEqual( Ratio.parseToArray( 0 ), [0,1] );
+		deepEqual( Ratio.parseToArray( 123 ), [123, 1]);
+		deepEqual( Ratio.parseToArray( 423 ), [ 423, 1 ]);
+		
+		deepEqual( Ratio.parseToArray( "3" ), [ 3, 1 ]);
+		deepEqual( Ratio.parseToArray( " 3  " ), [ 3, 1 ]);
+		deepEqual( Ratio.parseToArray(" 3/1"), [ 3, 1 ]);
+		
+		deepEqual( Ratio.parseToArray("3/ 2"), [ 3, 2 ]);
+		deepEqual( Ratio.parseToArray("1 / 3"), [1, 3 ]);
+		deepEqual( Ratio.parseToArray("-4/ 3"), [-4, 3 ]);
+		
+		deepEqual( Ratio.parseToArray(" 4 /-3"), [-4, 3 ]);
+		deepEqual( Ratio.parseToArray("-4 /-3"), [4, 3 ]);
+		deepEqual( Ratio.parseToArray( (new Ratio(4,3)) ), [4,3 ]);
+		
+		deepEqual( Ratio.parseToArray( (new Ratio(-4,3)) ), [-4,3 ]);
+		deepEqual( Ratio.parseToArray( (new Ratio(4,-3)) ), [-4,3 ]);
+		deepEqual( Ratio.parseToArray( (new Ratio(-4,-3)) ), [4,3 ]);
+		
+		deepEqual( Ratio.parseToArray(Number(1.12)), [112,100 ]);
+		deepEqual( Ratio.parseToArray(1e3), [1000, 1 ]);
+		deepEqual( Ratio.parseToArray("1e-5"), [1,10000 ]);
+		
+		deepEqual( Ratio.parseToArray("-1e-5"), [-1,10000 ]);
+		deepEqual( Ratio.parseToArray(1.01e3), [ 1010,1 ]);
+		deepEqual( Ratio.parseToArray(1.01e-3), [-1, 0.00101 ]);
+		deepEqual( Ratio.parseToArray(0.771), [771,1000 ]);
 	});
 	test( "test Ratio creation with invalid input", function(){
 		equal( (new Ratio()).toString(), "0" );
@@ -321,7 +335,7 @@ $(function(){
 		equal( a, "3/2" );
 		a = a.divide("3/2");
 		equal( a, "1" );
-		equal( a.multiply(12).reduce(), 12 );
+		//equal( a.multiply(12).reduce(), 12 );
 		equal( a, "1" );
 	});
 });
