@@ -2,23 +2,25 @@
  * @project Ratio.js
  * @purpose Provides a Ratio(Fraction) object for Javascript. Similar to Fraction.py for Python.
  * @author Larry Battle , <http://bateru.com/news/>
- * @date May 10, 2012
+ * @date May 23, 2012
  * @license MIT and GPL 3.0
  * MIT License <http://www.opensource.org/licenses/mit-license>
  * GPL v3 <http://opensource.org/licenses/GPL-3.0>
  * @info Project page: <https://github.com/LarryBattle/Ratio.js/>
- * @version Beta 0.1.1, 2012.05.23
+ * @version Beta 0.1.2, 2012.05.23
  */
 //
-// Todo: Test scientific notation compatiblity. <br/>
-// Todo: Separate Core functionals with extras.
+// Todo: Test scientific notation compatiblity. <br/> 
+// Todo: Decide if it's ok for there to be scientific notation in the rationals. If yes, then will this cause problems?<br/> 
+// Todo: Decide if it's ok for there to be decimals inside the rational.<br/> 
+// Todo: Separate Core functionals with extras.<br/> 
 // Todo: Have Ratio methods parse the arguments instead of a parameter. <br/>
 // Todo: Fix Ratio.parse() to support the arguments. <br/>
 // Todo: Change new Ratio() to Ratio() <br/>
 // Todo: Ratio.prototype.descale, could produce decimals in numerator or denominator <br/>
 // Todo: change the way Ratio.js find and use decimals, since scientistic notation is a valid number.<br/>
-// Todo: Have testcases for all methods.
-// Todo; Pass testcases.
+// Todo: Have testcases for all methods.<br/> 
+// Todo; Pass testcases.<br/> 
 //
 
 // Note: Ratio.METHOD_NAME is used when this isn't contained within the bottom.
@@ -99,38 +101,63 @@ Ratio.getPrimeFactors = function (num) {
 Ratio.getNumeratorWithSign = function( a, b ){
 	return ((+a*+b)/Math.abs(+a*+b)) > 0 ? Math.abs(+a): -Math.abs(+a);
 };
-// TODO: Add a stage checker to get rid of all the if and else conditions.
+Ratio.parseDecimal = function( obj ){
+	var arr = [], base, parts;
+	if( !/\./.test(+obj) ){
+		return arr;
+	}
+	parts = (+obj).toString().split( /\./ );
+	base = Math.pow( 10, parts[1].toString().length );
+	arr[0] = Math.abs(parts[0]) * base + (+parts[1]);
+	arr[0] *= /[-]/.test( parts[0] ) ? -1: 1;
+	arr[1] = base;
+	return arr;
+};
+Ratio.parseENotation = function( obj ){
+	var arr = [], top, parts;
+	parts = (+obj).toString().split(/e/i);
+	top = Ratio.parseDecimal( parts[0] );
+	if( Math.abs(+obj) < 1 ){
+		arr[0] = top[0];
+		arr[1] = top[1] * Math.pow( 10, Math.abs(+parts[1]));
+	}else{
+		arr[0] = top[0]* Math.pow( 10, Math.abs(+parts[1]));
+		arr[1] = top[1];
+	}
+	return arr;
+};
+Ratio.parseNumber = function( obj ){
+	var arr = [];
+	if( Ratio.isNumeric( obj ) ){
+		obj = +obj;
+		if( /\d+\.\d+$/.test(obj) ){
+			arr = Ratio.parseDecimal(obj);
+		}else{
+			if( /e/i.test(obj) ){
+				arr = Ratio.parseENotation( obj );
+			}else{
+				arr[0] = obj;
+				arr[1] = 1;
+			}
+		}
+	}
+	return arr;
+};
 Ratio.parseToArray = function (obj) {
-	var arr = [], re = /\//, sign, parts;
+	var arr = [], parts;
+	if( typeof obj == "undefined" || obj == null ){
+		return arr;
+	}
 	if( obj instanceof Ratio ){
 		arr[0] = Ratio.getNumeratorWithSign( obj.numerator, obj.denominator );
 		arr[1] = Math.abs( obj.denominator );
 	}else{
-		if( re.test( obj ) ){
-			parts = obj.split( re );
+		if( /\//.test( obj ) ){
+			parts = obj.split( /\// );
 			arr[0] = Ratio.getNumeratorWithSign( parts[0], parts[1] );
 			arr[1] = Math.abs(+parts[1]);
 		}else{
-			if( Ratio.isNumeric( obj ) ){
-				if( /\./.test(obj) ){
-					parts = (obj).toString().split( /\./ );
-					if( +parts[0] ){
-						arr[1] = Math.pow( 10, Math.abs(+parts[1]).toString().length );
-						arr[0] = (+parts[0] * arr[1]) + (+parts[1]);
-					}else{
-						arr[0] = +parts[1];
-						arr[1] = Math.pow( 10, parts[1].length );
-					}
-				}else if( /e/i.test(obj) ){
-					var decimals = obj.toString().split(/e/i);
-					var parts2 = Ratio.parseToArray( decimals );
-					//??? var parts = Ratio.parseToArray( decimals );
-					if( Math.abs(+obj) > 1 ){}
-				}else{
-					arr[0] = +obj;
-					arr[1] = 1;
-				}
-			}
+			arr = Ratio.parseNumber( obj );
 		}
 	}
 	return arr;
@@ -138,12 +165,17 @@ Ratio.parseToArray = function (obj) {
 // Converts input to a Ratio object. <br/>
 // Invalid numbers return NaN
 // Ex. new Ratio.parse( "3/4" ).numerator == "3"
-Ratio.parse = function (obj) {
+Ratio.parse = function (obj, obj2 ) {
 	if( !Ratio.isNumeric( obj ) ){
 		return "NaN";
 	}
-	var result = 0;
-	return result;
+	var a = Ratio.parseToArray( obj );
+	if( typeof obj2 != "undefined" && obj2 !== null ){
+		var b = Ratio.parseToArray( obj2 );
+		a[0] *= b[1];
+		a[1] *= b[0];
+	}
+	return new Ratio( a[0], a[1] );
 };
 // Converts input into a Ratio object then returns the reduced ratio.<br/>
 // Ex. new Ratio.reduce( "10/4" ).toString() == "5/2";
