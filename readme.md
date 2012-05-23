@@ -1,6 +1,6 @@
 ﻿# Ratio.js #
 By Larry Battle <http://bateru.com/news/contact-me><br/>
-Version Beta 0.1, 2012.05.12<br/>
+Version Beta 0.1.2, 2012.05.23<br/>
 **Work in progress**<br/>
 <a href="http://jsfiddle.net/jKu4q/1/" title="Testcases">Current Testcases result</a><br/>
 
