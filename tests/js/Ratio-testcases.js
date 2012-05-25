@@ -11,18 +11,29 @@
 */
 $(function(){
 	test( "test new Ratio creation", function(){
-		var a = new Ratio( new Ratio(1,3) );
-		equal( a.toString(), "1/3" );
+		equal( Ratio().toString(), "0" );
 		equal( new Ratio().toString(), "0" );
 		equal( new Ratio(3).toString(), "3" );
+		equal( new Ratio(1,3).toString(), "1/3" );
 		equal( new Ratio(3,1).toString(), "3" );
 		equal( new Ratio(10,10).toString(), "1" );
-		equal( new Ratio(400,5).toString(), "400/5" );
+		equal( new Ratio(400,5).toString(), "80" );
 		equal( new Ratio(3,2).toString(), "3/2" );
 		equal( new Ratio(1,3).toString(), "1/3" );
 		equal( new Ratio(-4,3).toString(), "-4/3" );
 		equal( new Ratio(4,-3).toString(), "-4/3" );
 		equal( new Ratio(-4,-3).toString(), "4/3" );
+	});
+	test( "test Ratio.getNumeratorWithSign()", function(){
+		equal( Ratio.getNumeratorWithSign(1,1), 1 );
+		equal( Ratio.getNumeratorWithSign(-1,-1), 1 );
+		equal( Ratio.getNumeratorWithSign(-1,1), -1 );
+		equal( Ratio.getNumeratorWithSign(1,-1), -1 );
+		
+		equal( Ratio.getNumeratorWithSign( Infinity,1), Infinity );
+		equal( Ratio.getNumeratorWithSign(-Infinity,-1), Infinity );
+		equal( Ratio.getNumeratorWithSign(-Infinity,1), -Infinity );
+		equal( Ratio.getNumeratorWithSign(1,-Infinity), -1 );
 	});
 	test( "test Ratio.parseToArray()", function(){
 		deepEqual( Ratio.parseToArray("apples"), []);
@@ -64,40 +75,45 @@ $(function(){
 		deepEqual( Ratio.parseToArray(-1.01e-30), [-101, 1e32]);
 	});
 	test( "test Ratio.parse() with singal arguments.", function(){
-		equal( Ratio.parse("-0.125").toString(), "1/8" );
-		equal( Ratio.parse( new Ratio(3) ).toString(), "3/1" );
-		equal( Ratio.parse(3).toString(), "3/1" );
+		equal( Ratio.parse("-0.125").toString(), "-125/1000" );
+		equal( Ratio.parse( new Ratio(3) ).toString(), "3" );
+		equal( Ratio.parse(3).toString(), "3" );
 		equal( Ratio.parse("-3.0e-1").toString(), "-3/10" );
-		equal( Ratio.parse(3.0).toString(), "3/1" );
+		equal( Ratio.parse(3.0).toString(), "3" );
 		equal( Ratio.parse(new Ratio(-1,3)).toString(), "-1/3" );
 	});
 	test( "test Ratio.parse() with double arguments.", function(){
-		equal( Ratio.parse(0.125,0.5).toString(), "1/4" );
-		equal( Ratio.parse(0.125,"1/2").toString(), "1/4" );
+		equal( Ratio.parse(0.125,0.5).toString(), "1250/5000" );
+		equal( Ratio.parse(0.125,"1/2").toString(), "250/1000" );
 		equal( Ratio.parse(3, new Ratio(2)).toString(), "3/2" );
 		
 		equal( Ratio.parse(3, new Ratio(1)).toString(), "3" );
 		equal( Ratio.parse(new Ratio(1),3).toString(), "1/3" );
 		equal( Ratio.parse(new Ratio(-4),new Ratio(3)).toString(), "-4/3" );
 		
-		equal( Ratio.parse(new Ratio(4,5).toString(),new Ratio(-3,2).toString()).toString(), "-4/3" );
+		equal( Ratio.parse(new Ratio(4,5).toString(),new Ratio(-3,2).toString()).toString(), "-8/15" );
 	});
 	test( "test Ratio creation with invalid input", function(){
 		equal( (new Ratio()).toString(), "0" );
 		equal( (new Ratio(null,null)).toString(), "0" );
 		equal( new Ratio(null,2).toString(), "0" );
+		
 		equal( new Ratio({},2).toString(), "0" );
 		equal( new Ratio([],1).toString(), "0" );
 		equal( new Ratio(true,1).toString(), "0" );
+		
 		equal( new Ratio(function(){},2).toString(), "0" );
 		equal( new Ratio(false,2).toString(), "0" );
 		equal( new Ratio(false,true).toString(), "0" );
+		
 		equal( new Ratio("ten", "ten").toString(), "0" );
 		equal( new Ratio(/ten/,1).toString(), "0" );
 		equal( new Ratio(Infinity).toString(), Infinity );
+		
 		equal( new Ratio(Infinity,1).toString(), Infinity );
 		equal( new Ratio(Infinity,"0").toString(), Infinity );
 		equal( new Ratio(-Infinity,"0").toString(), -Infinity );
+		
 		equal( (new Ratio(Infinity,Infinity)).toString(), "NaN" );
 		equal( (new Ratio(NaN,0)).toString(), "NaN" );
 	});
@@ -248,7 +264,7 @@ $(function(){
 		equal( new Ratio(0,1).divide(new Ratio(1,10)).toString(), "0" );
 		equal( new Ratio(1,1).divide(new Ratio(1,1)).toString(), "1" );
 		equal( new Ratio(10,3).divide(new Ratio(100,30)).toString(), "1" );
-		equal( new Ratio(1,4).divide(new Ratio(1,20)).toString(), "20/4" );
+		equal( new Ratio(1,4).divide(new Ratio(1,20)).toString(), "5" );
 		equal( new Ratio(-10,23).divide(new Ratio(13,-39)).toString(), (39*10)+"/"+(13*23) );
 		equal( new Ratio(-12,-34).divide(new Ratio(-45,-67)).toString(), (12*67)+"/"+(45*34) );
 	});
