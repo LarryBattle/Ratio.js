@@ -29,13 +29,16 @@
 // Note: Use Ratio.prototype.METHOD_NAME if this is required in the bottom of the method.
 
 // Returns an Ratio(Fraction) object that has a numerator and denominator, corresponding to a/b.<br/>
-// Ex. (new Ratio(2,4)).toString() = (new Ratio("2/4")).toString() = "2/4" <br/>
+// Ex. Ratio(2,4).toString() = Ratio("2/4").toString() = "2/4" <br/>
 var Ratio = function (a, b, type, alwaysReduce) {
+	if(!(this instanceof Ratio)){
+		return new Ratio(a, b, type, alwaysReduce);
+	}
     this.divSign = "/";
     this.alwaysReduce = !!alwaysReduce;
     this.type = ""+type;
     this.denominator = isNaN("" + b) ? 1 : Math.abs(b);
-    this.numerator = isNaN("" + a) ? 0 : Ratio.getNumeratorWithSign(a,b);
+    this.numerator = isNaN("" + a) ? 0 : Ratio.getNumeratorWithSign(a,(b||1));
     return this.denominator && this.alwaysReduce ? Ratio.reduce(this) : this;
 };
 // Borrowed from jQuery 1.7.2 <br/>
@@ -62,13 +65,7 @@ Ratio.gcd = function (a, b) {
 // More info <http://bateru.com/news/2012/05/code-of-the-day-javascript-prime-factors-of-a-number/>
 Ratio.getPrimeFactors = function (num) {
     num = Math.floor(num);
-    var root,
-    factors = [],
-
-    x,
-    sqrt = Math.sqrt,
-
-    doLoop = 1 < num && isFinite(num);
+    var root, factors = [], x, sqrt = Math.sqrt, doLoop = 1 < num && isFinite(num);
     while (doLoop) {
         root = sqrt(num);
         x = 2;
@@ -86,7 +83,8 @@ Ratio.getPrimeFactors = function (num) {
     return factors;
 };
 Ratio.getNumeratorWithSign = function (top, bottom) {
-    return (0 < ((+top * +bottom) / Math.abs(+top * +bottom))) ? Math.abs(+top) : -Math.abs(+top);
+	var x = (+top||1), y = (+bottom||1), a = "" + x*y;
+	return ('-' != a[0]) ? Math.abs(+top) : -Math.abs(+top);
 };
 Ratio.parseDecimal = function (obj) {
     var arr = [], base, parts;
@@ -121,7 +119,7 @@ Ratio.parseENotation = function (obj) {
 			arr[1] = top[1];
 		}
 	}else{
-		arr = [obj, 1];
+		arr = Ratio.parseDecimal( obj );
 	}
     return arr;
 };
@@ -176,6 +174,10 @@ Ratio.parse = function (obj, obj2) {
 Ratio.reduce = function (obj) {
 	return Ratio.parse(obj).reduce();
 };
+// Returns the ratio as a/b
+Ratio.prototype.toFraction = function(){
+	return "" + this.numerator + this.divSign + this.denominator;
+};
 // Returns a string of the Ratio in fraction form if the numerator and denominator are Rational numbers. <br/>
 // Otherwise, returns a string of the computed value a/b. <br/>
 // Note: x/1 is shown as x, and 0/x is 0.<br/>
@@ -185,10 +187,9 @@ Ratio.prototype.toString = function () {
     if ( +(this.numerator) && this.denominator != 1) {
         str += this.divSign + Math.abs(this.denominator);
     }
-    if (val == 1) {
-		//??? shouldn't the number already be reduced? Also, what's the base??
-        str = "1"; 
-    }
+	if ( +this.denominator == 0 || (this.numerator % this.denominator) == 0 ) {
+		str = val;
+	}
     return (isNaN(val) || this.type == "decimal") ? val.toString() : str;
 };
 // Adds the current Ratio by another Ratio.<br/>
@@ -197,9 +198,7 @@ Ratio.prototype.add = function (obj) {
     if (!(obj instanceof Ratio)) {
         obj = Ratio.parse.apply(this, arguments);
     }
-    var x,
-    top,
-    bottom;
+    var x, top, bottom;
 
     if (this.denominator == obj.denominator) {
         top = this.numerator + obj.numerator;
@@ -217,7 +216,7 @@ Ratio.prototype.divide = function (obj) {
     if (!(obj instanceof Ratio)) {
         obj = Ratio.parse.apply(this, arguments);
     }
-    return new Ratio(this.denominator * obj.numerator, this.numerator * obj.denominator, this.type, this.alwaysReduce);
+    return new Ratio(this.numerator * obj.denominator, this.denominator * obj.numerator, this.type, this.alwaysReduce);
 };
 // Compares if the current Ratio and another object have the same value.<br/>
 // Ex. new Ratio(1,2).equals( 1/2 ) === true
@@ -294,7 +293,7 @@ Ratio.prototype.reduce = function () {
 };
 //?? Needs work.
 Ratio.repeatingDec2Ratio = function (val) {
-    var a = Ratio.dec2Ratio(val),
+    var a = Ratio.parse(val),
     top = a.numerator,
     bottom = a.denominator,
     repeatVal = Ratio.getRepeatingDecimals(a);
