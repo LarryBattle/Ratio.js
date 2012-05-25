@@ -10,37 +10,6 @@
 * @version Beta 0.1.2, 2012.05.23
 */
 $(function(){
-	test( "test Ratio.getRepeatingDecimals", function(){
-		var func = Ratio.getRepeatingDecimals;
-		equal( func(1/10), null );
-		equal( func(1/40), null );
-		equal( func(1/32), null );
-		equal( func(1/3), "3" );
-		equal( func(2/3), "6" );
-		equal( func(1/7), "142857" );
-		equal( func(1/9), "1" );
-	});
-	test( "test Ratio.hasRepeatingDecimals", function(){
-		var func = Ratio.hasRepeatingDecimals;
-		equal( func( 1/333 ), true );
-		equal( func( 7/13 ), true );
-		equal( func( 100/11 ), true );
-		equal( func( 100/13 ), true );
-		equal( func( 1/3 ), true );
-		equal( func( 1/7 ), true );
-		equal( func( "0.33333" ), true );
-		
-		equal( func( 1/5 ), false );
-		equal( func( 1/100 ), false );		
-		equal( func( "0.3333" ), false );
-		equal( func( Math.PI ), false );
-		equal( func( {} ), false );
-		equal( func( null ), false );
-		equal( func( true ), false );
-		equal( func( Infinity ), false );
-		equal( func( NaN ), false );
-	});
-
 	test( "test new Ratio creation", function(){
 		var a = new Ratio( new Ratio(1,3) );
 		equal( a.toString(), "1/3" );
@@ -54,15 +23,6 @@ $(function(){
 		equal( new Ratio(-4,3).toString(), "-4/3" );
 		equal( new Ratio(4,-3).toString(), "-4/3" );
 		equal( new Ratio(-4,-3).toString(), "4/3" );
-	});
-	test( "test crazy forms of creating a new Ratio", function(){
-		equal( new Ratio(0.125,0.5).toString(), "1/4" );
-		equal( new Ratio(0.125,"1/2").toString(), "1/4" );
-		equal( new Ratio(3, new Ratio(2)).toString(), "3/2" );
-		equal( new Ratio(3, new Ratio(1)).toString(), "3" );
-		equal( new Ratio(new Ratio(1),3).toString(), "1/3" );
-		equal( new Ratio(new Ratio(-4),new Ratio(3)).toString(), "-4/3" );
-		equal( new Ratio(new Ratio(4,5).toString(),new Ratio(-3,2).toString()).toString(), "-4/3" );
 	});
 	test( "test Ratio.parseToArray()", function(){
 		deepEqual( Ratio.parseToArray("apples"), []);
@@ -102,6 +62,25 @@ $(function(){
 		deepEqual( Ratio.parseToArray(1.01e-30), [101, 1e32]);
 		
 		deepEqual( Ratio.parseToArray(-1.01e-30), [-101, 1e32]);
+	});
+	test( "test Ratio.parse() with singal arguments.", function(){
+		equal( Ratio.parse("-0.125").toString(), "1/8" );
+		equal( Ratio.parse( new Ratio(3) ).toString(), "3/1" );
+		equal( Ratio.parse(3).toString(), "3/1" );
+		equal( Ratio.parse("-3.0e-1").toString(), "-3/10" );
+		equal( Ratio.parse(3.0).toString(), "3/1" );
+		equal( Ratio.parse(new Ratio(-1,3)).toString(), "-1/3" );
+	});
+	test( "test Ratio.parse() with double arguments.", function(){
+		equal( Ratio.parse(0.125,0.5).toString(), "1/4" );
+		equal( Ratio.parse(0.125,"1/2").toString(), "1/4" );
+		equal( Ratio.parse(3, new Ratio(2)).toString(), "3/2" );
+		
+		equal( Ratio.parse(3, new Ratio(1)).toString(), "3" );
+		equal( Ratio.parse(new Ratio(1),3).toString(), "1/3" );
+		equal( Ratio.parse(new Ratio(-4),new Ratio(3)).toString(), "-4/3" );
+		
+		equal( Ratio.parse(new Ratio(4,5).toString(),new Ratio(-3,2).toString()).toString(), "-4/3" );
 	});
 	test( "test Ratio creation with invalid input", function(){
 		equal( (new Ratio()).toString(), "0" );
@@ -273,25 +252,35 @@ $(function(){
 		equal( new Ratio(-10,23).divide(new Ratio(13,-39)).toString(), (39*10)+"/"+(13*23) );
 		equal( new Ratio(-12,-34).divide(new Ratio(-45,-67)).toString(), (12*67)+"/"+(45*34) );
 	});
-	test( "test Ratio.dec2Ratio", function(){
-		var func = Ratio.dec2Ratio;
-		equal( func(1).toString(), "1" );
-		equal( func(2).toString(), "2" );
-		equal( func(434).toString(), "434" );
-		equal( func(1/2).toString(), "5/10" );
-		equal( func(1/3).toString(), "3333333333333333/10000000000000000" );
-		equal( func(1/4).toString(), "25/100" );
-		equal( func(1/5).toString(), "2/10" );
-		equal( func(1/6).toString(), "16666666666666666/100000000000000000" );
-		equal( func(1/7).toString(), "14285714285714284/100000000000000000" );
-		equal( func(1/8).toString(), "125/1000" );
-		equal( func(1/9).toString(), "1111111111111111/10000000000000000" );
-		equal( func(1/10).toString(), "1/10" );
-		equal( func(1/30).toString(), "3333333333333333/100000000000000000" );
-		equal( func(1/111).toString(), "9009009009009008/1000000000000000000" );
-		equal( func(49/20).toString(), "245/100" );
-		equal( func(9/4).toString(), "225/100" );
-		equal( func(7/3).toString(), "23333333333333336/10000000000000000" );
+	test( "test Ratio.getRepeatingDecimals", function(){
+		var func = Ratio.getRepeatingDecimals;
+		equal( func(1/10), null );
+		equal( func(1/40), null );
+		equal( func(1/32), null );
+		equal( func(1/3), "3" );
+		equal( func(2/3), "6" );
+		equal( func(1/7), "142857" );
+		equal( func(1/9), "1" );
+	});
+	test( "test Ratio.hasRepeatingDecimals", function(){
+		var func = Ratio.hasRepeatingDecimals;
+		equal( func( 1/333 ), true );
+		equal( func( 7/13 ), true );
+		equal( func( 100/11 ), true );
+		equal( func( 100/13 ), true );
+		equal( func( 1/3 ), true );
+		equal( func( 1/7 ), true );
+		equal( func( "0.33333" ), true );
+		
+		equal( func( 1/5 ), false );
+		equal( func( 1/100 ), false );		
+		equal( func( "0.3333" ), false );
+		equal( func( Math.PI ), false );
+		equal( func( {} ), false );
+		equal( func( null ), false );
+		equal( func( true ), false );
+		equal( func( Infinity ), false );
+		equal( func( NaN ), false );
 	});
 	test( "test Ratio.prototype.reduce()", function(){
 		equal( new Ratio().reduce().toString(), "0");
@@ -304,16 +293,16 @@ $(function(){
 		equal( new Ratio(1/111).reduce().toString(), "1/111");
 		equal( new Ratio(1/333).reduce().toString(), "1/333");
 	});
-	test( "test Ratio.prototype.copy", function(){
+	test( "test Ratio.prototype.clone", function(){
 		var a = new Ratio(1/3);
-		var b = a.copy();
+		var b = a.clone();
 		var c = new Ratio(20,9);
 		equal( a.equals( b ), true );
 		equal( b.equals( a ), true );
 		equal( b.equals( c ), false );
 		equal( c.equals( a ), false );
 	});
-	test( "test Ratio.prototype.copy", function(){
+	test( "test type enforcement", function(){	
 		var a = new Ratio(1,4);
 		a.type = "string";
 		equal( 1+a, "11/4" );
@@ -340,7 +329,7 @@ $(function(){
 		equal( a, "3/2" );
 		a = a.divide("3/2");
 		equal( a, "1" );
-		//equal( a.multiply(12).reduce(), 12 );
+		equal( a.multiply(12).reduce(), 12 );
 		equal( a, "1" );
 	});
 });
