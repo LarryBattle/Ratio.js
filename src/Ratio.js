@@ -16,6 +16,7 @@
 // Todo: Decide if it's ok for there to be decimals inside the rational.<br/>
 // Todo: Separate Core functionals with extras.<br/>
 // Todo: Have Ratio methods parse the arguments instead of a parameter. <br/>
+// Todo: Make new Ratio and cloning a lot easier to copy over all the properties of the previous object. All clone should have the same divSign.
 // Todo: Fix Ratio.parse() to support the arguments. <br/>
 // Todo: Try to convert to jsdocs.
 // Todo: Change new Ratio() to Ratio() <br/>
@@ -174,9 +175,59 @@ Ratio.parse = function (obj, obj2) {
 Ratio.reduce = function (obj) {
 	return Ratio.parse(obj).reduce();
 };
+
+Ratio.repeatingDec2Ratio = function (val) {	
+    var a = Ratio.parse(val),
+    top = a.numerator,
+    bottom = a.denominator,
+    repeatVal = Ratio.getRepeatingDecimals(a);
+    var d = (+a).toString();
+    if (repeatVal) {
+        // calculate b
+        var r = repeatVal;
+        // Todo fix and test this.
+        var re = new RegExp("\\.(\\d+?)" + r);
+        var x = d.match(re)[1];
+        var b = Math.pow(10, x.length);
+        x = d.split('.')[1].split(d.indexOf(r))[0];
+        // top = Math.pow(10, r.length * b);
+        // bottom = Math.pow(10,r.length + x.length) - Math.pow(10,x.length);
+    }
+    return new Ratio(top, bottom);
+};
+// Returns wheather a value has repeating decimals.
+// Ex. new Ratio.hasRepeatingDecimals(1/3) == true
+Ratio.hasRepeatingDecimals = function (val) {
+    var matches = false,
+    re = /(\d+?)\1$/;
+    if (!isNaN("" + val) && /\.\d{5}/.test((+val).toString())) {
+        matches = !!(+val).toString().replace(/\d$/, "").match(re);
+    }
+    return matches;
+};
+// Returns the repeating decimals from a repeating decimal value.
+// Ex. new Ratio.getRepeatingDecimals(1/3) == "3"
+Ratio.getRepeatingDecimals = function (val) {
+	var match = null, re = /(\d+?)(?:\1+)/;
+    if (!Ratio.hasRepeatingDecimals(val)) {
+        return match;
+    }
+    match = (+val).toString().replace(/\d$/, "").match(re)[1];
+    return match;
+};
 // Returns the ratio as a/b
 Ratio.prototype.toFraction = function(){
 	return "" + this.numerator + this.divSign + this.denominator;
+};
+// Returns an array form of the Ratio.
+// Ex. new Ratio(1,2).toArray() == [1,2]
+Ratio.prototype.toArray = function () {
+    return [this.numerator, this.denominator];
+};
+// Returns the computed value of numerator / denominator
+// Ex. new Ratio(1,2).valueOf() == 0.5
+Ratio.prototype.valueOf = function (showValue) {
+    return (!showValue && this.type == "string") ? this.toString() : (this.numerator / this.denominator);
 };
 // Returns a string of the Ratio in fraction form if the numerator and denominator are Rational numbers. <br/>
 // Otherwise, returns a string of the computed value a/b. <br/>
@@ -191,6 +242,24 @@ Ratio.prototype.toString = function () {
 		str = val;
 	}
     return (isNaN(val) || this.type == "decimal") ? val.toString() : str;
+};
+// Returns a new copy of the Ratio with a specified type.<br/>
+// Ex. new Ratio(1,2).clone().toString() === "1/2"
+Ratio.prototype.clone = function () {
+    return new Ratio(this.numerator, this.denominator, this.type, this.alwaysReduce);
+};
+// Reduces the Ratio. <br/> x*a / x*b => a / b <br/>
+// Ex. var a = new Ratio(0.5); <br/>
+// a.toString() == "5/10"; <br/>
+// a.reduce().toString() == "1/2";
+Ratio.prototype.reduce = function () {
+    var top = this.numerator, bottom = this.denominator, arr = Ratio.getRepeatProps(top/bottom);
+    if ( arr.length ) {
+		top = +(arr.join('')) - +(arr[0]+""+arr[1]);
+		bottom = Math.pow(10, arr[1].length ) * ( Math.pow(10, arr[2].length ) - 1);
+    }
+	var factor = Ratio.gcd(top, bottom);
+    return new Ratio( top / factor, bottom / factor );
 };
 // Adds the current Ratio by another Ratio.<br/>
 // Ex. new Ratio( 1, 3 ).add( 1,2 ).toString() == "5/6"
@@ -240,6 +309,9 @@ Ratio.prototype.subtract = function (obj) {
     obj.numerator = -obj.numerator;
     return this.add(obj);
 };
+// ######
+// Extras
+// ######
 // Returns an new Ratio divided by a factor. <br/>
 // Ex. new Ratio(10,4).descale( 2 ).toString() === "5/2"
 Ratio.prototype.descale = function (factor) {
@@ -260,11 +332,6 @@ Ratio.prototype.scale = function (factor) {
 Ratio.prototype.abs = function () {
     return new Ratio(Math.abs(this.numerator), this.denominator, this.type, this.alwaysReduce);
 };
-// Returns a new copy of the Ratio with a specified type.<br/>
-// Ex. new Ratio(1,2).clone().toString() === "1/2"
-Ratio.prototype.clone = function () {
-    return new Ratio(this.numerator, this.denominator, this.type, this.alwaysReduce);
-};
 // Returns Ratio in the form of (numerator mod denominator)/1 <br/>
 // Ex. new Ratio(3,10).mod().toString() == 3
 Ratio.prototype.mod = function () {
@@ -280,65 +347,28 @@ Ratio.prototype.negate = function () {
 Ratio.prototype.isProper = function () {
     return Math.abs(this.numerator) < this.denominator;
 };
-// Reduces the Ratio. <br/> x*a / x*b => a / b <br/>
-// Ex. var a = new Ratio(0.5); <br/>
-// a.toString() == "5/10"; <br/>
-// a.reduce().toString() == "1/2";
-Ratio.prototype.reduce = function () {
-    var obj = new Ratio(this.numerator, this.denominator);
-    if (Ratio.getRepeatingDecimals(+obj)) {
-        obj = Ratio.repeatingDec2Ratio(+obj);
-    }
-    return this.descale(Ratio.gcd(obj.numerator, obj.denominator));
-};
-//?? Needs work.
-Ratio.repeatingDec2Ratio = function (val) {
-    var a = Ratio.parse(val),
-    top = a.numerator,
-    bottom = a.denominator,
-    repeatVal = Ratio.getRepeatingDecimals(a);
-    var d = (+a).toString();
-    if (repeatVal) {
-        // calculate b
-        var r = repeatVal;
-        // Todo fix and test this.
-        var re = new RegExp("\\.(\\d+?)" + r);
-        var x = d.match(re)[1];
-        var b = Math.pow(10, x.length);
-        x = d.split('.')[1].split(d.indexOf(r))[0];
-        // top = Math.pow(10, r.length * b);
-        // bottom = Math.pow(10,r.length + x.length) - Math.pow(10,x.length);
-    }
-    return new Ratio(top, bottom);
-};
-// Returns wheather a value has repeating decimals.
-// Ex. new Ratio.hasRepeatingDecimals(1/3) == true
-Ratio.hasRepeatingDecimals = function (val) {
-    var matches = false,
-    re = /(\d+?)\1$/;
-    if (!isNaN("" + val) && /\.\d{5}/.test((+val).toString())) {
-        matches = !!(+val).toString().replace(/\d$/, "").match(re);
-    }
-    return matches;
-};
-// Returns the repeating decimals from a repeating decimal value.
-// Ex. new Ratio.getRepeatingDecimals(1/3) == "3"
-Ratio.getRepeatingDecimals = function (val) {
-    if (!Ratio.hasRepeatingDecimals(val)) {
-        return null;
-    }
-    var match = null,
-    re = /(\d+?)(?:\1+)/;
-    match = (+val).toString().replace(/\d$/, "").match(re)[1];
-    return match;
-};
-// Returns an array form of the Ratio.
-// Ex. new Ratio(1,2).toArray() == [1,2]
-Ratio.prototype.toArray = function () {
-    return [this.numerator, this.denominator];
-};
-// Returns the computed value of numerator / denominator
-// Ex. new Ratio(1,2).valueOf() == 0.5
-Ratio.prototype.valueOf = function (showValue) {
-    return (!showValue && this.type == "string") ? this.toString() : (this.numerator / this.denominator);
-};
+
+
+
+Ratio.getRepeatProps = function( val ){
+	var RE1_getRepeatDecimals = /(?:[^\.]+\.\d*)(\d+)+(?:\1)$/, 
+		arr = [], 
+		match = RE1_getRepeatDecimals.exec( val ), 
+		RE2_RE1AtEnd;
+	if( !match ){
+		val = (val || "" ).toString().replace( /\d$/, "" );
+		match = RE1_getRepeatDecimals.exec( val );
+	}
+	if( match && typeof match[1] != "undefined" && /\.\d{10}/.test(match[0]) ){
+		RE2_RE1AtEnd = new RegExp( "("+ match[1] +")+$" );
+		arr = val.toString().replace( RE2_RE1AtEnd, "" ).split( /\./ ).concat( match[1] );
+	}
+	return arr;
+}
+
+
+
+
+
+
+

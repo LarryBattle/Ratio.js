@@ -278,36 +278,53 @@ $(function(){
 		equal( func(1/7), "142857" );
 		equal( func(1/9), "1" );
 	});
-	test( "test Ratio.hasRepeatingDecimals", function(){
-		var func = Ratio.hasRepeatingDecimals;
-		equal( func( 1/333 ), true );
-		equal( func( 7/13 ), true );
-		equal( func( 100/11 ), true );
-		equal( func( 100/13 ), true );
-		equal( func( 1/3 ), true );
-		equal( func( 1/7 ), true );
-		equal( func( "0.33333" ), true );
+	test( "test Ratio.getRepeatProps() with invalid input", function(){
+		var func = Ratio.getRepeatProps;
+		deepEqual( func( "" ), [] );
+		deepEqual( func( [] ), [] );
+		deepEqual( func( {} ), [] );
+		deepEqual( func( Math.PI ), [] );
+		deepEqual( func( null ), [] );
+		deepEqual( func( true ), [] );
+		deepEqual( func( Infinity ), [] );
+		deepEqual( func( NaN ), [] );
+		deepEqual( func( 1/5 ), [] );
+		deepEqual( func( 1/100 ), [] );
+		deepEqual( func( "1.2.3" ), [] );
+		deepEqual( func( "1.333333" ), [] );
+	});	
+	test( "test Ratio.getRepeatProps() with valid input", function(){
+		var func = Ratio.getRepeatProps;
 		
-		equal( func( 1/5 ), false );
-		equal( func( 1/100 ), false );		
-		equal( func( "0.3333" ), false );
-		equal( func( Math.PI ), false );
-		equal( func( {} ), false );
-		equal( func( null ), false );
-		equal( func( true ), false );
-		equal( func( Infinity ), false );
-		equal( func( NaN ), false );
+		deepEqual( func( "1.1111111111" ), [ "1", "", "1" ] );
+		deepEqual( func( "1234.11111111111" ), [ "1234", "", "1" ] );
+		deepEqual( func( "1.12312311111111" ), [ "1", "123123", "1" ] );
+		
+		deepEqual( func( "12.12121212121212" ), [ "12", "", "12" ] );
+		deepEqual( func( "1234.1111212121212" ), [ "1234", "111", "12" ] );		
+		deepEqual( func( "2.123412341234" ), ["2","","1234"] );
+		
+		deepEqual( func( "3534.3344512341234" ), ["3534","33445","1234"] );
+		deepEqual( func( 1/333 ), ["0","","003" ] );
+		deepEqual( func( 7/13 ), ["0","5384","615384" ] );
+		
+		deepEqual( func( 100/11 ), ["9","","09" ] );
+		deepEqual( func( 100/13 ), ["7","692","307692" ] );
+		deepEqual( func( 1/3 ), ["0","","3" ] );
+		deepEqual( func( 4/3 ), ["1","","3" ] );
 	});
 	test( "test Ratio.prototype.reduce()", function(){
 		equal( new Ratio().reduce().toString(), "0");
 		equal( new Ratio(0).reduce().toString(), "0");
 		equal( new Ratio(1).reduce().toString(), "1");
+		
 		equal( new Ratio(1,3).reduce().toString(), "1/3");
 		equal( new Ratio(3,9).reduce().toString(), "1/3");
-		equal( new Ratio(1/100).reduce().toString(), "1/100");
-		equal( new Ratio(7/3).reduce().toString(), "7/3");
-		equal( new Ratio(1/111).reduce().toString(), "1/111");
-		equal( new Ratio(1/333).reduce().toString(), "1/333");
+		equal( Ratio.parse(1/100).reduce().toString(), "1/100");
+		
+		equal( Ratio.parse(7/3).reduce().toString(), "7/3");
+		equal( Ratio.parse(1/111).reduce().toString(), "1/111");
+		equal( Ratio.parse(1/333).reduce().toString(), "1/333");
 	});
 	test( "test Ratio.prototype.clone", function(){
 		var a = new Ratio(1/3);
@@ -348,4 +365,6 @@ $(function(){
 		equal( a.multiply(12).reduce(), 12 );
 		equal( a, "1" );
 	});
+	// test( "", function(){
+	// });
 });
