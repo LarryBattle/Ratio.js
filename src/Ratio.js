@@ -1,33 +1,17 @@
-
 /**
  * @project Ratio.js
  * @purpose Provides a Ratio(Fraction) object for Javascript. Similar to Fraction.py for Python.
  * @author Larry Battle , <http://bateru.com/news/>
- * @date May 23, 2012
+ * @date May 29, 2012
  * @license MIT and GPL 3.0
  * MIT License <http://www.opensource.org/licenses/mit-license>
  * GPL v3 <http://opensource.org/licenses/GPL-3.0>
  * @info Project page: <https://github.com/LarryBattle/Ratio.js/>
- * @version Beta 0.1.2, 2012.05.23
+ * @version Beta 0.1.4, 2012.05.29
  */
-//
 // Todo: Test scientific notation compatiblity. <br/>
-// Todo: Decide if it's ok for there to be scientific notation in the rationals. If yes, then will this cause problems?<br/>
-// Todo: Decide if it's ok for there to be decimals inside the rational.<br/>
-// Todo: Separate Core functionals with extras.<br/>
-// Todo: Have Ratio methods parse the arguments instead of a parameter. <br/>
 // Todo: Make new Ratio and cloning a lot easier to copy over all the properties of the previous object. All clone should have the same divSign.
-// Todo: Fix Ratio.parse() to support the arguments. <br/>
 // Todo: Try to convert to jsdocs.
-// Todo: Change new Ratio() to Ratio() <br/>
-// Todo: Ratio.prototype.descale, could produce decimals in numerator or denominator <br/>
-// Todo: change the way Ratio.js find and use decimals, since scientistic notation is a valid number.<br/>
-// Todo: Have testcases for all methods.<br/>
-// Todo; Pass testcases.<br/>
-//
-
-// Note: Ratio.METHOD_NAME is used when this isn't contained within the bottom.
-// Note: Use Ratio.prototype.METHOD_NAME if this is required in the bottom of the method.
 
 // Returns an Ratio(Fraction) object that has a numerator and denominator, corresponding to a/b.<br/>
 // Ex. Ratio(2,4).toString() = Ratio("2/4").toString() = "2/4" <br/>
@@ -61,28 +45,6 @@ Ratio.gcd = function (a, b) {
     }
     return Math.abs(a);
 };
-// Returns an array of the prime factors of a number. <br/>
-// Ex. new Ratio.getPrimeFactors(20) returns [2,2,5] <br/>
-// More info <http://bateru.com/news/2012/05/code-of-the-day-javascript-prime-factors-of-a-number/>
-Ratio.getPrimeFactors = function (num) {
-    num = Math.floor(num);
-    var root, factors = [], x, sqrt = Math.sqrt, doLoop = 1 < num && isFinite(num);
-    while (doLoop) {
-        root = sqrt(num);
-        x = 2;
-        if (num % x) {
-            x = 3;
-            while ((num % x) && ((x += 2) < root));
-
-        }
-        
-        x = (x > root) ? num : x;
-        factors.push(x);
-        doLoop = (x != num);
-        num /= x;
-    }
-    return factors;
-};
 Ratio.getNumeratorWithSign = function (top, bottom) {
 	var x = (+top||1), y = (+bottom||1), a = "" + x*y;
 	return ('-' != a[0]) ? Math.abs(+top) : -Math.abs(+top);
@@ -108,11 +70,10 @@ Ratio.parseENotation = function (obj) {
     if(!Ratio.isNumeric(obj)){
 		return arr;
 	}
-	obj = +obj;
-	if( /e/i.test(obj) ){
-		parts = obj.toString().split(/e/i);
+	if( /e/i.test(+obj) ){
+		parts = +obj.toString().split(/e/i);
 		top = Ratio.parseDecimal(parts[0]);
-		if (Math.abs(obj) < 1) {
+		if (Math.abs(+obj) < 1) {
 			arr[0] = top[0];
 			arr[1] = +(top[1] + "e" + Math.abs(+parts[1]));
 		} else {
@@ -120,21 +81,16 @@ Ratio.parseENotation = function (obj) {
 			arr[1] = top[1];
 		}
 	}else{
-		arr = Ratio.parseDecimal( obj );
+		arr = Ratio.parseDecimal( +obj );
 	}
     return arr;
 };
+// returns an array;
 Ratio.parseNumber = function (obj) {
-    var arr = [];
     if (!Ratio.isNumeric(obj)) {
-		return arr;
+		return [];
 	}
-	if (/e/i.test(obj)) {
-		arr = Ratio.parseENotation(obj);
-	}else {
-		arr = Ratio.parseDecimal(obj);
-	}
-    return arr;
+	return (/e/i.test(obj)) ? Ratio.parseENotation(obj) : Ratio.parseDecimal(obj);
 };
 Ratio.parseToArray = function (obj) {
     var arr = [], parts;
@@ -175,46 +131,31 @@ Ratio.parse = function (obj, obj2) {
 Ratio.reduce = function (obj) {
 	return Ratio.parse(obj).reduce();
 };
-
-Ratio.repeatingDec2Ratio = function (val) {	
-    var a = Ratio.parse(val),
-    top = a.numerator,
-    bottom = a.denominator,
-    repeatVal = Ratio.getRepeatingDecimals(a);
-    var d = (+a).toString();
-    if (repeatVal) {
-        // calculate b
-        var r = repeatVal;
-        // Todo fix and test this.
-        var re = new RegExp("\\.(\\d+?)" + r);
-        var x = d.match(re)[1];
-        var b = Math.pow(10, x.length);
-        x = d.split('.')[1].split(d.indexOf(r))[0];
-        // top = Math.pow(10, r.length * b);
-        // bottom = Math.pow(10,r.length + x.length) - Math.pow(10,x.length);
-    }
-    return new Ratio(top, bottom);
-};
-// Returns wheather a value has repeating decimals.
-// Ex. new Ratio.hasRepeatingDecimals(1/3) == true
-Ratio.hasRepeatingDecimals = function (val) {
-    var matches = false,
-    re = /(\d+?)\1$/;
-    if (!isNaN("" + val) && /\.\d{5}/.test((+val).toString())) {
-        matches = !!(+val).toString().replace(/\d$/, "").match(re);
-    }
-    return matches;
-};
-// Returns the repeating decimals from a repeating decimal value.
-// Ex. new Ratio.getRepeatingDecimals(1/3) == "3"
-Ratio.getRepeatingDecimals = function (val) {
-	var match = null, re = /(\d+?)(?:\1+)/;
-    if (!Ratio.hasRepeatingDecimals(val)) {
-        return match;
-    }
-    match = (+val).toString().replace(/\d$/, "").match(re)[1];
-    return match;
-};
+// To simplify a repeating decimal, divide the value into three parts.
+// dec = i.xr, where i are the values to the left of the decimal point. 
+// x are the decimals to the right of the decimal point and to the left of the repeating pattern.
+// r is the unique repeating patterns for the repeating decimal.
+// Ex. 22/7 = 3.14285714285714, i = 3, x = 1, r = 4285714
+// If the value is not a repeating decimal, then returns empty array.
+// Otherwise returns array = [ "numbers before decimal", "numbers before repeating pattern", "repeating pattern." ].
+Ratio.getRepeatProps = function( val ){
+	val = (val || "").toString();
+	var RE1_getRepeatDecimals = /(?:[^\.]+\.\d*)(\d{2,})+(?:\1)$/,
+		arr = [], 
+		match = RE1_getRepeatDecimals.exec( val ), 
+		RE2_RE1AtEnd,
+		RE3_RepeatingNums = /^(\d+)(?:\1)$/;
+	if( !match ){
+		val = val.replace( /\d$/, "" );
+		match = RE1_getRepeatDecimals.exec( val );
+	}
+	if( match && 1 < match.length && /\.\d{10}/.test(match[0]) ){
+		match[1] = RE3_RepeatingNums.test(match[1]) ? RE3_RepeatingNums.exec(match[1])[1] : match[1];
+		RE2_RE1AtEnd = new RegExp( "("+ match[1] +")+$" );
+		arr = val.replace( RE2_RE1AtEnd, "" ).split( /\./ ).concat( match[1] );
+	}
+	return arr;
+}
 // Returns the ratio as a/b
 Ratio.prototype.toFraction = function(){
 	return "" + this.numerator + this.divSign + this.denominator;
@@ -268,7 +209,6 @@ Ratio.prototype.add = function (obj) {
         obj = Ratio.parse.apply(this, arguments);
     }
     var x, top, bottom;
-
     if (this.denominator == obj.denominator) {
         top = this.numerator + obj.numerator;
         bottom = this.denominator;
@@ -309,23 +249,25 @@ Ratio.prototype.subtract = function (obj) {
     obj.numerator = -obj.numerator;
     return this.add(obj);
 };
-// ######
-// Extras
-// ######
+// ###### Extras ######
 // Returns an new Ratio divided by a factor. <br/>
 // Ex. new Ratio(10,4).descale( 2 ).toString() === "5/2"
 Ratio.prototype.descale = function (factor) {
-    return new Ratio(this.numerator / +factor, this.denominator / +factor, this.type, this.alwaysReduce);
+    return new Ratio(this.numerator / factor, this.denominator / factor, this.type, this.alwaysReduce);
 };
 // Returns an new Ratio powered to a power. <br/>
 // Ex. new Ratio(2,4).pow(4).toString() === "16/256"
 Ratio.prototype.pow = function (power) {
     return new Ratio(Math.pow(this.numerator, +power), Math.pow(this.denominator, +power), this.type, this.alwaysReduce);
 };
-// Returns an new Ratio multiplied by a factor.<br/>
+// Returns a new Ratio multiplied by a factor.<br/>
 // Ex. new Ratio(1,10).scale(10).toString() === "10/100"
 Ratio.prototype.scale = function (factor) {
     return new Ratio(this.numerator * +factor, this.denominator * +factor, this.type, this.alwaysReduce);
+};
+// Returns a new Ratio by parsing the numerator and denominator.
+Ratio.prototype.reParse = function () {
+    return Ratio.parse( this.numerator, this.denominator );
 };
 // Returns a Ratio object with no sign. <br/>
 // Ex. new Ratio(-1,-2).abs().toString() === "1/2"
@@ -342,33 +284,29 @@ Ratio.prototype.mod = function () {
 Ratio.prototype.negate = function () {
     return new Ratio( -this.numerator, this.denominator, this.type, this.alwaysReduce);
 };
-// Returns wheather the Ratio is proper.s
+// Returns wheather the Ratio is proper.
 // Ex. new Ratio(1,2).isProper() == true
 Ratio.prototype.isProper = function () {
     return Math.abs(this.numerator) < this.denominator;
 };
+// Returns an array of the prime factors of a number. <br/>
+// Ex. new Ratio.getPrimeFactors(20) returns [2,2,5] <br/>
+// More info <http://bateru.com/news/2012/05/code-of-the-day-javascript-prime-factors-of-a-number/>
+Ratio.getPrimeFactors = function (num) {
+    num = Math.floor(num);
+    var root, factors = [], x, sqrt = Math.sqrt, doLoop = 1 < num && isFinite(num);
+    while (doLoop) {
+        root = sqrt(num);
+        x = 2;
+        if (num % x) {
+            x = 3;
+            while ((num % x) && ((x += 2) < root));
 
-
-
-Ratio.getRepeatProps = function( val ){
-	var RE1_getRepeatDecimals = /(?:[^\.]+\.\d*)(\d+)+(?:\1)$/, 
-		arr = [], 
-		match = RE1_getRepeatDecimals.exec( val ), 
-		RE2_RE1AtEnd;
-	if( !match ){
-		val = (val || "" ).toString().replace( /\d$/, "" );
-		match = RE1_getRepeatDecimals.exec( val );
-	}
-	if( match && typeof match[1] != "undefined" && /\.\d{10}/.test(match[0]) ){
-		RE2_RE1AtEnd = new RegExp( "("+ match[1] +")+$" );
-		arr = val.toString().replace( RE2_RE1AtEnd, "" ).split( /\./ ).concat( match[1] );
-	}
-	return arr;
-}
-
-
-
-
-
-
-
+        }
+        x = (x > root) ? num : x;
+        factors.push(x);
+        doLoop = (x != num);
+        num /= x;
+    }
+    return factors;
+};
