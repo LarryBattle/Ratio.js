@@ -2,14 +2,79 @@
 * @project Ratio.js
 * @purpose Testcases for new Ratio.js
 * @author Larry Battle , <http://bateru.com/news/>
-* @date May 23, 2012
+* @date May 29, 2012
 * @license MIT and GPL 3.0 
 * MIT License <http://www.opensource.org/licenses/mit-license>
 * GPL v3 <http://opensource.org/licenses/GPL-3.0>
 * @info Project page: <https://github.com/LarryBattle/Ratio.js/>
-* @version Beta 0.1.2, 2012.05.23
+* @version Beta 0.1.4, 2012.05.29
 */
 $(function(){
+	test( "test Ratio.prototype.toString()", function(){
+		equal( Ratio(1,2).toString(), "1/2" );
+		equal( Ratio(-1,-2).toString(), "1/2" );
+		equal( Ratio(1e2,2e4).toString(), "100/20000" );
+		equal( Ratio(-1e100,4).toString(), "-2.5e+99" );
+	});
+	test( "test Ratio.prototype.toFraction()", function(){
+		var func = function(a,b){
+			return new Ratio(a,b).toFraction();
+		};
+		equal( func(), "0/1" );
+		equal( func(1,2), "1/2" );
+		equal( func(2,1), "2/1" );
+		equal( func(10,5), "10/5" );
+		equal( func(9,9), "9/9" );
+	});
+	test( "test Ratio.prototype.toArray()", function(){
+		equal( Ratio(1,2).toArray(), [1,2] );
+		equal( Ratio(-1,-2).toArray(), [1,2] );
+		equal( Ratio(0.34,2e3).toArray(), [0.34,2e3] );
+		equal( Ratio(10.23e100,-23.04).toArray(), [-10.23e100,23.04] );
+	});
+	test( "test Ratio.prototype.valueOf()", function(){
+		equal( Ratio(2,2), 1 );
+		equal( Ratio(1,2), 1/2 );
+		equal( Ratio(1,4), 1/4 );
+		equal( Ratio(1,3), 1/3 );
+		equal( Ratio(1e100,4), 1e100/4 );
+		equal( Ratio(1e-4,3), 1e-4/3 );
+	});
+	test( "test Ratio.parseDecimal()", function(){
+		var func = Ratio.parseDecimal;
+		deepEqual( func( [] ), [] );
+		deepEqual( func( {} ), [] );
+		deepEqual( func( "apple" ), [] );
+		
+		deepEqual( func( "0" ), [0, 1] );
+		deepEqual( func( "15" ), [15,1] );
+		deepEqual( func( "0.112" ), [112,1000] );
+		deepEqual( func( "23.0" ), [23, 1] );
+		deepEqual( func( "23.123" ), [23123, 1000] );
+	});
+	test( "test divider sign change", function(){
+		var a = Ratio(1,2);
+		equal( a.toString(), "1/2" );
+		a.divSign = ":";
+		equal( a.toString(), "1:2" );
+	});
+	test( "test Ratio.isNumeric()", function(){
+		var func = Ratio.isNumeric;
+		equal( func( null ), false );
+		equal( func( true ), false );
+		equal( func( false ), false );
+		equal( func( "NaN" ), false );
+		equal( func( NaN ), false );
+		equal( func( [] ), false );
+		equal( func( {} ), false );
+		equal( func( new Object() ), false );
+		equal( func( undefined ), false );
+		
+		equal( func( new Number(12) ), true );
+		equal( func( 1 ), true );
+		equal( func( 0x3 ), true );
+		equal( func( 1.1e10 ), true );
+	});
 	test( "test new Ratio creation", function(){
 		equal( Ratio().toString(), "0" );
 		equal( new Ratio().toString(), "0" );
@@ -34,6 +99,32 @@ $(function(){
 		equal( Ratio.getNumeratorWithSign(-Infinity,-1), Infinity );
 		equal( Ratio.getNumeratorWithSign(-Infinity,1), -Infinity );
 		equal( Ratio.getNumeratorWithSign(1,-Infinity), -1 );
+	});
+	test( "test Ratio.parseENotation()", function(){
+		var func = Ratio.parseENotation;
+		deepEqual(func( null ), []);
+		deepEqual(func( NaN ), []);
+		deepEqual(func( "happy" ), []);
+		deepEqual(func( "1.1e1.1" ), []);
+		
+		deepEqual(func( "10" ), [10,1]);
+		deepEqual(func( "2e1" ), [20,1]);
+		deepEqual(func( "-2.0004e2" ), [-20004, 100] );
+		deepEqual(func( "-2.0004e5" ), [-200040, 1] );
+		deepEqual(func( "-2.0004e-2" ), [-20004, 1000000] );
+		deepEqual(func( "-2.0004e-5" ), [-20004, 1000000000] );
+	});
+	test( "test Ratio.parseNumber()", function(){
+		var func = Ratio.parseNumber;
+		// I should really be using stubs. Sinon.js where are you!!??
+		deepEqual( func(), [] );
+		
+		deepEqual( func(0), [0,1] );
+		deepEqual( func(1), [1,1] );
+		deepEqual( func(-1), [-1,1] );
+		deepEqual( func(1.2e6), [1200000, 1] );
+		deepEqual( func(0.231), [231,1000] );
+		deepEqual( func(-123.484), [-123484, 1000] );
 	});
 	test( "test Ratio.parseToArray()", function(){
 		deepEqual( Ratio.parseToArray("apples"), []);
@@ -92,6 +183,10 @@ $(function(){
 		equal( Ratio.parse(new Ratio(-4),new Ratio(3)).toString(), "-4/3" );
 		
 		equal( Ratio.parse(new Ratio(4,5).toString(),new Ratio(-3,2).toString()).toString(), "-8/15" );
+	});
+	test( "test Ratio.prototype.reParse()", function(){
+		deepEqual( Ratio(1.2,1.5).reParse().toString(), Ratio.parse(1.2,1.5).toString() );
+		deepEqual( Ratio(-1.2e-10,1.5e15).reParse().toString(), Ratio.parse(-1.2e-10,1.5e15).toString() );
 	});
 	test( "test Ratio creation with invalid input", function(){
 		equal( (new Ratio()).toString(), "0" );
@@ -192,7 +287,7 @@ $(function(){
 		equal( new Ratio(1,3).add(new Ratio(3,9)).toString(), "6/9" );
 		equal( new Ratio(4,9).add(new Ratio(3,9)).toString(), "7/9" );
 	});
-		test( "test addition with -", function(){
+	test( "test addition with -", function(){
 		equal( new Ratio() - new Ratio(), 0 );
 		equal( new Ratio(1,4) - new Ratio(1,4), 0 );
 		equal( new Ratio(1,5) - new Ratio(1,2), "-0.3" );
@@ -215,6 +310,8 @@ $(function(){
 	test( "test Ratio.prototype.descale", function(){
 		equal( new Ratio( 25, 100 ).descale(5).toString(), "5/20" );
 		equal( new Ratio( 5, 100 ).descale(5).toString(), "1/20" );
+		equal( new Ratio( 5, 100 ).descale(5.0).toString(), "1/20" );
+		notEqual( new Ratio( 5, 100 ).descale(5.1).toString(), "1/20" );
 	});
 	test( "test Ratio.prototype.getPrimeFactors", function(){
 		var func = Ratio.getPrimeFactors;
@@ -268,16 +365,6 @@ $(function(){
 		equal( new Ratio(-10,23).divide(new Ratio(13,-39)).toString(), (39*10)+"/"+(13*23) );
 		equal( new Ratio(-12,-34).divide(new Ratio(-45,-67)).toString(), (12*67)+"/"+(45*34) );
 	});
-	test( "test Ratio.getRepeatingDecimals", function(){
-		var func = Ratio.getRepeatingDecimals;
-		equal( func(1/10), null );
-		equal( func(1/40), null );
-		equal( func(1/32), null );
-		equal( func(1/3), "3" );
-		equal( func(2/3), "6" );
-		equal( func(1/7), "142857" );
-		equal( func(1/9), "1" );
-	});
 	test( "test Ratio.getRepeatProps() with invalid input", function(){
 		var func = Ratio.getRepeatProps;
 		deepEqual( func( "" ), [] );
@@ -307,7 +394,8 @@ $(function(){
 		deepEqual( func( "3534.3344512341234" ), ["3534","33445","1234"] );
 		deepEqual( func( 1/333 ), ["0","","003" ] );
 		deepEqual( func( 7/13 ), ["0","5384","615384" ] );
-		
+		deepEqual( func( 1/111 ), ["0","","009" ] );
+		deepEqual( func( 11/111 ), ["0","","099" ] );
 		deepEqual( func( 100/11 ), ["9","","09" ] );
 		deepEqual( func( 100/13 ), ["7","692","307692" ] );
 		deepEqual( func( 1/3 ), ["0","","3" ] );
@@ -325,6 +413,14 @@ $(function(){
 		equal( Ratio.parse(7/3).reduce().toString(), "7/3");
 		equal( Ratio.parse(1/111).reduce().toString(), "1/111");
 		equal( Ratio.parse(1/333).reduce().toString(), "1/333");
+	});
+	test( "test Ratio.reduce()", function(){
+		var func = Ratio.reduce;
+		equal( func( 1,2 ).toString(), "1/2" );
+		equal( func( 4,8 ).toString(), "1/2" );
+		equal( func( 100,200 ).toString(), "1/2" );
+		equal( func( -42,42 ).toString(), "-1/1" );
+		equal( func( 134,-3 ).toString(), "-134/-3" );
 	});
 	test( "test Ratio.prototype.clone", function(){
 		var a = new Ratio(1/3);
@@ -365,6 +461,20 @@ $(function(){
 		equal( a.multiply(12).reduce(), 12 );
 		equal( a, "1" );
 	});
-	// test( "", function(){
-	// });
+	module( "Extra Functionality" );
+	test( "test Ratio.prototype.scale()", function(){
+		deepEqual(1,1);
+	});
+	test( "test Ratio.prototype.abs()", function(){
+		deepEqual(1,1);
+	});
+	test( "test Ratio.prototype.mod()", function(){
+		deepEqual(1,1);
+	});
+	test( "test Ratio.prototype.negate()", function(){
+		deepEqual(1,1);
+	});
+	test( "test Ratio.prototype.isProper()", function(){
+		deepEqual(1,1);
+	});
 });
