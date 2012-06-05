@@ -13,6 +13,9 @@
 * @todo Add at least 5 user cases. a.add(4).toFraction() doesn't copy over the divSign.
 	Ex: Ratio.parse(1/3).negate().add("-0.1").multiply(0xF3).divide(1,2).divide(1e-4).abs().toString()
 * @todo Document a warning about the difference between Ratio() vs Ratio.parse() vs Ratio.reduce(). use 1/3 as an example.
+* @todo decimalExpansion
+* @todo toFixed fixed
+* @todo Determine what should be in the next release
  */
  
 /**
