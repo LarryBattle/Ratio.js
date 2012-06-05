@@ -7,21 +7,17 @@
     GPL v3 <http://opensource.org/licenses/GPL-3.0>
 * @info Project page: <https://github.com/LarryBattle/Ratio.js/>
 * @version Beta 0.1.6, 2012.06.5
-    
 * @todo Test scientific notation compatiblity. 
-* @todo Make new Ratio and cloning a lot easier to copy over all the properties of the previous object.<br/>
-        All clone should have the same divSign.
-* @todo slight bug, new to fix Ratio.parse.apply(this,arguments) to Ratio.parse( obj, obj2 ).
  */
  
 /**
 * @classdesc {Ratio} Ratio - Ratio is an object that has a numerator and denominator, corresponding to a/b.<br/>
     Note: The keyword `new` is not required to create a new instance of the Ratio object, since this is done for you.<br/>
     In otherwords, <code><pre>new Ratio( value )</pre></code> is the same as <code><pre>Ratio( value )</pre></code>.
-* @param {Object} a - can be a Ratio object or numeric value.
-* @param {Object} b - can be a Ratio object or numeric value.
-* @param {string} type - can be either a "string" or "decimal". `type` forces a type on the Ratio object.
-* @param {boolean} alwaysReduce - If true, then the Ratio object and the child of it will always represent the simplified form of the rational.
+* @param {Ratio|String|Number} a - can be a Ratio object or numeric value.
+* @param {Ratio|String|Number} b - can be a Ratio object or numeric value.
+* @param {String} type - can be either a "string" or "decimal". `type` forces a type on the Ratio object.
+* @param {Boolean} alwaysReduce - If true, then the Ratio object and the child of it will always represent the simplified form of the rational.
 * @returns {Ratio} object that has a numerator and denominator, corresponding to a/b.
 * @example Ex. Ratio(2,4).toString() = Ratio("2/4").toString() = "2/4"
 */
@@ -34,7 +30,12 @@ var Ratio = function (a, b, type, alwaysReduce) {
     this.type = ""+type;
     this.denominator = isNaN("" + b) ? 1 : Math.abs(b);
     this.numerator = isNaN("" + a) ? 0 : Ratio.getNumeratorWithSign(a,(b||1));
-    return this.denominator && this.alwaysReduce ? Ratio.reduce(this) : this;
+    if( this.denominator && this.alwaysReduce ){
+    	var arr = Ratio.reduce(this);
+		this.numerator = arr[0];
+		this.denominator = arr[1];
+	}
+	return this;
 };
 /**
 * @summary Checks if value is a finite number. <br/> Borrowed from jQuery 1.7.2 <br/>
@@ -64,7 +65,7 @@ Ratio.gcd = function (a, b) {
 };
 /**
 * @summary Returns the numerator with the corresponding sign of (top/bottom). <br/>
-        Use to force `top` to designate the sign of the Ratio.
+        Used to force `top` to represent the sign of the Ratio.
 * @param {Number} top
 * @param {Number} bottom
 * @returns {Number}
@@ -186,25 +187,30 @@ Ratio.parse = function (obj, obj2) {
     return new Ratio(arr[0], arr[1]);
 };
 /**
-* @summary Same as Ratio.parse except returns a reduced Ratio.
+* @summary Given a numerator and denominator in the form of [a,b], returns as an array of numbers.
 * @param {Ratio|Number|String} obj
 * @param {Ratio|Number|String} obj
-* @returns {Ratio}
+* @returns {Array[ Number, Number ]}
 * @example <code><pre>
     // Example 1:
-    var a = Ratio.reduce(27,36);
-    var b = Ratio(3,4);
-    a.equals( b ) === true;
+    Ratio.reduce( Ratio(36,-36) ) returns [-1,1]
     
     // Example 2:
-    Ratio.reduce( "9/12" ).numerator == 3
+    Ratio.reduce( "9/12" ) returns [3,4]
     
     // Example 3:
-    Ratio.reduce( "10/4" ).toString() == "5/2"
+    Ratio.reduce( "10/4" ).toString() returns [5,2]
     </pre></code>
 */
 Ratio.reduce = function (obj,obj2) {
-    return Ratio.parse(obj,obj2).reduce();
+	obj = Ratio.parse( obj, obj2 );
+	var top = obj.numerator, bottom = obj.denominator, arr = Ratio.getRepeatProps(top/bottom);
+    if ( arr.length ) {
+        top = +(arr.join('')) - +(arr[0]+""+arr[1]);
+        bottom = Math.pow(10, arr[1].length ) * ( Math.pow(10, arr[2].length ) - 1);
+    }
+    var factor = Ratio.gcd(top, bottom);
+    return [ top / factor, bottom / factor ];
 };
 /**
 * @summary This function divides a repeating decimal into 3 parts. If the value passed is not a repeating decimal then an empty array is returned.<br/>
@@ -235,7 +241,7 @@ Ratio.getRepeatProps = function( val ){
         match[1] = RE3_RepeatingNums.test(match[1]) ? RE3_RepeatingNums.exec(match[1])[1] : match[1];
         RE2_RE1AtEnd = new RegExp( "("+ match[1] +")+$" );
         arr = val.split( /\./ ).concat( match[1] );
-    	arr[1] = arr[1].replace( RE2_RE1AtEnd, "" );
+		arr[1] = arr[1].replace( RE2_RE1AtEnd, "" );
     }
     return arr;
 }
@@ -303,7 +309,13 @@ Ratio.prototype.toString = function () {
     return (isNaN(val) || this.type == "decimal") ? val.toString() : str;
 };
 /**
-* @summary Returns a new instance of the current Ratio.
+* @summary Returns a new instance of the current Ratio. 
+ The clone propery value can be changed if the appropriate argument value is supplied.
+*
+* @param {Number} top
+* @param {Number} bottom
+* @param {String} type
+* @param {Boolean} alwaysReduce
 * @returns {Ratio}
 * @example <code><pre>
     var a = Ratio(2,4);
@@ -312,7 +324,11 @@ Ratio.prototype.toString = function () {
     </pre></code>
 */
 Ratio.prototype.clone = function (top, bottom, type, alwaysReduce ) {
-    return new Ratio( top || this.numerator, bottom || this.denominator, type || this.type, alwaysReduce || this.alwaysReduce );
+	top = typeof top !== "undefined" && top !== null ? top : this.numerator;
+	bottom = typeof bottom !== "undefined" && bottom !== null ? bottom : this.denominator;
+	type = typeof type !== "undefined" && type !== null ? type : this.type;
+	alwaysReduce = typeof alwaysReduce !== "undefined" && alwaysReduce !== null ? alwaysReduce : this.alwaysReduce;
+    return new Ratio( top, bottom, type, alwaysReduce );
 };
 /**
 * @summary From the Ratio instance, returns a new instacne with a reduced ratio by factoring out the greatest common multiple.
@@ -326,7 +342,7 @@ Ratio.prototype.reduce = function () {
         bottom = Math.pow(10, arr[1].length ) * ( Math.pow(10, arr[2].length ) - 1);
     }
     var factor = Ratio.gcd(top, bottom);
-    return new Ratio( top / factor, bottom / factor );
+    return new Ratio( top / factor, bottom / factor, this.type, this.alwaysReduce );
 };
 /**
 * @summary Adds the current Ratio by another Ratio.
@@ -335,9 +351,9 @@ Ratio.prototype.reduce = function () {
 * @returns {Ratio}
 * @example Ratio( 1, 3 ).add( 1,2 ).toString() == "5/6"
 */
-Ratio.prototype.add = function (obj) {
-    if (!(obj instanceof Ratio)) {
-        obj = Ratio.parse.apply(this, arguments);
+Ratio.prototype.add = function (obj,obj2) {
+    if (!(obj instanceof Ratio) || typeof obj2 !== "undefined") {
+        obj = Ratio.parse(obj,obj2);
     }
     var x, top, bottom;
     if (this.denominator == obj.denominator) {
@@ -357,9 +373,9 @@ Ratio.prototype.add = function (obj) {
 * @returns {Ratio}
 * @example Ratio( 1,2 ).divide( 3,4 ).toString() == "2/3"
 */
-Ratio.prototype.divide = function (obj) {
-    if (!(obj instanceof Ratio)) {
-        obj = Ratio.parse.apply(this, arguments);
+Ratio.prototype.divide = function (obj, obj2) {
+    if (!(obj instanceof Ratio) || typeof obj2 !== "undefined") {
+        obj = Ratio.parse(obj,obj2);
     }
     return new Ratio(this.numerator * obj.denominator, this.denominator * obj.numerator, this.type, this.alwaysReduce);
 };
@@ -379,9 +395,9 @@ Ratio.prototype.equals = function (obj) {
 * @returns {Ratio}
 * @example Ratio(2,5).multiply( 1, 2 ).toString() == "2/10"
 */
-Ratio.prototype.multiply = function (obj) {
-    if (!(obj instanceof Ratio)) {
-        obj = Ratio.parse.apply(this, arguments);
+Ratio.prototype.multiply = function (obj, obj2) {
+    if (!(obj instanceof Ratio) || typeof obj2 !== "undefined") {
+        obj = Ratio.parse(obj, obj2);
     }
     return new Ratio(this.numerator * obj.numerator, this.denominator * obj.denominator, this.type, this.alwaysReduce);
 };
@@ -392,9 +408,9 @@ Ratio.prototype.multiply = function (obj) {
 * @returns {Ratio}
 * @example Ratio(2,3).subtract(1,7).toString() === "-1/3"
 */
-Ratio.prototype.subtract = function (obj) {
-    if (!(obj instanceof Ratio)) {
-        obj = Ratio.parse.apply(this, arguments);
+Ratio.prototype.subtract = function (obj, obj2) {
+    if (!(obj instanceof Ratio) || typeof obj2 !== "undefined") {
+        obj = Ratio.parse(obj, obj2);
     }
     obj.numerator = -obj.numerator;
     return this.add(obj);
