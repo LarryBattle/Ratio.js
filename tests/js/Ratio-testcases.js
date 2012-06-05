@@ -2,20 +2,19 @@
 * @project Ratio.js
 * @purpose Testcases for new Ratio.js
 * @author Larry Battle , <http://bateru.com/news/>
-* @date May 30, 2012
 * @license MIT and GPL 3.0 
 * MIT License <http://www.opensource.org/licenses/mit-license>
 * GPL v3 <http://opensource.org/licenses/GPL-3.0>
 * @info Project page: <https://github.com/LarryBattle/Ratio.js/>
-* @version Beta 0.1.5, 2012.05.30
+* @version Beta 0.1.6, 2012.06.5
 */
 $(function(){
 	module( "Instantiation" );
 	test( "test new Ratio creation", function(){
 		var func = function(a,b){
-			return new Ratio(a,b).toString();
+			return Ratio(a,b).toString();
 		};
-		equal( Ratio(), "0" );
+		equal( new Ratio(), "0" );
 		equal( func(), "0" );
 		equal( func(3), "3" );
 		equal( func(1,3), "1/3" );
@@ -28,18 +27,35 @@ $(function(){
 		equal( func(4,-3), "-4/3" );
 		equal( func(-4,-3), "4/3" );
 	});
-	test( "test Ratio.prototype.clone", function(){
-		var a = new Ratio(1/3);
+	test( "test Ratio.prototype.clone with no arguments", function(){
+		var a = Ratio(1,3);
 		var b = a.clone();
-		var c = new Ratio(20,9);
+		var c = Ratio(20,9);
 		equal( a.equals( b ), true );
 		equal( b.equals( a ), true );
 		equal( b.equals( c ), false );
 		equal( c.equals( a ), false );
 	});
+	test( "test Ratio.prototype.clone with arguments", function(){
+		var a = Ratio(11,12,"string",true);
+		deepEqual( a.clone(), a );
+		deepEqual( a.clone(7), Ratio(7,12,"string",true) );
+		deepEqual( a.clone(null,7), Ratio(11,7,"string",true) );
+		deepEqual( a.clone(null,null,""), Ratio(11,12,"",true) );
+		deepEqual( a.clone(null,null,null,false), Ratio(11,12,"string",false) );
+		
+		deepEqual( a.clone(1,null,"",false), Ratio(1,12,"",false) );
+		deepEqual( a.clone(1,2,null,false), Ratio(1,2,"string",false) );
+		deepEqual( a.clone(1,2,"decimal",false), Ratio(1,2,"decimal",false) );
+	});
+	test( "test Ratio.prototype.clone with change to internal attributes", function(){
+		var a = Ratio(1,3);
+		var b = a.clone();
+		equal( a.equals( b ), true );
+	});	
 	test( "test Ratio creation with invalid input", function(){
 		var func = function(a,b){
-			return new Ratio(a,b).toString();
+			return Ratio(a,b).toString();
 		};
 		equal( (func()), "0" );
 		equal( (func(null,null)), "0" );
@@ -74,7 +90,7 @@ $(function(){
 	});
 	test( "test Ratio.prototype.toFraction()", function(){
 		var func = function(a,b){
-			return new Ratio(a,b).toFraction();
+			return Ratio(a,b).toFraction();
 		};
 		equal( func(), "0/1" );
 		equal( func(1,2), "1/2" );
@@ -84,7 +100,7 @@ $(function(){
 	});
 	test( "test Ratio.prototype.toArray()", function(){
 		var func = function(a,b){
-			return (new Ratio(a,b)).toArray();
+			return (Ratio(a,b)).toArray();
 		};
 		deepEqual( func(1,2), [1,2] );
 		deepEqual( func(-1,-2), [1,2] );
@@ -100,7 +116,7 @@ $(function(){
 		equal( Ratio(1e-4,3), 1e-4/3 );
 	});
 	test( "test type enforcement", function(){	
-		var a = new Ratio(1,4);
+		var a = Ratio(1,4);
 		a.type = "string";
 		equal( 1+a, "11/4" );
 		equal( "Ratio = "+a, "Ratio = 1/4" );
@@ -127,15 +143,15 @@ $(function(){
 	});
 	test( "test changing numerator", function(){
 		var a, b;
-		a = new Ratio(1,2);
-		b = new Ratio(3,2);
+		a = Ratio(1,2);
+		b = Ratio(3,2);
 		a.numerator = 3;
 		equal( a.equals(b), true );
 	});
 	test( "test changing denominator", function(){
 		var a, b;
-		a = new Ratio(1,2);
-		b = new Ratio(1,3);
+		a = Ratio(1,2);
+		b = Ratio(1,3);
 		a.denominator = 3;
 		equal( a.equals(b), true );
 	});
@@ -197,11 +213,11 @@ $(function(){
 		
 		deepEqual( func(" 4 /-3"), [-4, 3 ]);
 		deepEqual( func("-4 /-3"), [4, 3 ]);
-		deepEqual( func( (new Ratio(4,3)) ), [4,3 ]);
+		deepEqual( func( (Ratio(4,3)) ), [4,3 ]);
 		
-		deepEqual( func( (new Ratio(-4,3)) ), [-4,3 ]);
-		deepEqual( func( (new Ratio(4,-3)) ), [-4,3 ]);
-		deepEqual( func( (new Ratio(-4,-3)) ), [4,3 ]);
+		deepEqual( func( (Ratio(-4,3)) ), [-4,3 ]);
+		deepEqual( func( (Ratio(4,-3)) ), [-4,3 ]);
+		deepEqual( func( (Ratio(-4,-3)) ), [4,3 ]);
 		
 		deepEqual( func(Number(1.12)), [112,100 ]);
 		deepEqual( func(0.771), [771,1000 ]);
@@ -220,23 +236,23 @@ $(function(){
 	test( "test Ratio.parse() with singal arguments.", function(){
 		var func = Ratio.parse;
 		equal( func("-0.125").toString(), "-125/1000" );
-		equal( func( new Ratio(3) ).toString(), "3" );
+		equal( func( Ratio(3) ).toString(), "3" );
 		equal( func(3).toString(), "3" );
 		equal( func("-3.0e-1").toString(), "-3/10" );
 		equal( func(3.0).toString(), "3" );
-		equal( func(new Ratio(-1,3)).toString(), "-1/3" );
+		equal( func(Ratio(-1,3)).toString(), "-1/3" );
 	});
 	test( "test Ratio.parse() with double arguments.", function(){
 		var func = Ratio.parse;
 		equal( func(0.125,0.5).toString(), "1250/5000" );
 		equal( func(0.125,"1/2").toString(), "250/1000" );
-		equal( func(3, new Ratio(2)).toString(), "3/2" );
+		equal( func(3, Ratio(2)).toString(), "3/2" );
 		
-		equal( func(3, new Ratio(1)).toString(), "3" );
-		equal( func(new Ratio(1),3).toString(), "1/3" );
-		equal( func(new Ratio(-4),new Ratio(3)).toString(), "-4/3" );
+		equal( func(3, Ratio(1)).toString(), "3" );
+		equal( func(Ratio(1),3).toString(), "1/3" );
+		equal( func(Ratio(-4),Ratio(3)).toString(), "-4/3" );
 		
-		equal( func(new Ratio(4,5).toString(),new Ratio(-3,2).toString()).toString(), "-8/15" );
+		equal( func(Ratio(4,5).toString(),Ratio(-3,2).toString()).toString(), "-8/15" );
 	});
 	test( "test Ratio.prototype.reParse()", function(){
 		deepEqual( Ratio(1.2,1.5).reParse().toString(), Ratio.parse(1.2,1.5).toString() );
@@ -294,12 +310,12 @@ $(function(){
 	module( "Basic Operations" );
 	test( "test equivalance using Ratio.prototype.equals and ==", function(){
 		var a, b, c, d, e;
-		a = new Ratio();
-		b = new Ratio();
-		c = new Ratio(3,4);
-		d = new Ratio(3,4);
-		e = new Ratio(12,12);
-		f = new Ratio(12,12);
+		a = Ratio();
+		b = Ratio();
+		c = Ratio(3,4);
+		d = Ratio(3,4);
+		e = Ratio(12,12);
+		f = Ratio(12,12);
 		
 		equal( a.equals(a), true, "identity check using equals" );
 		equal( b.equals(b), true, "identity check using equals" );
@@ -319,9 +335,9 @@ $(function(){
 		equal( f.equals(c), false, "identity check" );
 	});
 	test( "test comparison", function(){
-		var a = new Ratio(1,2);
-		var b = new Ratio(1,4);
-		var c = new Ratio(150,3);
+		var a = Ratio(1,2);
+		var b = Ratio(1,4);
+		var c = Ratio(150,3);
 		ok( a > b );
 		ok( c >= b );
 		ok( c >= a );
@@ -329,54 +345,54 @@ $(function(){
 		ok( b <= c );
 	});
 	test( "test addition with +", function(){
-		equal( new Ratio() + new Ratio(), 0 );
-		equal( new Ratio(0) + new Ratio(0), 0);
-		equal( new Ratio(-1) + new Ratio(1), 0 );
-		equal( new Ratio(1) + new Ratio(2), 3 );
-		equal( new Ratio(40) + new Ratio(2), 42 );
-		equal( new Ratio(20001,40002) + new Ratio(400,800), 1 );
-		equal( new Ratio(1,2) + new Ratio(1,2), 1 );
-		equal( new Ratio(1) + new Ratio(1,2), 1.5 );
-		equal( new Ratio(1) + new Ratio(1,3), 4/3 );
-		equal( new Ratio(1,3) + new Ratio(-1,3), 0 );
+		equal( Ratio() + Ratio(), 0 );
+		equal( Ratio(0) + Ratio(0), 0);
+		equal( Ratio(-1) + Ratio(1), 0 );
+		equal( Ratio(1) + Ratio(2), 3 );
+		equal( Ratio(40) + Ratio(2), 42 );
+		equal( Ratio(20001,40002) + Ratio(400,800), 1 );
+		equal( Ratio(1,2) + Ratio(1,2), 1 );
+		equal( Ratio(1) + Ratio(1,2), 1.5 );
+		equal( Ratio(1) + Ratio(1,3), 4/3 );
+		equal( Ratio(1,3) + Ratio(-1,3), 0 );
 	});
 	test( "test Ratio.prototype.add()", function(){
-		equal( new Ratio().add(new Ratio()).toString(), "0" );
-		equal( new Ratio(0).add(new Ratio(0)).toString(), "0" );
-		equal( new Ratio(2,4).add(new Ratio(4,8)).toString(), "1" );
-		equal( new Ratio(1,2).add(new Ratio(1,2)).toString(), "1" );
-		equal( new Ratio(1).add(new Ratio(1)).toString(), "2" );
-		equal( new Ratio(1).add(new Ratio(2)).toString(), "3" );
-		equal( new Ratio(40).add(new Ratio(2)).toString(), "42" );
-		equal( new Ratio(1).add(new Ratio(1,2)).toString(), "3/2" );
-		equal( new Ratio(2,5).add(new Ratio(3,4)).toString(), "23/20" );
-		equal( new Ratio(1,3).add(new Ratio(3,9)).toString(), "6/9" );
-		equal( new Ratio(4,9).add(new Ratio(3,9)).toString(), "7/9" );
+		equal( Ratio().add(Ratio()).toString(), "0" );
+		equal( Ratio(0).add(Ratio(0)).toString(), "0" );
+		equal( Ratio(2,4).add(Ratio(4,8)).toString(), "1" );
+		equal( Ratio(1,2).add(Ratio(1,2)).toString(), "1" );
+		equal( Ratio(1).add(Ratio(1)).toString(), "2" );
+		equal( Ratio(1).add(Ratio(2)).toString(), "3" );
+		equal( Ratio(40).add(Ratio(2)).toString(), "42" );
+		equal( Ratio(1).add(Ratio(1,2)).toString(), "3/2" );
+		equal( Ratio(2,5).add(Ratio(3,4)).toString(), "23/20" );
+		equal( Ratio(1,3).add(Ratio(3,9)).toString(), "6/9" );
+		equal( Ratio(4,9).add(Ratio(3,9)).toString(), "7/9" );
 	});
 	test( "test addition with -", function(){
-		equal( new Ratio() - new Ratio(), 0 );
-		equal( new Ratio(1,4) - new Ratio(1,4), 0 );
-		equal( new Ratio(1,5) - new Ratio(1,2), "-0.3" );
-		equal( new Ratio(1,20) - new Ratio(1,100), "0.04" );
+		equal( Ratio() - Ratio(), 0 );
+		equal( Ratio(1,4) - Ratio(1,4), 0 );
+		equal( Ratio(1,5) - Ratio(1,2), "-0.3" );
+		equal( Ratio(1,20) - Ratio(1,100), "0.04" );
 	});
 	test( "test Ratio.prototype.subtract()", function(){
-		equal( new Ratio().subtract(new Ratio()).toString(), "0" );
-		equal( new Ratio(0).subtract(new Ratio(0)).toString(), "0" );
-		equal( new Ratio(1,3).subtract(new Ratio(3,9)).toString(), "0" );
-		equal( new Ratio(2,4).subtract(new Ratio(4,8)).toString(), "0" );
-		equal( new Ratio(1).subtract(new Ratio(1,2)).toString(), "1/2" );
-		equal( new Ratio(4).subtract(new Ratio(1)).toString(), "3" );
-		equal( new Ratio(4,9).subtract(new Ratio(3,9)).toString(), "1/9" );
-		equal( new Ratio(10,2).subtract(new Ratio(9,19)).toString(), "172/38" );
-		equal( new Ratio(1).subtract(new Ratio(3,2)).toString(), "-1/2" );
-		equal( new Ratio(1).subtract(new Ratio(4)).toString(), "-3" );
-		equal( new Ratio(2,5).subtract(new Ratio(3,4)).toString(), "-7/20" );
-		equal( new Ratio(1,9).subtract(new Ratio(4,9)).toString(), "-3/9" );
+		equal( Ratio().subtract(Ratio()).toString(), "0" );
+		equal( Ratio(0).subtract(Ratio(0)).toString(), "0" );
+		equal( Ratio(1,3).subtract(Ratio(3,9)).toString(), "0" );
+		equal( Ratio(2,4).subtract(Ratio(4,8)).toString(), "0" );
+		equal( Ratio(1).subtract(Ratio(1,2)).toString(), "1/2" );
+		equal( Ratio(4).subtract(Ratio(1)).toString(), "3" );
+		equal( Ratio(4,9).subtract(Ratio(3,9)).toString(), "1/9" );
+		equal( Ratio(10,2).subtract(Ratio(9,19)).toString(), "172/38" );
+		equal( Ratio(1).subtract(Ratio(3,2)).toString(), "-1/2" );
+		equal( Ratio(1).subtract(Ratio(4)).toString(), "-3" );
+		equal( Ratio(2,5).subtract(Ratio(3,4)).toString(), "-7/20" );
+		equal( Ratio(1,9).subtract(Ratio(4,9)).toString(), "-3/9" );
 	});
 
 	test( "test Ratio.prototype.multiply", function(){
 		var func = function(a,b,c,d){
-			return ( new Ratio( a,b) ).multiply( c, d ).toString();
+			return ( Ratio( a,b) ).multiply( c, d ).toString();
 		};
 		equal( func(1,1,1,1), "1" );
 		equal( func(1,1,2,1), "2" );
@@ -389,7 +405,7 @@ $(function(){
 	});
 	test( "test Ratio.prototype.divide", function(){
 		var func = function(a,b,c,d){
-			return ( new Ratio( a,b) ).divide( c, d ).toString();
+			return ( Ratio( a,b) ).divide( c, d ).toString();
 		};
 		equal( func(0,1,1,10), "0" );
 		equal( func(1,1,1,1), "1" );
@@ -452,16 +468,16 @@ $(function(){
 	});
 	test( "test Ratio.reduce()", function(){
 		var func = Ratio.reduce;
-		equal( func( 1,2 ).toString(), "1/2" );
-		equal( func( 4,8 ).toString(), "1/2" );
-		equal( func( 100,200 ).toString(), "1/2" );
-		equal( func( -42,42 ).toString(), "-1" );
-		equal( func( 134,-3 ).toString(), "-134/3" );
+		deepEqual( func( 1,2 ), [ 1, 2] );
+		deepEqual( func( 4,8 ), [ 1, 2] );
+		deepEqual( func( 100,200 ), [ 1, 2] );
+		deepEqual( func( -42,42 ), [ -1, 1] );
+		deepEqual( func( 134,-3 ), [ -134, 3] );
 	});
 	
 	module( "Use Cases" );
 	test( "test user case", function(){
-		var a = new Ratio(1,2, "string");
+		var a = Ratio(1,2, "string");
 		equal( a, "1/2" );
 		a = a.add(3);
 		equal( a, "7/2" );
@@ -476,7 +492,7 @@ $(function(){
 	module( "Extra Functionality" );
 	test( "test Ratio.prototype.descale", function(){
 		var func = function(a,b,c){
-			return (new Ratio(a,b)).descale(c).toString();
+			return (Ratio(a,b)).descale(c).toString();
 		};
 		equal( func( 25, 100,5), "5/20" );
 		equal( func( 5, 100,5), "1/20" );
@@ -485,7 +501,7 @@ $(function(){
 	});
 	test( "test Ratio.prototype.scale()", function(){
 		var func = function(a,b,c){
-			return (new Ratio(a,b)).scale(c).toString();
+			return (Ratio(a,b)).scale(c).toString();
 		};
 		equal( func(2,3,5), "10/15" );
 		equal( func(2,3,3e-10), "6e-10/9e-10" );
@@ -494,7 +510,7 @@ $(function(){
 	});
 	test( "test Ratio.prototype.abs()", function(){
 		var func = function(a,b){
-			return (new Ratio(a,b)).abs().toString();
+			return (Ratio(a,b)).abs().toString();
 		};
 		equal( func(1,2), "1/2" );
 		equal( func(-1,2), "1/2" );
@@ -504,7 +520,7 @@ $(function(){
 	});
 	test( "test Ratio.prototype.mod()", function(){
 		var func = function(a,b){
-			return (new Ratio(a,b)).mod().toString();
+			return (Ratio(a,b)).mod().toString();
 		};
 		equal( func(5,0), 0 );
 		equal( func(5,1), 0 );
@@ -514,7 +530,7 @@ $(function(){
 	});
 	test( "test Ratio.prototype.negate()", function(){
 		var func = function(a,b){
-			return (new Ratio(a,b)).negate().toString();
+			return (Ratio(a,b)).negate().toString();
 		};
 		equal(func(1,2), "-1/2" );
 		equal(func(-1,2), "1/2" );
@@ -523,7 +539,7 @@ $(function(){
 	});
 	test( "test Ratio.prototype.isProper()", function(){
 		var func = function(a,b){
-			return (new Ratio(a,b)).isProper();
+			return (Ratio(a,b)).isProper();
 		};
 		equal(func(1,2), true );
 		equal(func(1e2,2e2), true );
