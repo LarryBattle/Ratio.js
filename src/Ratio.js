@@ -2,12 +2,11 @@
 * @project Ratio.js
 * @purpose Provides a Ratio(Fraction) object for Javascript. Similar to Fraction.py for Python.
 * @author Larry Battle , <http://bateru.com/news/>
-* @date May 30, 2012
 * @license MIT and GPL 3.0
     MIT License <http://www.opensource.org/licenses/mit-license>
     GPL v3 <http://opensource.org/licenses/GPL-3.0>
 * @info Project page: <https://github.com/LarryBattle/Ratio.js/>
-* @version Beta 0.1.5, 2012.05.30
+* @version Beta 0.1.6, 2012.06.5
     
 * @todo Test scientific notation compatiblity. 
 * @todo Make new Ratio and cloning a lot easier to copy over all the properties of the previous object.<br/>
@@ -73,7 +72,7 @@ Ratio.gcd = function (a, b) {
 */
 Ratio.getNumeratorWithSign = function (top, bottom) {
     var x = (+top||1), y = (+bottom||1), a = "" + x*y;
-    return ('-' != a[0]) ? Math.abs(+top) : -Math.abs(+top);
+    return /[-]/.test(a.charAt(0)) ? -Math.abs(+top) : Math.abs(+top);
 };
 /**
 * @summary Converts a decimal value to a ratio in the form of [top, bottom], such that top/bottom is the decimal value.
@@ -235,7 +234,8 @@ Ratio.getRepeatProps = function( val ){
     if( match && 1 < match.length && /\.\d{10}/.test(match[0]) ){
         match[1] = RE3_RepeatingNums.test(match[1]) ? RE3_RepeatingNums.exec(match[1])[1] : match[1];
         RE2_RE1AtEnd = new RegExp( "("+ match[1] +")+$" );
-        arr = val.replace( RE2_RE1AtEnd, "" ).split( /\./ ).concat( match[1] );
+        arr = val.split( /\./ ).concat( match[1] );
+    	arr[1] = arr[1].replace( RE2_RE1AtEnd, "" );
     }
     return arr;
 }
@@ -311,8 +311,8 @@ Ratio.prototype.toString = function () {
     a.equals(b) === true;
     </pre></code>
 */
-Ratio.prototype.clone = function () {
-    return new Ratio(this.numerator, this.denominator, this.type, this.alwaysReduce);
+Ratio.prototype.clone = function (top, bottom, type, alwaysReduce ) {
+    return new Ratio( top || this.numerator, bottom || this.denominator, type || this.type, alwaysReduce || this.alwaysReduce );
 };
 /**
 * @summary From the Ratio instance, returns a new instacne with a reduced ratio by factoring out the greatest common multiple.
