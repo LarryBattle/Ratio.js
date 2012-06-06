@@ -1,46 +1,46 @@
 # package.json #
-{
-    "name" : "Ratio.js",
-	"description" : "Provides a Fraction \/ Rational \/ Ratio object for javascript.",
-	"version" : "0.2",
-	"author" : "Larry Battle <http:\/\/bateru.com\/news\/contact-me>",
-	"contributors" : [{
-			"name" : "Larry Battle",
-			"email" : "http:\/\/bateru.com\/news\/contact-me"
-		}
-	],
-	"main" : ".\/src\/Ratio.js",
-	"keywords" : ["Ratio", "fraction", "rational", "numbers", "Math"],
-	"scripts" : "",
-	"repository" : "git:\/\/github.com\/LarryBattle\/Ratio.js",
-	"engines" : {
-		"node" : "*"
-	},
-	"directories" : ""
-}
+	{
+		"name" : "Ratio.js",
+		"description" : "Provides a Fraction \/ Rational \/ Ratio object for javascript.",
+		"version" : "0.2",
+		"author" : "Larry Battle <http:\/\/bateru.com\/news\/contact-me>",
+		"contributors" : [{
+				"name" : "Larry Battle",
+				"email" : "http:\/\/bateru.com\/news\/contact-me"
+			}
+		],
+		"main" : ".\/src\/Ratio.js",
+		"keywords" : ["Ratio", "fraction", "rational", "numbers", "Math"],
+		"scripts" : "",
+		"repository" : "git:\/\/github.com\/LarryBattle\/Ratio.js",
+		"engines" : {
+			"node" : "*"
+		},
+		"directories" : ""
+	}
 
 # Readme.txt #
 
 *Work in Progress*
 ## Ratio.js ##
-	Provides a Fraction/Rational/Ratio object for javascript.
-	
-	Why should I use Ratio.js?<br/>
-	By keeping values in a rational form, you can maintain the precision and can avoid common floating point operation errors in javascript.
+Provides a Fraction/Rational/Ratio object for javascript.
 
-	Alternatives:
-	1. [Fraction.js](http://hypervolu.me/~erik/fraction.js/)
-	2. [Rational.js](http://code.google.com/p/crumble/source/browse/trunk/rational.js?spec=svn4&r=4)
-	3. [Math.Rational](http://blog.livedoor.jp/dankogai/js/rational.txt)
+Why should I use Ratio.js?<br/>
+By keeping values in a rational form, you can maintain the precision and can avoid common floating point operation errors in javascript.
 
-	Support:
-	Firefox, Chrome, IE 6+, Safari and Opera.
+Support:
+Firefox, Chrome, IE 6+, Safari and Opera.
+
+Alternatives:
+1. [Fraction.js](http://hypervolu.me/~erik/fraction.js/)
+2. [Rational.js](http://code.google.com/p/crumble/source/browse/trunk/rational.js?spec=svn4&r=4)
+3. [Math.Rational](http://blog.livedoor.jp/dankogai/js/rational.txt)
 
 ## Version ##
 	0.2
 
 ## Installation ##
-	`<script type="Ratio.js"/>`
+`<script type="Ratio.js"/>`
 
 ## Documentation ##
 *Work in Process*
@@ -81,14 +81,13 @@
     a.toArray() // returns [ 1, 10 ]
 
 ## License ##
-	License: MIT and GPL 3.0 <br/>
-	[MIT License] <http://www.opensource.org/licenses/mit-license><br/>
-	[GPL v3] <http://opensource.org/licenses/GPL-3.0>
+License: MIT and GPL 3.0 <br/>
+[MIT License] <http://www.opensource.org/licenses/mit-license><br/>
+[GPL v3] <http://opensource.org/licenses/GPL-3.0>
 
 ## Test cases ##
-	<a href="http://jsfiddle.net/jKu4q/2/" title="Testcases">Current Testcases result</a><br/>
-	
-	Test cases are located in the test folder.
+<a href="http://jsfiddle.net/jKu4q/2/" title="Testcases">Current Testcases result</a><br/>	
+Test cases are located in the test folder.
 
 ## Project page: ##
-	<https://github.com/LarryBattle/Ratio.js/><br/>
+<https://github.com/LarryBattle/Ratio.js/><br/>
