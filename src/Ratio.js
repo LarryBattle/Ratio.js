@@ -7,15 +7,12 @@
     GPL v3 <http://opensource.org/licenses/GPL-3.0>
 * @info Project page: <https://github.com/LarryBattle/Ratio.js/>
 * @version Beta 0.1.6, 2012.06.5
-* @todo Test scientific notation compatiblity. 
+// core
 * @todo Change toString() to toFraction(), if it's a Ratio then it needs always show a fraction.
-* @todo Change new Ratio to clone. - this will make it a lot easier to add props to the Ratio.
+// testing
+* @todo Test scientific notation compatiblity. 
 * @todo Add at least 5 user cases. a.add(4).toFraction() doesn't copy over the divSign.
 	Ex: Ratio.parse(1/3).negate().add("-0.1").multiply(0xF3).divide(1,2).divide(1e-4).abs().toString()
-* @todo Document a warning about the difference between Ratio() vs Ratio.parse() vs Ratio.reduce(). use 1/3 as an example.
-* @todo decimalExpansion
-* @todo toFixed fixed
-* @todo Determine what should be in the next release
  */
  
 /**
@@ -31,13 +28,13 @@
 * @returns {Ratio} object that has a numerator and denominator, corresponding to a/b.
 * @example Ex. Ratio(2,4).toString() = Ratio("2/4").toString() = "2/4"
 */
-var Ratio = function (a, b, type, alwaysReduce) {
+var Ratio = function (a, b, alwaysReduce) {
     if(!(this instanceof Ratio)){
-        return new Ratio(a, b, type, alwaysReduce);
+        return new Ratio(a, b, alwaysReduce);
     }
     this.divSign = "/";
     this.alwaysReduce = !!alwaysReduce;
-    this.type = ""+type;
+    this.type = "";
     this.denominator = isNaN("" + b) ? 1 : Math.abs(b);
     this.numerator = isNaN("" + a) ? 0 : Ratio.getNumeratorWithSign(a,(b||1));
     if( this.denominator && this.alwaysReduce ){
@@ -212,13 +209,13 @@ Ratio.parse = function (obj, obj2) {
 * @returns {Array[ Number, Number ]}
 * @example <code><pre>
     // Example 1:
-    Ratio.reduce( Ratio(36,-36) ) returns [-1,1]
+    Ratio.reduce( Ratio(36,-36) ) // returns [-1,1]
     
     // Example 2:
-    Ratio.reduce( "9/12" ) returns [3,4]
+    Ratio.reduce( "9/12" ) // returns [3,4]
     
     // Example 3:
-    Ratio.reduce( "10/4" ).toString() returns [5,2]
+    Ratio.reduce( "10/4" ).toString() // returns [5,2]
     </pre></code>
 */
 Ratio.reduce = function (obj,obj2) {
@@ -246,7 +243,7 @@ Ratio.reduce = function (obj,obj2) {
 * @example Ratio.getRepeatProps( 22/7 ) // returns ["3", "14", "285714"]
 */
 Ratio.getRepeatProps = function( val ){
-    val = (val || "").toString();
+    val = ""+(val || "");
     var RE1_getRepeatDecimals = /(?:[^\.]+\.\d*)(\d{2,})+(?:\1)$/,
         arr = [], 
         match = RE1_getRepeatDecimals.exec( val ), 
@@ -321,7 +318,7 @@ Ratio.prototype.valueOf = function (showValue) {
     Ratio(0,0).toString() == "NaN"
     </code></pre>
 */
-Ratio.prototype.toString = function () {
+Ratio.prototype.toLocaleString = function () {
     var str = "" + this.numerator, val = this.valueOf(true);
     if ( +(this.numerator) && this.denominator != 1) {
         str += this.divSign + Math.abs(this.denominator);
@@ -331,6 +328,7 @@ Ratio.prototype.toString = function () {
     }
     return (isNaN(val) || this.type == "decimal") ? val.toString() : str;
 };
+Ratio.prototype.toString = Ratio.prototype.toLocaleString;
 /**
 * Returns a new instance of the current Ratio. 
 * The clone propery value can be changed if the appropriate argument value is supplied.
@@ -346,12 +344,17 @@ Ratio.prototype.toString = function () {
     a.equals(b) === true;
     </pre></code>
 */
+Ratio.getValueIfDefined = function( backup, value ){
+	return typeof value !== "undefined" && value !== null ? value : backup;
+};
 Ratio.prototype.clone = function (top, bottom, type, alwaysReduce ) {
-	top = typeof top !== "undefined" && top !== null ? top : this.numerator;
-	bottom = typeof bottom !== "undefined" && bottom !== null ? bottom : this.denominator;
-	type = typeof type !== "undefined" && type !== null ? type : this.type;
-	alwaysReduce = typeof alwaysReduce !== "undefined" && alwaysReduce !== null ? alwaysReduce : this.alwaysReduce;
-    return new Ratio( top, bottom, type, alwaysReduce );
+	var func = Ratio.getValueIfDefined;
+	top = func( this.numerator, top);
+	bottom = func( this.denominator, bottom );
+	alwaysReduce = func( this.alwaysReduce, alwaysReduce );
+	var obj = new Ratio( top, bottom, alwaysReduce );
+	obj.type = func( this.type, type );
+	return obj;
 };
 /**
 * From the Ratio instance, returns a new instacne with a reduced ratio by factoring out the greatest common multiple.
@@ -361,7 +364,7 @@ Ratio.prototype.clone = function (top, bottom, type, alwaysReduce ) {
 */
 Ratio.prototype.reduce = function () {
     var arr = Ratio.reduce( this.numerator, this.denominator );
-    return new Ratio( arr[0], arr[1], this.type, this.alwaysReduce );
+    return this.clone( arr[0], arr[1] );
 };
 /**
 * Adds the current Ratio by another Ratio.
@@ -384,7 +387,7 @@ Ratio.prototype.add = function (obj,obj2) {
         top = ((this.numerator * obj.denominator) + ( this.denominator *obj.numerator)) / x,
         bottom = (this.denominator * obj.denominator) / x;
     }
-    return new Ratio(top, bottom, this.type, this.alwaysReduce);
+    return this.clone(top, bottom);
 };
 /**
 * Divides the current Ratio by another Ratio. 
@@ -398,7 +401,7 @@ Ratio.prototype.divide = function (obj, obj2) {
     if (!(obj instanceof Ratio) || typeof obj2 !== "undefined") {
         obj = Ratio.parse(obj,obj2);
     }
-    return new Ratio(this.numerator * obj.denominator, this.denominator * obj.numerator, this.type, this.alwaysReduce);
+    return this.clone(this.numerator * obj.denominator, this.denominator * obj.numerator);
 };
 /**
 * Compares if the current Ratio and another object have the same value.
@@ -422,7 +425,7 @@ Ratio.prototype.multiply = function (obj, obj2) {
     if (!(obj instanceof Ratio) || typeof obj2 !== "undefined") {
         obj = Ratio.parse(obj, obj2);
     }
-    return new Ratio(this.numerator * obj.numerator, this.denominator * obj.denominator, this.type, this.alwaysReduce);
+    return this.clone(this.numerator * obj.numerator, this.denominator * obj.denominator);
 };
 /**
 * Subtracts the current Ratio by another Ratio.
@@ -448,7 +451,7 @@ Ratio.prototype.subtract = function (obj, obj2) {
 * @example Ratio(10,4).descale( 2 ).toString() === "5/2"
 */
 Ratio.prototype.descale = function (factor) {
-    return new Ratio(this.numerator / factor, this.denominator / factor, this.type, this.alwaysReduce);
+    return this.clone(this.numerator / factor, this.denominator / factor);
 };
 /**
 * From the Ratio instance, returns an new Ratio raised to a power. 
@@ -458,7 +461,7 @@ Ratio.prototype.descale = function (factor) {
 * @example Ratio(2,4).pow(4).toString() === "16/256"
 */
 Ratio.prototype.pow = function (power) {
-    return new Ratio(Math.pow(this.numerator, +power), Math.pow(this.denominator, +power), this.type, this.alwaysReduce);
+    return this.clone(Math.pow(this.numerator, +power), Math.pow(this.denominator, +power));
 };
 /**
 * From the Ratio instance, returns a new Ratio multiplied by a factor.
@@ -468,7 +471,7 @@ Ratio.prototype.pow = function (power) {
 * @example Ratio(1,10).scale(10).toString() === "10/100"
 */
 Ratio.prototype.scale = function (factor) {
-    return new Ratio(this.numerator * +factor, this.denominator * +factor, this.type, this.alwaysReduce);
+    return this.clone(this.numerator * +factor, this.denominator * +factor);
 };
 /**
 * From the Ratio instance, returns a new Ratio by parsing the numerator and denominator.<br/>
@@ -492,7 +495,7 @@ Ratio.prototype.reParse = function () {
 * @example Ratio(-3,2).abs().toString() == "3/2"
 */
 Ratio.prototype.abs = function () {
-    return new Ratio(Math.abs(this.numerator), this.denominator, this.type, this.alwaysReduce);
+    return this.clone(Math.abs(this.numerator));
 };
 /**
 * From the Ratio instance, returns a new Ratio in the form of (numerator mod denominator)/1.<br/>
@@ -502,7 +505,7 @@ Ratio.prototype.abs = function () {
 * @example Ratio(3,10).mod().toString() == "3"
 */
 Ratio.prototype.mod = function () {
-    return new Ratio(this.numerator % this.denominator, 1, this.type, this.alwaysReduce);
+    return this.clone(this.numerator % this.denominator, 1);
 };
 /**
 * Returns a new instance of the Ratio with the sign toggled.
@@ -511,7 +514,7 @@ Ratio.prototype.mod = function () {
 * @example Ratio(1,2).negate().toString() == "-1/2"
 */
 Ratio.prototype.negate = function () {
-    return new Ratio( -this.numerator, this.denominator, this.type, this.alwaysReduce);
+    return this.clone( -this.numerator);
 };
 /**
 * Determines if the current Ratio is a proper fraction.
