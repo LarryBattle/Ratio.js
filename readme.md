@@ -91,3 +91,6 @@ Test cases are located in the test folder.
 
 ## Project page: ##
 <https://github.com/LarryBattle/Ratio.js/><br/>
+
+## Todo ##
+Document a warning about the difference between Ratio() vs Ratio.parse(). use 1/3 as an example.
