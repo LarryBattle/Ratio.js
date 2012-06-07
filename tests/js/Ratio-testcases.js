@@ -273,13 +273,13 @@ $(function(){
 		
 		equal( func(Ratio(4,5).toLocaleString(),Ratio(-3,2).toLocaleString()).toLocaleString(), "-8/15" );
 	});
-	test( "test Ratio.prototype.reParse()", function(){
+	test( "test Ratio.prototype.cleanFormat()", function(){
 		var func = function(a, b){
-			return Ratio(a,b).reParse().toString();
+			return Ratio(a,b).cleanFormat().toString();
 		};
 		equal( func(1.2,1.5), Ratio.parse(1.2,1.5).toString() );
 		equal( func(1.2e30,1.5), Ratio.parse(1.2e30,1.5).toString() );
-		equal( func(1.2e30,1.5), Ratio.parse(1.2e30,1.5).toString() );
+		equal( func(1.00000000000000009e30,1.5), Ratio.parse(1.0e30,1.5).toString() );
 		equal( func(-1.2e-10,1.5e15), Ratio(-1.2e-10,1.5e15).toString() );
 	});
 	
