@@ -7,6 +7,8 @@
     GPL v3 <http://opensource.org/licenses/GPL-3.0>
 * @info Project page: <https://github.com/LarryBattle/Ratio.js/>
 * @version Beta 0.1.7, 2012.06.6
+// code
+* @todo Rename cleanFormat to cleanFormat() and add cleanENotation to the mix.
 // testing
 * @todo Test scientific notation compatiblity. 
 * @todo Add at least 5 user cases. a.add(4).toFraction() doesn't copy over the divSign.
@@ -479,15 +481,18 @@ Ratio.prototype.scale = function (factor) {
     <code><pre>
     var a = Ratio(20,30).descale(3);
     a.toString() == "6.666666666666667/10";
-    a.reParse().toString() == "6666666666666667/10000000000000000"
+    a.cleanFormat().toString() == "6666666666666667/10000000000000000"
     </pre></code>
 */
-Ratio.prototype.reParse = function () {
+Ratio.prototype.cleanFormat = function () {
 	var re = /^\d+\.\d+$/;
 	if( re.test( this.numerator ) || re.test( this.denominator ) ){
 		return Ratio.parse( this.numerator, this.denominator );
 	}
-	return this.clone();
+	var obj = this.clone();
+	obj.numerator = Ratio.getCleanENotation( obj.numerator );
+	obj.denominator = Ratio.getCleanENotation( obj.denominator );
+	return obj;
 };
 /**
 * Returns a new instances that is the absolute value of the current Ratio.
