@@ -6,7 +6,7 @@
 * MIT License <http://www.opensource.org/licenses/mit-license>
 * GPL v3 <http://opensource.org/licenses/GPL-3.0>
 * @info Project page: <https://github.com/LarryBattle/Ratio.js/>
-* @version Beta 0.1.6, 2012.06.5
+* @version Beta 0.1.7, 2012.06.6
 */
 $(function(){
 	module( "Instantiation" );
@@ -94,9 +94,9 @@ $(function(){
 		equal( Ratio(1e2,2e4).toLocaleString(), "100/20000" );
 		equal( Ratio(-1e100,4).toLocaleString(), "-2.5e+99" );
 	});
-	test( "test Ratio.prototype.toFraction()", function(){
+	test( "test Ratio.prototype.toString()", function(){
 		var func = function(a,b){
-			return Ratio(a,b).toFraction();
+			return Ratio(a,b).toString();
 		};
 		equal( func(), "0/1" );
 		equal( func(1,2), "1/2" );
@@ -274,8 +274,13 @@ $(function(){
 		equal( func(Ratio(4,5).toLocaleString(),Ratio(-3,2).toLocaleString()).toLocaleString(), "-8/15" );
 	});
 	test( "test Ratio.prototype.reParse()", function(){
-		deepEqual( Ratio(1.2,1.5).reParse().toLocaleString(), Ratio.parse(1.2,1.5).toLocaleString() );
-		deepEqual( Ratio(-1.2e-10,1.5e15).reParse().toLocaleString(), Ratio.parse(-1.2e-10,1.5e15).toLocaleString() );
+		var func = function(a, b){
+			return Ratio(a,b).reParse().toString();
+		};
+		equal( func(1.2,1.5), Ratio.parse(1.2,1.5).toString() );
+		equal( func(1.2e30,1.5), Ratio.parse(1.2e30,1.5).toString() );
+		equal( func(1.2e30,1.5), Ratio.parse(1.2e30,1.5).toString() );
+		equal( func(-1.2e-10,1.5e15), Ratio(-1.2e-10,1.5e15).toString() );
 	});
 	
 	module( "Core Functions" );
@@ -506,7 +511,7 @@ $(function(){
 		equal( a, "3/2" );
 		a = a.divide("3/2");
 		equal( a, "1" );
-		equal( a.multiply(12).reduce(), 12 );
+		equal( a.multiply(12).reduce().toLocaleString(), 12 );
 		equal( a, "1" );
 	});
 	
@@ -537,7 +542,7 @@ $(function(){
 		equal( func(-1,2), "1/2" );
 		equal( func(-1,-2), "1/2" );
 		equal( func(1,2), "1/2" );
-		equal( func(-1e23,21), "1e+23/21" );
+		equal( func(-1e22,21), "1e+22/21" );
 	});
 	test( "test Ratio.prototype.mod()", function(){
 		var func = function(a,b){
@@ -584,5 +589,12 @@ $(function(){
 		deepEqual( func(9876543210 ), [2,3,3,5,17,17,379721] );
 		deepEqual( func("103103103" ), [3,103,333667] );
 	});
-	
+	test( "test Ratio.getCleanENotation()", function(){
+		var func = Ratio.getCleanENotation;
+		equal( func(null), "0" );
+		equal( func("bear"), "0" );
+		equal( func("9.999999e+22"), "9.999999e+22" );
+		equal( func("9.999999999999999e+22"), "1e+23" );
+		equal( func("1.1000000000000003e-30"), "1.1e-30" );
+	});
 });

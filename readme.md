@@ -1,26 +1,3 @@
-# package.json #
-	{
-		"name" : "Ratio.js",
-		"description" : "Provides a Fraction \/ Rational \/ Ratio object for javascript.",
-		"version" : "0.2",
-		"author" : "Larry Battle <http:\/\/bateru.com\/news\/contact-me>",
-		"contributors" : [{
-				"name" : "Larry Battle",
-				"email" : "http:\/\/bateru.com\/news\/contact-me"
-			}
-		],
-		"main" : ".\/src\/Ratio.js",
-		"keywords" : ["Ratio", "fraction", "rational", "numbers", "Math"],
-		"scripts" : "",
-		"repository" : "git:\/\/github.com\/LarryBattle\/Ratio.js",
-		"engines" : {
-			"node" : "*"
-		},
-		"directories" : ""
-	}
-
-# Readme.txt #
-
 *Work in Progress*
 ## Ratio.js ##
 Provides a Fraction/Rational/Ratio object for javascript.

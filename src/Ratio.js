@@ -6,9 +6,7 @@
     MIT License <http://www.opensource.org/licenses/mit-license>
     GPL v3 <http://opensource.org/licenses/GPL-3.0>
 * @info Project page: <https://github.com/LarryBattle/Ratio.js/>
-* @version Beta 0.1.6, 2012.06.5
-// core
-* @todo Change toString() to toFraction(), if it's a Ratio then it needs always show a fraction.
+* @version Beta 0.1.7, 2012.06.6
 // testing
 * @todo Test scientific notation compatiblity. 
 * @todo Add at least 5 user cases. a.add(4).toFraction() doesn't copy over the divSign.
@@ -262,24 +260,6 @@ Ratio.getRepeatProps = function( val ){
     return arr;
 }
 /**
-* From the Ratio instance, returns the raw values of the numerator and denominator in the form "a/b".<br/>
-* Note: The division symbol can be change by the use of `divSign` property.
-* 
-* @returns {String}
-* @example <code><pre>
-    // Example 1:
-    Ratio(8,2).toFraction() == "8/2";
-    
-    // Example 2:
-    var a = Ratio(8,2);
-    a.divSign = ":";
-    a.toFraction() == "8:2";
-    </pre></code>
-*/
-Ratio.prototype.toFraction = function(){
-    return "" + this.numerator + this.divSign + this.denominator;
-};
-/**
 * From the Ratio instance, returns the raw values of the numerator and denominator in the form [numerator, denominator].
 * 
 * @returns {Array[Number, Number]}
@@ -302,7 +282,7 @@ Ratio.prototype.toArray = function () {
     </pre></code>
 */
 Ratio.prototype.valueOf = function (showValue) {
-    return (!showValue && this.type == "string") ? this.toString() : (this.numerator / this.denominator);
+    return (!showValue && this.type == "string") ? this.toLocaleString() : (this.numerator / this.denominator);
 };
 /**
 * From the Ratio instance, returns a string of the Ratio in fraction form if the numerator and denominator are Rational numbers.
@@ -312,10 +292,10 @@ Ratio.prototype.valueOf = function (showValue) {
 * @returns {String}
 * @example <code><pre>
     // Example 1:
-    Ratio(1,10).toString() == "1/10"
+    Ratio(1,10).toLocaleString() == "1/10"
     
     // Example 2:
-    Ratio(0,0).toString() == "NaN"
+    Ratio(0,0).toLocaleString() == "NaN"
     </code></pre>
 */
 Ratio.prototype.toLocaleString = function () {
@@ -328,7 +308,24 @@ Ratio.prototype.toLocaleString = function () {
     }
     return (isNaN(val) || this.type == "decimal") ? val.toString() : str;
 };
-Ratio.prototype.toString = Ratio.prototype.toLocaleString;
+/**
+* From the Ratio instance, returns the raw values of the numerator and denominator in the form "a/b".<br/>
+* Note: The division symbol can be change by the use of `divSign` property.
+* 
+* @returns {String}
+* @example <code><pre>
+    // Example 1:
+    Ratio(8,2).toString() == "8/2";
+    
+    // Example 2:
+    var a = Ratio(8,2);
+    a.divSign = ":";
+    a.toString() == "8:2";
+    </pre></code>
+*/
+Ratio.prototype.toString = function(){
+    return "" + this.numerator + this.divSign + this.denominator;
+};
 /**
 * Returns a new instance of the current Ratio. 
 * The clone propery value can be changed if the appropriate argument value is supplied.
@@ -486,7 +483,11 @@ Ratio.prototype.scale = function (factor) {
     </pre></code>
 */
 Ratio.prototype.reParse = function () {
-    return Ratio.parse( this.numerator, this.denominator );
+	var re = /^\d+\.\d+$/;
+	if( re.test( this.numerator ) || re.test( this.denominator ) ){
+		return Ratio.parse( this.numerator, this.denominator );
+	}
+	return this.clone();
 };
 /**
 * Returns a new instances that is the absolute value of the current Ratio.
@@ -550,4 +551,25 @@ Ratio.getPrimeFactors = function (num) {
         num /= x;
     }
     return factors;
+};
+/**
+* Rounds up a scientific notated number with 8+ trailing 0s or 9s.
+* Note: Returns number as string to preserve value.
+*
+* @param {Number} num
+* @returns {String}
+* @example <code><pre>
+	// Example 1
+	Ratio.getCleanENotation( "1.1000000000000003e-30" ) === "1.1e-30";
+	// Example 2
+	Ratio.getCleanENotation( "9.999999999999999e+22" ) === "1e+23";
+	</pre></code>
+*/
+Ratio.getCleanENotation = function(num){
+	num = (+num||0).toString();
+	if( /\.\d+(0|9){8,}\d?e/.test( num ) ){
+		var i = num.match( /(?:\d+\.)(\d+)(?:e.*)/ )[1].replace(/(0|9)+\d$/, '').length + 1;
+		num = (+num).toPrecision( i ).toString();
+	}
+	return num;
 };
