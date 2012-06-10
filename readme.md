@@ -1,44 +1,32 @@
 *Work in Progress*
 ## Ratio.js ##
-Provides a Fraction/Rational/Ratio object for javascript.
+Provides a Fraction / Rational / Ratio object for javascript.
 
-Why should I use Ratio.js?<br/>
-By keeping values in a rational form, you can maintain the precision and can avoid common floating point operation errors in javascript.
+**Why use Ratio.js?**
 
-Support:
+By keeping values in a rational form, you can maintain precision and can avoid common floating point operation errors in Javascript.
 
-Firefox 12, Chrome 19, IE 7+, and Opera 11+.
-Note: Run the Ratio test cases to check for browser capability.
+**Support:**
 
-Alternatives:
-1. [Fraction.js](http://hypervolu.me/~erik/fraction.js/)
-2. [Rational.js](http://code.google.com/p/crumble/source/browse/trunk/rational.js?spec=svn4&r=4)
-3. [Math.Rational](http://blog.livedoor.jp/dankogai/js/rational.txt)
+Chrome 19, Firefox 12, IE 7+, and Opera 11+.
 
-## Version ##
+Note: Run the test cases to check for browser compatibility.
+
+## Current Version ##
 	0.2
 
 ## Installation ##
-`<script type="Ratio.js"/>`
-
-## Usage ##
-
-Example: 
-
-What's ( 0.1 + 0.2 )/( 1/3 * 12 ) as a fraction?
-
-
-Solution:
-
-	var result = Ratio(0.1).add(0.2).divide( Ratio(1/3).multiply(12) );
-	"answer = " + result.toString() // shows "answer = 3/40"
+Just include the Ratio.js script. Like so, 
+    `<script type="Ratio.js"/>`
 	
 ## Quick Start Guide ##
 
+### Ratio Constructor ###
 Once your include Ratio.js, it introduces a global constructor called `Ratio`.
 `new` is not require to make a new object since it's done for you.
 Thus `new Ratio()` and `Ratio()` are both valid to instantiate an object.
 	
+### Ratio Properties ###
 All Ratio objects have a `numerator`, `denominator`, `type` and `divSign` property members.
 
 	var a = Ratio();
@@ -47,7 +35,7 @@ All Ratio objects have a `numerator`, `denominator`, `type` and `divSign` proper
 	a.denominator == 1;
 	a.type == "";
 	a.divSign == "/"
-
+### Creating new Ratio Objects ###
 There are various ways to create a new Ratio object. Ratio.parse() is the easiest and prefered methods.
 	var a = Ratio(1,2);
 	a.toString() == "1/2"
@@ -67,7 +55,7 @@ There are various ways to create a new Ratio object. Ratio.parse() is the easies
 	a = Ratio.parse( Ratio(1/2) );
 	a.toString() == "1/2"
 
-	
+### Methods ###
 All proproty methods are non-destructive and return a new Ratio object.
 
 	var a = Ratio(1,3);
@@ -78,6 +66,7 @@ All proproty methods are non-destructive and return a new Ratio object.
 Here are a list of the methods.
 `toArray`, `valueOf`, `toLocaleString`, `toString`, `clone`, `reduce`, `add`, `divide`, `equals`, `multiply`, `subtract`, `descale`, `pow`, `scale`, `cleanFormat`, `abs`, `mod`, `negate`, and `isProper`.
 
+### Adding Features ###
 The following steps are needed to add functionality to Ratio.js.
 
 1. Create a test case for the new feature in `tests\Ratio_testcases.html`.
@@ -107,17 +96,17 @@ Refer to docs/Ratio.js_documentation.html
 	c.toString() == "1053/5"
 
     // in Ratio.js
-    var a = new Ratio( 0.1 ).add( 0.2 );
-    var b = new Ratio( 0.3 );
+    var a = Ratio( 0.1 ).add( 0.2 );
+    var b = Ratio( 0.3 );
     (+a == +b )  == true
     
     // another way of writing it.
-    new Ratio( "0.1" ).add( 0.2 ).equals( 0.3 ); // true!
+    Ratio( "0.1" ).add( 0.2 ).equals( 0.3 ); // true!
     
     // And another.
-    var a = new Ratio(1,10);
-    var b = new Ratio(2,10);
-    var c = new Ratio(3,10);
+    var a = Ratio(1,10);
+    var b = Ratio(2,10);
+    var c = Ratio(3,10);
     a.add( b ).toString() === c.toString() // true!
     
     a.toString() === "1/10"
@@ -125,17 +114,27 @@ Refer to docs/Ratio.js_documentation.html
     ( +a === a.valueOf() ) 
     a.toArray() // returns [ 1, 10 ]
 
+## Example ## 
+Evaluate ( 0.1 + 0.2 )/( 1/3 * 12 ) as a fraction?
+
+Solution:
+
+	var result = Ratio(0.1).add(0.2).divide( Ratio(1/3).multiply(12) );
+	"answer = " + result.toString() // shows "answer = 3/40"
+
 ## License ##
-License: MIT and GPL 3.0 <br/>
-[MIT License] <http://www.opensource.org/licenses/mit-license><br/>
-[GPL v3] <http://opensource.org/licenses/GPL-3.0>
+License: [MIT License](http://www.opensource.org/licenses/mit-license) and 
+[GPL v3](http://opensource.org/licenses/GPL-3.0)
 
 ## Test cases ##
-<a href="http://jsfiddle.net/jKu4q/2/" title="Testcases">Current Testcases result</a><br/>	
+Test Case Results [Here](http://jsfiddle.net/jKu4q/2/)
+
 Test cases are located in the test folder.
 
 ## Project page: ##
 <https://github.com/LarryBattle/Ratio.js/><br/>
 
-## Todo ##
-Document a warning about the difference between Ratio() vs Ratio.parse(). use 1/3 as an example.
+## Alternatives:##
+1. [Fraction.js](http://hypervolu.me/~erik/fraction.js/)
+2. [Rational.js](http://code.google.com/p/crumble/source/browse/trunk/rational.js?spec=svn4&r=4)
+3. [Math.Rational](http://blog.livedoor.jp/dankogai/js/rational.txt)
