@@ -31,9 +31,7 @@ What's ( 0.1 + 0.2 )/( 1/3 * 12 ) as a fraction?
 Solution:
 
 	var result = Ratio(0.1).add(0.2).divide( Ratio(1/3).multiply(12) );
-	
 	"answer = " + result.toString() // shows "answer = 3/40"
-	
 	
 ## Quick Start Guide ##
 
@@ -50,6 +48,26 @@ All Ratio objects have a `numerator`, `denominator`, `type` and `divSign` proper
 	a.type == "";
 	a.divSign == "/"
 
+There are various ways to create a new Ratio object. Ratio.parse() is the easiest and prefered methods.
+var a = Ratio(1,2);
+a.toString() == "1/2"
+
+a = Ratio.parse(1,2);
+a.toString() == "1/2"
+
+a = Ratio.parse(1/2);
+a.toString() == "1/2"
+
+a = Ratio.parse( "1/2" );
+a.toString() == "1/2"
+
+a = Ratio.parse( Ratio(1), Ratio(2) );
+a.toString() == "1/2"
+
+a = Ratio.parse( Ratio(1/2) );
+a.toString() == "1/2"
+
+	
 All proproty methods are non-destructive and return a new Ratio object.
 
 	var a = Ratio(1,3);
@@ -63,11 +81,8 @@ Here are a list of the methods.
 The following steps are needed to add functionality to Ratio.js.
 
 1. Create a test case for the new feature in `tests\Ratio_testcases.html`.
-
 2. Add functionality to Ratio.js while making your testcases pass.
-
 3. Once complete, refactor.
-
 4. Push request.
 
 Note: If the feature requires the use a `this`, then attach it the prototype methods. Otherwise it should be a static method on the Ratio constructor.
@@ -88,8 +103,8 @@ Refer to docs/Ratio.js_documentation.html
 	a.toString() == "0:1"
 	
 	// Ratio operations
-	Ratio.parse(1/3).negate().add("-0.1").multiply(0xF3).divide(1,2).divide(1e-4).abs().toString()
-	
+	var c = Ratio.parse(1/3).negate().add("-0.1").multiply(0xF3).divide(1,2).divide(1e-4).abs();
+	c.toString() == "1053/5"
 
     // in Ratio.js
     var a = new Ratio( 0.1 ).add( 0.2 );
