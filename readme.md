@@ -49,23 +49,23 @@ All Ratio objects have a `numerator`, `denominator`, `type` and `divSign` proper
 	a.divSign == "/"
 
 There are various ways to create a new Ratio object. Ratio.parse() is the easiest and prefered methods.
-var a = Ratio(1,2);
-a.toString() == "1/2"
+	var a = Ratio(1,2);
+	a.toString() == "1/2"
 
-a = Ratio.parse(1,2);
-a.toString() == "1/2"
+	a = Ratio.parse(1,2);
+	a.toString() == "1/2"
 
-a = Ratio.parse(1/2);
-a.toString() == "1/2"
+	a = Ratio.parse(1/2);
+	a.toString() == "1/2"
 
-a = Ratio.parse( "1/2" );
-a.toString() == "1/2"
+	a = Ratio.parse( "1/2" );
+	a.toString() == "1/2"
 
-a = Ratio.parse( Ratio(1), Ratio(2) );
-a.toString() == "1/2"
+	a = Ratio.parse( Ratio(1), Ratio(2) );
+	a.toString() == "1/2"
 
-a = Ratio.parse( Ratio(1/2) );
-a.toString() == "1/2"
+	a = Ratio.parse( Ratio(1/2) );
+	a.toString() == "1/2"
 
 	
 All proproty methods are non-destructive and return a new Ratio object.
