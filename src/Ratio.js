@@ -6,9 +6,7 @@
     MIT License <http://www.opensource.org/licenses/mit-license>
     GPL v3 <http://opensource.org/licenses/GPL-3.0>
 * @info Project page: <https://github.com/LarryBattle/Ratio.js/>
-* @version Beta 0.1.7, 2012.06.6
-// code
-* @todo Rename cleanFormat to cleanFormat() and add cleanENotation to the mix.
+* @version Beta 0.1.8, 2012.06.9
 // testing
 * @todo Test scientific notation compatiblity. 
 * @todo Add at least 5 user cases. a.add(4).toFraction() doesn't copy over the divSign.
@@ -83,7 +81,7 @@ Ratio.gcd = function (a, b) {
 */
 Ratio.getNumeratorWithSign = function (top, bottom) {
     var x = (+top||1), y = (+bottom||1), a = "" + x*y;
-    return /[-]/.test(a.charAt(0)) ? -Math.abs(+top) : Math.abs(+top);
+    return (/\-/.test(a.charAt(0))) ? -Math.abs(+top) : Math.abs(+top);
 };
 /**
 * Converts a decimal value to a ratio in the form of [top, bottom], such that top/bottom is the decimal value.
@@ -93,7 +91,7 @@ Ratio.getNumeratorWithSign = function (top, bottom) {
 * @example Ratio.parseDecimal( "-0.25" ) // returns [-25,100]
 */
 Ratio.parseDecimal = function (obj) {
-    var arr = [], base, parts;
+    var arr = [], parts;
     if(!Ratio.isNumeric(obj)){
         return arr;
     }
@@ -158,7 +156,7 @@ Ratio.parseNumber = function (obj) {
 * @example Ratio.parseToArray( 0.125 ) // returns [125, 1000]
 */
 Ratio.parseToArray = function (obj) {
-    var arr = [], parts;
+    var arr = [], parts, re = /\//;
     if (typeof obj == "undefined" || obj === null) {
         return arr;
     }
@@ -166,8 +164,8 @@ Ratio.parseToArray = function (obj) {
         arr[0] = Ratio.getNumeratorWithSign(obj.numerator, obj.denominator);
         arr[1] = Math.abs(obj.denominator);
     } else {
-        if (/\//.test(obj)) {
-            parts = obj.split(/\//);
+        if ( re.test(obj)) {
+            parts = obj.split( re );
             arr[0] = Ratio.getNumeratorWithSign(parts[0], parts[1]);
             arr[1] = Math.abs(+parts[1]);
         } else {
@@ -260,7 +258,7 @@ Ratio.getRepeatProps = function( val ){
 		arr[1] = arr[1].replace( RE2_RE1AtEnd, "" );
     }
     return arr;
-}
+};
 /**
 * From the Ratio instance, returns the raw values of the numerator and denominator in the form [numerator, denominator].
 * 
@@ -305,7 +303,7 @@ Ratio.prototype.toLocaleString = function () {
     if ( +(this.numerator) && this.denominator != 1) {
         str += this.divSign + Math.abs(this.denominator);
     }
-    if ( +this.denominator == 0 || (this.numerator % this.denominator) == 0 ) {
+    if ( +this.denominator === 0 || (this.numerator % this.denominator) === 0 ) {
         str = val;
     }
     return (isNaN(val) || this.type == "decimal") ? val.toString() : str;

@@ -6,7 +6,7 @@
 * MIT License <http://www.opensource.org/licenses/mit-license>
 * GPL v3 <http://opensource.org/licenses/GPL-3.0>
 * @info Project page: <https://github.com/LarryBattle/Ratio.js/>
-* @version Beta 0.1.7, 2012.06.6
+* @version Beta 0.1.8, 2012.06.9
 */
 $(function(){
 	module( "Instantiation" );
@@ -89,10 +89,13 @@ $(function(){
 	
 	module( "Format Types" );
 	test( "test Ratio.prototype.toLocaleString()", function(){
-		equal( Ratio(1,2).toLocaleString(), "1/2" );
-		equal( Ratio(-1,-2).toLocaleString(), "1/2" );
-		equal( Ratio(1e2,2e4).toLocaleString(), "100/20000" );
-		equal( Ratio(-1e100,4).toLocaleString(), "-2.5e+99" );
+		var func = function( a,b){
+			return Ratio(a,b).toLocaleString();
+		};
+		equal( func(1,2), "1/2" );
+		equal( func(-1,-2), "1/2" );
+		equal( func(1e2,2e4), "100/20000" );
+		equal( func(-1e100,4), "-2.5e+99" );
 	});
 	test( "test Ratio.prototype.toString()", function(){
 		var func = function(a,b){
@@ -212,66 +215,76 @@ $(function(){
 		deepEqual( func(0.231), [231,1000] );
 		deepEqual( func(-123.484), [-123484, 1000] );
 	});
-	test( "test Ratio.parseToArray()", function(){
+	test( "test Ratio.parseToArray() with invalid input", function(){
 		var func = Ratio.parseToArray;
 		deepEqual( func("apples"), []);
 		deepEqual( func(true), []);
 		deepEqual( func([]), [] );
-		
+	});	
+	test( "test Ratio.parseToArray() with whole numbers", function(){
+		var func = Ratio.parseToArray;
 		deepEqual( func( 0 ), [0,1] );
 		deepEqual( func( 123 ), [123, 1]);
 		deepEqual( func( 423 ), [ 423, 1 ]);
-		
 		deepEqual( func( "3" ), [ 3, 1 ]);
 		deepEqual( func( " 3  " ), [ 3, 1 ]);
+	});
+	test( "test Ratio.parseToArray() with fractions", function(){
+		var func = Ratio.parseToArray;
 		deepEqual( func(" 3/1"), [ 3, 1 ]);
-		
 		deepEqual( func("3/ 2"), [ 3, 2 ]);
 		deepEqual( func("1 / 3"), [1, 3 ]);
 		deepEqual( func("-4/ 3"), [-4, 3 ]);
-		
 		deepEqual( func(" 4 /-3"), [-4, 3 ]);
 		deepEqual( func("-4 /-3"), [4, 3 ]);
+	});
+	test( "test Ratio.parseToArray() with Ratio objects", function(){
+		var func = Ratio.parseToArray;
 		deepEqual( func( (Ratio(4,3)) ), [4,3 ]);
-		
 		deepEqual( func( (Ratio(-4,3)) ), [-4,3 ]);
 		deepEqual( func( (Ratio(4,-3)) ), [-4,3 ]);
 		deepEqual( func( (Ratio(-4,-3)) ), [4,3 ]);
-		
+	});	
+	test( "test Ratio.parseToArray() with decimals", function(){
+		var func = Ratio.parseToArray;
 		deepEqual( func(Number(1.12)), [112,100 ]);
 		deepEqual( func(0.771), [771,1000 ]);
+	});
+	test( "test Ratio.parseToArray() with scientific notated numbers", function(){
+		var func = Ratio.parseToArray;
 		deepEqual( func(1e3), [1000, 1 ]);
-		
 		deepEqual( func("1e-5"), [1,100000 ]);
 		deepEqual( func("-1e-5"), [-1,100000 ]);
 		deepEqual( func(1.01e3), [ 1010,1 ]);
-		
 		deepEqual( func(1e101), [ 1e101, 1 ]);
 		deepEqual( func(1.01e-3), [101, 100000]);
 		deepEqual( func(1.01e-30), [101, 1e32]);
-		
 		deepEqual( func(-1.01e-30), [-101, 1e32]);
 	});
 	test( "test Ratio.parse() with singal arguments.", function(){
-		var func = Ratio.parse;
-		equal( func("-0.125").toLocaleString(), "-125/1000" );
-		equal( func( Ratio(3) ).toLocaleString(), "3" );
-		equal( func(3).toLocaleString(), "3" );
-		equal( func("-3.0e-1").toLocaleString(), "-3/10" );
-		equal( func(3.0).toLocaleString(), "3" );
-		equal( func(Ratio(-1,3)).toLocaleString(), "-1/3" );
+		var func = function(a){
+			return Ratio.parse(a).toLocaleString();
+		};
+		equal( func("-0.125"), "-125/1000" );
+		equal( func(Ratio(3)), "3" );
+		equal( func(3), "3" );
+		equal( func("-3.0e-1"), "-3/10" );
+		equal( func(3.0), "3" );
+		equal( func(Ratio(-1,3)), "-1/3" );
 	});
 	test( "test Ratio.parse() with double arguments.", function(){
-		var func = Ratio.parse;
-		equal( func(0.125,0.5).toLocaleString(), "1250/5000" );
-		equal( func(0.125,"1/2").toLocaleString(), "250/1000" );
-		equal( func(3, Ratio(2)).toLocaleString(), "3/2" );
+		var func = function(a,b){
+			return Ratio.parse(a,b).toLocaleString();
+		};
+		equal( func(0.125,0.5), "1250/5000" );
+		equal( func(0.125,"1/2"), "250/1000" );
+		equal( func(3, Ratio(2)), "3/2" );
 		
-		equal( func(3, Ratio(1)).toLocaleString(), "3" );
-		equal( func(Ratio(1),3).toLocaleString(), "1/3" );
-		equal( func(Ratio(-4),Ratio(3)).toLocaleString(), "-4/3" );
+		equal( func(3, Ratio(1)), "3" );
+		equal( func(Ratio(1),3), "1/3" );
+		equal( func(Ratio(-4),Ratio(3)), "-4/3" );
 		
-		equal( func(Ratio(4,5).toLocaleString(),Ratio(-3,2).toLocaleString()).toLocaleString(), "-8/15" );
+		equal( func(Ratio(4,5).toLocaleString(),Ratio(-3,2).toLocaleString()), "-8/15" );
 	});
 	test( "test Ratio.prototype.cleanFormat()", function(){
 		var func = function(a, b){
@@ -369,51 +382,66 @@ $(function(){
 		ok( b <= c );
 	});
 	test( "test addition with +", function(){
-		equal( Ratio() + Ratio(), 0 );
-		equal( Ratio(0) + Ratio(0), 0);
-		equal( Ratio(-1) + Ratio(1), 0 );
-		equal( Ratio(1) + Ratio(2), 3 );
-		equal( Ratio(40) + Ratio(2), 42 );
-		equal( Ratio(20001,40002) + Ratio(400,800), 1 );
-		equal( Ratio(1,2) + Ratio(1,2), 1 );
-		equal( Ratio(1) + Ratio(1,2), 1.5 );
-		equal( Ratio(1) + Ratio(1,3), 4/3 );
-		equal( Ratio(1,3) + Ratio(-1,3), 0 );
+		var func = function( a,b,c,d){
+			return (Ratio(a,b) + Ratio(c,d));
+		};
+		var x = null;
+		equal( func(), 0 );
+		equal( func(0,x,0,x), 0);
+		equal( func(-1,x,1,x), 0 );
+		equal( func(1,x,2,x), 3 );
+		equal( func(40,x,2,x), 42 );
+		equal( func(20001,40002,400,800), 1 );
+		equal( func(1,2,1,2), 1 );
+		equal( func(1,x,1,2), 1.5 );
+		equal( func(1,x,1,3), 4/3 );
+		equal( func(1,3,-1,3), 0 );
 	});
 	test( "test Ratio.prototype.add()", function(){
-		equal( Ratio().add(Ratio()).toLocaleString(), "0" );
-		equal( Ratio(0).add(Ratio(0)).toLocaleString(), "0" );
-		equal( Ratio(2,4).add(Ratio(4,8)).toLocaleString(), "1" );
-		equal( Ratio(1,2).add(Ratio(1,2)).toLocaleString(), "1" );
-		equal( Ratio(1).add(Ratio(1)).toLocaleString(), "2" );
-		equal( Ratio(1).add(Ratio(2)).toLocaleString(), "3" );
-		equal( Ratio(40).add(Ratio(2)).toLocaleString(), "42" );
-		equal( Ratio(1).add(Ratio(1,2)).toLocaleString(), "3/2" );
-		equal( Ratio(2,5).add(Ratio(3,4)).toLocaleString(), "23/20" );
-		equal( Ratio(1,3).add(Ratio(3,9)).toLocaleString(), "6/9" );
-		equal( Ratio(4,9).add(Ratio(3,9)).toLocaleString(), "7/9" );
+		var func = function( a,b,c,d){
+			return Ratio(a,b).add( Ratio(c,d) ).toLocaleString();
+		};
+		var x = null;
+		equal( func(), "0" );
+		equal( func(0,x,0,x), "0" );
+		equal( func(2,4,4,8), "1" );
+		equal( func(1,2,1,2), "1" );
+		equal( func(1,x,1,x), "2" );
+		equal( func(1,x,2,x), "3" );
+		equal( func(40,x,2,x), "42" );
+		equal( func(1,x,1,2), "3/2" );
+		equal( func(2,5,3,4), "23/20" );
+		equal( func(1,3,3,9), "6/9" );
+		equal( func(4,9,3,9), "7/9" );
 	});
 	test( "test addition with -", function(){
-		equal( Ratio() - Ratio(), 0 );
-		equal( Ratio(1,4) - Ratio(1,4), 0 );
-		equal( Ratio(1,5) - Ratio(1,2), "-0.3" );
-		equal( Ratio(1,20) - Ratio(1,100), "0.04" );
+		var func = function( a,b,c,d){
+			return (Ratio(a,b) - Ratio(c,d));
+		};
+		var x = null;
+		equal( func(), 0);
+		equal( func(1,4,1,4), 0 );
+		equal( func(1,5,1,2), "-0.3" );
+		equal( func(1,20,1,100), "0.04" );
 	});
 	test( "test Ratio.prototype.subtract()", function(){
-		equal( Ratio().subtract(Ratio()).toLocaleString(), "0" );
-		equal( Ratio(0).subtract(Ratio(0)).toLocaleString(), "0" );
-		equal( Ratio(1,3).subtract(Ratio(3,9)).toLocaleString(), "0" );
-		equal( Ratio(2,4).subtract(Ratio(4,8)).toLocaleString(), "0" );
-		equal( Ratio(1).subtract(Ratio(1,2)).toLocaleString(), "1/2" );
-		equal( Ratio(4).subtract(Ratio(1)).toLocaleString(), "3" );
-		equal( Ratio(4,9).subtract(Ratio(3,9)).toLocaleString(), "1/9" );
-		equal( Ratio(10,2).subtract(Ratio(9,19)).toLocaleString(), "172/38" );
-		equal( Ratio(1).subtract(Ratio(3,2)).toLocaleString(), "-1/2" );
-		equal( Ratio(1).subtract(Ratio(4)).toLocaleString(), "-3" );
-		equal( Ratio(2,5).subtract(Ratio(3,4)).toLocaleString(), "-7/20" );
-		equal( Ratio(1,9).subtract(Ratio(4,9)).toLocaleString(), "-3/9" );
+		var func = function( a,b,c,d){
+			return Ratio(a,b).subtract( Ratio(c,d) ).toLocaleString();
+		};
+		var x = null;
+		equal( func(), "0" );
+		equal( func(0,x,0,x), "0" );
+		equal( func(1,3,3,9), "0" );
+		equal( func(2,4,4,8), "0" );
+		equal( func(1,x,1,2), "1/2" );
+		equal( func(4,x,1,x), "3" );
+		equal( func(4,9,3,9), "1/9" );
+		equal( func(10,2,9,19), "172/38" );
+		equal( func(1,x,3,2), "-1/2" );
+		equal( func(1,x,4,x), "-3" );
+		equal( func(2,5,3,4), "-7/20" );
+		equal( func(1,9,4,9), "-3/9" );
 	});
-
 	test( "test Ratio.prototype.multiply", function(){
 		var func = function(a,b,c,d){
 			return ( Ratio( a,b) ).multiply( c, d ).toLocaleString();
@@ -453,7 +481,7 @@ $(function(){
 		deepEqual( func( "1.2.3" ), [] );
 		deepEqual( func( "1.333333" ), [] );
 	});	
-	test( "test Ratio.getRepeatProps() with valid input", function(){
+	test( "test Ratio.getRepeatProps() with decimal numbers as string", function(){
 		var func = Ratio.getRepeatProps;
 		
 		deepEqual( func( "1.1111111111" ), [ "1", "", "1" ] );
@@ -465,6 +493,9 @@ $(function(){
 		deepEqual( func( "2.123412341234" ), ["2","","1234"] );
 		
 		deepEqual( func( "3534.3344512341234" ), ["3534","33445","1234"] );
+	});
+	test( "test Ratio.getRepeatProps() with computed decimal numbers", function(){
+		var func = Ratio.getRepeatProps;
 		deepEqual( func( 1/333 ), ["0","","003" ] );
 		deepEqual( func( 7/13 ), ["0","5384","615384" ] );
 		deepEqual( func( 1/111 ), ["0","","009" ] );
