@@ -5,20 +5,37 @@
 	  <title>Ratio.js Documentation</title>
 	</head>
 	<body>
+		*Work in progress.* <br/>
+		<h2>Ratio.js API Documentation</h2>
 		<p id="functionList" class="dotTemplate">
 		<!-- 
-			Length of it = {{=it.length}}
-		-->
-		obj.ctx.string
-		<!-- 
-		
 		Functions List:
 			<ol>
 			{{ for(var i = 0, l = it.length; i < l; i++ ){ }}
 				{{? it[i].ctx }}
 				<li>
-					<b>{{= it[i].ctx.string}}</b><br/>
-					{{= it[i].description.full}}
+					<fieldset>
+						<legend><b>{{= it[i].ctx.string}}</b></legend>
+						{{ var tags = it[i].tags; }}
+						{{ for( var j = 0, jLen = tags.length; j < jLen; j++ ){ }}
+							{{= tags[ j ].type }}: 
+							{{ if( tags[ j ].name ){ }}
+								{{= tags[ j ].name }} 
+							{{ } }}
+							{{ if( tags[ j ].string ){ }}
+								{{= tags[ j ].string }} 
+							{{ } }}
+							<br/>
+						{{ } }}
+						<dl>
+							<dt>{{  }}</dt>
+							<dd></dd>
+						</dl>
+						<dl>
+							<dt>Description:</dt>
+							<dd>{{= it[i].description.full}}</dd>
+						</dl>
+					</fieldset>
 				</li>
 				{{?}}
 			{{ } }}
