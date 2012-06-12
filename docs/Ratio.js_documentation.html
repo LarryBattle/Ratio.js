@@ -5,10 +5,31 @@
 	  <title>Ratio.js Documentation</title>
 	</head>
 	<body>
-		Verison
+		<p id="functionList" class="dotTemplate">
+		<!-- 
+			Length of it = {{=it.length}}
+		-->
+		obj.ctx.string
+		<!-- 
+		
+		Functions List:
+			<ol>
+			{{ for(var i = 0, l = it.length; i < l; i++ ){ }}
+				{{? it[i].ctx }}
+				<li>
+					<b>{{= it[i].ctx.string}}</b><br/>
+					{{= it[i].description.full}}
+				</li>
+				{{?}}
+			{{ } }}
+			</ol>
+		-->
+		</p>
 		<script src="../vendor/jquery/jquery-1.7.2.min.js"></script>
-		<script src="../vendor/dot/dot.js"></script>
+		<script src="../vendor/dot.js/dot.min.js"></script>
+		<script src="../vendor/getComments/jQuery.getComments.js"></script>
 		<script src="../src/Ratio.js"></script>
+		<script src="js/RatioData.js"></script>
 		<script src="js/Ratio-formater.js"></script>
 	</body>
 </html>

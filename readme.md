@@ -13,21 +13,22 @@ Chrome 19, Firefox 12, IE 7+, and Opera 11+.
 Note: Run the test cases to check for browser compatibility.
 
 ## Current Version ##
-	0.2
+`0.2`
 
 ## Installation ##
 Just include the Ratio.js script. Like so, 
-    `<script type="Ratio.js"/>`
+    `<script src="Ratio.js"/>`
 	
 ## Quick Start Guide ##
 
 ### Ratio Constructor ###
-Once your include Ratio.js, it introduces a global constructor called `Ratio`.
+Once you've included Ratio.js, it introduces a global constructor called `Ratio`.
+
 `new` is not require to make a new object since it's done for you.
 Thus `new Ratio()` and `Ratio()` are both valid to instantiate an object.
 	
 ### Ratio Properties ###
-All Ratio objects have a `numerator`, `denominator`, `type` and `divSign` property members.
+All Ratio objects have a `numerator`, `denominator`, `type` and `divSign` property.
 
 	var a = Ratio();
 	a.toString() == "0/1"
@@ -37,6 +38,7 @@ All Ratio objects have a `numerator`, `denominator`, `type` and `divSign` proper
 	a.divSign == "/"
 ### Creating new Ratio Objects ###
 There are various ways to create a new Ratio object. Ratio.parse() is the easiest and prefered methods.
+
 	var a = Ratio(1,2);
 	a.toString() == "1/2"
 
@@ -114,7 +116,8 @@ Refer to docs/Ratio.js_documentation.html
     ( +a === a.valueOf() ) 
     a.toArray() // returns [ 1, 10 ]
 
-## Example ## 
+##Example## 
+
 Evaluate ( 0.1 + 0.2 )/( 1/3 * 12 ) as a fraction?
 
 Solution:
