@@ -18,7 +18,7 @@ Note: Run the test cases to check for additional browser compatibility.
 Just include the Ratio.js script. Like so, 
     `<script src="Ratio.js"/>`
 
-##Examples## 
+##Examples
 
 1. What is `12.12121212121212` as a fraction?
 
