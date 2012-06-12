@@ -6,25 +6,27 @@
     MIT License <http://www.opensource.org/licenses/mit-license>
     GPL v3 <http://opensource.org/licenses/GPL-3.0>
 * @info Project page: <https://github.com/LarryBattle/Ratio.js/>
-* @version Beta 0.1.8, 2012.06.9
+* @version 0.1.9, 2012.06.12
 // testing
 * @todo Test scientific notation compatiblity. 
 * @todo Add at least 5 user cases. a.add(4).toFraction() doesn't copy over the divSign.
 	Ex: Ratio.parse(1/3).negate().add("-0.1").multiply(0xF3).divide(1,2).divide(1e-4).abs().toString()
+* @todo Consider wrapping Ratio inside a closure and getting rid of some redundant functions from the chain.
+* @todo Find out if cleanFormat() could be replaced with reduce()
  */
  
 /**
 * Ratio is an object that has a numerator and denominator, corresponding to a/b.<br/>
 * Note: The keyword `new` is not required to create a new instance of the Ratio object, since this is done for you.<br/>
-* In otherwords, <code><pre>new Ratio( value )</pre></code> is the same as <code><pre>Ratio( value )</pre></code>.
-*
+* In otherwords, `new Ratio( value )` is the same as `Ratio( value )`.
+* 
 * @constructor
 * @param {Ratio|String|Number} a - can be a Ratio object or numeric value.
 * @param {Ratio|String|Number} b - can be a Ratio object or numeric value.
 * @param {String} type - can be either a "string" or "decimal". `type` forces a type on the Ratio object.
 * @param {Boolean} alwaysReduce - If true, then the Ratio object and the child of it will always represent the simplified form of the rational.
 * @returns {Ratio} object that has a numerator and denominator, corresponding to a/b.
-* @example Ex. Ratio(2,4).toString() = Ratio("2/4").toString() = "2/4"
+* @example Ratio(2,4).toString() == Ratio("2/4").toString() == "2/4"
 */
 var Ratio = function (a, b, alwaysReduce) {
     if(!(this instanceof Ratio)){
@@ -45,12 +47,23 @@ var Ratio = function (a, b, alwaysReduce) {
 /**
 * Checks if value is a finite number. <br/> Borrowed from jQuery 1.7.2 <br/>
 *
-* @param {Object}
+* @param {Object} obj
 * @returns {Boolean}
 * @example Ratio.isNumeric("1.0e3") == true
 */
 Ratio.isNumeric = function (obj) {
     return !isNaN(parseFloat(obj)) && isFinite(obj);
+};
+/**
+* Returns the default value is the provides new value is undefined or null. Similar to `var a = (b || c)`.
+*
+* @param {Object} backup
+* @param {Object} value
+* @returns {Object}
+* @example Ratio.getValueIfDefined( 4, null ) == 4
+*/
+Ratio.getValueIfDefined = function( backup, value ){
+	return typeof value !== "undefined" && value !== null ? value : backup;
 };
 /**
 * Find the Greatest Common Factor between two numbers using "Euler Method".
@@ -180,7 +193,7 @@ Ratio.parseToArray = function (obj) {
 * @param {Ratio|Number|String} obj
 * @param {Ratio|Number|String} obj
 * @returns {Ratio}
-* @example <code><pre>
+* @example 
     // Example 1:
     var a = Ratio.parse(3,4);
     var b = Ratio(3,4);
@@ -188,7 +201,6 @@ Ratio.parseToArray = function (obj) {
     
     // Example 2:
     Ratio.parse( "3/4" ).numerator == "3"
-    </pre></code>
 */
 Ratio.parse = function (obj, obj2) {
     var arr = Ratio.parseToArray(obj), arr2;
@@ -205,7 +217,7 @@ Ratio.parse = function (obj, obj2) {
 * @param {Ratio|Number|String} obj
 * @param {Ratio|Number|String} obj
 * @returns {Array[ Number, Number ]}
-* @example <code><pre>
+* @example 
     // Example 1:
     Ratio.reduce( Ratio(36,-36) ) // returns [-1,1]
     
@@ -214,7 +226,6 @@ Ratio.parse = function (obj, obj2) {
     
     // Example 3:
     Ratio.reduce( "10/4" ).toString() // returns [5,2]
-    </pre></code>
 */
 Ratio.reduce = function (obj,obj2) {
 	obj = Ratio.parse( obj, obj2 );
@@ -228,14 +239,16 @@ Ratio.reduce = function (obj,obj2) {
 };
 /**
 * This function divides a repeating decimal into 3 parts. If the value passed is not a repeating decimal then an empty array is returned.<br/>
-* For repeating decimals, the return value is an array which contains the numeric value split into 3 parts like, [ "numbers before decimal", "numbers before repeating pattern", "repeating pattern." ].
+* For repeating decimals, the return value is an array which contains the numeric value split into 3 parts like, <br/>
+* [ "numbers before decimal", "numbers before repeating pattern", "repeating pattern." ].<br/>
 * Here's another explanation. <br/>
 * The return value is [i, x, r] for the repeating decimal value.<br/>
 * where i are the values to the left of the decimal point. <br/>
 * x are the decimals to the right of the decimal point and to the left of the repeating pattern.<br/>
 * r is the unique repeating patterns for the repeating decimal.<br/>
-* Ex. 22/7 = 3.142857142857143 = 3.14-285714-285714-3, i = 3, x = 14, r = 285714<br/>
+* Example. 22/7 = 3.142857142857143 = 3.14-285714-285714-3, i = 3, x = 14, r = 285714<br/>
 * It should be noted that the last digit might be removed to avoid rounding errors.
+* 
 * @param {Number} val 
 * @returns {Array[Number, Number, Number]}
 * @example Ratio.getRepeatProps( 22/7 ) // returns ["3", "14", "285714"]
@@ -260,6 +273,53 @@ Ratio.getRepeatProps = function( val ){
     return arr;
 };
 /**
+* Returns an array of the prime factors of a number. <br/> 
+* More info <http://bateru.com/news/2012/05/code-of-the-day-javascript-prime-factors-of-a-number/>
+* 
+* @param {Number} num 
+* @returns {Array[Number, Number, ... ]}
+* @example Ratio.getPrimeFactors(20) // returns [2,2,5]
+*/
+Ratio.getPrimeFactors = function (num) {
+    num = Math.floor(num);
+    var root, factors = [], x, sqrt = Math.sqrt, doLoop = 1 < num && isFinite(num);
+    while (doLoop) {
+        root = sqrt(num);
+        x = 2;
+        if (num % x) {
+            x = 3;
+            while ((num % x) && ((x += 2) < root));
+
+        }
+        x = (x > root) ? num : x;
+        factors.push(x);
+        doLoop = (x != num);
+        num /= x;
+    }
+    return factors;
+};
+/**
+* Rounds up a scientific notated number with 8+ trailing 0s or 9s.
+* Note: Returns number as string to preserve value.
+*
+* @param {Number} num
+* @returns {String}
+* @example 
+	// Example 1
+	Ratio.getCleanENotation( "1.1000000000000003e-30" ) === "1.1e-30";
+	
+	// Example 2
+	Ratio.getCleanENotation( "9.999999999999999e+22" ) === "1e+23";
+*/
+Ratio.getCleanENotation = function(num){
+	num = (+num||0).toString();
+	if( /\.\d+(0|9){8,}\d?e/.test( num ) ){
+		var i = num.match( /(?:\d+\.)(\d+)(?:e.*)/ )[1].replace(/(0|9)+\d$/, '').length + 1;
+		num = (+num).toPrecision( i ).toString();
+	}
+	return num;
+};
+/**
 * From the Ratio instance, returns the raw values of the numerator and denominator in the form [numerator, denominator].
 * 
 * @returns {Array[Number, Number]}
@@ -273,13 +333,12 @@ Ratio.prototype.toArray = function () {
 * 
 * @param {Boolean} showValue - Is one of the factors that determine if the return value is the computed value of the Ratio or the toString() value.
 * @returns {Number|String}
-* @example <code><pre>
+* @example 
     // Example 1:
     Ratio(1,2).valueOf() == 0.5;
     
     // Example 2:
     Ratio(1,2).valueOf(true) == "1/2"
-    </pre></code>
 */
 Ratio.prototype.valueOf = function (showValue) {
     return (!showValue && this.type == "string") ? this.toLocaleString() : (this.numerator / this.denominator);
@@ -290,13 +349,12 @@ Ratio.prototype.valueOf = function (showValue) {
 * Note: If the computed value of (numerator / denominator) is not a number, the result is returned.    
 * 
 * @returns {String}
-* @example <code><pre>
+* @example 
     // Example 1:
     Ratio(1,10).toLocaleString() == "1/10"
     
     // Example 2:
     Ratio(0,0).toLocaleString() == "NaN"
-    </code></pre>
 */
 Ratio.prototype.toLocaleString = function () {
     var str = "" + this.numerator, val = this.valueOf(true);
@@ -313,7 +371,7 @@ Ratio.prototype.toLocaleString = function () {
 * Note: The division symbol can be change by the use of `divSign` property.
 * 
 * @returns {String}
-* @example <code><pre>
+* @example 
     // Example 1:
     Ratio(8,2).toString() == "8/2";
     
@@ -321,7 +379,6 @@ Ratio.prototype.toLocaleString = function () {
     var a = Ratio(8,2);
     a.divSign = ":";
     a.toString() == "8:2";
-    </pre></code>
 */
 Ratio.prototype.toString = function(){
     return "" + this.numerator + this.divSign + this.denominator;
@@ -335,15 +392,11 @@ Ratio.prototype.toString = function(){
 * @param {String} type
 * @param {Boolean} alwaysReduce
 * @returns {Ratio}
-* @example <code><pre>
+* @example 
     var a = Ratio(2,4);
     var b = a.clone();
     a.equals(b) === true;
-    </pre></code>
 */
-Ratio.getValueIfDefined = function( backup, value ){
-	return typeof value !== "undefined" && value !== null ? value : backup;
-};
 Ratio.prototype.clone = function (top, bottom, type, alwaysReduce ) {
 	var func = Ratio.getValueIfDefined;
 	top = func( this.numerator, top);
@@ -439,9 +492,8 @@ Ratio.prototype.subtract = function (obj, obj2) {
     obj.numerator = -obj.numerator;
     return this.add(obj);
 };
-// ###### Extras ######
 /**
-* From the Ratio instance, returns an new Ratio divided by a factor. 
+* From the Ratio instance, returns an new Ratio scaled down by a factor. 
 * 
 * @param {Number} factor 
 * @returns {Ratio}
@@ -461,7 +513,7 @@ Ratio.prototype.pow = function (power) {
     return this.clone(Math.pow(this.numerator, +power), Math.pow(this.denominator, +power));
 };
 /**
-* From the Ratio instance, returns a new Ratio multiplied by a factor.
+* From the Ratio instance, returns a new Ratio scaled up by a factor.
 * 
 * @param {Number} factor
 * @returns {Ratio}
@@ -475,12 +527,10 @@ Ratio.prototype.scale = function (factor) {
 * This is useful if want to ensure that the Ratio contains only whole numbers in the numerator and denominator after a caclulation.
 * 
 * @returns {Ratio}
-* @example Ratio(2,3).descale(2.1).toString() == "";
-    <code><pre>
+* @example 
     var a = Ratio(20,30).descale(3);
     a.toString() == "6.666666666666667/10";
     a.cleanFormat().toString() == "6666666666666667/10000000000000000"
-    </pre></code>
 */
 Ratio.prototype.cleanFormat = function () {
 	var re = /^\d+\.\d+$/;
@@ -528,51 +578,4 @@ Ratio.prototype.negate = function () {
 */
 Ratio.prototype.isProper = function () {
     return Math.abs(this.numerator) < this.denominator;
-};
-/**
-* Returns an array of the prime factors of a number. <br/> 
-* More info <http://bateru.com/news/2012/05/code-of-the-day-javascript-prime-factors-of-a-number/>
-* 
-* @param {Number} num 
-* @returns {Array[Number, Number, ... ]}
-* @example Ratio.getPrimeFactors(20) // returns [2,2,5]
-*/
-Ratio.getPrimeFactors = function (num) {
-    num = Math.floor(num);
-    var root, factors = [], x, sqrt = Math.sqrt, doLoop = 1 < num && isFinite(num);
-    while (doLoop) {
-        root = sqrt(num);
-        x = 2;
-        if (num % x) {
-            x = 3;
-            while ((num % x) && ((x += 2) < root));
-
-        }
-        x = (x > root) ? num : x;
-        factors.push(x);
-        doLoop = (x != num);
-        num /= x;
-    }
-    return factors;
-};
-/**
-* Rounds up a scientific notated number with 8+ trailing 0s or 9s.
-* Note: Returns number as string to preserve value.
-*
-* @param {Number} num
-* @returns {String}
-* @example <code><pre>
-	// Example 1
-	Ratio.getCleanENotation( "1.1000000000000003e-30" ) === "1.1e-30";
-	// Example 2
-	Ratio.getCleanENotation( "9.999999999999999e+22" ) === "1e+23";
-	</pre></code>
-*/
-Ratio.getCleanENotation = function(num){
-	num = (+num||0).toString();
-	if( /\.\d+(0|9){8,}\d?e/.test( num ) ){
-		var i = num.match( /(?:\d+\.)(\d+)(?:e.*)/ )[1].replace(/(0|9)+\d$/, '').length + 1;
-		num = (+num).toPrecision( i ).toString();
-	}
-	return num;
 };
