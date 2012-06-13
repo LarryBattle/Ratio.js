@@ -9,6 +9,10 @@
 * @version Beta 0.1.8, 2012.06.9
 */
 $(function(){
+	module( "Ratio Global Constants" );
+	test( "test for version number", function(){
+		ok( Ratio.VERSION, "Version number is detected." );
+	});
 	module( "Instantiation" );
 	test( "test new Ratio creation", function(){
 		var func = function(a,b){
@@ -627,5 +631,8 @@ $(function(){
 		equal( func("9.999999e+22"), "9.999999e+22" );
 		equal( func("9.999999999999999e+22"), "1e+23" );
 		equal( func("1.1000000000000003e-30"), "1.1e-30" );
+	});
+	test( "test Nodes.js( NPM ) support", function(){
+		ok( exports.Ratio.VERSION, "Ratio was added to exports." )
 	});
 });
