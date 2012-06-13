@@ -12,7 +12,7 @@ Chrome 19, Firefox 12, IE 7+, and Opera 11+.
 Note: Run the test cases to check for additional browser compatibility.
 
 ## Current Version ##
-`0.1.9`
+`0.2`
 
 ## Installation ##
 Just include the Ratio.js script. Like so, 
@@ -80,10 +80,10 @@ To retrieve the value inside a Ratio object you can use `toString()`, `toLocaleS
 	
 ### Ratio Comparison ###
 
-	valueOf() is called when inequality comparisons are made on a Ratio object.<br/>
-	However, Equalivances will compare the objects not values. Use `equals()` instead.<br/>
-	Thus you can do the following.
-	
+valueOf() is called when inequality comparisons are made on a Ratio object.<br/>
+However, Equalivances will compare the objects not values. Use `equals()` instead.<br/>
+Thus you can do the following.
+
 	var a = Ratio(15,3), b = Ratio(3,15);
 	a > b == true;
 	a < b == false;
