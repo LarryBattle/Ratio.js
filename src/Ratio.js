@@ -6,7 +6,7 @@
     MIT License <http://www.opensource.org/licenses/mit-license>
     GPL v3 <http://opensource.org/licenses/GPL-3.0>
 * @info Project page: <https://github.com/LarryBattle/Ratio.js/>
-* @version 0.1.9, 2012.06.12
+* @version 0.2, 2012.06.13
 // code
 * @todo Find out if cleanFormat() could be replaced with reduce()
 * @todo Add a min version of Ratio.js
