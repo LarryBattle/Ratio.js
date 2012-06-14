@@ -7,15 +7,6 @@
     GPL v3 <http://opensource.org/licenses/GPL-3.0>
 * @info Project page: <https://github.com/LarryBattle/Ratio.js/>
 * @version 0.2, 2012.06.13
-// code
-* @todo Find out if cleanFormat() could be replaced with reduce()
-* @todo Add a min version of Ratio.js
-* @todo equals(), decide if this will check for the same object or just only value. Should deepEquals( object ) == equals( object, true )?
-* @todo Consider wrapping Ratio inside a closure and getting rid of some redundant functions from the chain.
-// testing
-* @todo Test scientific notation compatiblity. 
-* @todo Add at least 5 user cases. a.add(4).toFraction() doesn't copy over the divSign.
-	Ex: Ratio.parse(1/3).negate().add("-0.1").multiply(0xF3).divide(1,2).divide(1e-4).abs().toString()
  */
  
 /**
