@@ -8,7 +8,12 @@
 * @info Project page: <https://github.com/LarryBattle/Ratio.js/>
 * @version 0.2, 2012.06.13
 */
-$(function(){
+
+// exports is used to test Ratio.js as a node module.
+var exports = {}; 
+
+// contains all tests.
+var runTests = function(){
 	module( "Ratio Global Constants" );
 	test( "test for version number", function(){
 		ok( Ratio.VERSION, "Version number is detected." );
@@ -633,6 +638,12 @@ $(function(){
 		equal( func("1.1000000000000003e-30"), "1.1e-30" );
 	});
 	test( "test Nodes.js( NPM ) support", function(){
-		ok( exports.Ratio.VERSION, "Ratio was added to exports." )
+		ok( exports.Ratio.VERSION, "Ratio was added to exports." );
 	});
-});
+};
+var reRunTests = function(){
+	QUnit.reset();  // should clear the DOM
+    QUnit.init();   // resets the qunit test environment
+    QUnit.start();  // allows for the new test to be captured.
+	runTests();
+};
