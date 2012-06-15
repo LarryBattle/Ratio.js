@@ -136,7 +136,7 @@ Here are a list of the methods.
 
 ## Documentation ##
 
-Refer to `docs/Ratio.js_documentation.html`<br/>
+Refer to the `docs` folder.<br/>
 Also you can read the source code, which is well documented.
 	
 ## Additional Examples ##
