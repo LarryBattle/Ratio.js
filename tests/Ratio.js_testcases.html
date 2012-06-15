@@ -7,7 +7,7 @@
 * MIT License <http://www.opensource.org/licenses/mit-license>
 * GPL v3 <http://opensource.org/licenses/GPL-3.0>
 * @info Project page: <https://github.com/LarryBattle/Ratio.js/>
-* @version Beta 0.1.9, 2012.06.10
+* @version 0.2, 2012.06.13
 */
 -->
 <!DOCTYPE HTML PUBLIC>
@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="../vendor/qunit/qunit.css" type="text/css" media="screen" />  
 </head>
 <body>
+	<input type="button" value="Rerun tests" id="reRunTests-btn"/><br/>
 	<h1 id="qunit-header">Ratio.js</h1>
 	<h2 id="qunit-banner"></h2>
 	<div id="qunit-testrunner-toolbar"></div>
@@ -24,7 +25,15 @@
 	<div id="qunit-fixture">test markup, will be hidden</div>
 	<script src="../vendor/jquery/jquery-1.7.2.min.js"></script>
 	<script src="../vendor/qunit/qunit.js"></script>
-	<script src="../src/Ratio.js"></script>
 	<script src="js/Ratio-testcases.js"></script>
+	<script src="../src/Ratio.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		runTests();
+		$( "#reRunTests-btn" ).click(function(){
+			reRunTests();
+		});
+	});
+	</script>
 </body>
 </html>
