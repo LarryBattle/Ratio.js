@@ -136,8 +136,8 @@ Here are a list of the methods.
 
 ## Documentation ##
 
-Documentation is currently under construction. `docs/Ratio.js_documentation.html`<br/>
-Right now you can read the source code, which is well documented.
+Refer to `docs/Ratio.js_documentation.html`<br/>
+Also you can read the source code, which is well documented.
 	
 ## Additional Examples ##
 
@@ -182,7 +182,7 @@ License: [MIT License](http://www.opensource.org/licenses/mit-license) and [GPL 
 
 ## Test cases ##
 
-Test Case Results [Here](http://jsfiddle.net/jKu4q/2/) <br/>
+Test Case Results [Here](http://jsfiddle.net/jKu4q/3/) <br/>
 Test cases are located in the test folder.
 
 ## Adding Features ##
