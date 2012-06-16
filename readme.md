@@ -192,9 +192,9 @@ The following steps are strongly encouraged when adding functionality to Ratio.j
 1. Create a test case for the new feature in `tests\Ratio_testcases.html`.
 2. Add functionality to Ratio.js while making your testcases pass.
 3. Refactor once test pass.
-4. Fix any errors found by JSLint.
-5. Analyze Ratio.js with JSMeter. If the "Program Level" is red, then refactor and break your function(s) into small methods.
-6. Once all steps are complete then send a push request.
+4. Fix any errors found by [JSLint.com](http://jslint.com).
+5. Analyze Ratio.js with [JSMeter.info](http://jsmeter.info). If the "Program Level" is red, then refactor and break your function(s) into small methods.
+6. Once all steps are complete then send a pull request.
 
 Note: If the feature requires the use a `this`, then attach it the prototype methods. Otherwise it should be a static method on the Ratio constructor.
 
