@@ -6,7 +6,7 @@
  * MIT License <http://www.opensource.org/licenses/mit-license>
  * GPL v3 <http://opensource.org/licenses/GPL-3.0>
  * @info Project page: <https://github.com/LarryBattle/Ratio.js/>
- * @version 0.2, 2012.06.13
+ * @version 0.2.1, 2012.07.02
  */
 
 // exports is used to test Ratio.js as a node module.
@@ -35,6 +35,19 @@ var runTests = function () {
 		equal(func(-4, 3), "-4/3");
 		equal(func(4, -3), "-4/3");
 		equal(func(-4, -3), "4/3");
+	});
+	test("test new Ratio creation with scientific notated numbers.", function () {
+		var func = function (a, b) {
+			return Ratio(a, b).toLocaleString();
+		};
+
+		equal(func(3e30), "3e+30");
+		equal(func(-3e30,1e25), "-3e+30/1e+25");
+		equal(func(1e21, 3e30), "1e+21/3e+30");
+		
+		equal(func(1e-23), "1e-23");
+		equal(func(-1e30, 1e-23), "-1e+30/1e-23");
+		equal(func(1e-33,1e50), "1e-33/1e+50");
 	});
 	test("test Ratio.prototype.clone with no arguments", function () {
 		var a = Ratio(1, 3);
@@ -113,8 +126,13 @@ var runTests = function () {
 		equal(func(), "0/1");
 		equal(func(1, 2), "1/2");
 		equal(func(2, 1), "2/1");
+		
 		equal(func(10, 5), "10/5");
-		equal(func(9, 9), "9/9");
+		equal(func(9e99, 9e24), "9e+99/9e+24");
+		equal(func(9e-99, 9e24), "9e-99/9e+24");
+		
+		equal(func(9e99, -9e24), "-9e+99/9e+24");
+		equal(func(-9e-99, 9e24), "-9e-99/9e+24");
 	});
 	test("test Ratio.prototype.toArray()", function () {
 		var func = function (a, b) {
@@ -545,7 +563,7 @@ var runTests = function () {
 	});
 	
 	module("Use Cases");
-	test("test user case", function () {
+	test("test user case 1", function () {
 		var a = Ratio(1, 2);
 		a.type = "string";
 		
@@ -559,7 +577,14 @@ var runTests = function () {
 		equal(a.multiply(12).reduce().toLocaleString(), 12);
 		equal(a, "1");
 	});
-	
+	// test("test user case 2: Calculate PI", function () {
+	// });
+	// test("test user case 3: 2x2 Matrix of Ratios ", function () {
+	// });
+	// test("test user case 4: ?", function () {
+	// });
+	// test("test user case 5: ?", function () {
+	// });
 	module("Extra Functionality");
 	test("test Ratio.prototype.descale", function () {
 		var func = function (a, b, c) {
@@ -634,6 +659,26 @@ var runTests = function () {
 		deepEqual(func(9876543210), [2, 3, 3, 5, 17, 17, 379721]);
 		deepEqual(func("103103103"), [3, 103, 333667]);
 	});
+	test("test Ratio.prototype.findX() with invalid input", function(){
+		var func = function(a,b,str){
+			return (new Ratio(a,b)).findX(str);
+		};
+		equal(func(1,2,"x10"), null );
+		equal(func(1,2,"x/1/2"), null );
+		equal(func(1,2,"I like turtles"), null );
+	});
+	test("test Ratio.prototype.findX() with valid input", function(){
+		var func = function(a,b,str){
+			return (new Ratio(a,b)).findX(str).reduce().toString();
+		};
+		equal(func(1,2,"x/10"), "5/1" );
+		equal(func(1,2,"x/1"), "1/2" );
+		equal(func(5,-2,"x/24"), "-60/1" );
+		
+		equal(func(3,7,"10/x"), "70/3" );
+		equal(func(11,-9,"10/x"), "-90/11" );
+		equal(func(1,-201,"10/x"), "-2010/1" );
+	});
 	test("test Ratio.getCleanENotation()", function () {
 		var func = Ratio.getCleanENotation;
 		equal(func(null), "0");
@@ -642,6 +687,7 @@ var runTests = function () {
 		equal(func("9.999999999999999e+22"), "1e+23");
 		equal(func("1.1000000000000003e-30"), "1.1e-30");
 	});
+	module("Node.js");
 	test("test Nodes.js( NPM ) support", function () {
 		ok(exports.Ratio.VERSION, "Ratio was added to exports.");
 	});

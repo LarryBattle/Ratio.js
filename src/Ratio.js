@@ -6,7 +6,7 @@
     MIT License <http://www.opensource.org/licenses/mit-license>
     GPL v3 <http://opensource.org/licenses/GPL-3.0>
 * @info Project page: <https://github.com/LarryBattle/Ratio.js/>
-* @version 0.2, 2012.06.13
+* @version 0.2.1, 2012.07.02
  */
  
 /**
@@ -41,7 +41,7 @@ var Ratio = function (a, b, alwaysReduce) {
 /**
 * Version number of Ratio.js
 */
-Ratio.VERSION = "0.2";
+Ratio.VERSION = "0.2.1";
 /**
 * Checks if value is a finite number. <br/> Borrowed from jQuery 1.7.2 <br/>
 *
@@ -576,6 +576,25 @@ Ratio.prototype.negate = function () {
 */
 Ratio.prototype.isProper = function () {
     return Math.abs(this.numerator) < this.denominator;
+};
+/**
+* Determines the value of x. Solves the following equations.
+* 1. ( a/b = x/n ) or 2. ( a/b = n/x )
+* Where a, b are the numerator and denominator respectively of the current Ratio.
+* Note: Returns null if the the string can't be split into exactly 2 elements.
+*
+* @returns {Ratio}
+* @example Ratio(1,4).findX("x/20") == 5;
+*/
+Ratio.prototype.findX = function (str) {
+	var arr = (""+str).split("/");
+	if(arr.length !== 2){
+		return null;
+	}
+	var numIndex = !isNaN(arr[0]) ? 0 : 1,
+		funcName = numIndex ? "multiply" : "divide";
+		
+	return Ratio(arr[numIndex])[funcName]( this );
 };
 /**
 * Adds npm support
