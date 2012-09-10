@@ -48,5 +48,8 @@ Todo List
 //readme.me
 @todo Add update for readme.me for version information
 
+//jake - build script
+@todo Need to update docs in both repositories.
+@todo Update version in the readme.md
 //Others
 @todo Add demo page
