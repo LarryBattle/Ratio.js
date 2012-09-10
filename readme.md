@@ -11,8 +11,7 @@ Chrome 19, Firefox 12, IE 7+, and Opera 11+.
 
 Note: Run the test cases to check for additional browser compatibility.
 
-## Current Version ##
-`0.2.3`
+## Current Version ## <br/> `0.2.3`
 
 ## Installation ##
 Just include the Ratio.js script. Like so, 
@@ -70,13 +69,13 @@ To retrieve the value inside a Ratio object you can use `toString()`, `toLocaleS
 `toString()` - returns string "numerator/denominator".<br/>
 `toArray()` - returns [ numerator, denominator ].<br/>
 `valueOf()` - returns (numerator/denominator).<br/>
-`toLocaleString()` - returns string as a mixed number, such as "whole_number numerator/denominator".<br/>
+`toLocaleString()` - returns string "numerator/denominator" unless the value is a whole number, which would return the latter.<br/>
 
-	var a = Ratio(31,10);
-	a.toString() == "31/10";
-	a.toLocaleString() == "3 1/10";
-	a.toArray() == [31,10];
-	a.valueOf() == 3.1; // same as +a
+	var a = Ratio(30,10);
+	a.toString() == "30/10";
+	a.toLocaleString() == "3";
+	a.toArray() == [30,10];
+	a.valueOf() == 3; // same as +a
 	
 ### Ratio Comparison ###
 
@@ -130,16 +129,8 @@ All proproty methods are non-destructive and return a new Ratio object.
 	a.add(1,5).toString() == "8/15"
 	a.toString() == "1/3"
 	
-Here is a list of important methods.
-
-<b>Data Expression:</b>
-`toArray`, `valueOf`, `toLocaleString`, `toString`
-
-<b>Basic Math Operations:</b>
-`abs`, `add`, `descale`, `divide`, `equals`, `mod`, `multiply`, `negate`,`pow`, `scale`, `subtract`, `reduce`
-
-<b>Special Operations:</b>
-`clone`,  `cleanFormat`, `findX`, `isProper`, `parse`
+Here are a list of the methods.
+`toArray`, `valueOf`, `toLocaleString`, `toString`, `clone`, `reduce`, `add`, `divide`, `equals`, `multiply`, `subtract`, `descale`, `pow`, `scale`, `cleanFormat`, `abs`, `mod`, `negate`, and `isProper`.
 
 
 ## Documentation ##
@@ -189,8 +180,6 @@ Also you can read the source code, which is well documented.
 License: [MIT License](http://www.opensource.org/licenses/mit-license) and [GPL v3](http://opensource.org/licenses/GPL-3.0)
 
 ## Test cases ##
-
-Test Case Results [Here](http://jsfiddle.net/jKu4q/3/) <br/>
 Test cases are located in the test folder.
 
 ## Adding Features ##

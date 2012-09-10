@@ -6,10 +6,10 @@
     MIT License <http://www.opensource.org/licenses/mit-license>
     GPL v3 <http://opensource.org/licenses/GPL-3.0>
 * @info Project page: <https://github.com/LarryBattle/Ratio.js/>
-* @version 0.2.2, 2012.07.13
+* @version 0.2.3
 * @note Uses YUI-DOC to generate documentation.
 **/
-;
+; 
 /**
 * Ratio is an object that has a numerator and denominator, corresponding to a/b.<br/>
 * Note that the keyword `new` is not required to create a new instance of the Ratio object, since this is done for you.<br/>
@@ -47,7 +47,7 @@ var Ratio = function (numerator, denominator, alwaysReduce) {
 * @property Ratio.VERSION
 * @type String
 **/
-Ratio.VERSION = "0.2.2";
+Ratio.VERSION = "0.2.3";
 /**
 * Checks if value is a finite number. <br/> Borrowed from jQuery 1.7.2 <br/>
 *
@@ -124,8 +124,7 @@ Ratio.parseDecimal = function (obj) {
         return arr;
     }
     obj = +obj;
-    //if (/\d+\.\d+$/.test(obj)) {
-	if (obj%1) {
+    if (/\d+\.\d+$/.test(obj)) {
         parts = obj.toString().split(/\./);
         arr[1] = Math.pow(10, parts[1].length);
         arr[0] = Math.abs(parts[0]) * arr[1] + (+parts[1]);
@@ -182,28 +181,6 @@ Ratio.parseNumber = function (obj) {
     return (/e/i.test(obj)) ? Ratio.parseENotation(obj) : Ratio.parseDecimal(obj);
 };
 /**
-* Converts a mixed numeric value to a Ratio in the form of [top, bottom], such that top/bottom.
-*  
-* @method Ratio.parseMixedNumber
-* @param {Number|String} obj Numeric Object.
-* @return {Array[Number, Number]}
-* @example 
-     Ratio.parseMixedNumber( "1 1/3" ) // returns [4, 3]
-**/
-Ratio.parseMixedNumber = function(obj){
-	var re = /\//, arr = [], parts;
-	obj = (""+obj).replace( /^\s+/, "");
-	// if( /\d\s+\d/.test(obj) ){
-		// parts = obj.split( /\s/ );
-		// arr = Ratio.parse(parts[0]).add(parts[1]).toArray();
-	// }else{	
-		parts = obj.split( re );
-		arr[0] = Ratio.getNumeratorWithSign(parts[0], parts[1]);
-		arr[1] = Math.abs(+parts[1]);
-	//}
-	return arr;
-};
-/**
 * Converts a numeric value to a Ratio in the form of [top, bottom], such that top/bottom.
 *  
 * @method Ratio.parseToArray
@@ -213,9 +190,7 @@ Ratio.parseMixedNumber = function(obj){
      Ratio.parseToArray( 0.125 ) // returns [125, 1000]
 **/
 Ratio.parseToArray = function (obj) {
-    var arr = [], 
-		//parts, 
-		re = /\//;
+    var arr = [], parts, re = /\//;
     if (typeof obj == "undefined" || obj === null) {
         return arr;
     }
@@ -224,10 +199,9 @@ Ratio.parseToArray = function (obj) {
         arr[1] = Math.abs(obj.denominator);
     } else {
         if ( re.test(obj)) {
-			arr = Ratio.parseMixedNumber(obj);
-            // parts = obj.split( re );
-            // arr[0] = Ratio.getNumeratorWithSign(parts[0], parts[1]);
-            // arr[1] = Math.abs(+parts[1]);
+            parts = obj.split( re );
+            arr[0] = Ratio.getNumeratorWithSign(parts[0], parts[1]);
+            arr[1] = Math.abs(+parts[1]);
         } else {
             arr = Ratio.parseNumber(obj);
         }
@@ -418,21 +392,14 @@ Ratio.prototype.valueOf = function (showValue) {
     Ratio(0,0).toLocaleString() == "NaN"
 **/
 Ratio.prototype.toLocaleString = function () {
-    var str, a, b = Math.abs(this.denominator),
-		val = this.valueOf(true);
-		
-    if ( +this.denominator === 0 || (this.numerator % this.denominator) === 0 || isNaN(val) || this.type == "decimal") {
-        str = val.toString();
-    }else{
-		var obj = this.reduce();
-		a = Ratio.getNumeratorWithSign(this.numerator, (this.denominator||1));
-	    if ( this.isProper() ) {
-			str = [a, this.divSign, b].join("");
-		}else{
-			str = ( 0 < val ? Math.floor(val) : Math.ceil(val)) + " " + [ Math.abs(this.mod().valueOf()), this.divSign, b].join("");
-		}
-	}
-    return str;
+    var str = "" + this.numerator, val = this.valueOf(true);
+    if ( +(this.numerator) && this.denominator != 1) {
+        str += this.divSign + Math.abs(this.denominator);
+    }
+    if ( +this.denominator === 0 || (this.numerator % this.denominator) === 0 ) {
+        str = val;
+    }
+    return (isNaN(val) || this.type == "decimal") ? val.toString() : str;
 };
 /**
 * From the Ratio instance, returns the raw values of the numerator and denominator in the form "a/b".<br/>
@@ -634,9 +601,8 @@ Ratio.prototype.scale = function (factor) {
     a.cleanFormat().toString() == "6666666666666667/10000000000000000"
 **/
 Ratio.prototype.cleanFormat = function () {
-    //var re = /^\d+\.\d+$/;
-    //if( re.test( this.numerator ) || re.test( this.denominator ) ){
-	if( ( this.numerator % 1 ) || this.denominator % 1 ){
+    var re = /^\d+\.\d+$/;
+    if( re.test( this.numerator ) || re.test( this.denominator ) ){
         return Ratio.parse( this.numerator, this.denominator );
     }
     var obj = this.clone();
@@ -714,6 +680,18 @@ Ratio.prototype.findX = function (str) {
         funcName = numIndex ? "multiply" : "divide";
         
     return Ratio(arr[numIndex])[funcName]( this );
+};
+/**
+* Switches the numerator and denominator positions.
+*
+* @method Ratio.prototype.flip
+* @chainable
+* @return {Ratio}
+* @example 
+     Ratio(1,2).flip().toString() == "2/1";
+**/
+Ratio.prototype.flip = function () {
+    return this.clone(this.denominator, this.numerator);
 };
 
 // Adds npm support
