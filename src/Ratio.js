@@ -9,7 +9,7 @@
 * @version 0.2.2, 2012.07.13
 * @note Uses YUI-DOC to generate documentation.
 **/
-; 
+;
 /**
 * Ratio is an object that has a numerator and denominator, corresponding to a/b.<br/>
 * Note that the keyword `new` is not required to create a new instance of the Ratio object, since this is done for you.<br/>
@@ -23,8 +23,8 @@
 * @param {String} [type] can be either a "string" or "decimal". `type` forces a type on the Ratio object.
 * @param {Boolean} [alwaysReduce] if true, then the Ratio object and the child of it will always represent the simplified form of the rational.
 * @return {Ratio} object that has a numerator and denominator, corresponding to a/b.
-* @example 	
-	Ratio(2,4).toString() == Ratio("2/4").toString() == "2/4"
+* @example     
+    Ratio(2,4).toString() == Ratio("2/4").toString() == "2/4"
 **/
 var Ratio = function (numerator, denominator, alwaysReduce) {
     if(!(this instanceof Ratio)){
@@ -36,11 +36,11 @@ var Ratio = function (numerator, denominator, alwaysReduce) {
     this.denominator = isNaN("" + denominator) ? 1 : Math.abs(denominator);
     this.numerator = isNaN("" + numerator) ? 0 : Ratio.getNumeratorWithSign(numerator, (denominator||1));
     if( this.denominator && this.alwaysReduce ){
-		var arr = Ratio.reduce(this);
-		this.numerator = arr[0];
-		this.denominator = arr[1];
-	}
-	return this;
+        var arr = Ratio.reduce(this);
+        this.numerator = arr[0];
+        this.denominator = arr[1];
+    }
+    return this;
 };
 /**
 * Version number of Ratio.js
@@ -55,7 +55,7 @@ Ratio.VERSION = "0.2.2";
 * @param {Object} obj
 * @return {Boolean}
 * @example 
-	 Ratio.isNumeric("1.0e3") == true
+     Ratio.isNumeric("1.0e3") == true
 **/
 Ratio.isNumeric = function (obj) {
     return !isNaN(parseFloat(obj)) && isFinite(obj);
@@ -69,10 +69,10 @@ Ratio.isNumeric = function (obj) {
 * @param {Object} value
 * @return {Object}
 * @example 
-	 Ratio.getValueIfDefined( 4, null ) == 4
+     Ratio.getValueIfDefined( 4, null ) == 4
 **/
 Ratio.getValueIfDefined = function( backup, value ){
-	return typeof value !== "undefined" && value !== null ? value : backup;
+    return typeof value !== "undefined" && value !== null ? value : backup;
 };
 /**
 * Find the Greatest Common Factor between two numbers using "Euler Method".
@@ -81,7 +81,7 @@ Ratio.getValueIfDefined = function( backup, value ){
 * @param {Number} a
 * @return {Number} b
 * @example 
-	 Ratio.gcd(20,12) == 4
+     Ratio.gcd(20,12) == 4
 **/
 Ratio.gcd = function (a, b) {
     var c;
@@ -103,7 +103,7 @@ Ratio.gcd = function (a, b) {
 * @param {Number} bottom
 * @return {Number}
 * @example 
-	 Ratio.getNumeratorWithSign(1,-2) == -1
+     Ratio.getNumeratorWithSign(1,-2) == -1
 **/
 Ratio.getNumeratorWithSign = function (top, bottom) {
     var x = (+top||1), y = (+bottom||1), a = "" + x*y;
@@ -116,7 +116,7 @@ Ratio.getNumeratorWithSign = function (top, bottom) {
 * @param {Number|String} obj Numeric Object containing a decimal point.
 * @return {Array} an array of numbers.
 * @example 
-	 Ratio.parseDecimal( "-0.25" ) // returns [-25,100]
+     Ratio.parseDecimal( "-0.25" ) // returns [-25,100]
 **/
 Ratio.parseDecimal = function (obj) {
     var arr = [], parts;
@@ -124,7 +124,8 @@ Ratio.parseDecimal = function (obj) {
         return arr;
     }
     obj = +obj;
-    if (/\d+\.\d+$/.test(obj)) {
+    //if (/\d+\.\d+$/.test(obj)) {
+	if (obj%1) {
         parts = obj.toString().split(/\./);
         arr[1] = Math.pow(10, parts[1].length);
         arr[0] = Math.abs(parts[0]) * arr[1] + (+parts[1]);
@@ -141,7 +142,7 @@ Ratio.parseDecimal = function (obj) {
 * @param {Number|String} obj Numeric Object containing a character `e`.
 * @return {Array[Number, Number]}
 * @example 
-	 Ratio.parseENotation(-2.5e23) // returns [-2.5e+24, 10]
+     Ratio.parseENotation(-2.5e23) // returns [-2.5e+24, 10]
 **/
 Ratio.parseENotation = function (obj) {
     var arr = [], top, parts;
@@ -172,7 +173,7 @@ Ratio.parseENotation = function (obj) {
 * @param {Number|String} obj Numeric Object containing a character `e` or `.`.
 * @return {Array[Number, Number]}
 * @example 
-	 Ratio.parseNumber( NaN ) // returns [];
+     Ratio.parseNumber( NaN ) // returns [];
 **/
 Ratio.parseNumber = function (obj) {
     if (!Ratio.isNumeric(obj)) {
@@ -181,16 +182,40 @@ Ratio.parseNumber = function (obj) {
     return (/e/i.test(obj)) ? Ratio.parseENotation(obj) : Ratio.parseDecimal(obj);
 };
 /**
+* Converts a mixed numeric value to a Ratio in the form of [top, bottom], such that top/bottom.
+*  
+* @method Ratio.parseMixedNumber
+* @param {Number|String} obj Numeric Object.
+* @return {Array[Number, Number]}
+* @example 
+     Ratio.parseMixedNumber( "1 1/3" ) // returns [4, 3]
+**/
+Ratio.parseMixedNumber = function(obj){
+	var re = /\//, arr = [], parts;
+	obj = (""+obj).replace( /^\s+/, "");
+	// if( /\d\s+\d/.test(obj) ){
+		// parts = obj.split( /\s/ );
+		// arr = Ratio.parse(parts[0]).add(parts[1]).toArray();
+	// }else{	
+		parts = obj.split( re );
+		arr[0] = Ratio.getNumeratorWithSign(parts[0], parts[1]);
+		arr[1] = Math.abs(+parts[1]);
+	//}
+	return arr;
+};
+/**
 * Converts a numeric value to a Ratio in the form of [top, bottom], such that top/bottom.
 *  
 * @method Ratio.parseToArray
 * @param {Number|String} obj Numeric Object.
 * @return {Array[Number, Number]}
 * @example 
-	 Ratio.parseToArray( 0.125 ) // returns [125, 1000]
+     Ratio.parseToArray( 0.125 ) // returns [125, 1000]
 **/
 Ratio.parseToArray = function (obj) {
-    var arr = [], parts, re = /\//;
+    var arr = [], 
+		//parts, 
+		re = /\//;
     if (typeof obj == "undefined" || obj === null) {
         return arr;
     }
@@ -199,9 +224,10 @@ Ratio.parseToArray = function (obj) {
         arr[1] = Math.abs(obj.denominator);
     } else {
         if ( re.test(obj)) {
-            parts = obj.split( re );
-            arr[0] = Ratio.getNumeratorWithSign(parts[0], parts[1]);
-            arr[1] = Math.abs(+parts[1]);
+			arr = Ratio.parseMixedNumber(obj);
+            // parts = obj.split( re );
+            // arr[0] = Ratio.getNumeratorWithSign(parts[0], parts[1]);
+            // arr[1] = Math.abs(+parts[1]);
         } else {
             arr = Ratio.parseNumber(obj);
         }
@@ -217,14 +243,14 @@ Ratio.parseToArray = function (obj) {
 * @param {Ratio|Number|String} [obj]
 * @return {Ratio}
 * @example 
-	 
-	// Example 1:
-	var a = Ratio.parse(3,4);
-	var b = Ratio(3,4);
-	a.equals( b ) === true;
-	
-	// Example 2:
-	Ratio.parse( "3/4" ).numerator == "3"
+     
+    // Example 1:
+    var a = Ratio.parse(3,4);
+    var b = Ratio(3,4);
+    a.equals( b ) === true;
+    
+    // Example 2:
+    Ratio.parse( "3/4" ).numerator == "3"
 **/
 Ratio.parse = function (obj, obj2) {
     var arr = Ratio.parseToArray(obj), arr2;
@@ -243,18 +269,18 @@ Ratio.parse = function (obj, obj2) {
 * @param {Ratio|Number|String} [obj]
 * @return {Array[ Number, Number ]}
 * @example
-	// Example 1:
-	Ratio.reduce( Ratio(36,-36) ) // returns [-1,1]
-	
-	// Example 2:
-	Ratio.reduce( "9/12" ) // returns [3,4]
-	
-	// Example 3:
-	Ratio.reduce( "10/4" ).toString() // returns [5,2]
+    // Example 1:
+    Ratio.reduce( Ratio(36,-36) ) // returns [-1,1]
+    
+    // Example 2:
+    Ratio.reduce( "9/12" ) // returns [3,4]
+    
+    // Example 3:
+    Ratio.reduce( "10/4" ).toString() // returns [5,2]
 **/
 Ratio.reduce = function (obj,obj2) {
-	obj = Ratio.parse( obj, obj2 );
-	var top = obj.numerator, bottom = obj.denominator, arr = Ratio.getRepeatProps(top/bottom);
+    obj = Ratio.parse( obj, obj2 );
+    var top = obj.numerator, bottom = obj.denominator, arr = Ratio.getRepeatProps(top/bottom);
     if ( arr.length ) {
         top = +(arr.join('')) - +(arr[0]+""+arr[1]);
         bottom = Math.pow(10, arr[1].length ) * ( Math.pow(10, arr[2].length ) - 1);
@@ -278,7 +304,7 @@ Ratio.reduce = function (obj,obj2) {
 * @param {Number} val 
 * @return {Array} an array of 3 numbers.
 * @example 
-	Ratio.getRepeatProps( 22/7 ) // returns ["3", "14", "285714"]
+    Ratio.getRepeatProps( 22/7 ) // returns ["3", "14", "285714"]
 **/
 Ratio.getRepeatProps = function( val ){
     val = ""+(val || "");
@@ -295,7 +321,7 @@ Ratio.getRepeatProps = function( val ){
         match[1] = RE3_RepeatingNums.test(match[1]) ? RE3_RepeatingNums.exec(match[1])[1] : match[1];
         RE2_RE1AtEnd = new RegExp( "("+ match[1] +")+$" );
         arr = val.split( /\./ ).concat( match[1] );
-		arr[1] = arr[1].replace( RE2_RE1AtEnd, "" );
+        arr[1] = arr[1].replace( RE2_RE1AtEnd, "" );
     }
     return arr;
 };
@@ -307,7 +333,7 @@ Ratio.getRepeatProps = function( val ){
 * @param {Number} num 
 * @return {Array} an array of numbers
 * @example 
-	Ratio.getPrimeFactors(20) // returns [2,2,5]
+    Ratio.getPrimeFactors(20) // returns [2,2,5]
 **/
 Ratio.getPrimeFactors = function (num) {
     num = Math.floor(num);
@@ -335,20 +361,20 @@ Ratio.getPrimeFactors = function (num) {
 * @param {Number} num
 * @return {String}
 * @example 
-	 
-	// Example 1
-	Ratio.getCleanENotation( "1.1000000000000003e-30" ) === "1.1e-30";
-	
-	// Example 2
-	Ratio.getCleanENotation( "9.999999999999999e+22" ) === "1e+23";
+     
+    // Example 1
+    Ratio.getCleanENotation( "1.1000000000000003e-30" ) === "1.1e-30";
+    
+    // Example 2
+    Ratio.getCleanENotation( "9.999999999999999e+22" ) === "1e+23";
 **/
 Ratio.getCleanENotation = function(num){
-	num = (+num||0).toString();
-	if( /\.\d+(0|9){8,}\d?e/.test( num ) ){
-		var i = num.match( /(?:\d+\.)(\d+)(?:e.*)/ )[1].replace(/(0|9)+\d$/, '').length + 1;
-		num = (+num).toPrecision( i ).toString();
-	}
-	return num;
+    num = (+num||0).toString();
+    if( /\.\d+(0|9){8,}\d?e/.test( num ) ){
+        var i = num.match( /(?:\d+\.)(\d+)(?:e.*)/ )[1].replace(/(0|9)+\d$/, '').length + 1;
+        num = (+num).toPrecision( i ).toString();
+    }
+    return num;
 };
 /**
 * From the Ratio instance, returns the raw values of the numerator and denominator in the form [numerator, denominator].
@@ -356,7 +382,7 @@ Ratio.getCleanENotation = function(num){
 * @method Ratio.toArray
 * @return {Array} an array of 2 numbers.
 * @example 
-	 Ratio(1,2).toArray() // returns [1,2]
+     Ratio(1,2).toArray() // returns [1,2]
 **/
 Ratio.prototype.toArray = function () {
     return [this.numerator, this.denominator];
@@ -368,11 +394,11 @@ Ratio.prototype.toArray = function () {
 * @param {Boolean} [showValue] Is one of the factors that determine if the return value is the computed value of the Ratio or the toString() value.
 * @return {Number|String}
 * @example
-	// Example 1:
-	Ratio(1,2).valueOf() == 0.5;
-	
-	// Example 2:
-	Ratio(1,2).valueOf(true) == "1/2"
+    // Example 1:
+    Ratio(1,2).valueOf() == 0.5;
+    
+    // Example 2:
+    Ratio(1,2).valueOf(true) == "1/2"
 **/
 Ratio.prototype.valueOf = function (showValue) {
     return (!showValue && this.type == "string") ? this.toLocaleString() : (this.numerator / this.denominator);
@@ -385,21 +411,28 @@ Ratio.prototype.valueOf = function (showValue) {
 * @method Ratio.prototype.toLocaleString
 * @return {String}
 * @example
-	// Example 1:
-	Ratio(1,10).toLocaleString() == "1/10"
-	
-	// Example 2:
-	Ratio(0,0).toLocaleString() == "NaN"
+    // Example 1:
+    Ratio(1,10).toLocaleString() == "1/10"
+    
+    // Example 2:
+    Ratio(0,0).toLocaleString() == "NaN"
 **/
 Ratio.prototype.toLocaleString = function () {
-    var str = "" + this.numerator, val = this.valueOf(true);
-    if ( +(this.numerator) && this.denominator != 1) {
-        str += this.divSign + Math.abs(this.denominator);
-    }
-    if ( +this.denominator === 0 || (this.numerator % this.denominator) === 0 ) {
-        str = val;
-    }
-    return (isNaN(val) || this.type == "decimal") ? val.toString() : str;
+    var str, a, b = Math.abs(this.denominator),
+		val = this.valueOf(true);
+		
+    if ( +this.denominator === 0 || (this.numerator % this.denominator) === 0 || isNaN(val) || this.type == "decimal") {
+        str = val.toString();
+    }else{
+		var obj = this.reduce();
+		a = Ratio.getNumeratorWithSign(this.numerator, (this.denominator||1));
+	    if ( this.isProper() ) {
+			str = [a, this.divSign, b].join("");
+		}else{
+			str = ( 0 < val ? Math.floor(val) : Math.ceil(val)) + " " + [ Math.abs(this.mod().valueOf()), this.divSign, b].join("");
+		}
+	}
+    return str;
 };
 /**
 * From the Ratio instance, returns the raw values of the numerator and denominator in the form "a/b".<br/>
@@ -409,13 +442,13 @@ Ratio.prototype.toLocaleString = function () {
 * @return {String}
 * @example
 
-	// Example 1:
-	Ratio(8,2).toString() == "8/2";
-	
-	// Example 2:
-	var a = Ratio(8,2);
-	a.divSign = ":";
-	a.toString() == "8:2";
+    // Example 1:
+    Ratio(8,2).toString() == "8/2";
+    
+    // Example 2:
+    var a = Ratio(8,2);
+    a.divSign = ":";
+    a.toString() == "8:2";
 **/
 Ratio.prototype.toString = function(){
     return "" + this.numerator + this.divSign + this.denominator;
@@ -432,18 +465,18 @@ Ratio.prototype.toString = function(){
 * @return {Ratio}
 * @example
 
-	var a = Ratio(2,4);
-	var b = a.clone();
-	a.equals(b) === true;
+    var a = Ratio(2,4);
+    var b = a.clone();
+    a.equals(b) === true;
 **/
 Ratio.prototype.clone = function (top, bottom, type, alwaysReduce ) {
-	var func = Ratio.getValueIfDefined;
-	top = func( this.numerator, top);
-	bottom = func( this.denominator, bottom );
-	alwaysReduce = func( this.alwaysReduce, alwaysReduce );
-	var obj = new Ratio( top, bottom, alwaysReduce );
-	obj.type = func( this.type, type );
-	return obj;
+    var func = Ratio.getValueIfDefined;
+    top = func( this.numerator, top);
+    bottom = func( this.denominator, bottom );
+    alwaysReduce = func( this.alwaysReduce, alwaysReduce );
+    var obj = new Ratio( top, bottom, alwaysReduce );
+    obj.type = func( this.type, type );
+    return obj;
 };
 /**
 * From the Ratio instance, returns a new instacne with a reduced ratio by factoring out the greatest common multiple.
@@ -452,7 +485,7 @@ Ratio.prototype.clone = function (top, bottom, type, alwaysReduce ) {
 * @chainable
 * @return {Ratio}
 * @example 
-	 Ratio(10,2).reduce().toString() == "5/1"
+     Ratio(10,2).reduce().toString() == "5/1"
 **/
 Ratio.prototype.reduce = function () {
     var arr = Ratio.reduce( this.numerator, this.denominator );
@@ -467,7 +500,7 @@ Ratio.prototype.reduce = function () {
 * @param {Ratio|Number|String} [obj2]
 * @return {Ratio}
 * @example 
-	 Ratio( 1, 3 ).add( 1,2 ).toString() == "5/6"
+     Ratio( 1, 3 ).add( 1,2 ).toString() == "5/6"
 **/
 Ratio.prototype.add = function (obj,obj2) {
     if (!(obj instanceof Ratio) || typeof obj2 !== "undefined") {
@@ -493,7 +526,7 @@ Ratio.prototype.add = function (obj,obj2) {
 * @param {Ratio|Number|String} [obj2]
 * @return {Ratio}
 * @example 
-	 Ratio( 1,2 ).divide( 3,4 ).toString() == "2/3"
+     Ratio( 1,2 ).divide( 3,4 ).toString() == "2/3"
 **/
 Ratio.prototype.divide = function (obj, obj2) {
     if (!(obj instanceof Ratio) || typeof obj2 !== "undefined") {
@@ -508,7 +541,7 @@ Ratio.prototype.divide = function (obj, obj2) {
 * @param {Object} obj 
 * @return {Ratio}
 * @example 
-	 Ratio(1,2).equals( 1/2 ) === true
+     Ratio(1,2).equals( 1/2 ) === true
 **/
 Ratio.prototype.equals = function (obj) {
     return (this.numerator / this.denominator) == obj.valueOf();
@@ -522,7 +555,7 @@ Ratio.prototype.equals = function (obj) {
 * @param {Ratio|Number|String} [obj2]
 * @return {Ratio}
 * @example 
-	 Ratio(2,5).multiply( 1, 2 ).toString() == "2/10"
+     Ratio(2,5).multiply( 1, 2 ).toString() == "2/10"
 **/
 Ratio.prototype.multiply = function (obj, obj2) {
     if (!(obj instanceof Ratio) || typeof obj2 !== "undefined") {
@@ -539,7 +572,7 @@ Ratio.prototype.multiply = function (obj, obj2) {
 * @param {Ratio|Number|String} [obj2]
 * @return {Ratio}
 * @example 
-	 Ratio(2,3).subtract(1,7).toString() === "-1/3"
+     Ratio(2,3).subtract(1,7).toString() === "-1/3"
 **/
 Ratio.prototype.subtract = function (obj, obj2) {
     if (!(obj instanceof Ratio) || typeof obj2 !== "undefined") {
@@ -556,7 +589,7 @@ Ratio.prototype.subtract = function (obj, obj2) {
 * @param {Number} factor 
 * @return {Ratio}
 * @example 
-	 Ratio(10,4).descale( 2 ).toString() === "5/2"
+     Ratio(10,4).descale( 2 ).toString() === "5/2"
 **/
 Ratio.prototype.descale = function (factor) {
     return this.clone(this.numerator / factor, this.denominator / factor);
@@ -569,7 +602,7 @@ Ratio.prototype.descale = function (factor) {
 * @param {Number} power 
 * @return {Ratio}
 * @example 
-	 Ratio(2,4).pow(4).toString() === "16/256"
+     Ratio(2,4).pow(4).toString() === "16/256"
 **/
 Ratio.prototype.pow = function (power) {
     return this.clone(Math.pow(this.numerator, +power), Math.pow(this.denominator, +power));
@@ -582,7 +615,7 @@ Ratio.prototype.pow = function (power) {
 * @param {Number} factor
 * @return {Ratio}
 * @example 
-	 Ratio(1,10).scale(10).toString() === "10/100"
+     Ratio(1,10).scale(10).toString() === "10/100"
 **/
 Ratio.prototype.scale = function (factor) {
     return this.clone(this.numerator * +factor, this.denominator * +factor);
@@ -595,20 +628,21 @@ Ratio.prototype.scale = function (factor) {
 * @chainable
 * @return {Ratio}
 * @example
-	
-	var a = Ratio(20,30).descale(3);
-	a.toString() == "6.666666666666667/10";
-	a.cleanFormat().toString() == "6666666666666667/10000000000000000"
+    
+    var a = Ratio(20,30).descale(3);
+    a.toString() == "6.666666666666667/10";
+    a.cleanFormat().toString() == "6666666666666667/10000000000000000"
 **/
 Ratio.prototype.cleanFormat = function () {
-	var re = /^\d+\.\d+$/;
-	if( re.test( this.numerator ) || re.test( this.denominator ) ){
-		return Ratio.parse( this.numerator, this.denominator );
-	}
-	var obj = this.clone();
-	obj.numerator = Ratio.getCleanENotation( obj.numerator );
-	obj.denominator = Ratio.getCleanENotation( obj.denominator );
-	return obj;
+    //var re = /^\d+\.\d+$/;
+    //if( re.test( this.numerator ) || re.test( this.denominator ) ){
+	if( ( this.numerator % 1 ) || this.denominator % 1 ){
+        return Ratio.parse( this.numerator, this.denominator );
+    }
+    var obj = this.clone();
+    obj.numerator = Ratio.getCleanENotation( obj.numerator );
+    obj.denominator = Ratio.getCleanENotation( obj.denominator );
+    return obj;
 };
 /**
 * Returns a new instances that is the absolute value of the current Ratio.
@@ -617,7 +651,7 @@ Ratio.prototype.cleanFormat = function () {
 * @chainable
 * @return {Ratio}
 * @example 
-	 Ratio(-3,2).abs().toString() == "3/2"
+     Ratio(-3,2).abs().toString() == "3/2"
 **/
 Ratio.prototype.abs = function () {
     return this.clone(Math.abs(this.numerator));
@@ -630,7 +664,7 @@ Ratio.prototype.abs = function () {
 * @chainable
 * @return {Ratio}
 * @example 
-	 Ratio(3,10).mod().toString() == "3"
+     Ratio(3,10).mod().toString() == "3"
 **/
 Ratio.prototype.mod = function () {
     return this.clone(this.numerator % this.denominator, 1);
@@ -642,7 +676,7 @@ Ratio.prototype.mod = function () {
 * @chainable
 * @return {Ratio}
 * @example 
-	 Ratio(1,2).negate().toString() == "-1/2"
+     Ratio(1,2).negate().toString() == "-1/2"
 **/
 Ratio.prototype.negate = function () {
     return this.clone( -this.numerator);
@@ -653,7 +687,7 @@ Ratio.prototype.negate = function () {
 * @method Ratio.prototype.isProper
 * @return {Boolean}
 * @example 
-	 Ratio(12,3).isProper() == false;
+     Ratio(12,3).isProper() == false;
 **/
 Ratio.prototype.isProper = function () {
     return Math.abs(this.numerator) < this.denominator;
@@ -669,23 +703,23 @@ Ratio.prototype.isProper = function () {
 * @chainable
 * @return {Ratio}
 * @example 
-	 Ratio(1,4).findX("x/20") == 5;
+     Ratio(1,4).findX("x/20") == 5;
 **/
 Ratio.prototype.findX = function (str) {
-	var arr = (""+str).split("/");
-	if(arr.length !== 2){
-		return null;
-	}
-	var numIndex = !isNaN(arr[0]) ? 0 : 1,
-		funcName = numIndex ? "multiply" : "divide";
-		
-	return Ratio(arr[numIndex])[funcName]( this );
+    var arr = (""+str).split("/");
+    if(arr.length !== 2){
+        return null;
+    }
+    var numIndex = !isNaN(arr[0]) ? 0 : 1,
+        funcName = numIndex ? "multiply" : "divide";
+        
+    return Ratio(arr[numIndex])[funcName]( this );
 };
 
 // Adds npm support
 if (typeof exports !== 'undefined') {
-	if (typeof module !== 'undefined' && module.exports) {
-		exports = module.exports;
-	}
-	exports.Ratio = Ratio;
+    if (typeof module !== 'undefined' && module.exports) {
+        exports = module.exports;
+    }
+    exports.Ratio = Ratio;
 }
