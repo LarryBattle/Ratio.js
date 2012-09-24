@@ -8,7 +8,7 @@
 {
 	"valid" : {
 		"fraction" : [{
-				"description" : "a/b, where a != 0 and a % b != 0",
+				"description" : "a/b, where a != 0, b != 0 and |a| < |b|",
 				"toString()" : "a/b",
 				"toRaw()" : "a/b"
 			}
@@ -32,7 +32,7 @@
 			}
 		],
 		"mixed number" : [{
-				"description" : "(n + a)/b, where 1 < |n| and a != 0",
+				"description" : "(n + a)/b, where |b| < |n|, |a| < |b| and 0 < |a|",
 				"toString()" : "nb + (a/b)",
 				"toRaw()" : "(n + a)/b"
 			}
@@ -49,8 +49,7 @@
 				"description" : "a/b, where |a| >> b",
 				"toString()" : "+-Infinity",
 				"toRaw()" : "a/b"
-			}
-		],
+		}],
 		"NaN" : [{
 				"description" : "Infinity / Infinity",
 				"toString()" : "NaN",

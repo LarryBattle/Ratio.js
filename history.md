@@ -2,6 +2,16 @@
 __Project Page:__ <https://github.com/LarryBattle/Ratio.js>  <br/>
 __Date:__ 09/09/12 <br/>
 
+__@Version: 0.2.4__ <br/>
+* Ratio.parse now supports mixed numbers. 
+* Changed the behavior of the Ratio constructor.
+	- Default values Ratio().toRaw() === "0/1"
+	- Supplied input for the numerator or denominator will eval to NaN if not a number.
+* Added: Ratio.getTypeGuess(), used to simplify the parsing functions.
+* Deleted: Ratio.parseENotation(), Ratio.parseNumber(), and Ratio.parseDecimal()
+* Updated Ratio.parseToArray() to include all the delete parsing functionality.
+* Updated documentation.
+
 __@Version: 0.2.3__ <br/>
 * Changed the overall folder scripts to make it smaller and easier to understand.<br/>
 * Updated: Build script, `dev/jakeFile.js`. Read the source for the requirements.<br/>

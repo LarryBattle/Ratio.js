@@ -26,24 +26,24 @@ var runTests = function () {
 		equal(func(3, 1), "3");
 		equal(func(10, 10), "1");
 		equal(func(400, 5), "80");
-		equal(func(3, 2), "3/2");
+		equal(func(3, 2), "1 1/2");
 		equal(func(1, 3), "1/3");
-		equal(func(-4, 3), "-4/3");
-		equal(func(4, -3), "-4/3");
-		equal(func(-4, -3), "4/3");
+		equal(func(-4, 3), "-1 1/3");
+		equal(func(4, -3), "-1 1/3");
+		equal(func(-4, -3), "1 1/3");
 	});
 	test("test new Ratio creation with scientific notated numbers.", function () {
 		var func = function (a, b) {
 			return Ratio(a, b).toLocaleString();
 		};
-
+		
 		equal(func(3e30), "3e+30");
-		equal(func(-3e30,1e25), "-3e+30/1e+25");
+		equal(func(-3e30, 1e25), "-3e+30/1e+25");
 		equal(func(1e21, 3e30), "1e+21/3e+30");
 		
 		equal(func(1e-23), "1e-23");
 		equal(func(-1e30, 1e-23), "-1e+30/1e-23");
-		equal(func(1e-33,1e50), "1e-33/1e+50");
+		equal(func(1e-33, 1e50), "1e-33/1e+50");
 	});
 	test("test Ratio.prototype.clone with no arguments", function () {
 		var a = Ratio(1, 3);
@@ -82,19 +82,19 @@ var runTests = function () {
 			return Ratio(a, b).toLocaleString();
 		};
 		equal((func()), "0");
-		equal((func(null, null)), "0");
+		equal((func(null, null)), "NaN");
 		equal(func(null, 2), "0");
 		
-		equal(func({}, 2), "0");
+		equal(func({}, 2), "NaN");
 		equal(func([], 1), "0");
-		equal(func(true, 1), "0");
+		equal(func(true, 1), "1");
 		
-		equal(func(function () {}, 2), "0");
+		equal(func(function () {}, 2), "NaN");
 		equal(func(false, 2), "0");
 		equal(func(false, true), "0");
 		
-		equal(func("ten", "ten"), "0");
-		equal(func(/ten/, 1), "0");
+		equal(func("ten", "ten"), "NaN");
+		equal(func(/ten/, 1), "NaN");
 		equal(func(Infinity), Infinity);
 		
 		equal(func(Infinity, 1), Infinity);
@@ -103,6 +103,74 @@ var runTests = function () {
 		
 		equal((func(Infinity, Infinity)), "NaN");
 		equal((func(NaN, 0)), "NaN");
+	});
+	
+	module("toRaw output");
+	test("test Ratio.prototype.toRaw() for valid input: proper fraction", function(){
+		var func = function(a, b){
+			return Ratio(a, b).toRaw();
+		};
+		equal( func(1,2), "1/2" );
+		equal( func(-1,2), "-1/2" );
+		equal( func(1e23,2e25), "1e+23/2e+25" );
+		equal( func(-1e23,2e25), "-1e+23/2e+25" );
+	});
+	test("test Ratio.prototype.toRaw() for valid input: whole numbers", function(){
+		var func = function(a, b){
+			return Ratio(a, b).toRaw();
+		};
+		equal( func(1,Infinity), "1/Infinity" );
+		equal( func(0,3), "0/3" );
+		equal( func(3,3), "3/3" );
+		equal( func(12,3), "12/3" );
+		equal( func(1,1e300), "1/1e+300" );
+		equal( func(0,3e40), "0/3e+40" );
+		equal( func(3e40,1e40), "3e+40/1e+40" );
+		
+		equal( func(-1,Infinity), "-1/Infinity" );
+		equal( func(-0,3), "0/3" );
+		equal( func(-3,3), "-3/3" );
+		equal( func(-12,3), "-12/3" );
+		equal( func(-1,1e300), "-1/1e+300" );
+		equal( func(-0,3e40), "0/3e+40" );
+	});
+	test("test Ratio.prototype.toRaw() for valid input: mixed numbers", function(){
+		var func = function(a, b){
+			return Ratio(a, b).toRaw();
+		};
+		equal( func(3,2), "3/2" );
+		equal( func(50,4), "50/4" );
+		equal( func(3e+23,29), "3e+23/29" );
+		
+		equal( func(-3,2), "-3/2" );
+		equal( func(-50,4), "-50/4" );
+		equal( func(-3e+23,29), "-3e+23/29" );
+	});
+	test("test Ratio.prototype.toRaw() for invalid input: decimal in fraction", function(){
+		var func = function(a, b){
+			return Ratio(a, b).toRaw();
+		};
+		equal( func(0.11,0.3), "0.11/0.3" );
+	});
+	test("test Ratio.prototype.toRaw() for invalid input: Infinity", function(){
+		var func = function(a, b){
+			return Ratio(a, b).toRaw();
+		};
+		equal( func(1,0), "1/0" );
+		equal( func(Infinity,1), "Infinity/1" );
+		equal( func(Infinity,0), "Infinity/0" );
+	});
+	test("test Ratio.prototype.toRaw() for invalid input: NaN", function(){
+		var func = function(a, b){
+			return Ratio(a, b).toRaw();
+		};
+		equal( func(Infinity,-Infinity), "-Infinity/Infinity" );
+		equal( func(32, "i12"), "32/NaN" );
+		equal( func("-i", 12), "NaN/12" );
+		equal( func("palm", "fist"), "NaN/NaN" );
+		equal( func("19", "fist"), "19/NaN" );
+		equal( func("palm", "o"), "NaN/NaN" );
+		equal( func("-i", "i"), "NaN/NaN" );
 	});
 	
 	module("Format Types");
@@ -202,10 +270,68 @@ var runTests = function () {
 		a.denominator = 3;
 		equal(a.equals(b), true);
 	});
-	module("Parsers");
-	test("test Ratio.parseDecimal()", function () {
-		var func = Ratio.parseDecimal;
-		deepEqual(func([]), []);
+	module("Parsering Input");
+	test("test Ratio.getTypeGuess() for output as `Ratio`", function(){
+		var func = Ratio.getTypeGuess;
+		equal(func( Ratio() ), "Ratio");
+		equal(func( Ratio(1,2) ), "Ratio");
+		equal(func( Ratio(2e3) ), "Ratio");
+	});
+	test("test Ratio.getTypeGuess() for output as `number`", function(){
+		var func = Ratio.getTypeGuess;
+		equal(func(23), "number");
+		equal(func(+23), "number");
+		equal(func(-23), "number");
+	});
+	test("test Ratio.getTypeGuess() for output as `decimal`", function(){
+		var func = Ratio.getTypeGuess;
+		
+		equal(func(1.1), "decimal");
+		equal(func("-1.1"), "decimal");
+		equal(func("+1.1"), "decimal");
+	});
+	test("test Ratio.getTypeGuess() for output as `e`", function(){
+		var func = Ratio.getTypeGuess;
+		
+		equal(func(1.1e30), "e");
+		equal(func(-1.1e-23), "e");
+		equal(func(+1.1e+23), "e");
+	});
+	test("test Ratio.getTypeGuess() for output as `mixed`", function(){
+		var func = Ratio.getTypeGuess;
+		
+		equal(func("10 1/2"), "mixed");
+		equal(func("-10 -1/2"), "mixed");
+		equal(func("+10 -1/+2"), "mixed");
+	});
+	test("test Ratio.getTypeGuess() for output as `fraction`", function(){
+		var func = Ratio.getTypeGuess;
+		
+		equal(func( "+1/2" ), "fraction");
+		equal(func("-1e12/+2e103"), "fraction");
+		equal(func("+2.3e32/23.3"), "fraction");	
+	});
+	test("test Ratio.getTypeGuess() for output as `NaN`", function(){
+		var func = Ratio.getTypeGuess;
+		
+		equal(func(), "NaN");
+		equal(func(function(){}), "NaN");		
+		equal(func( "E" ), "NaN");
+		
+		equal(func( NaN ), "NaN");
+		equal(func( "10e-" ), "NaN");
+		equal(func( Math ), "NaN");
+		
+		equal(func( "o" ), "NaN");
+		equal(func( "1.1.1" ), "NaN");
+		equal(func( "1e1e" ), "NaN");
+		
+		equal(func( "10 a/b" ), "NaN");
+		equal(func( "a/b" ), "NaN");
+	});
+	test("test Ratio.parseToArray() for numbers", function () {
+		var func = Ratio.parseToArray;
+		deepEqual(func([]), [0,1]);
 		deepEqual(func({}), []);
 		deepEqual(func("apple"), []);
 		
@@ -214,10 +340,16 @@ var runTests = function () {
 		deepEqual(func("0.112"), [112, 1000]);
 		deepEqual(func("23.0"), [23, 1]);
 		deepEqual(func("23.123"), [23123, 1000]);
+		deepEqual(func(0), [0, 1]);
+		deepEqual(func(1), [1, 1]);
+		deepEqual(func(-1), [-1, 1]);
+		deepEqual(func(1.2e6), [1200000, 1]);
+		deepEqual(func(0.231), [231, 1000]);
+		deepEqual(func(-123.484), [-123484, 1000]);
 	});
-	test("test Ratio.parseENotation()", function () {
-		var func = Ratio.parseENotation;
-		deepEqual(func(null), []);
+	test("test Ratio.parseToArray() for `e` numbers", function () {
+		var func = Ratio.parseToArray;
+		deepEqual(func(null), [0,1]);
 		deepEqual(func(NaN), []);
 		deepEqual(func("happy"), []);
 		deepEqual(func("1.1e1.1"), []);
@@ -229,22 +361,9 @@ var runTests = function () {
 		deepEqual(func("-2.0004e-2"), [-20004, 1000000]);
 		deepEqual(func("-2.0004e-5"), [-20004, 1000000000]);
 	});
-	test("test Ratio.parseNumber()", function () {
-		var func = Ratio.parseNumber;
-		deepEqual(func(), []);
-		
-		deepEqual(func(0), [0, 1]);
-		deepEqual(func(1), [1, 1]);
-		deepEqual(func(-1), [-1, 1]);
-		deepEqual(func(1.2e6), [1200000, 1]);
-		deepEqual(func(0.231), [231, 1000]);
-		deepEqual(func(-123.484), [-123484, 1000]);
-	});
 	test("test Ratio.parseToArray() with invalid input", function () {
 		var func = Ratio.parseToArray;
 		deepEqual(func("apples"), []);
-		deepEqual(func(true), []);
-		deepEqual(func([]), []);
 	});
 	test("test Ratio.parseToArray() with whole numbers", function () {
 		var func = Ratio.parseToArray;
@@ -303,13 +422,13 @@ var runTests = function () {
 		};
 		equal(func(0.125, 0.5), "1250/5000");
 		equal(func(0.125, "1/2"), "250/1000");
-		equal(func(3, Ratio(2)), "3/2");
+		equal(func(3, Ratio(2)), "1 1/2");
 		
 		equal(func(3, Ratio(1)), "3");
 		equal(func(Ratio(1), 3), "1/3");
-		equal(func(Ratio(-4), Ratio(3)), "-4/3");
+		equal(func(Ratio(-4), Ratio(3)), "-1 1/3");
 		
-		equal(func(Ratio(4, 5).toLocaleString(), Ratio(-3, 2).toLocaleString()), "-8/15");
+		equal(func(Ratio(4, 5).toRaw(), Ratio(-3, 2).toRaw()), "-8/15");
 	});
 	test("test Ratio.prototype.cleanFormat()", function () {
 		var func = function (a, b) {
@@ -321,7 +440,7 @@ var runTests = function () {
 		equal(func(-1.2e-10, 1.5e15), Ratio(-1.2e-10, 1.5e15).toString());
 	});
 	
-	module("Core Functions");
+	module("Internal Functions");
 	test("test Ratio.isNumeric()", function () {
 		var func = Ratio.isNumeric;
 		equal(func(null), false);
@@ -331,10 +450,10 @@ var runTests = function () {
 		equal(func(NaN), false);
 		equal(func([]), false);
 		equal(func({}), false);
-		equal(func(new Object()), false);
+		equal(func({}), false);
 		equal(func(undefined), false);
 		
-		equal(func(new Number(12)), true);
+		equal(func( + (12)), true);
 		equal(func(1), true);
 		equal(func(0x3), true);
 		equal(func(1.1e10), true);
@@ -414,9 +533,9 @@ var runTests = function () {
 		var func = function (a, b, c, d) {
 			return (Ratio(a, b) + Ratio(c, d));
 		};
-		var x = null;
+		var x;
 		equal(func(), 0);
-		equal(func(0, x, 0, x), 0);
+		equal(func(0, x, 0, x),  0);
 		equal(func(-1, x, 1, x), 0);
 		equal(func(1, x, 2, x), 3);
 		equal(func(40, x, 2, x), 42);
@@ -430,7 +549,7 @@ var runTests = function () {
 		var func = function (a, b, c, d) {
 			return Ratio(a, b).add(Ratio(c, d)).toLocaleString();
 		};
-		var x = null;
+		var x;
 		equal(func(), "0");
 		equal(func(0, x, 0, x), "0");
 		equal(func(2, 4, 4, 8), "1");
@@ -438,8 +557,8 @@ var runTests = function () {
 		equal(func(1, x, 1, x), "2");
 		equal(func(1, x, 2, x), "3");
 		equal(func(40, x, 2, x), "42");
-		equal(func(1, x, 1, 2), "3/2");
-		equal(func(2, 5, 3, 4), "23/20");
+		equal(func(1, x, 1, 2), "1 1/2");
+		equal(func(2, 5, 3, 4), "1 3/20");
 		equal(func(1, 3, 3, 9), "6/9");
 		equal(func(4, 9, 3, 9), "7/9");
 	});
@@ -456,7 +575,7 @@ var runTests = function () {
 		var func = function (a, b, c, d) {
 			return Ratio(a, b).subtract(Ratio(c, d)).toLocaleString();
 		};
-		var x = null;
+		var x;
 		equal(func(), "0");
 		equal(func(0, x, 0, x), "0");
 		equal(func(1, 3, 3, 9), "0");
@@ -464,7 +583,7 @@ var runTests = function () {
 		equal(func(1, x, 1, 2), "1/2");
 		equal(func(4, x, 1, x), "3");
 		equal(func(4, 9, 3, 9), "1/9");
-		equal(func(10, 2, 9, 19), "172/38");
+		equal(func(10, 2, 9, 19), "4 20/38");
 		equal(func(1, x, 3, 2), "-1/2");
 		equal(func(1, x, 4, x), "-3");
 		equal(func(2, 5, 3, 4), "-7/20");
@@ -491,7 +610,7 @@ var runTests = function () {
 		equal(func(1, 1, 1, 1), "1");
 		equal(func(10, 3, 100, 30), "1");
 		equal(func(1, 4, 1, 20), "5");
-		equal(func(-10, 23, 13, -39), (39 * 10) + "/" + (13 * 23));
+		equal(func(-10, 23, 13, -39), "1 91/299" );
 		equal(func(-12, -34, -45, -67), (12 * 67) + "/" + (45 * 34));
 	});
 	test("test Ratio.getRepeatProps() with invalid input", function () {
@@ -545,7 +664,7 @@ var runTests = function () {
 		equal(func(3, 9), "1/3");
 		equal(func(1 / 100), "1/100");
 		
-		equal(func(7 / 3), "7/3");
+		equal(func(7 / 3), "2 1/3");
 		equal(func(1 / 111), "1/111");
 		equal(func(1 / 333), "1/333");
 	});
@@ -563,15 +682,15 @@ var runTests = function () {
 		var a = Ratio(1, 2);
 		a.type = "string";
 		
-		equal(a, "1/2");
+		equal(a.toRaw(), "1/2");
 		a = a.add(3);
-		equal(a, "7/2");
+		equal(a.toRaw(), "7/2");
 		a = a.subtract(2);
-		equal(a, "3/2");
+		equal(a.toRaw(), "3/2");
 		a = a.divide("3/2");
-		equal(a, "1");
+		equal(a.toLocaleString(), "1");
 		equal(a.multiply(12).reduce().toLocaleString(), 12);
-		equal(a, "1");
+		equal(a.toLocaleString(), "1");
 	});
 	// test("test user case 2: Calculate PI", function () {
 	// });
@@ -614,11 +733,11 @@ var runTests = function () {
 		var func = function (a, b) {
 			return (Ratio(a, b)).mod().toLocaleString();
 		};
-		equal(func(5, 0), 0);
-		equal(func(5, 1), 0);
-		equal(func(5, 2), 1);
-		equal(func(5, 20), 5);
-		equal(func(5e2, 21), 17);
+		equal(func(5, 0), "NaN");
+		equal(func(5, 1), "0");
+		equal(func(5, 2), "1");
+		equal(func(5, 20), "5");
+		equal(func(5e2, 21), "17");
 	});
 	test("test Ratio.prototype.negate()", function () {
 		var func = function (a, b) {
@@ -655,28 +774,28 @@ var runTests = function () {
 		deepEqual(func(9876543210), [2, 3, 3, 5, 17, 17, 379721]);
 		deepEqual(func("103103103"), [3, 103, 333667]);
 	});
-	test("test Ratio.prototype.findX() with invalid input", function(){
-		var func = function(a,b,str){
-			return (new Ratio(a,b)).findX(str);
+	test("test Ratio.prototype.findX() with invalid input", function () {
+		var func = function (a, b, str) {
+			return (new Ratio(a, b)).findX(str);
 		};
-		equal(func(1,2,"x10"), null );
-		equal(func(1,2,"x/1/2"), null );
-		equal(func(1,2,"I like turtles"), null );
+		equal(func(1, 2, "x10"), null);
+		equal(func(1, 2, "x/1/2"), null);
+		equal(func(1, 2, "I like turtles"), null);
 	});
-	test("test Ratio.prototype.findX() with valid input", function(){
-		var func = function(a,b,str){
-			return (new Ratio(a,b)).findX(str).reduce().toString();
+	test("test Ratio.prototype.findX() with valid input", function () {
+		var func = function (a, b, str) {
+			return (new Ratio(a, b)).findX(str).reduce().toString();
 		};
-		equal(func(1,2,"x/10"), "5/1" );
-		equal(func(1,2,"x/1"), "1/2" );
-		equal(func(5,-2,"x/24"), "-60/1" );
+		equal(func(1, 2, "x/10"), "5/1");
+		equal(func(1, 2, "x/1"), "1/2");
+		equal(func(5, -2, "x/24"), "-60/1");
 		
-		equal(func(3,7,"10/x"), "70/3" );
-		equal(func(11,-9,"10/x"), "-90/11" );
-		equal(func(1,-201,"10/x"), "-2010/1" );
+		equal(func(3, 7, "10/x"), "70/3");
+		equal(func(11, -9, "10/x"), "-90/11");
+		equal(func(1, -201, "10/x"), "-2010/1");
 	});
-	test("teste Ratio.prototype.flip()", function(){
-		equal(Ratio(1,2).flip().toString(), "2/1");
+	test("test Ratio.prototype.flip()", function () {
+		equal(Ratio(1, 2).flip().toString(), "2/1");
 	});
 	test("test Ratio.getCleanENotation()", function () {
 		var func = Ratio.getCleanENotation;

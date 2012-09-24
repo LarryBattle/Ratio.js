@@ -63,7 +63,19 @@ The default value of the numerator is 0 and denominator is 1.
 	a.denominator == 1;
 	a.type == "";
 	a.divSign == "/";
+
+Examples:
+
+	// Good Values
+	Ratio().toRaw() === "0/1"
+	Ratio(4).toRaw() === "4/1"
+	Ratio(4,5).toRaw() === "4/5"
 	
+	// Bad Values
+	Ratio("five").toRaw() === "NaN/1"
+	Ratio(1,"ten").toRaw() === "1/NaN"
+	Ratio("five","ten").toRaw() === "NaN/NaN"
+
 ### Ratio values ###
 
 To retrieve the value inside a Ratio object you can use `toString()`, `toLocaleString()`, `toArray()` or `valueOf()`.<br/>
