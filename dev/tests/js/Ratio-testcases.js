@@ -38,11 +38,11 @@ var runTests = function () {
 		};
 		
 		equal(func(3e30), "3e+30");
-		equal(func(-3e30, 1e25), "-3e+30/1e+25");
+		equal(func(-3e30, 1e25), "-300000");
 		equal(func(1e21, 3e30), "1e+21/3e+30");
 		
 		equal(func(1e-23), "1e-23");
-		equal(func(-1e30, 1e-23), "-1e+30/1e-23");
+		equal(func(-1e30, 1e-23), "-1e+53");
 		equal(func(1e-33, 1e50), "1e-33/1e+50");
 	});
 	test("test Ratio.prototype.clone with no arguments", function () {
@@ -332,9 +332,6 @@ var runTests = function () {
 	test("test Ratio.parseToArray() for numbers", function () {
 		var func = Ratio.parseToArray;
 		deepEqual(func([]), [0,1]);
-		deepEqual(func({}), []);
-		deepEqual(func("apple"), []);
-		
 		deepEqual(func("0"), [0, 1]);
 		deepEqual(func("15"), [15, 1]);
 		deepEqual(func("0.112"), [112, 1000]);
@@ -349,10 +346,6 @@ var runTests = function () {
 	});
 	test("test Ratio.parseToArray() for `e` numbers", function () {
 		var func = Ratio.parseToArray;
-		deepEqual(func(null), [0,1]);
-		deepEqual(func(NaN), []);
-		deepEqual(func("happy"), []);
-		deepEqual(func("1.1e1.1"), []);
 		
 		deepEqual(func("10"), [10, 1]);
 		deepEqual(func("2e1"), [20, 1]);
@@ -363,7 +356,13 @@ var runTests = function () {
 	});
 	test("test Ratio.parseToArray() with invalid input", function () {
 		var func = Ratio.parseToArray;
-		deepEqual(func("apples"), []);
+		//deepEqual(func(null), [NaN, 1]);
+		deepEqual(func({}), [NaN, 1]);
+		deepEqual(func("apple"), [ NaN, 1]);
+		deepEqual(func("apples"), [NaN, 1]);
+		deepEqual(func(NaN), [NaN, 1]);
+		deepEqual(func("happy"), [NaN, 1]);
+		deepEqual(func("1.1e1.1"), [NaN, 1]);
 	});
 	test("test Ratio.parseToArray() with whole numbers", function () {
 		var func = Ratio.parseToArray;
@@ -489,6 +488,77 @@ var runTests = function () {
 	});
 	
 	module("Basic Operations");
+	test("test Ratio.prototype.equals() against self using `.valueOf()`, `.toString()`, and `.toLocaleString()`", function(){
+		var func = function(a,b){
+			var x = Ratio(a,b), errMsg = "";
+			errMsg = x.equals( x.valueOf() ) ? "" : "x.equals( x.valueOf() )";
+			errMsg = x.equals( x.toString() ) ? "" : "x.equals( x.toString() )";
+			errMsg = x.equals( x.toLocaleString()) ? "" : "x.equals( x.toLocaleString() )";
+			if( errMsg ){
+				errMsg = "x = " + x.toString() +", problem with " + errMsg;
+			}
+			return errMsg;
+		};
+		var check = function( a, b){
+			equal( func(a,b), "", "checking for a = " + a + " and b = " + b );
+		};
+		check(0);
+		check(1);
+		check(109);
+		check(40,3);
+		check(3,40);
+		check(40,40);
+		check(1,7);
+		check(7,6);
+	});
+	test("test Ratio.prototype.equals() against self using `.valueOf()`, `.toString()`, and `.toLocaleString()`", function(){
+		var func = function(a,b){
+			var x = Ratio.parse(a,b), errMsg = "";
+			errMsg = x.equals( x.valueOf() ) ? "" : "x.equals( x.valueOf() )";
+			errMsg = x.equals( x.toString() ) ? "" : "x.equals( x.toString() )";
+			errMsg = x.equals( x.toLocaleString()) ? "" : "x.equals( x.toLocaleString() )";
+			if( errMsg ){
+				errMsg = "x = " + x.toString() +", problem with " + errMsg;
+			}
+			return errMsg;
+		};
+		var check = function( a, b){
+			equal( func(a,b), "", "checking for a = " + a + " and b = " + b );
+		};
+		check("0/4");
+		check("1/1");
+		check("109");
+		check("40/3");
+		check("3/40");
+		check("40/40");
+		check("1/7");
+		check("7/6");
+	});
+	test("test Ratio.prototype.equals() for false comparisons", function(){
+		var func = function(a, b, c){
+			return Ratio.parse(a, b).equals(c);
+		};
+		equal( func(1,2, 2 ), false);
+		equal( func(1,2, "1/22"), false);
+		equal( func(1,5, "5"), false);
+	});
+	test("test Ratio.prototype.deepEquals()", function(){
+		var func = function(a,b,type,c){
+			var d = Ratio.parse(a,b);
+			d.type = type;
+			return d.deepEquals(c);
+		};
+		var x = Ratio(1,2);
+		x.type = "string";
+		
+		equal(func(1,2, "string", x), true);
+		equal(func(1e40,2, "", Ratio.parse(1e40,2) ), true);
+		equal(func(4,4,"", Ratio.parse(4,4)), true);
+		
+		equal(func(1,2, "decimal", x), false);
+		equal(func(1e20,1, "", Ratio.parse(1e40,2) ), false);
+		equal(func(2,2,"", Ratio.parse(4,4)), false);
+	});
 	test("test equivalance using Ratio.prototype.equals and ==", function () {
 		var a,
 		b,
@@ -656,7 +726,7 @@ var runTests = function () {
 		var func = function (a, b) {
 			return Ratio.parse(a, b).reduce().toLocaleString();
 		};
-		equal(func(), "0");
+		equal(func(), "NaN");
 		equal(func(0), "0");
 		equal(func(1), "1");
 		

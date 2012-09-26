@@ -2,6 +2,14 @@
 __Project Page:__ <https://github.com/LarryBattle/Ratio.js>  <br/>
 __Date:__ 09/09/12 <br/>
 
+__@Version: 0.2.5__ <br/>
+* Default value for Ratio.parse() is now `NaN` instead of 0/1
+* Note that null, true and false are treatied as numbers.
+* Improved Ratio.prototype.equals() to support all numeric types.
+* Added: Ratio.prototype.deepEquals() for a strict comparison check.
+* Added: Document comments for YUI-DOCS
+* Updated: testcases.
+
 __@Version: 0.2.4__ <br/>
 * Ratio.parse now supports mixed numbers. 
 * Changed the behavior of the Ratio constructor.

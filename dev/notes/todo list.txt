@@ -2,6 +2,7 @@ Todo List
 ---------
 
 // Ratio.js code
+@todo Extra: Add a division method.
 @todo Add support for parsing mixed numbers and outputting as well.
 	- Ratio.prototype.toLocaleString outputs to mixed numbers when appropriate.
 - two bugs:
@@ -10,7 +11,6 @@ Todo List
 
 @todo Find out if cleanFormat() could be replaced with reduce()
 @todo Change add "min" to the Ratio.min.js verison. So you know which version you're testing with.
-@todo Ratio.prototype.equals(), decide if this will check for the same object or just only value. Should deepEquals( object ) == equals( object, true )?
 
 // testing
 @todo Add at least 5 user cases. a.add(4).toFraction() doesn't copy over the divSign.

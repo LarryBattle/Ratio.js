@@ -6,7 +6,7 @@
 MIT License <http://www.opensource.org/licenses/mit-license>
 GPL v3 <http://opensource.org/licenses/GPL-3.0>
  * @info Project page: <https://github.com/LarryBattle/Ratio.js/>
- * @version 0.2.4
+ * @version 0.2.5
  * @note Uses YUI-DOC to generate documentation.
  **/
 ;
@@ -37,6 +37,20 @@ var Ratio = function (numerator, denominator, alwaysReduce) {
 	this.numerator = numerator;
 	return this.correctRatio();
 };
+/**
+ * Adjusts the ratio in three ways:
+ * 
+ * 1) Sets the numerator and denominator to default values if undefined. (Default fraction: 0/1)
+ * 2) Places the sign on numerator. 
+ * 3) Reduces the function if needed.
+ * This function is called after the instances is created.
+ *
+ * @method Ratio.prototype.correctRatio
+ * @param {Object} obj
+ * @return {Ratio}
+ * @example
+Ratio().toString(); // `.correctRatio()` was called internally.
+ **/
 Ratio.prototype.correctRatio = function () {
 	var a = this.numerator;
 	b = this.denominator;
@@ -60,7 +74,7 @@ Ratio.prototype.correctRatio = function () {
  * @property Ratio.VERSION
  * @type String
  **/
-Ratio.VERSION = "0.2.4";
+Ratio.VERSION = "0.2.5";
 /**
  * Checks if value is a finite number. <br/> Borrowed from jQuery 1.7.2 <br/>
  *
@@ -87,11 +101,22 @@ Ratio.getValueIfDefined( 4, null ) == 4
 Ratio.getValueIfDefined = function (backup, value) {
 	return typeof value !== "undefined" && value !== null ? value : backup;
 };
+
+/**
+ * Provides a quick way to find out the numeric type of an object.
+ * Types include: `NaN`, `Ratio`, `number`, `e`, `decimal`, `mixed` and `fraction`
+ *
+ * @method Ratio.getTypeGuess
+ * @param {Object} obj
+ * @return {String} type
+ * @example
+Ratio.getTypeGuess("1/3") == "fraction";
+ **/
 Ratio.getTypeGuess = function (obj) {
 	var type = "NaN";
 	if (obj instanceof Ratio) {
 		type = "Ratio";
-	} else if (!isNaN(obj) && obj !== NaN) {
+	} else if (!isNaN(obj)) {
 		type = "number";
 		if (/e/i.test(+obj)) {
 			type = "e";
@@ -167,7 +192,7 @@ Ratio.parseToArray = function (obj) {
 		arr[0] += (parts[0] * arr[1]);
 		break;
 	case "fraction":
-		parts = obj.split(/\//);
+		parts = obj.split( /\// );
 		arr[0] = Ratio.getNumeratorWithSign(parts[0], parts[1]);
 		arr[1] = Math.abs(+parts[1]);
 		break;
@@ -190,6 +215,8 @@ Ratio.parseToArray = function (obj) {
 	case "Ratio":
 		arr = [obj.numerator, obj.denominator];
 		break;
+	default:
+		arr = [ NaN, 1 ];
 	}
 	return arr;
 };
@@ -365,7 +392,11 @@ Ratio(1,2).valueOf() == 0.5;
 Ratio(1,2).valueOf(true) == "1/2"
  **/
 Ratio.prototype.valueOf = function (showValue) {
-	return (!showValue && this.type == "string") ? this.toLocaleString() : (this.numerator / this.denominator);
+	var val = (this.numerator / this.denominator);
+	if(!showValue && this.type == "string"){
+		val = this.toLocaleString();
+	}
+	return val;
 };
 /**
  * From the Ratio instance, returns a string of the Ratio in fraction form if the numerator and denominator are Rational numbers.<br/>
@@ -382,16 +413,14 @@ Ratio(1,10).toLocaleString() == "1/10"
 Ratio(0,0).toLocaleString() == "NaN"
  **/
 Ratio.prototype.toLocaleString = function () {
-	var val = this.valueOf(true), x,
-	str;
+	var val = this.valueOf(true), x, str;
+	
 	if( isNaN( val ) ){
 		str = "NaN";
-	}else if(val%1 === 0){
-		str = "" + val;
-	}else if(!isFinite(val%1)){
+	}else if(val%1 === 0 || this.denominator === 1 || !isFinite(val%1) ){
 		str = "" + val;
 	}else if( 1 < Math.abs(val) ){
-		x = parseInt(this.numerator / this.denominator, 10);
+		x = parseInt(val, 10);
 		str = x + " " + Math.abs(this.numerator%this.denominator) + this.divSign + this.denominator;
 	}else{
 		str = "" + this.numerator + this.divSign + this.denominator;
@@ -514,12 +543,25 @@ Ratio.prototype.divide = function (obj, obj2) {
  *
  * @method Ratio.prototype.equals
  * @param {Object} obj
- * @return {Ratio}
+ * @return {Boolean}
  * @example
 Ratio(1,2).equals( 1/2 ) === true
  **/
 Ratio.prototype.equals = function (obj) {
-	return (this.numerator / this.denominator) == obj.valueOf();
+	var val = (Ratio.isNumeric(obj) || obj instanceof Ratio ) ? obj.valueOf() : Ratio.parse(obj).valueOf();
+	return (this.numerator / this.denominator) == +val;
+};
+/**
+ * Performs a strict comparison to determine if the current instances and passed object are identical.
+ *
+ * @method Ratio.prototype.deepEquals
+ * @param {Object} obj
+ * @return {Boolean}
+ * @example
+Ratio(1,2).deepEquals( 1/2 ) === false
+*/
+Ratio.prototype.deepEquals = function (obj) {
+	return (obj instanceof Ratio) && (this.numerator === obj.numerator) && (this.denominator === obj.denominator) && (this.type === obj.type);
 };
 /**
  * Multiply the current Ratio by another Ratio.

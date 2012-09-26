@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.4</em>
+            <em>API Docs for: 0.2.5</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -353,6 +353,13 @@ In otherwords, <code>new Ratio( value )</code> is the same as <code>Ratio( value
                             </li>
                         
                             <li class="index-item method">
+                                <a href="#method_Ratio.getTypeGuess">Ratio.getTypeGuess</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
                                 <a href="#method_Ratio.getValueIfDefined">Ratio.getValueIfDefined</a>
 
                                 
@@ -403,6 +410,20 @@ In otherwords, <code>new Ratio( value )</code> is the same as <code>Ratio( value
                         
                             <li class="index-item method">
                                 <a href="#method_Ratio.prototype.clone">Ratio.prototype.clone</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.prototype.correctRatio">Ratio.prototype.correctRatio</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.prototype.deepEquals">Ratio.prototype.deepEquals</a>
 
                                 
                                 
@@ -618,7 +639,7 @@ In otherwords, <code>new Ratio( value )</code> is the same as <code>Ratio( value
             
         
         
-        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l110"><code>..\src\Ratio.js:110</code></a>
+        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l135"><code>..\src\Ratio.js:135</code></a>
         
         </p>
 
@@ -730,7 +751,7 @@ In otherwords, <code>new Ratio( value )</code> is the same as <code>Ratio( value
             
         
         
-        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l321"><code>..\src\Ratio.js:321</code></a>
+        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l348"><code>..\src\Ratio.js:348</code></a>
         
         </p>
 
@@ -852,7 +873,7 @@ Ratio.getCleanENotation( "9.999999999999999e+22" ) === "1e+23";</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l130"><code>..\src\Ratio.js:130</code></a>
+        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l155"><code>..\src\Ratio.js:155</code></a>
         
         </p>
 
@@ -979,7 +1000,7 @@ Used to force <code>top</code> to represent the sign of the Ratio.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l289"><code>..\src\Ratio.js:289</code></a>
+        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l316"><code>..\src\Ratio.js:316</code></a>
         
         </p>
 
@@ -1092,7 +1113,7 @@ More info <a href="http://bateru.com/news/2012/05/code-of-the-day-javascript-pri
             
         
         
-        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l252"><code>..\src\Ratio.js:252</code></a>
+        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l279"><code>..\src\Ratio.js:279</code></a>
         
         </p>
 
@@ -1167,6 +1188,119 @@ It should be noted that the last digit might be removed to avoid rounding errors
 </div>
 
                 
+                    <div id="method_Ratio.getTypeGuess" class="method item">
+    <h3 class="name"><code>Ratio.getTypeGuess</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>obj</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l105"><code>..\src\Ratio.js:105</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Provides a quick way to find out the numeric type of an object.
+Types include: <code>NaN</code>, <code>Ratio</code>, <code>number</code>, <code>e</code>, <code>decimal</code>, <code>mixed</code> and <code>fraction</code></p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">obj</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">String</span>:
+                    
+                    type
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <p>Ratio.getTypeGuess("1/3") == "fraction";</p>
+            </div>
+        </div>
+    
+</div>
+
+                
                     <div id="method_Ratio.getValueIfDefined" class="method item">
     <h3 class="name"><code>Ratio.getValueIfDefined</code></h3>
 
@@ -1219,7 +1353,7 @@ It should be noted that the last digit might be removed to avoid rounding errors
             
         
         
-        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l76"><code>..\src\Ratio.js:76</code></a>
+        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l90"><code>..\src\Ratio.js:90</code></a>
         
         </p>
 
@@ -1346,7 +1480,7 @@ Similar to <code>var a = (b || c)</code>.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l64"><code>..\src\Ratio.js:64</code></a>
+        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l78"><code>..\src\Ratio.js:78</code></a>
         
         </p>
 
@@ -1465,7 +1599,7 @@ Similar to <code>var a = (b || c)</code>.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l196"><code>..\src\Ratio.js:196</code></a>
+        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l223"><code>..\src\Ratio.js:223</code></a>
         
         </p>
 
@@ -1598,7 +1732,7 @@ Ratio.parse( "3/4" ).numerator == "3"</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l147"><code>..\src\Ratio.js:147</code></a>
+        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l172"><code>..\src\Ratio.js:172</code></a>
         
         </p>
 
@@ -1701,7 +1835,7 @@ Ratio.parse( "3/4" ).numerator == "3"</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l620"><code>..\src\Ratio.js:620</code></a>
+        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l662"><code>..\src\Ratio.js:662</code></a>
         
         </p>
 
@@ -1797,7 +1931,7 @@ Ratio.parse( "3/4" ).numerator == "3"</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l467"><code>..\src\Ratio.js:467</code></a>
+        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l496"><code>..\src\Ratio.js:496</code></a>
         
         </p>
 
@@ -1916,7 +2050,7 @@ Ratio.parse( "3/4" ).numerator == "3"</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l598"><code>..\src\Ratio.js:598</code></a>
+        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l640"><code>..\src\Ratio.js:640</code></a>
         
         </p>
 
@@ -2025,7 +2159,7 @@ a.cleanFormat().toString() == "6666666666666667/10000000000000000"</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l430"><code>..\src\Ratio.js:430</code></a>
+        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l459"><code>..\src\Ratio.js:459</code></a>
         
         </p>
 
@@ -2142,6 +2276,233 @@ a.equals(b) === true;</p>
 </div>
 
                 
+                    <div id="method_Ratio.prototype.correctRatio" class="method item">
+    <h3 class="name"><code>Ratio.prototype.correctRatio</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>obj</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="..\classes\Ratio.html" class="crosslink">Ratio</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l40"><code>..\src\Ratio.js:40</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Adjusts the ratio in three ways:</p>
+
+<p>1) Sets the numerator and denominator to default values if undefined. (Default fraction: 0/1)
+2) Places the sign on numerator. 
+3) Reduces the function if needed.
+This function is called after the instances is created.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">obj</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="..\classes\Ratio.html" class="crosslink">Ratio</a></span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <p>Ratio().toString(); // <code>.correctRatio()</code> was called internally.</p>
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_Ratio.prototype.deepEquals" class="method item">
+    <h3 class="name"><code>Ratio.prototype.deepEquals</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>obj</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Boolean</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l554"><code>..\src\Ratio.js:554</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Performs a strict comparison to determine if the current instances and passed object are identical.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">obj</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Boolean</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <p>Ratio(1,2).deepEquals( 1/2 ) === false</p>
+            </div>
+        </div>
+    
+</div>
+
+                
                     <div id="method_Ratio.prototype.descale" class="method item">
     <h3 class="name"><code>Ratio.prototype.descale</code></h3>
 
@@ -2190,7 +2551,7 @@ a.equals(b) === true;</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l559"><code>..\src\Ratio.js:559</code></a>
+        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l601"><code>..\src\Ratio.js:601</code></a>
         
         </p>
 
@@ -2309,7 +2670,7 @@ a.equals(b) === true;</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l495"><code>..\src\Ratio.js:495</code></a>
+        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l524"><code>..\src\Ratio.js:524</code></a>
         
         </p>
 
@@ -2409,7 +2770,7 @@ a.equals(b) === true;</p>
 
     
         <span class="returns-inline">
-            <span class="type"><a href="..\classes\Ratio.html" class="crosslink">Ratio</a></span>
+            <span class="type">Boolean</span>
         </span>
     
 
@@ -2436,7 +2797,7 @@ a.equals(b) === true;</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l512"><code>..\src\Ratio.js:512</code></a>
+        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l541"><code>..\src\Ratio.js:541</code></a>
         
         </p>
 
@@ -2482,7 +2843,7 @@ a.equals(b) === true;</p>
             <div class="returns-description">
                 
                     
-                        <span class="type"><a href="..\classes\Ratio.html" class="crosslink">Ratio</a></span>:
+                        <span class="type">Boolean</span>:
                     
                 
             </div>
@@ -2539,7 +2900,7 @@ a.equals(b) === true;</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l668"><code>..\src\Ratio.js:668</code></a>
+        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l710"><code>..\src\Ratio.js:710</code></a>
         
         </p>
 
@@ -2623,7 +2984,7 @@ Note: Returns null if the the string can't be split into exactly 2 elements.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l691"><code>..\src\Ratio.js:691</code></a>
+        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l733"><code>..\src\Ratio.js:733</code></a>
         
         </p>
 
@@ -2701,7 +3062,7 @@ Note: Returns null if the the string can't be split into exactly 2 elements.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l657"><code>..\src\Ratio.js:657</code></a>
+        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l699"><code>..\src\Ratio.js:699</code></a>
         
         </p>
 
@@ -2781,7 +3142,7 @@ Note: Returns null if the the string can't be split into exactly 2 elements.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l632"><code>..\src\Ratio.js:632</code></a>
+        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l674"><code>..\src\Ratio.js:674</code></a>
         
         </p>
 
@@ -2878,7 +3239,7 @@ Which is the same as Ratio( (numerator % denominator), 1 ).</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l524"><code>..\src\Ratio.js:524</code></a>
+        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l566"><code>..\src\Ratio.js:566</code></a>
         
         </p>
 
@@ -2997,7 +3358,7 @@ Which is the same as Ratio( (numerator % denominator), 1 ).</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l645"><code>..\src\Ratio.js:645</code></a>
+        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l687"><code>..\src\Ratio.js:687</code></a>
         
         </p>
 
@@ -3087,7 +3448,7 @@ Which is the same as Ratio( (numerator % denominator), 1 ).</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l572"><code>..\src\Ratio.js:572</code></a>
+        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l614"><code>..\src\Ratio.js:614</code></a>
         
         </p>
 
@@ -3190,7 +3551,7 @@ Which is the same as Ratio( (numerator % denominator), 1 ).</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l454"><code>..\src\Ratio.js:454</code></a>
+        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l483"><code>..\src\Ratio.js:483</code></a>
         
         </p>
 
@@ -3280,7 +3641,7 @@ Which is the same as Ratio( (numerator % denominator), 1 ).</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l585"><code>..\src\Ratio.js:585</code></a>
+        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l627"><code>..\src\Ratio.js:627</code></a>
         
         </p>
 
@@ -3399,7 +3760,7 @@ Which is the same as Ratio( (numerator % denominator), 1 ).</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l541"><code>..\src\Ratio.js:541</code></a>
+        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l583"><code>..\src\Ratio.js:583</code></a>
         
         </p>
 
@@ -3516,7 +3877,7 @@ Which is the same as Ratio( (numerator % denominator), 1 ).</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l370"><code>..\src\Ratio.js:370</code></a>
+        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l401"><code>..\src\Ratio.js:401</code></a>
         
         </p>
 
@@ -3600,7 +3961,7 @@ Ratio(0,0).toLocaleString() == "NaN"</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l419"><code>..\src\Ratio.js:419</code></a>
+        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l448"><code>..\src\Ratio.js:448</code></a>
         
         </p>
 
@@ -3678,7 +4039,7 @@ Ratio(0,0).toLocaleString() == "NaN"</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l401"><code>..\src\Ratio.js:401</code></a>
+        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l430"><code>..\src\Ratio.js:430</code></a>
         
         </p>
 
@@ -3779,7 +4140,7 @@ a.toString() == "8:2";</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l223"><code>..\src\Ratio.js:223</code></a>
+        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l250"><code>..\src\Ratio.js:250</code></a>
         
         </p>
 
@@ -3903,7 +4264,7 @@ Ratio.reduce( "10/4" ).toString() // returns [5,2]</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l343"><code>..\src\Ratio.js:343</code></a>
+        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l370"><code>..\src\Ratio.js:370</code></a>
         
         </p>
 
@@ -3992,7 +4353,7 @@ Ratio.reduce( "10/4" ).toString() // returns [5,2]</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l354"><code>..\src\Ratio.js:354</code></a>
+        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l381"><code>..\src\Ratio.js:381</code></a>
         
         </p>
 
@@ -4093,7 +4454,7 @@ Ratio(1,2).valueOf(true) == "1/2"</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l58"><code>..\src\Ratio.js:58</code></a>
+        <a href="..&#x2F;files&#x2F;.._src_Ratio.js.html#l72"><code>..\src\Ratio.js:72</code></a>
         
         </p>
 
