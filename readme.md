@@ -12,7 +12,7 @@ Chrome 19, Firefox 12, IE 7+, and Opera 11+.
 Note: Run the test cases to check for additional browser compatibility.
 
 ## Current Version
-`0.2.3`
+`0.2.6`
 
 ## Installation ##
 Just include the Ratio.js script. Like so, 
@@ -67,14 +67,14 @@ The default value of the numerator is 0 and denominator is 1.
 Examples:
 
 	// Good Values
-	Ratio().toRaw() === "0/1"
-	Ratio(4).toRaw() === "4/1"
-	Ratio(4,5).toRaw() === "4/5"
+	Ratio().toString() === "0/1"
+	Ratio(4).toString() === "4/1"
+	Ratio(4,5).toString() === "4/5"
 	
 	// Bad Values
-	Ratio("five").toRaw() === "NaN/1"
-	Ratio(1,"ten").toRaw() === "1/NaN"
-	Ratio("five","ten").toRaw() === "NaN/NaN"
+	Ratio("five").toString() === "NaN/1"
+	Ratio(1,"ten").toString() === "1/NaN"
+	Ratio("five","ten").toString() === "NaN/NaN"
 
 ### Ratio values ###
 
