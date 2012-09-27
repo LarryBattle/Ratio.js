@@ -2,6 +2,7 @@ Todo List
 ---------
 
 // Ratio.js code
+@todo find out how `.toLocaleString()` should handle with `e` types in the numerator and denominator relating to other types.
 @todo Extra: Add a division method.
 @todo Add support for parsing mixed numbers and outputting as well.
 	- Ratio.prototype.toLocaleString outputs to mixed numbers when appropriate.

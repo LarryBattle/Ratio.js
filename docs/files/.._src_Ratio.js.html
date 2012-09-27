@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.5</em>
+            <em>API Docs for: 0.2.6</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -94,7 +94,7 @@
 MIT License &lt;http:&#x2F;&#x2F;www.opensource.org&#x2F;licenses&#x2F;mit-license&gt;
 GPL v3 &lt;http:&#x2F;&#x2F;opensource.org&#x2F;licenses&#x2F;GPL-3.0&gt;
  * @info Project page: &lt;https:&#x2F;&#x2F;github.com&#x2F;LarryBattle&#x2F;Ratio.js&#x2F;&gt;
- * @version 0.2.5
+ * @version 0.2.6
  * @note Uses YUI-DOC to generate documentation.
  **&#x2F;
 ;
@@ -162,7 +162,7 @@ Ratio.prototype.correctRatio = function () {
  * @property Ratio.VERSION
  * @type String
  **&#x2F;
-Ratio.VERSION = &quot;0.2.5&quot;;
+Ratio.VERSION = &quot;0.2.6&quot;;
 &#x2F;**
  * Checks if value is a finite number. &lt;br&#x2F;&gt; Borrowed from jQuery 1.7.2 &lt;br&#x2F;&gt;
  *
@@ -270,9 +270,8 @@ Ratio.parseToArray = function (obj) {
 	var parts = [],
 	j,
 	arr = [],
-	top,
-	type = Ratio.getTypeGuess(obj);
-	switch (type) {
+	top;
+	switch (Ratio.getTypeGuess(obj)) {
 	case &quot;mixed&quot;:
 		parts[0] = obj.substring(0, obj.indexOf(&quot; &quot;));
 		parts[1] = obj.substring(parts[0].length);
@@ -296,9 +295,9 @@ Ratio.parseToArray = function (obj) {
 	case &quot;e&quot;:
 		parts = (+obj).toString().split(&#x2F;e&#x2F;i);
 		top = Ratio.parseToArray(parts[0]);
-		j = Math.abs(+obj) &lt; 1;
-		arr[j ? 0 : 1] = top[j ? 0 : 1];
-		arr[j ? 1 : 0] =  + (top[j ? 1 : 0] + &quot;e&quot; + Math.abs(+parts[1]));
+		j = (Math.abs(+obj) &lt; 1) ? [0, 1] : [1, 0];
+		arr[j[0]] = top[j[0]];
+		arr[j[1]] = +(top[j[1]] + &quot;e&quot; + Math.abs(+parts[1]));
 		break;
 	case &quot;Ratio&quot;:
 		arr = [obj.numerator, obj.denominator];
@@ -501,15 +500,19 @@ Ratio(1,10).toLocaleString() == &quot;1&#x2F;10&quot;
 Ratio(0,0).toLocaleString() == &quot;NaN&quot;
  **&#x2F;
 Ratio.prototype.toLocaleString = function () {
-	var val = this.valueOf(true), x, str;
+	var val = this.valueOf(true), x, str, errorSize = 1e-9;
 	
 	if( isNaN( val ) ){
 		str = &quot;NaN&quot;;
 	}else if(val%1 === 0 || this.denominator === 1 || !isFinite(val%1) ){
 		str = &quot;&quot; + val;
 	}else if( 1 &lt; Math.abs(val) ){
-		x = parseInt(val, 10);
-		str = x + &quot; &quot; + Math.abs(this.numerator%this.denominator) + this.divSign + this.denominator;
+		if( Math.abs( val - val.toFixed(0) ) &lt; errorSize ){
+			str = val.toFixed(0);
+		}else{
+			x = parseInt(val, 10);
+			str = x + &quot; &quot; + Math.abs(this.numerator%this.denominator) + this.divSign + this.denominator;			
+		}
 	}else{
 		str = &quot;&quot; + this.numerator + this.divSign + this.denominator;
 	}
@@ -531,17 +534,6 @@ a.divSign = &quot;:&quot;;
 a.toString() == &quot;8:2&quot;;
  **&#x2F;
 Ratio.prototype.toString = function () {
-	return &quot;&quot; + this.numerator + this.divSign + this.denominator;
-};
-&#x2F;**
- * From the Ratio instance, returns the raw values of the numerator and denominator.
- *
- * @method Ratio.prototype.toRaw
- * @return {String}
- * @example
-Ratio.parse(&quot;2&#x2F;2&quot;).toRaw() === &quot;2&#x2F;2&quot;
- *&#x2F;
-Ratio.prototype.toRaw = function () {
 	return &quot;&quot; + this.numerator + this.divSign + this.denominator;
 };
 &#x2F;**

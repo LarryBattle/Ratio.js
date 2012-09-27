@@ -105,19 +105,19 @@ var runTests = function () {
 		equal((func(NaN, 0)), "NaN");
 	});
 	
-	module("toRaw output");
-	test("test Ratio.prototype.toRaw() for valid input: proper fraction", function(){
+	module("toString output");
+	test("test Ratio.prototype.toString() for valid input: proper fraction", function(){
 		var func = function(a, b){
-			return Ratio(a, b).toRaw();
+			return Ratio(a, b).toString();
 		};
 		equal( func(1,2), "1/2" );
 		equal( func(-1,2), "-1/2" );
 		equal( func(1e23,2e25), "1e+23/2e+25" );
 		equal( func(-1e23,2e25), "-1e+23/2e+25" );
 	});
-	test("test Ratio.prototype.toRaw() for valid input: whole numbers", function(){
+	test("test Ratio.prototype.toString() for valid input: whole numbers", function(){
 		var func = function(a, b){
-			return Ratio(a, b).toRaw();
+			return Ratio(a, b).toString();
 		};
 		equal( func(1,Infinity), "1/Infinity" );
 		equal( func(0,3), "0/3" );
@@ -134,9 +134,9 @@ var runTests = function () {
 		equal( func(-1,1e300), "-1/1e+300" );
 		equal( func(-0,3e40), "0/3e+40" );
 	});
-	test("test Ratio.prototype.toRaw() for valid input: mixed numbers", function(){
+	test("test Ratio.prototype.toString() for valid input: mixed numbers", function(){
 		var func = function(a, b){
-			return Ratio(a, b).toRaw();
+			return Ratio(a, b).toString();
 		};
 		equal( func(3,2), "3/2" );
 		equal( func(50,4), "50/4" );
@@ -146,23 +146,23 @@ var runTests = function () {
 		equal( func(-50,4), "-50/4" );
 		equal( func(-3e+23,29), "-3e+23/29" );
 	});
-	test("test Ratio.prototype.toRaw() for invalid input: decimal in fraction", function(){
+	test("test Ratio.prototype.toString() for invalid input: decimal in fraction", function(){
 		var func = function(a, b){
-			return Ratio(a, b).toRaw();
+			return Ratio(a, b).toString();
 		};
 		equal( func(0.11,0.3), "0.11/0.3" );
 	});
-	test("test Ratio.prototype.toRaw() for invalid input: Infinity", function(){
+	test("test Ratio.prototype.toString() for invalid input: Infinity", function(){
 		var func = function(a, b){
-			return Ratio(a, b).toRaw();
+			return Ratio(a, b).toString();
 		};
 		equal( func(1,0), "1/0" );
 		equal( func(Infinity,1), "Infinity/1" );
 		equal( func(Infinity,0), "Infinity/0" );
 	});
-	test("test Ratio.prototype.toRaw() for invalid input: NaN", function(){
+	test("test Ratio.prototype.toString() for invalid input: NaN", function(){
 		var func = function(a, b){
-			return Ratio(a, b).toRaw();
+			return Ratio(a, b).toString();
 		};
 		equal( func(Infinity,-Infinity), "-Infinity/Infinity" );
 		equal( func(32, "i12"), "32/NaN" );
@@ -171,6 +171,77 @@ var runTests = function () {
 		equal( func("19", "fist"), "19/NaN" );
 		equal( func("palm", "o"), "NaN/NaN" );
 		equal( func("-i", "i"), "NaN/NaN" );
+	});
+	
+	module("toLocaleString output");
+	test("test Ratio.prototype.toLocaleString() for valid input: proper fraction", function(){
+		var func = function(a, b){
+			return Ratio(a, b).toLocaleString();
+		};
+		equal( func(1,2), "1/2" );
+		equal( func(-1,2), "-1/2" );
+		equal( func(1e23,2e25), "1e+23/2e+25" );
+		equal( func(-1e23,2e25), "-1e+23/2e+25" );
+	});
+	test("test Ratio.prototype.toLocaleString() for valid input: whole numbers", function(){
+		var func = function(a, b){
+			return Ratio(a, b).toLocaleString();
+		};
+		equal( func(1,Infinity), "0" );
+		equal( func(0,3), "0" );
+		equal( func(0,3e40), "0" );
+		equal( func(1,1e400), "0" );
+		equal( func(3,3), "1" );
+		equal( func(3e40,1e40), "3" );
+		equal( func(12,3), "4" );
+		
+		equal( func(-1,Infinity), "0" );
+		equal( func(-0,3), "0" );
+		equal( func(-0,3e40), "0" );
+		equal( func(-1,1e400), "0" );
+		equal( func(-3,3), "-1" );
+		equal( func(-3e40,1e40), "-3" );
+		equal( func(-12,3), "-4" );
+	});
+	test("test Ratio.prototype.toLocaleString() for valid input: mixed numbers", function(){
+		var func = function(a, b){
+			return Ratio(a, b).toLocaleString();
+		};
+		equal( func(3,2), "1 1/2" );
+		equal( func(50,4), "12 2/4" );
+		equal( func(3e+23,29), "3e+23/29" );
+		equal( func(7e30,3e25), "233333 1e+30/3e+25" );
+		
+		equal( func(-3,2), "-1 1/2" );
+		equal( func(-50,4), "-12 2/4" );
+		equal( func(-3e+23,29), "-3e+23/29" );
+		equal( func(-7e30,3e25), "-233333 1e+30/3e+25" );
+	});
+	test("test Ratio.prototype.toLocaleString() for invalid input: decimal in fraction", function(){
+		var func = function(a, b){
+			return Ratio(a, b).toLocaleString();
+		};
+		equal( func(0.11,0.3), "0.11/0.3" );
+	});
+	test("test Ratio.prototype.toLocaleString() for invalid input: Infinity", function(){
+		var func = function(a, b){
+			return Ratio(a, b).toLocaleString();
+		};
+		equal( func(1,0), "Infinity" );
+		equal( func(Infinity,1), "Infinity" );
+		equal( func(Infinity,0), "Infinity" );
+	});
+	test("test Ratio.prototype.toLocaleString() for invalid input: NaN", function(){
+		var func = function(a, b){
+			return Ratio(a, b).toLocaleString();
+		};
+		equal( func(Infinity,-Infinity), "NaN" );
+		equal( func(32, "i12"), "NaN" );
+		equal( func("-i", 12), "NaN" );
+		equal( func("palm", "fist"), "NaN" );
+		equal( func("19", "fist"), "NaN" );
+		equal( func("palm", "o"), "NaN" );
+		equal( func("-i", "i"), "NaN" );
 	});
 	
 	module("Format Types");
@@ -353,6 +424,7 @@ var runTests = function () {
 		deepEqual(func("-2.0004e5"), [-200040, 1]);
 		deepEqual(func("-2.0004e-2"), [-20004, 1000000]);
 		deepEqual(func("-2.0004e-5"), [-20004, 1000000000]);
+		deepEqual(func("-1.34e-30"), [-134, 1e+32] );
 	});
 	test("test Ratio.parseToArray() with invalid input", function () {
 		var func = Ratio.parseToArray;
@@ -427,7 +499,7 @@ var runTests = function () {
 		equal(func(Ratio(1), 3), "1/3");
 		equal(func(Ratio(-4), Ratio(3)), "-1 1/3");
 		
-		equal(func(Ratio(4, 5).toRaw(), Ratio(-3, 2).toRaw()), "-8/15");
+		equal(func(Ratio(4, 5).toString(), Ratio(-3, 2).toString()), "-8/15");
 	});
 	test("test Ratio.prototype.cleanFormat()", function () {
 		var func = function (a, b) {
@@ -752,11 +824,11 @@ var runTests = function () {
 		var a = Ratio(1, 2);
 		a.type = "string";
 		
-		equal(a.toRaw(), "1/2");
+		equal(a.toString(), "1/2");
 		a = a.add(3);
-		equal(a.toRaw(), "7/2");
+		equal(a.toString(), "7/2");
 		a = a.subtract(2);
-		equal(a.toRaw(), "3/2");
+		equal(a.toString(), "3/2");
 		a = a.divide("3/2");
 		equal(a.toLocaleString(), "1");
 		equal(a.multiply(12).reduce().toLocaleString(), 12);

@@ -6,7 +6,7 @@
 MIT License <http://www.opensource.org/licenses/mit-license>
 GPL v3 <http://opensource.org/licenses/GPL-3.0>
  * @info Project page: <https://github.com/LarryBattle/Ratio.js/>
- * @version 0.2.5
+ * @version 0.2.6
  * @note Uses YUI-DOC to generate documentation.
  **/
 ;
@@ -74,7 +74,7 @@ Ratio.prototype.correctRatio = function () {
  * @property Ratio.VERSION
  * @type String
  **/
-Ratio.VERSION = "0.2.5";
+Ratio.VERSION = "0.2.6";
 /**
  * Checks if value is a finite number. <br/> Borrowed from jQuery 1.7.2 <br/>
  *
@@ -182,9 +182,8 @@ Ratio.parseToArray = function (obj) {
 	var parts = [],
 	j,
 	arr = [],
-	top,
-	type = Ratio.getTypeGuess(obj);
-	switch (type) {
+	top;
+	switch (Ratio.getTypeGuess(obj)) {
 	case "mixed":
 		parts[0] = obj.substring(0, obj.indexOf(" "));
 		parts[1] = obj.substring(parts[0].length);
@@ -208,9 +207,9 @@ Ratio.parseToArray = function (obj) {
 	case "e":
 		parts = (+obj).toString().split(/e/i);
 		top = Ratio.parseToArray(parts[0]);
-		j = Math.abs(+obj) < 1;
-		arr[j ? 0 : 1] = top[j ? 0 : 1];
-		arr[j ? 1 : 0] =  + (top[j ? 1 : 0] + "e" + Math.abs(+parts[1]));
+		j = (Math.abs(+obj) < 1) ? [0, 1] : [1, 0];
+		arr[j[0]] = top[j[0]];
+		arr[j[1]] = +(top[j[1]] + "e" + Math.abs(+parts[1]));
 		break;
 	case "Ratio":
 		arr = [obj.numerator, obj.denominator];
@@ -413,15 +412,19 @@ Ratio(1,10).toLocaleString() == "1/10"
 Ratio(0,0).toLocaleString() == "NaN"
  **/
 Ratio.prototype.toLocaleString = function () {
-	var val = this.valueOf(true), x, str;
+	var val = this.valueOf(true), x, str, errorSize = 1e-9;
 	
 	if( isNaN( val ) ){
 		str = "NaN";
 	}else if(val%1 === 0 || this.denominator === 1 || !isFinite(val%1) ){
 		str = "" + val;
 	}else if( 1 < Math.abs(val) ){
-		x = parseInt(val, 10);
-		str = x + " " + Math.abs(this.numerator%this.denominator) + this.divSign + this.denominator;
+		if( Math.abs( val - val.toFixed(0) ) < errorSize ){
+			str = val.toFixed(0);
+		}else{
+			x = parseInt(val, 10);
+			str = x + " " + Math.abs(this.numerator%this.denominator) + this.divSign + this.denominator;			
+		}
 	}else{
 		str = "" + this.numerator + this.divSign + this.denominator;
 	}
@@ -443,17 +446,6 @@ a.divSign = ":";
 a.toString() == "8:2";
  **/
 Ratio.prototype.toString = function () {
-	return "" + this.numerator + this.divSign + this.denominator;
-};
-/**
- * From the Ratio instance, returns the raw values of the numerator and denominator.
- *
- * @method Ratio.prototype.toRaw
- * @return {String}
- * @example
-Ratio.parse("2/2").toRaw() === "2/2"
- */
-Ratio.prototype.toRaw = function () {
 	return "" + this.numerator + this.divSign + this.denominator;
 };
 /**

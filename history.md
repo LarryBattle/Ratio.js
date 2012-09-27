@@ -1,6 +1,12 @@
 ##Ratio.js Release Notes##
 __Project Page:__ <https://github.com/LarryBattle/Ratio.js>  <br/>
-__Date:__ 09/09/12 <br/>
+__Date:__ 09/27/12 <br/>
+
+__@Version: 0.2.6__ <br/>
+* Added detailed testcases for `.toLocaleString()`.
+* Removed `.toRaw()`
+* Updated testcases to use `.toString()` instead of `.toRaw()`
+* Passed more testcases for `.toLocaleString()`
 
 __@Version: 0.2.5__ <br/>
 * Default value for Ratio.parse() is now `NaN` instead of 0/1
