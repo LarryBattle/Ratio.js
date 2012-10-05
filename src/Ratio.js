@@ -164,10 +164,8 @@ Ratio.gcd = function (a, b) {
 Ratio.getNumeratorWithSign(1,-2) == -1
  **/
 Ratio.getNumeratorWithSign = function (top, bottom) {
-	var x = (+top || 1),
-	y = (+bottom || 1),
-	a = "" + x * y;
-	return (/\-/.test(a.charAt(0))) ? -Math.abs(+top) : Math.abs(+top);
+	var sign = (+top * (+bottom || 1)) < 0 ? -1 : 1;
+	return Math.abs(+top) * sign;
 };
 /**
  * Converts a numeric value to a Ratio in the form of [top, bottom], such that top/bottom.
