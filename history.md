@@ -1,6 +1,10 @@
 ##Ratio.js Release Notes##
 __Project Page:__ <https://github.com/LarryBattle/Ratio.js>  <br/>
-__Date:__ 09/27/12 <br/>
+__Date:__ 10/07/12 <br/>
+
+__@Version: 0.2.7__ <br/>
+* Added `Ratio.prototype.correctRatio()` to simplify the Ratio constructor.
+* Refactored `Ratio.getNumeratorWithSign()`
 
 __@Version: 0.2.6__ <br/>
 * Added detailed testcases for `.toLocaleString()`.

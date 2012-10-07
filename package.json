@@ -1,7 +1,7 @@
 ﻿{
 	"name" : "Ratio.js",
 	"description" : "Provides a Fraction / Rational / Ratio object for javascript.",
-	"version" : "0.2.6",
+	"version" : "0.2.7",
 	"author" : "Larry Battle <http://bateru.com/news/contact-me>",
 	"contributors" : [
 		{

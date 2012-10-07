@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.6</em>
+            <em>API Docs for: 0.2.7</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -94,7 +94,7 @@
 MIT License &lt;http:&#x2F;&#x2F;www.opensource.org&#x2F;licenses&#x2F;mit-license&gt;
 GPL v3 &lt;http:&#x2F;&#x2F;opensource.org&#x2F;licenses&#x2F;GPL-3.0&gt;
  * @info Project page: &lt;https:&#x2F;&#x2F;github.com&#x2F;LarryBattle&#x2F;Ratio.js&#x2F;&gt;
- * @version 0.2.6
+ * @version 0.2.7
  * @note Uses YUI-DOC to generate documentation.
  **&#x2F;
 ;
@@ -162,7 +162,7 @@ Ratio.prototype.correctRatio = function () {
  * @property Ratio.VERSION
  * @type String
  **&#x2F;
-Ratio.VERSION = &quot;0.2.6&quot;;
+Ratio.VERSION = &quot;0.2.7&quot;;
 &#x2F;**
  * Checks if value is a finite number. &lt;br&#x2F;&gt; Borrowed from jQuery 1.7.2 &lt;br&#x2F;&gt;
  *
@@ -252,10 +252,8 @@ Ratio.gcd = function (a, b) {
 Ratio.getNumeratorWithSign(1,-2) == -1
  **&#x2F;
 Ratio.getNumeratorWithSign = function (top, bottom) {
-	var x = (+top || 1),
-	y = (+bottom || 1),
-	a = &quot;&quot; + x * y;
-	return (&#x2F;\-&#x2F;.test(a.charAt(0))) ? -Math.abs(+top) : Math.abs(+top);
+	var sign = (+top * (+bottom || 1)) &lt; 0 ? -1 : 1;
+	return Math.abs(+top) * sign;
 };
 &#x2F;**
  * Converts a numeric value to a Ratio in the form of [top, bottom], such that top&#x2F;bottom.
