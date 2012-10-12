@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Ratio.js Demo</title>
+	</head>
+	<body>
+		<h2>
+			<a href="https://github.com/LarryBattle/Ratio.js">Ratio.js</a> Demo.
+		</h2>
+		
+		var x = Ratio.parse( <input type="text" id="userInput" placeholder="type a fraction"/> ); <input type="button" id="generateRandomInput" value="Generate Input"/>
+		<table>
+			<tr>
+				<td align="right">x.toString() = </td>
+				<td id="xToString"></td>
+			</tr>
+			<tr>
+				<td align="right">x.reduce().toString() = </td>
+				<td id="xReduceToString"></td>
+			</tr>
+			<tr>
+				<td align="right">x.toLocaleString() = </td>
+				<td id="xToLocaleString"></td>
+			</tr>
+			<tr>
+				<td align="right">x.reduce().toLocaleString() = </td>
+				<td id="xReduceToLocaleString"></td>
+			</tr>
+			<tr>
+				<td align="right">x.valueOf() = </td>
+				<td id="xValueOf"></td>
+			</tr>
+		</table>
+		<script src="../src/Ratio.js"></script>
+		<script type="text/javascript">
+		var generateRandomInput = function(max){
+			var a = ~~(Math.random() * max), b = ~~(Math.random() * max), c = ~~(Math.random() * max);
+			var str = "";
+			switch( ~~(Math.random() * 3) ){
+				case 0:
+					str = "" + a/b;
+					break;
+				case 1:
+					str = a + "/" + b;
+					break;
+				case 2:
+					str = a + " " + b + "/" + c;
+					break;
+			}
+			return str;
+		};
+		var $ = function( id ){
+			return document.getElementById( id ) || {};
+		};
+		var displayRatioOutput = function(){
+			var x = Ratio.parse( $("userInput").value );
+			
+			$("xToString").innerHTML = x.toString();
+			$("xReduceToString").innerHTML = x.reduce().toString();
+			$("xToLocaleString").innerHTML = x.toLocaleString();
+			$("xReduceToLocaleString").innerHTML = x.reduce().toLocaleString();
+			$("xValueOf").innerHTML = x.valueOf();
+		};
+		var generateRatioInput = function(){
+			$("userInput").value = generateRandomInput(200);
+			displayRatioOutput();
+		};
+		$("userInput").onkeyup = displayRatioOutput;
+		$("generateRandomInput").onclick = generateRatioInput;
+		generateRatioInput();
+		</script>
+	</body>
+</html>
