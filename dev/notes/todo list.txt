@@ -29,6 +29,3 @@ Todo List
 //jake - build script
 @todo Need to update docs in both repositories.
 @todo Update version in the readme.md
-
-//Others
-@todo Add demo page
