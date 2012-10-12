@@ -1,6 +1,12 @@
 ##Ratio.js Release Notes##
 __Project Page:__ <https://github.com/LarryBattle/Ratio.js>  <br/>
-__Date:__ 10/07/12 <br/>
+__Date:__ 10/12/12 <br/>
+
+__@Version: 0.2.8__ <br/>
+* Added Ratio.js in the `demo` folder.
+* Added `Ratio.prototype.approximateTo` to approximate values to new fraction with a given denominator.
+* Changed the export object for node.js so that Ratio is the export object instead of exporting an object that points to Ratio.
+* Added testcase for `Ratio.prototype.approximateTo`.
 
 __@Version: 0.2.7__ <br/>
 * Added `Ratio.prototype.correctRatio()` to simplify the Ratio constructor.
