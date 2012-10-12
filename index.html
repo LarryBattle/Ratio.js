@@ -1,8 +1,23 @@
 <html>
 <head>
-<META HTTP-EQUIV="Refresh" CONTENT="1; URL=docs/index.html">
+  <title>Ratio.js - Fractions for Javascript</title>
 </head>
 <body>
-Redirecting to the documentation.
+	<h1>Ratio.js - Fractions for Javascript</h1>
+	By <a href="http://www.bateru.com/news">Larry Battle</a>
+	<ul>
+		<li><a href="demo/demo-basic.html">Simple Demo</a></li>
+		<li><a href="docs/classes/Ratio.html">Documentation</a></li>
+		<li><a href="dev/tests/Ratio.js_testcases.html">Test Cases</a></li>
+		<li><a href="https://github.com/LarryBattle/Ratio.js/issues?state=open">Report Issues</a></li>
+	</ul>
+	<p id="ratioVersion"></p>
+	<script src="src/Ratio.js"></script>
+	<script type="text/javascript">
+	var $ = function( id ){
+		return document.getElementById( id ) || {};
+	}
+	$("ratioVersion").innerHTML = "Current Version is <b>" + (Ratio.VERSION || "Error") + "</b>";
+	</script>
 </body>
 </html>
