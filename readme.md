@@ -11,7 +11,17 @@ Chrome 19, Firefox 12, IE 7+, and Opera 11+.
 
 Note: Run the test cases to check for additional browser compatibility.
 
-Ratio.version = `0.2.7`
+Simple Demo:
+http://larrybattle.github.com/Ratio.js/demo/demo-basic.html
+
+Documentation:
+http://larrybattle.github.com/Ratio.js/docs/classes/Ratio.html
+
+Testcase:
+http://larrybattle.github.com/Ratio.js/dev/tests/Ratio.js_testcases.html
+
+##Current version
+`0.2.7`
 
 ## Installation ##
 Just include the Ratio.js script. Like so, 
