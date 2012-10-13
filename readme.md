@@ -21,7 +21,7 @@ Testcase:
 http://larrybattle.github.com/Ratio.js/dev/tests/Ratio.js_testcases.html
 
 ##Current version
-`0.2.7`
+`0.2.8`
 
 ## Installation ##
 Just include the Ratio.js script. Like so, 
