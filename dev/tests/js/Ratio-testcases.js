@@ -190,7 +190,6 @@ var runTests = function () {
 		equal( func(1,Infinity), "0" );
 		equal( func(0,3), "0" );
 		equal( func(0,3e40), "0" );
-		equal( func(1,1e400), "0" );
 		equal( func(3,3), "1" );
 		equal( func(3e40,1e40), "3" );
 		equal( func(12,3), "4" );
@@ -198,7 +197,6 @@ var runTests = function () {
 		equal( func(-1,Infinity), "0" );
 		equal( func(-0,3), "0" );
 		equal( func(-0,3e40), "0" );
-		equal( func(-1,1e400), "0" );
 		equal( func(-3,3), "-1" );
 		equal( func(-3e40,1e40), "-3" );
 		equal( func(-12,3), "-4" );
@@ -947,9 +945,26 @@ var runTests = function () {
 		equal(func("9.999999999999999e+22"), "1e+23");
 		equal(func("1.1000000000000003e-30"), "1.1e-30");
 	});
+	test("test Ratio.prototype.approximateTo()", function(){
+		var func = function(a,b, base){
+			return Ratio.parse(a,b).approximateTo(base).toString();
+		};
+		equal(func(1,3), "1/3", "The Ratio instance should be returned if no base is provided.");
+		equal(func(5,10,2), "1/2");
+		equal(func(5,10,7), "4/7");
+		equal(func(27,100,3), "1/3");
+		equal(func(77,100,3), "2/3");
+		equal(func(99,100,9), "9/9");
+		equal(func(1,100,1e6), "10000/1000000");
+		
+		equal(func(-1,3), "-1/3", "The Ratio instance should be returned if no base is provided.");
+		equal(func(97,-100,3), "-3/3");
+		equal(func(-27,100,3), "-1/3");
+	});
 	module("Node.js");
 	test("test Nodes.js( NPM ) support", function () {
-		ok(exports.Ratio.VERSION, "Ratio was added to exports.");
+		ok( exports === Ratio, "The Ratio object is the export object." );
+		ok(exports.VERSION, "Ratio was added to exports.");
 	});
 };
 var reRunTests = function () {

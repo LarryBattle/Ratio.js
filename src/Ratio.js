@@ -732,11 +732,30 @@ Ratio(1,2).flip().toString() == "2/1";
 Ratio.prototype.flip = function () {
 	return this.clone(this.denominator, this.numerator);
 };
+/**
+ * From the Ratio instance, approxiates the value to a new fraction with a provided denominator.
+ * In otherwords, this method helps you find out what fraction with a given denominator will best 
+ * represent the current numeric value of the Ratio.
+ * 
+ * @method Ratio.prototype.approximateTo
+ * @chainable
+ * @param {Number} base
+ * @return {Ratio}
+ * @example
+Ratio(27,100).approximateTo("3").toString() == "1/3";
+**/
+Ratio.prototype.approximateTo = function (base) {
+	if (typeof base === "undefined") {
+		return this;
+	}
+	var a = Math.round(this.findX("x/" + base).valueOf());
+	return new Ratio(a, base);
+};
 
 // Adds npm support
 if (typeof exports !== 'undefined') {
 	if (typeof module !== 'undefined' && module.exports) {
 		exports = module.exports;
 	}
-	exports.Ratio = Ratio;
+	exports = Ratio;
 }
