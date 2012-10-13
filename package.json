@@ -3,8 +3,7 @@
 	"description" : "Provides a Fraction / Rational / Ratio object for javascript.",
 	"version" : "0.2.7",
 	"author" : "Larry Battle <http://bateru.com/news/contact-me>",
-	"contributors" : [
-		{
+	"contributors" : [{
 			"name" : "Larry Battle",
 			"email" : "http://bateru.com/news/contact-me"
 		}
@@ -15,7 +14,6 @@
 		"type" : "git",
 		"url" : "https://github.com/LarryBattle/Ratio.js.git"
 	},
-	"repository" : "git://github.com/LarryBattle/Ratio.js",
 	"engines" : {
 		"node" : "*"
 	},
