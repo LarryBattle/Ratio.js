@@ -6,7 +6,7 @@
         "author": "Larry Battle , <http://bateru.com/news/>",
         "license": "MIT and GPL 3.0\nMIT License <http://www.opensource.org/licenses/mit-license>\nGPL v3 <http://opensource.org/licenses/GPL-3.0>",
         "info": "Project page: <https://github.com/LarryBattle/Ratio.js/>",
-        "version": "0.2.7",
+        "version": "0.2.8",
         "note": "Uses YUI-DOC to generate documentation."
     },
     "files": {
@@ -838,6 +838,29 @@
             },
             "example": [
                 "\nRatio(1,2).flip().toString() == \"2/1\";"
+            ],
+            "class": "Ratio"
+        },
+        {
+            "file": "..\\src\\Ratio.js",
+            "line": 735,
+            "description": "From the Ratio instance, approxiates the value to a new fraction with a provided denominator.\nIn otherwords, this method helps you find out what fraction with a given denominator will best \nrepresent the current numeric value of the Ratio.",
+            "itemtype": "method",
+            "name": "Ratio.prototype.approximateTo",
+            "chainable": 1,
+            "params": [
+                {
+                    "name": "base",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Ratio"
+            },
+            "example": [
+                "\nRatio(27,100).approximateTo(\"3\").toString() == \"1/3\";"
             ],
             "class": "Ratio"
         }

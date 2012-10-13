@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.7</em>
+            <em>API Docs for: 0.2.8</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -94,7 +94,7 @@
 MIT License &lt;http:&#x2F;&#x2F;www.opensource.org&#x2F;licenses&#x2F;mit-license&gt;
 GPL v3 &lt;http:&#x2F;&#x2F;opensource.org&#x2F;licenses&#x2F;GPL-3.0&gt;
  * @info Project page: &lt;https:&#x2F;&#x2F;github.com&#x2F;LarryBattle&#x2F;Ratio.js&#x2F;&gt;
- * @version 0.2.7
+ * @version 0.2.8
  * @note Uses YUI-DOC to generate documentation.
  **&#x2F;
 ;
@@ -162,7 +162,7 @@ Ratio.prototype.correctRatio = function () {
  * @property Ratio.VERSION
  * @type String
  **&#x2F;
-Ratio.VERSION = &quot;0.2.7&quot;;
+Ratio.VERSION = &quot;0.2.8&quot;;
 &#x2F;**
  * Checks if value is a finite number. &lt;br&#x2F;&gt; Borrowed from jQuery 1.7.2 &lt;br&#x2F;&gt;
  *
@@ -820,13 +820,32 @@ Ratio(1,2).flip().toString() == &quot;2&#x2F;1&quot;;
 Ratio.prototype.flip = function () {
 	return this.clone(this.denominator, this.numerator);
 };
+&#x2F;**
+ * From the Ratio instance, approxiates the value to a new fraction with a provided denominator.
+ * In otherwords, this method helps you find out what fraction with a given denominator will best 
+ * represent the current numeric value of the Ratio.
+ * 
+ * @method Ratio.prototype.approximateTo
+ * @chainable
+ * @param {Number} base
+ * @return {Ratio}
+ * @example
+Ratio(27,100).approximateTo(&quot;3&quot;).toString() == &quot;1&#x2F;3&quot;;
+**&#x2F;
+Ratio.prototype.approximateTo = function (base) {
+	if (typeof base === &quot;undefined&quot;) {
+		return this;
+	}
+	var a = Math.round(this.findX(&quot;x&#x2F;&quot; + base).valueOf());
+	return new Ratio(a, base);
+};
 
 &#x2F;&#x2F; Adds npm support
 if (typeof exports !== &#x27;undefined&#x27;) {
 	if (typeof module !== &#x27;undefined&#x27; &amp;&amp; module.exports) {
 		exports = module.exports;
 	}
-	exports.Ratio = Ratio;
+	exports = Ratio;
 }
 
     </pre>
