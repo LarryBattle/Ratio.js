@@ -5,23 +5,20 @@ Provides a Fraction / Rational / Ratio object for javascript.
 
 By keeping values in a rational form, you can maintain precision and can avoid common floating point operation errors in Javascript.
 
+
+- [Simple Demo](http://larrybattle.github.com/Ratio.js/demo/demo-basic.html)
+- [Documentation](http://larrybattle.github.com/Ratio.js/docs/classes/Ratio.html)
+- [Testcase](http://larrybattle.github.com/Ratio.js/dev/tests/Ratio.js_testcases.html)
+- [Release Notes](http://larrybattle.github.com/Ratio.js/history.md)
+
 **Support:**
 
 Chrome 19, Firefox 12, IE 7+, and Opera 11+.
 
 Note: Run the test cases to check for additional browser compatibility.
 
-Simple Demo:
-http://larrybattle.github.com/Ratio.js/demo/demo-basic.html
-
-Documentation:
-http://larrybattle.github.com/Ratio.js/docs/classes/Ratio.html
-
-Testcase:
-http://larrybattle.github.com/Ratio.js/dev/tests/Ratio.js_testcases.html
-
 ##Current version
-`0.2.8`
+<span id="ratioVersion">0.2.9</span>
 
 ## Installation ##
 Just include the Ratio.js script. Like so, 

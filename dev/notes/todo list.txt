@@ -4,14 +4,8 @@ Todo List
 // Ratio.js code
 @todo find out how `.toLocaleString()` should handle with `e` types in the numerator and denominator relating to other types.
 @todo Extra: Add a division method.
-@todo Add support for parsing mixed numbers and outputting as well.
-	- Ratio.prototype.toLocaleString outputs to mixed numbers when appropriate.
-- two bugs:
-	- resetting the value of the denominator causes sign issues because the sign is only set when parsed.
-	- need to check the spacing between /([+\-])(\s+)(\d)/g, "$1$3".????
-
 @todo Find out if cleanFormat() could be replaced with reduce()
-@todo Change add "min" to the Ratio.min.js verison. So you know which version you're testing with.
+@todo Add version number to the Ratio javascript files?
 
 // testing
 @todo Add at least 5 user cases. a.add(4).toFraction() doesn't copy over the divSign.
@@ -22,10 +16,8 @@ Todo List
 @todo Perform metrics on a growing matrix then graph the results.	
 
 //readme.me
-@todo Add update for readme.me for version information
-@todo Warn user about this.
-	`equal(func(Ratio(4, 5).toLocaleString(), Ratio(-3, 2).toLocaleString()), "-8/15");`
+@todo Warn user to call `.correctFormat()` after changing the denominator. Or suggest that `ratio.clone(null, newValue)` should be used.
+@todo Warn user about `Ratio(a,b)` vs `Ratio.parse(a,b)`
 	
 //jake - build script
 @todo Need to update docs in both repositories.
-@todo Update version in the readme.md

@@ -6,7 +6,7 @@
         "author": "Larry Battle , <http://bateru.com/news/>",
         "license": "MIT and GPL 3.0\nMIT License <http://www.opensource.org/licenses/mit-license>\nGPL v3 <http://opensource.org/licenses/GPL-3.0>",
         "info": "Project page: <https://github.com/LarryBattle/Ratio.js/>",
-        "version": "0.2.8",
+        "version": "0.2.9",
         "note": "Uses YUI-DOC to generate documentation."
     },
     "files": {
@@ -16,13 +16,6 @@
             "classes": {
                 "Ratio": 1
             },
-            "fors": {},
-            "namespaces": {}
-        },
-        "..\\src\\Ratio.min.js": {
-            "name": "..\\src\\Ratio.min.js",
-            "modules": {},
-            "classes": {},
             "fors": {},
             "namespaces": {}
         }
@@ -83,7 +76,7 @@
         {
             "file": "..\\src\\Ratio.js",
             "line": 40,
-            "description": "Adjusts the ratio in three ways:\n\n1) Sets the numerator and denominator to default values if undefined. (Default fraction: 0/1)\n2) Places the sign on numerator. \n3) Reduces the function if needed.\nThis function is called after the instances is created.",
+            "description": "Adjusts the ratio in three ways:\n\n1) Sets the numerator and denominator to default values if undefined. (Default fraction: 0/1)\n2) Places the sign on numerator.\n3) Reduces the function if needed.\nThis function is called after the instances is created.",
             "itemtype": "method",
             "name": "Ratio.prototype.correctRatio",
             "params": [
@@ -431,7 +424,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 431,
+            "line": 434,
             "description": "From the Ratio instance, returns the raw values of the numerator and denominator in the form \"a/b\".<br/>\nNote: The division symbol can be change by the use of `divSign` property.",
             "itemtype": "method",
             "name": "Ratio.prototype.toString",
@@ -446,7 +439,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 449,
+            "line": 452,
             "description": "Returns a new instance of the current Ratio.<br/>\nThe clone propery value can be changed if the appropriate argument value is supplied.",
             "itemtype": "method",
             "name": "Ratio.prototype.clone",
@@ -487,7 +480,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 473,
+            "line": 476,
             "description": "From the Ratio instance, returns a new instacne with a reduced ratio by factoring out the greatest common multiple.",
             "itemtype": "method",
             "name": "Ratio.prototype.reduce",
@@ -503,7 +496,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 486,
+            "line": 489,
             "description": "Adds the current Ratio by another Ratio.",
             "itemtype": "method",
             "name": "Ratio.prototype.add",
@@ -532,7 +525,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 514,
+            "line": 517,
             "description": "Divides the current Ratio by another Ratio.",
             "itemtype": "method",
             "name": "Ratio.prototype.divide",
@@ -561,7 +554,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 531,
+            "line": 534,
             "description": "Compares if the current Ratio and another object have the same value.",
             "itemtype": "method",
             "name": "Ratio.prototype.equals",
@@ -583,7 +576,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 544,
+            "line": 547,
             "description": "Performs a strict comparison to determine if the current instances and passed object are identical.",
             "itemtype": "method",
             "name": "Ratio.prototype.deepEquals",
@@ -605,7 +598,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 556,
+            "line": 559,
             "description": "Multiply the current Ratio by another Ratio.",
             "chainable": 1,
             "itemtype": "method",
@@ -634,7 +627,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 573,
+            "line": 576,
             "description": "Subtracts the current Ratio by another Ratio.",
             "itemtype": "method",
             "name": "Ratio.prototype.subtract",
@@ -663,7 +656,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 591,
+            "line": 594,
             "description": "From the Ratio instance, returns an new Ratio scaled down by a factor.",
             "itemtype": "method",
             "name": "Ratio.prototype.descale",
@@ -686,7 +679,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 604,
+            "line": 607,
             "description": "From the Ratio instance, returns an new Ratio raised to a power.",
             "itemtype": "method",
             "name": "Ratio.prototype.pow",
@@ -709,7 +702,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 617,
+            "line": 620,
             "description": "From the Ratio instance, returns a new Ratio scaled up by a factor.",
             "itemtype": "method",
             "name": "Ratio.prototype.scale",
@@ -732,7 +725,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 630,
+            "line": 633,
             "description": "From the Ratio instance, returns a new Ratio by parsing the numerator and denominator.<br/>\nThis is useful if want to ensure that the Ratio contains only whole numbers in the numerator and denominator after a caclulation.",
             "itemtype": "method",
             "name": "Ratio.prototype.cleanFormat",
@@ -748,7 +741,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 652,
+            "line": 655,
             "description": "Returns a new instances that is the absolute value of the current Ratio.",
             "itemtype": "method",
             "name": "Ratio.prototype.abs",
@@ -764,7 +757,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 664,
+            "line": 667,
             "description": "From the Ratio instance, returns a new Ratio in the form of (numerator mod denominator)/1.<br/>\nWhich is the same as Ratio( (numerator % denominator), 1 ).",
             "itemtype": "method",
             "name": "Ratio.prototype.mod",
@@ -780,7 +773,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 677,
+            "line": 680,
             "description": "Returns a new instance of the Ratio with the sign toggled.",
             "itemtype": "method",
             "name": "Ratio.prototype.negate",
@@ -796,7 +789,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 689,
+            "line": 692,
             "description": "Determines if the current Ratio is a proper fraction.",
             "itemtype": "method",
             "name": "Ratio.prototype.isProper",
@@ -811,7 +804,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 700,
+            "line": 703,
             "description": "Determines the value of x. Solves the following equations.<br/>\n1. `( a/b = x/n )` or\n2. `( a/b = n/x )` <br/>\nWhere a, b are the numerator and denominator respectively of the current Ratio.<br/>\nNote: Returns null if the the string can't be split into exactly 2 elements.",
             "itemtype": "method",
             "name": "Ratio.prototype.findX",
@@ -844,7 +837,7 @@
         {
             "file": "..\\src\\Ratio.js",
             "line": 735,
-            "description": "From the Ratio instance, approxiates the value to a new fraction with a provided denominator.\nIn otherwords, this method helps you find out what fraction with a given denominator will best \nrepresent the current numeric value of the Ratio.",
+            "description": "From the Ratio instance, approxiates the value to a new fraction with a provided denominator.\nIn otherwords, this method helps you find out what fraction with a given denominator will best\nrepresent the current numeric value of the Ratio.",
             "itemtype": "method",
             "name": "Ratio.prototype.approximateTo",
             "chainable": 1,

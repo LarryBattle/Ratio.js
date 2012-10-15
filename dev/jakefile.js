@@ -17,13 +17,17 @@ var fs = require('fs'),
 		docs : basePath + "docs",
 		min : basePath + "src/Ratio.min.js",
 		src : basePath + "src",
-		uncompressed : basePath + "src/Ratio.js"
+		uncompressed : basePath + "src/Ratio.js",
+		readme : basePath + "readme.md"
 	};
 
-var getUpdatedVersionSource = function(str, version){
-	var RE_comment = /(\s*@version\s+)(.*)/i,
-		RE_property = /(\s*Ratio.VERSION\s*=\s*['"])(.*)(['"];?)/i;
-	return (""+str).replace( RE_comment, "$1" + version ).replace( RE_property, "$1" + version + "$3" );
+var readAndUpdateVersion = function( filePath, updateFunc ){
+	var file = fs.readFileSync( filePath ).toString(),
+		updatedFile = updateFunc( file, projectInfo.version );
+		
+	console.log( "\nUpdating version number in %s", filePath );	
+	
+    fs.writeFileSync( filePath, updatedFile );
 };
 var getMinimizedCode = function(orig_code){
 	var ug = require("uglifyjs"),
@@ -44,12 +48,14 @@ task( "default", function(){
 
 desc( "Updated version information in Ratio.js" );
 task("updateVersion", function(){
-	console.log( "\nUpdating version number in %s", paths.uncompressed );
-
-	var file = fs.readFileSync( paths.uncompressed ).toString(),
-		updatedFile = getUpdatedVersionSource( file, projectInfo.version );
-		
-    fs.writeFileSync( paths.uncompressed, updatedFile );
+	readAndUpdateVersion( paths.uncompressed,  function getUpdatedVersionSource(str, version){
+		var RE_comment = /(\s*@version\s+)(.*)/i,
+			RE_property = /(\s*Ratio.VERSION\s*=\s*['"])(.*)(['"];?)/i;
+		return (""+str).replace( RE_comment, "$1" + version ).replace( RE_property, "$1" + version + "$3" );
+	});
+	readAndUpdateVersion( paths.readme, function(str, version){
+		return (""+str).replace( /("ratioVersion"\s*>)([^<]+)(<\/)/, "$1"+version+"$3" );
+	});
 });
 
 desc( "Using yuidoc.js to generate documentation." );

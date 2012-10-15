@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.8</em>
+            <em>API Docs for: 0.2.9</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -94,7 +94,7 @@
 MIT License &lt;http:&#x2F;&#x2F;www.opensource.org&#x2F;licenses&#x2F;mit-license&gt;
 GPL v3 &lt;http:&#x2F;&#x2F;opensource.org&#x2F;licenses&#x2F;GPL-3.0&gt;
  * @info Project page: &lt;https:&#x2F;&#x2F;github.com&#x2F;LarryBattle&#x2F;Ratio.js&#x2F;&gt;
- * @version 0.2.8
+ * @version 0.2.9
  * @note Uses YUI-DOC to generate documentation.
  **&#x2F;
 ;
@@ -127,9 +127,9 @@ var Ratio = function (numerator, denominator, alwaysReduce) {
 };
 &#x2F;**
  * Adjusts the ratio in three ways:
- * 
+ *
  * 1) Sets the numerator and denominator to default values if undefined. (Default fraction: 0&#x2F;1)
- * 2) Places the sign on numerator. 
+ * 2) Places the sign on numerator.
  * 3) Reduces the function if needed.
  * This function is called after the instances is created.
  *
@@ -162,7 +162,7 @@ Ratio.prototype.correctRatio = function () {
  * @property Ratio.VERSION
  * @type String
  **&#x2F;
-Ratio.VERSION = &quot;0.2.8&quot;;
+Ratio.VERSION = &quot;0.2.9&quot;;
 &#x2F;**
  * Checks if value is a finite number. &lt;br&#x2F;&gt; Borrowed from jQuery 1.7.2 &lt;br&#x2F;&gt;
  *
@@ -271,13 +271,13 @@ Ratio.parseToArray = function (obj) {
 	top;
 	switch (Ratio.getTypeGuess(obj)) {
 	case &quot;mixed&quot;:
-		parts[0] = obj.substring(0, obj.indexOf(&quot; &quot;));
-		parts[1] = obj.substring(parts[0].length);
-		arr = Ratio.parseToArray(parts[1]);
-		arr[0] += (parts[0] * arr[1]);
+		parts = obj.match(&#x2F;(\S+)\s+(\S.*)&#x2F;);
+		arr = Ratio.parseToArray(parts[2]);
+		j = 0 &lt; (parseFloat(parts[1]) * arr[0]) ? 1 : -1;
+		arr[0] = j * (Math.abs(arr[0]) + Math.abs(parts[1] * arr[1]));
 		break;
 	case &quot;fraction&quot;:
-		parts = obj.split( &#x2F;\&#x2F;&#x2F; );
+		parts = obj.split(&#x2F;\&#x2F;&#x2F;);
 		arr[0] = Ratio.getNumeratorWithSign(parts[0], parts[1]);
 		arr[1] = Math.abs(+parts[1]);
 		break;
@@ -295,13 +295,13 @@ Ratio.parseToArray = function (obj) {
 		top = Ratio.parseToArray(parts[0]);
 		j = (Math.abs(+obj) &lt; 1) ? [0, 1] : [1, 0];
 		arr[j[0]] = top[j[0]];
-		arr[j[1]] = +(top[j[1]] + &quot;e&quot; + Math.abs(+parts[1]));
+		arr[j[1]] =  + (top[j[1]] + &quot;e&quot; + Math.abs(+parts[1]));
 		break;
 	case &quot;Ratio&quot;:
 		arr = [obj.numerator, obj.denominator];
 		break;
 	default:
-		arr = [ NaN, 1 ];
+		arr = [NaN, 1];
 	}
 	return arr;
 };
@@ -478,7 +478,7 @@ Ratio(1,2).valueOf(true) == &quot;1&#x2F;2&quot;
  **&#x2F;
 Ratio.prototype.valueOf = function (showValue) {
 	var val = (this.numerator &#x2F; this.denominator);
-	if(!showValue &amp;&amp; this.type == &quot;string&quot;){
+	if (!showValue &amp;&amp; this.type == &quot;string&quot;) {
 		val = this.toLocaleString();
 	}
 	return val;
@@ -498,20 +498,23 @@ Ratio(1,10).toLocaleString() == &quot;1&#x2F;10&quot;
 Ratio(0,0).toLocaleString() == &quot;NaN&quot;
  **&#x2F;
 Ratio.prototype.toLocaleString = function () {
-	var val = this.valueOf(true), x, str, errorSize = 1e-9;
+	var val = this.valueOf(true),
+	x,
+	str,
+	errorSize = 1e-9;
 	
-	if( isNaN( val ) ){
+	if (isNaN(val)) {
 		str = &quot;NaN&quot;;
-	}else if(val%1 === 0 || this.denominator === 1 || !isFinite(val%1) ){
+	} else if (val % 1 === 0 || this.denominator === 1 || !isFinite(val % 1)) {
 		str = &quot;&quot; + val;
-	}else if( 1 &lt; Math.abs(val) ){
-		if( Math.abs( val - val.toFixed(0) ) &lt; errorSize ){
+	} else if (1 &lt; Math.abs(val)) {
+		if (Math.abs(val - val.toFixed(0)) &lt; errorSize) {
 			str = val.toFixed(0);
-		}else{
+		} else {
 			x = parseInt(val, 10);
-			str = x + &quot; &quot; + Math.abs(this.numerator%this.denominator) + this.divSign + this.denominator;			
+			str = x + &quot; &quot; + Math.abs(this.numerator % this.denominator) + this.divSign + this.denominator;
 		}
-	}else{
+	} else {
 		str = &quot;&quot; + this.numerator + this.divSign + this.denominator;
 	}
 	return str;
@@ -626,7 +629,7 @@ Ratio.prototype.divide = function (obj, obj2) {
 Ratio(1,2).equals( 1&#x2F;2 ) === true
  **&#x2F;
 Ratio.prototype.equals = function (obj) {
-	var val = (Ratio.isNumeric(obj) || obj instanceof Ratio ) ? obj.valueOf() : Ratio.parse(obj).valueOf();
+	var val = (Ratio.isNumeric(obj) || obj instanceof Ratio) ? obj.valueOf(true) : Ratio.parse(obj).valueOf(true);
 	return (this.numerator &#x2F; this.denominator) == +val;
 };
 &#x2F;**
@@ -637,7 +640,7 @@ Ratio.prototype.equals = function (obj) {
  * @return {Boolean}
  * @example
 Ratio(1,2).deepEquals( 1&#x2F;2 ) === false
-*&#x2F;
+ *&#x2F;
 Ratio.prototype.deepEquals = function (obj) {
 	return (obj instanceof Ratio) &amp;&amp; (this.numerator === obj.numerator) &amp;&amp; (this.denominator === obj.denominator) &amp;&amp; (this.type === obj.type);
 };
@@ -803,10 +806,7 @@ Ratio.prototype.findX = function (str) {
 	if (arr.length !== 2) {
 		return null;
 	}
-	var numIndex = !isNaN(arr[0]) ? 0 : 1,
-	funcName = numIndex ? &quot;multiply&quot; : &quot;divide&quot;;
-	
-	return Ratio(arr[numIndex])[funcName](this);
+	return (isNaN(arr[0]) ? Ratio(arr[1]).multiply(this) : Ratio(arr[0]).divide(this));
 };
 &#x2F;**
  * Switches the numerator and denominator positions.
@@ -822,22 +822,21 @@ Ratio.prototype.flip = function () {
 };
 &#x2F;**
  * From the Ratio instance, approxiates the value to a new fraction with a provided denominator.
- * In otherwords, this method helps you find out what fraction with a given denominator will best 
+ * In otherwords, this method helps you find out what fraction with a given denominator will best
  * represent the current numeric value of the Ratio.
- * 
+ *
  * @method Ratio.prototype.approximateTo
  * @chainable
  * @param {Number} base
  * @return {Ratio}
  * @example
 Ratio(27,100).approximateTo(&quot;3&quot;).toString() == &quot;1&#x2F;3&quot;;
-**&#x2F;
+ **&#x2F;
 Ratio.prototype.approximateTo = function (base) {
 	if (typeof base === &quot;undefined&quot;) {
 		return this;
 	}
-	var a = Math.round(this.findX(&quot;x&#x2F;&quot; + base).valueOf());
-	return new Ratio(a, base);
+	return this.clone(Math.round(this.valueOf(true) * base), base);
 };
 
 &#x2F;&#x2F; Adds npm support

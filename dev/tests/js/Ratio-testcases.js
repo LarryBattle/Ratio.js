@@ -134,6 +134,16 @@ var runTests = function () {
 		equal( func(-1,1e300), "-1/1e+300" );
 		equal( func(-0,3e40), "0/3e+40" );
 	});
+	test("test Ratio.prototype.toString() for valid input: Scientific notated numbers", function(){
+		var func = function(a, b){
+			return Ratio(a, b).toString();
+		};
+		equal(func(9e99, 9e24), "9e+99/9e+24");
+		equal(func(9e-99, 9e24), "9e-99/9e+24");
+		
+		equal(func(9e99, -9e24), "-9e+99/9e+24");
+		equal(func(-9e-99, 9e24), "-9e-99/9e+24");
+	});
 	test("test Ratio.prototype.toString() for valid input: mixed numbers", function(){
 		var func = function(a, b){
 			return Ratio(a, b).toString();
@@ -215,6 +225,14 @@ var runTests = function () {
 		equal( func(-3e+23,29), "-3e+23/29" );
 		equal( func(-7e30,3e25), "-233333 1e+30/3e+25" );
 	});
+	test("test Ratio.prototype.toLocaleString() for valid input: Scientific notated numbers", function(){
+		var func = function(a, b){
+			return Ratio(a, b).toLocaleString();
+		};
+		equal(func(1e2, 2e4), "100/20000");
+		equal(func(-1e100, 4), "-2.5e+99");
+		equal(func(-1e22, 21), "1e+22/21");
+	});
 	test("test Ratio.prototype.toLocaleString() for invalid input: decimal in fraction", function(){
 		var func = function(a, b){
 			return Ratio(a, b).toLocaleString();
@@ -241,17 +259,7 @@ var runTests = function () {
 		equal( func("palm", "o"), "NaN" );
 		equal( func("-i", "i"), "NaN" );
 	});
-	
-	module("Format Types");
-	test("test Ratio.prototype.toLocaleString()", function () {
-		var func = function (a, b) {
-			return Ratio(a, b).toLocaleString();
-		};
-		equal(func(1, 2), "1/2");
-		equal(func(-1, -2), "1/2");
-		equal(func(1e2, 2e4), "100/20000");
-		equal(func(-1e100, 4), "-2.5e+99");
-	});
+	module("Alternative Format Types");
 	test("test Ratio.prototype.toString()", function () {
 		var func = function (a, b) {
 			return Ratio(a, b).toString();
@@ -261,11 +269,7 @@ var runTests = function () {
 		equal(func(2, 1), "2/1");
 		
 		equal(func(10, 5), "10/5");
-		equal(func(9e99, 9e24), "9e+99/9e+24");
-		equal(func(9e-99, 9e24), "9e-99/9e+24");
-		
-		equal(func(9e99, -9e24), "-9e+99/9e+24");
-		equal(func(-9e-99, 9e24), "-9e-99/9e+24");
+
 	});
 	test("test Ratio.prototype.toArray()", function () {
 		var func = function (a, b) {
@@ -398,32 +402,7 @@ var runTests = function () {
 		equal(func( "10 a/b" ), "NaN");
 		equal(func( "a/b" ), "NaN");
 	});
-	test("test Ratio.parseToArray() for numbers", function () {
-		var func = Ratio.parseToArray;
-		deepEqual(func([]), [0,1]);
-		deepEqual(func("0"), [0, 1]);
-		deepEqual(func("15"), [15, 1]);
-		deepEqual(func("0.112"), [112, 1000]);
-		deepEqual(func("23.0"), [23, 1]);
-		deepEqual(func("23.123"), [23123, 1000]);
-		deepEqual(func(0), [0, 1]);
-		deepEqual(func(1), [1, 1]);
-		deepEqual(func(-1), [-1, 1]);
-		deepEqual(func(1.2e6), [1200000, 1]);
-		deepEqual(func(0.231), [231, 1000]);
-		deepEqual(func(-123.484), [-123484, 1000]);
-	});
-	test("test Ratio.parseToArray() for `e` numbers", function () {
-		var func = Ratio.parseToArray;
-		
-		deepEqual(func("10"), [10, 1]);
-		deepEqual(func("2e1"), [20, 1]);
-		deepEqual(func("-2.0004e2"), [-20004, 100]);
-		deepEqual(func("-2.0004e5"), [-200040, 1]);
-		deepEqual(func("-2.0004e-2"), [-20004, 1000000]);
-		deepEqual(func("-2.0004e-5"), [-20004, 1000000000]);
-		deepEqual(func("-1.34e-30"), [-134, 1e+32] );
-	});
+	
 	test("test Ratio.parseToArray() with invalid input", function () {
 		var func = Ratio.parseToArray;
 		//deepEqual(func(null), [NaN, 1]);
@@ -436,21 +415,19 @@ var runTests = function () {
 	});
 	test("test Ratio.parseToArray() with whole numbers", function () {
 		var func = Ratio.parseToArray;
+		
+		deepEqual(func([]), [0,1]);
+		deepEqual(func("0"), [0, 1]);
+		deepEqual(func("15"), [15, 1]);
+		deepEqual(func(1), [1, 1]);
 		deepEqual(func(0), [0, 1]);
 		deepEqual(func(123), [123, 1]);
 		deepEqual(func(423), [423, 1]);
 		deepEqual(func("3"), [3, 1]);
 		deepEqual(func(" 3  "), [3, 1]);
+		deepEqual(func(-1), [-1, 1]);
 	});
-	test("test Ratio.parseToArray() with fractions", function () {
-		var func = Ratio.parseToArray;
-		deepEqual(func(" 3/1"), [3, 1]);
-		deepEqual(func("3/ 2"), [3, 2]);
-		deepEqual(func("1 / 3"), [1, 3]);
-		deepEqual(func("-4/ 3"), [-4, 3]);
-		deepEqual(func(" 4 /-3"), [-4, 3]);
-		deepEqual(func("-4 /-3"), [4, 3]);
-	});
+	
 	test("test Ratio.parseToArray() with Ratio objects", function () {
 		var func = Ratio.parseToArray;
 		deepEqual(func((Ratio(4, 3))), [4, 3]);
@@ -460,8 +437,17 @@ var runTests = function () {
 	});
 	test("test Ratio.parseToArray() with decimals", function () {
 		var func = Ratio.parseToArray;
+		
 		deepEqual(func(Number(1.12)), [112, 100]);
 		deepEqual(func(0.771), [771, 1000]);
+				
+		deepEqual(func("0.112"), [112, 1000]);
+		deepEqual(func("23.0"), [23, 1]);
+		deepEqual(func("23.123"), [23123, 1000]);
+		
+		deepEqual(func(1.2e6), [1200000, 1]);
+		deepEqual(func(0.231), [231, 1000]);
+		deepEqual(func(-123.484), [-123484, 1000]);
 	});
 	test("test Ratio.parseToArray() with scientific notated numbers", function () {
 		var func = Ratio.parseToArray;
@@ -473,8 +459,36 @@ var runTests = function () {
 		deepEqual(func(1.01e-3), [101, 100000]);
 		deepEqual(func(1.01e-30), [101, 1e32]);
 		deepEqual(func(-1.01e-30), [-101, 1e32]);
+		deepEqual(func("10"), [10, 1]);
+		deepEqual(func("2e1"), [20, 1]);
+		deepEqual(func("-2.0004e2"), [-20004, 100]);
+		deepEqual(func("-2.0004e5"), [-200040, 1]);
+		deepEqual(func("-2.0004e-2"), [-20004, 1000000]);
+		deepEqual(func("-2.0004e-5"), [-20004, 1000000000]);
+		deepEqual(func("-1.34e-30"), [-134, 1e+32] );
 	});
-	test("test Ratio.parse() with singal arguments.", function () {
+	test("test Ratio.parseToArray() with fractions", function () {
+		var func = Ratio.parseToArray;
+		deepEqual(func(" 3/1"), [3, 1]);
+		deepEqual(func("3/ 2"), [3, 2]);
+		deepEqual(func("1 / 3"), [1, 3]);
+		deepEqual(func("-4/ 3"), [-4, 3]);
+		deepEqual(func(" 4 /-3"), [-4, 3]);
+		deepEqual(func("-4 /-3"), [4, 3]);
+	});
+	test("test Ratio.parseToArray() with mixed numbers for sign correction", function () {
+		var func = Ratio.parseToArray;
+		
+		deepEqual(func("1 1/2"), [3, 2]);
+		deepEqual(func("1 -1/  -2   "), [3, 2]);
+		deepEqual(func("-1 -1/2"), [3, 2]);
+		
+		deepEqual(func(" 1 -1 /  2 "), [-3, 2]);
+		deepEqual(func("1 1/-2"), [-3, 2]);
+		deepEqual(func(" -1 1  / 2 "), [-3, 2]);
+	});
+	
+	test("test Ratio.parse() with single arguments.", function () {
 		var func = function (a) {
 			return Ratio.parse(a).toLocaleString();
 		};
@@ -867,7 +881,6 @@ var runTests = function () {
 		equal(func(-1, 2), "1/2");
 		equal(func(-1, -2), "1/2");
 		equal(func(1, 2), "1/2");
-		equal(func(-1e22, 21), "1e+22/21");
 	});
 	test("test Ratio.prototype.mod()", function () {
 		var func = function (a, b) {

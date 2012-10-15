@@ -1,40 +1,46 @@
 ##Ratio.js Release Notes##
 __Project Page:__ <https://github.com/LarryBattle/Ratio.js>  <br/>
-__Date:__ 10/12/12 <br/>
 
-__@Version: 0.2.8__ <br/>
-* Added Ratio.js in the `demo` folder.
-* Added `Ratio.prototype.approximateTo` to approximate values to new fraction with a given denominator.
-* Changed the export object for node.js so that Ratio is the export object instead of exporting an object that points to Ratio.
-* Added testcase for `Ratio.prototype.approximateTo`.
+__@Version: 0.2.9__  - 10/14/2012 <br/>
+* Bug fix: Passed true to all the `this.valueOf()` references to force all values to be numeric.<br/>
+* Bug Fix: `Ratio.parseToArray()` failed for mixed numbers where the faction had a negative value [issue ticket](https://github.com/LarryBattle/Ratio.js/issues/10)<br/>
+* Refactored: `Ratio.prototype.findX` and `Ratio.prototype.approximateTo`<br/>
+* Updated testcases<br/>
+* Build script how updates the version in `readme.md`
+
+__@Version: 0.2.8__ - 10/12/2012<br/>
+* Added Ratio.js in the `demo` folder.<br/>
+* Added `Ratio.prototype.approximateTo` to approximate values to new fraction with a given denominator.<br/>
+* Changed the export object for node.js so that Ratio is the export object instead of exporting an object that points to Ratio.<br/>
+* Added testcase for `Ratio.prototype.approximateTo`.<br/>
 
 __@Version: 0.2.7__ <br/>
-* Added `Ratio.prototype.correctRatio()` to simplify the Ratio constructor.
-* Refactored `Ratio.getNumeratorWithSign()`
+* Added `Ratio.prototype.correctRatio()` to simplify the Ratio constructor.<br/>
+* Refactored `Ratio.getNumeratorWithSign()`<br/>
 
 __@Version: 0.2.6__ <br/>
-* Added detailed testcases for `.toLocaleString()`.
-* Removed `.toRaw()`
-* Updated testcases to use `.toString()` instead of `.toRaw()`
-* Passed more testcases for `.toLocaleString()`
+* Added detailed testcases for `.toLocaleString()`.<br/>
+* Removed `.toRaw()`<br/>
+* Updated testcases to use `.toString()` instead of `.toRaw()`<br/>
+* Passed more testcases for `.toLocaleString()`<br/>
 
 __@Version: 0.2.5__ <br/>
-* Default value for Ratio.parse() is now `NaN` instead of 0/1
-* Note that null, true and false are treatied as numbers.
-* Improved Ratio.prototype.equals() to support all numeric types.
-* Added: Ratio.prototype.deepEquals() for a strict comparison check.
-* Added: Document comments for YUI-DOCS
-* Updated: testcases.
+* Default value for Ratio.parse() is now `NaN` instead of 0/1<br/>
+* Note that null, true and false are treatied as numbers.<br/>
+* Improved Ratio.prototype.equals() to support all numeric types.<br/>
+* Added: Ratio.prototype.deepEquals() for a strict comparison check.<br/>
+* Added: Document comments for YUI-DOCS<br/>
+* Updated: testcases.<br/>
 
 __@Version: 0.2.4__ <br/>
-* Ratio.parse now supports mixed numbers. 
-* Changed the behavior of the Ratio constructor.
-	- Default values Ratio().toRaw() === "0/1"
+* Ratio.parse now supports mixed numbers. <br/>
+* Changed the behavior of the Ratio constructor.<br/>
+	- Default values Ratio().toRaw() === "0/1"<br/>
 	- Supplied input for the numerator or denominator will eval to NaN if not a number.
-* Added: Ratio.getTypeGuess(), used to simplify the parsing functions.
-* Deleted: Ratio.parseENotation(), Ratio.parseNumber(), and Ratio.parseDecimal()
-* Updated Ratio.parseToArray() to include all the delete parsing functionality.
-* Updated documentation.
+* Added: Ratio.getTypeGuess(), used to simplify the parsing functions.<br/>
+* Deleted: Ratio.parseENotation(), Ratio.parseNumber(), and Ratio.parseDecimal()<br/>
+* Updated Ratio.parseToArray() to include all the delete parsing functionality.<br/>
+* Updated documentation.<br/>
 
 __@Version: 0.2.3__ <br/>
 * Changed the overall folder scripts to make it smaller and easier to understand.<br/>
@@ -44,7 +50,7 @@ __@Version: 0.2.3__ <br/>
 	- Updated version information in Ratio.js
 	- Minimize Ratio.js to Ratio.min.js
 	- Updated documentation using YUI Docs.
-	
+<br/>
 * Added: `Ratio.prototype.flip()`<br/>
 * Added: `Ratio.prototype.toMixedNumber()`<br/>
 
