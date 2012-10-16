@@ -6,7 +6,7 @@
 MIT License <http://www.opensource.org/licenses/mit-license>
 GPL v3 <http://opensource.org/licenses/GPL-3.0>
  * @info Project page: <https://github.com/LarryBattle/Ratio.js/>
- * @version 0.2.9
+ * @version 0.3
  * @note Uses YUI-DOC to generate documentation.
  **/
 ;
@@ -74,7 +74,7 @@ Ratio.prototype.correctRatio = function () {
  * @property Ratio.VERSION
  * @type String
  **/
-Ratio.VERSION = "0.2.9";
+Ratio.VERSION = "0.3";
 /**
  * Checks if value is a finite number. <br/> Borrowed from jQuery 1.7.2 <br/>
  *
@@ -745,10 +745,41 @@ Ratio.prototype.flip = function () {
 Ratio(27,100).approximateTo("3").toString() == "1/3";
  **/
 Ratio.prototype.approximateTo = function (base) {
-	if (typeof base === "undefined") {
-		return this;
+	if (isNaN(base)) {
+		return this.clone();
 	}
 	return this.clone(Math.round(this.valueOf(true) * base), base);
+};
+/**
+ * Same as `Ratio.prototype.approximateTo()` but operates on a arbitary amount of arguments and returns the Ratio with the closest match amoung the quantities.
+ * Note there is a error rate of 1e-9. <br/>
+ * Therefore, an approximated quantity is returned if the absolute value of the difference between the approximated quantity and actual value is smaller than the error rate.
+ *
+ * @method Ratio.prototype.toQuantityOf
+ * @chainable
+ * @see Ratio.prototype.approximateTo
+ * @param {Number, ...} base
+ * @return {Ratio}
+ * @example
+Ratio(1,2).toQuantityOf(2,3,4).toString() === "1/3";
+ **/
+Ratio.prototype.toQuantityOf = function () {
+	var args = Array.prototype.slice.call(arguments);
+	if (args.length < 1) {
+		return this.clone(NaN,1);
+	}
+	var val = this.valueOf(true),
+	x = this.approximateTo(args[0]),
+	prevX,
+	errorRate = 1e-9;
+	for (var i = 1, len = args.length; i < len && errorRate < Math.abs(x - val); i++) {
+		prevX = x;
+		x = this.approximateTo(args[i]);
+		if (Math.abs(prevX - val) < Math.abs(x - val)) {
+			x = prevX;
+		}
+	}
+	return x;
 };
 
 // Adds npm support

@@ -1,6 +1,12 @@
 ##Ratio.js Release Notes##
 __Project Page:__ <https://github.com/LarryBattle/Ratio.js>  <br/>
 
+__@Version: 0.3__  - 10/15/2012 <br/>
+* Added: `Ratio.prototype.toQuantityOf`, picks the best approximate ratio within a given list of quantities(units) to estimate with.
+* Bug fix: `Ratio.prototype.approximateTo()` now returns a clone if an argument isn't passed.
+* Changed: `Ratio.prototype.approximateTo()` to only accept numbers.
+
+
 __@Version: 0.2.9__  - 10/14/2012 <br/>
 * Bug fix: Passed true to all the `this.valueOf()` references to force all values to be numeric.<br/>
 * Bug Fix: `Ratio.parseToArray()` failed for mixed numbers where the faction had a negative value [issue ticket](https://github.com/LarryBattle/Ratio.js/issues/10)<br/>
