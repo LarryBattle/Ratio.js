@@ -4,6 +4,7 @@ Todo List
 // Ratio.js code
 @todo find out how `.toLocaleString()` should handle with `e` types in the numerator and denominator relating to other types.
 @todo Extra: Add a division method.
+@todo Find out if NaN should be returned for methods that require arguments but are called with none.
 @todo Find out if cleanFormat() could be replaced with reduce()
 @todo Add version number to the Ratio javascript files?
 

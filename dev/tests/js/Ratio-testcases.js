@@ -958,10 +958,25 @@ var runTests = function () {
 		equal(func("9.999999999999999e+22"), "1e+23");
 		equal(func("1.1000000000000003e-30"), "1.1e-30");
 	});
+	test("Ratio.prototype.toQuantityOf()", function(){
+		var func = function(a,b, units){
+			var x = Ratio.parse(a,b);
+			return x.toQuantityOf.apply(x, units).toString();
+		};
+		equal(func(1,2,[]), "NaN/1");
+		equal(func(1,2,[2]), "1/2");
+		equal(func(1,2,[1,2,3,4]), "1/2");
+		
+		equal(func(1,2,[3]), "2/3");
+		equal(func(3,8,[2,3,4]), "1/3");
+		equal(func(1,3,[2,4,8]), "3/8");
+	});
 	test("test Ratio.prototype.approximateTo()", function(){
 		var func = function(a,b, base){
 			return Ratio.parse(a,b).approximateTo(base).toString();
 		};
+		equal(func(1,3, {}), "1/3");
+		equal(func(1,3, "ten"), "1/3");
 		equal(func(1,3), "1/3", "The Ratio instance should be returned if no base is provided.");
 		equal(func(5,10,2), "1/2");
 		equal(func(5,10,7), "4/7");
