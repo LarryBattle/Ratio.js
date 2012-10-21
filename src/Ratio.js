@@ -6,7 +6,7 @@
 MIT License <http://www.opensource.org/licenses/mit-license>
 GPL v3 <http://opensource.org/licenses/GPL-3.0>
  * @info Project page: <https://github.com/LarryBattle/Ratio.js/>
- * @version 0.3
+ * @version 0.0.1
  * @note Uses YUI-DOC to generate documentation.
  **/
 ;
@@ -74,7 +74,7 @@ Ratio.prototype.correctRatio = function () {
  * @property Ratio.VERSION
  * @type String
  **/
-Ratio.VERSION = "0.3";
+Ratio.VERSION = "0.0.1";
 /**
  * Checks if value is a finite number. <br/> Borrowed from jQuery 1.7.2 <br/>
  *
@@ -367,7 +367,7 @@ Ratio.getCleanENotation = function (num) {
 /**
  * From the Ratio instance, returns the raw values of the numerator and denominator in the form [numerator, denominator].
  *
- * @method Ratio.toArray
+ * @method Ratio.prototype.toArray
  * @return {Array} an array of 2 numbers.
  * @example
 Ratio(1,2).toArray() // returns [1,2]
@@ -378,7 +378,7 @@ Ratio.prototype.toArray = function () {
 /**
  * From the Ratio instance, returns the computed value of numerator / denominator.
  *
- * @method Ratio.valueOf
+ * @method Ratio.prototype.valueOf
  * @param {Boolean} [showValue] Is one of the factors that determine if the return value is the computed value of the Ratio or the toString() value.
  * @return {Number|String}
  * @example

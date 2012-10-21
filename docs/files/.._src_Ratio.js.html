@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.3</em>
+            <em>API Docs for: 0.0.1</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -94,7 +94,7 @@
 MIT License &lt;http:&#x2F;&#x2F;www.opensource.org&#x2F;licenses&#x2F;mit-license&gt;
 GPL v3 &lt;http:&#x2F;&#x2F;opensource.org&#x2F;licenses&#x2F;GPL-3.0&gt;
  * @info Project page: &lt;https:&#x2F;&#x2F;github.com&#x2F;LarryBattle&#x2F;Ratio.js&#x2F;&gt;
- * @version 0.3
+ * @version 0.0.1
  * @note Uses YUI-DOC to generate documentation.
  **&#x2F;
 ;
@@ -162,7 +162,7 @@ Ratio.prototype.correctRatio = function () {
  * @property Ratio.VERSION
  * @type String
  **&#x2F;
-Ratio.VERSION = &quot;0.3&quot;;
+Ratio.VERSION = &quot;0.0.1&quot;;
 &#x2F;**
  * Checks if value is a finite number. &lt;br&#x2F;&gt; Borrowed from jQuery 1.7.2 &lt;br&#x2F;&gt;
  *
@@ -455,7 +455,7 @@ Ratio.getCleanENotation = function (num) {
 &#x2F;**
  * From the Ratio instance, returns the raw values of the numerator and denominator in the form [numerator, denominator].
  *
- * @method Ratio.toArray
+ * @method Ratio.prototype.toArray
  * @return {Array} an array of 2 numbers.
  * @example
 Ratio(1,2).toArray() &#x2F;&#x2F; returns [1,2]
@@ -466,7 +466,7 @@ Ratio.prototype.toArray = function () {
 &#x2F;**
  * From the Ratio instance, returns the computed value of numerator &#x2F; denominator.
  *
- * @method Ratio.valueOf
+ * @method Ratio.prototype.valueOf
  * @param {Boolean} [showValue] Is one of the factors that determine if the return value is the computed value of the Ratio or the toString() value.
  * @return {Number|String}
  * @example

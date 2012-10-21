@@ -6,7 +6,7 @@
         "author": "Larry Battle , <http://bateru.com/news/>",
         "license": "MIT and GPL 3.0\nMIT License <http://www.opensource.org/licenses/mit-license>\nGPL v3 <http://opensource.org/licenses/GPL-3.0>",
         "info": "Project page: <https://github.com/LarryBattle/Ratio.js/>",
-        "version": "0.3",
+        "version": "0.0.1",
         "note": "Uses YUI-DOC to generate documentation."
     },
     "files": {
@@ -381,7 +381,7 @@
             "line": 367,
             "description": "From the Ratio instance, returns the raw values of the numerator and denominator in the form [numerator, denominator].",
             "itemtype": "method",
-            "name": "Ratio.toArray",
+            "name": "Ratio.prototype.toArray",
             "return": {
                 "description": "an array of 2 numbers.",
                 "type": "Array"
@@ -396,7 +396,7 @@
             "line": 378,
             "description": "From the Ratio instance, returns the computed value of numerator / denominator.",
             "itemtype": "method",
-            "name": "Ratio.valueOf",
+            "name": "Ratio.prototype.valueOf",
             "params": [
                 {
                     "name": "showValue",
