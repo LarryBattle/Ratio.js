@@ -785,7 +785,8 @@ Ratio.prototype.toQuantityOf = function () {
 // Adds npm support
 if (typeof exports !== 'undefined') {
 	if (typeof module !== 'undefined' && module.exports) {
-		exports = module.exports;
+		module.exports = Ratio;
+	} else {
+		exports.Ratio = Ratio;
 	}
-	exports = Ratio;
 }
