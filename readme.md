@@ -21,8 +21,15 @@ Note: Run the test cases to check for additional browser compatibility.
 <span id="ratioVersion">0.3.2</span>
 
 ## Installation ##
-Just include the Ratio.js script. Like so, <br/>
-    `<script src="Ratio.js"/>` or `var Ratio = require("");`
+Just include the Ratio.js script.
+
+Browser:
+
+	<script src="Ratio.js"/>
+
+Node.js:
+
+	var Ratio = require("Ratio.js");
 
 ##Examples
 
