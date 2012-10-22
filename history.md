@@ -1,6 +1,14 @@
 ##Ratio.js Release Notes##
 __Project Page:__ <https://github.com/LarryBattle/Ratio.js>  <br/>
 
+__@Version: 0.3.2__  - 10/21/2012 <br/>
+- Pushed to the npm repository under the name `lb-ratio`.<br/>
+- Added `Ratio.prototype.reciprocal` to point to `Ratio.prototype.flip`<br/>
+- Added `demo\node-test-Ratio.js` for testing node.js.<br/>
+- Bug Fix: Ratio has be been exported to the `module` directly. [issue page](https://github.com/shesek/Ratio.js/commit/67312b7feed98474960198cbfa693e699c3e4530)<br/>
+- Updated documentation to fix format issue with the examples and provided more details on `Ratio.parse()`<br/>
+- Built documentation with YUIDocjs version `0.3.29`.<br/>
+
 __@Version: 0.3__  - 10/15/2012 <br/>
 * Added: `Ratio.prototype.toQuantityOf`, picks the best approximate ratio within a given list of quantities(units) to estimate with.
 * Bug fix: `Ratio.prototype.approximateTo()` now returns a clone if an argument isn't passed.

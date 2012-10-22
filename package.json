@@ -1,1 +1,20 @@
-﻿{"name":"example02","version":"0.0.1","dependencies":{"underscore":"~1.2.1"}}
+{
+	"name" : "lb-ratio",
+	"version" : "0.3.2",
+	"homepage" : "https://github.com/LarryBattle/Ratio.js",
+	"description" : "Provides a Fraction, Rational, and Ratio object for javascript.",
+	"keywords" : ["Ratio", "fraction", "rational", "numbers", "Math", "Mixed numbers"],
+	"author" : {
+		"name" : "Larry Battle",
+		"url" : "http://bateru.com/news/"
+	},
+	"main" : "./src/Ratio.js",
+	"repository" : {
+		"type" : "git",
+		"url" : "https://github.com/LarryBattle/Ratio.js.git"
+	},
+	"engines" : {
+		"node" : "*"
+	},
+	"license": "MIT"
+}

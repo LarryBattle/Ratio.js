@@ -217,13 +217,9 @@ var runTests = function () {
 		};
 		equal( func(3,2), "1 1/2" );
 		equal( func(50,4), "12 2/4" );
-		equal( func(3e+23,29), "3e+23/29" );
-		equal( func(7e30,3e25), "233333 1e+30/3e+25" );
-		
 		equal( func(-3,2), "-1 1/2" );
 		equal( func(-50,4), "-12 2/4" );
-		equal( func(-3e+23,29), "-3e+23/29" );
-		equal( func(-7e30,3e25), "-233333 1e+30/3e+25" );
+		
 	});
 	test("test Ratio.prototype.toLocaleString() for valid input: Scientific notated numbers", function(){
 		var func = function(a, b){
@@ -232,6 +228,10 @@ var runTests = function () {
 		equal(func(1e2, 2e4), "100/20000");
 		equal(func(-1e100, 4), "-2.5e+99");
 		equal(func(-1e22, 21), "1e+22/21");
+		equal( func(-3e+23,29), "-3e+23/29" );
+		equal( func(-7e30,3e25), "-233333 1e+30/3e+25" );
+		equal( func(3e+23,29), "3e+23/29" );
+		equal( func(7e30,3e25), "233333 1e+30/3e+25" );
 	});
 	test("test Ratio.prototype.toLocaleString() for invalid input: decimal in fraction", function(){
 		var func = function(a, b){
@@ -991,8 +991,8 @@ var runTests = function () {
 	});
 	module("Node.js");
 	test("test Nodes.js( NPM ) support", function () {
-		ok( exports === Ratio, "The Ratio object is the export object." );
-		ok(exports.VERSION, "Ratio was added to exports.");
+		ok( exports.Ratio === Ratio, "The Ratio object is the export object." );
+		ok(exports.Ratio.VERSION, "Ratio was added to exports.");
 	});
 };
 var reRunTests = function () {

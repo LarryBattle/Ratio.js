@@ -18,11 +18,11 @@ Chrome 19, Firefox 12, IE 7+, and Opera 11+.
 Note: Run the test cases to check for additional browser compatibility.
 
 ##Current version
-<span id="ratioVersion">0.0.1</span>
+<span id="ratioVersion">0.3.2</span>
 
 ## Installation ##
-Just include the Ratio.js script. Like so, 
-    `<script src="Ratio.js"/>`
+Just include the Ratio.js script. Like so, <br/>
+    `<script src="Ratio.js"/>` or `var Ratio = require("");`
 
 ##Examples
 
