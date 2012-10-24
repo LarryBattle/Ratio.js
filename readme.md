@@ -29,6 +29,12 @@ Browser:
 
 Node.js:
 
+Install: 
+
+	npm install lb-ratio
+
+Import
+
 	var Ratio = require("Ratio.js");
 
 ##Examples
