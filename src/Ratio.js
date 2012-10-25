@@ -339,7 +339,7 @@ Ratio.getPrimeFactors = function (num) {
         x = 2;
         if (num % x) {
             x = 3;
-            while ((num % x) && ((x += 2) < root));
+            while ((num % x) && ((x += 2) < root)){}
             
         }
         x = (root < x) ? num : x;
