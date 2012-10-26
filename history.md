@@ -1,6 +1,11 @@
 ##Ratio.js Release Notes##
 __Project Page:__ <https://github.com/LarryBattle/Ratio.js>  <br/>
 
+__@Version: 0.3.3__  - 10/25/2012 <br/>
+- Changed documentation to point to `Ratio.prototype.reciprocal` instead of `Ratio.prototype.flip`.
+- Refactored the Ratio prototype to an object literal to save space.
+- Updated readme.md to `require("lb-ratio")` for node installation example.
+
 __@Version: 0.3.2__  - 10/21/2012 <br/>
 - Pushed to the npm repository under the name `lb-ratio`.<br/>
 - Added `Ratio.prototype.reciprocal` to point to `Ratio.prototype.flip`<br/>

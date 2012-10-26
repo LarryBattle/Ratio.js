@@ -18,16 +18,16 @@ Chrome 19, Firefox 12, IE 7+, and Opera 11+.
 Note: Run the test cases to check for additional browser compatibility.
 
 ##Current version
-<span id="ratioVersion">0.3.2</span>
+<span id="ratioVersion">0.3.3</span>
 
 ## Installation ##
 Just include the Ratio.js script.
 
-Browser:
+<b>Browser:</b>
 
 	<script src="Ratio.js"/>
 
-Node.js:
+<b>Node.js:</b>
 
 Install: 
 
@@ -35,7 +35,7 @@ Install:
 
 Import
 
-	var Ratio = require("Ratio.js");
+	var Ratio = require("lb-ratio");
 
 ##Examples
 

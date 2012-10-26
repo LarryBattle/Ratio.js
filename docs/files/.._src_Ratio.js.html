@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.3.2</em>
+            <em>API Docs for: 0.3.3</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -94,7 +94,7 @@
 MIT License &lt;http:&#x2F;&#x2F;www.opensource.org&#x2F;licenses&#x2F;mit-license&gt;
 GPL v3 &lt;http:&#x2F;&#x2F;opensource.org&#x2F;licenses&#x2F;GPL-3.0&gt;
  * @info Project page: &lt;https:&#x2F;&#x2F;github.com&#x2F;LarryBattle&#x2F;Ratio.js&#x2F;&gt;
- * @version 0.3.2
+ * @version 0.3.3
  * @note Uses YUI-DOC to generate documentation.
  **&#x2F;
 &#x2F;**
@@ -125,43 +125,11 @@ var Ratio = function (numerator, denominator, alwaysReduce) {
     return this.correctRatio();
 };
 &#x2F;**
- * Adjusts the ratio in three ways:
- *
- * 1) Sets the numerator and denominator to default values if undefined. (Default fraction: 0&#x2F;1)
- * 2) Places the sign on numerator.
- * 3) Reduces the function if needed.
- * This function is called after the instances is created.
- *
- * @method Ratio.prototype.correctRatio
- * @param {Object} obj
- * @return {Ratio}
- * @example
-Ratio().toString(); &#x2F;&#x2F; &#x60;.correctRatio()&#x60; was called internally.
- **&#x2F;
-Ratio.prototype.correctRatio = function () {
-    var a = this.numerator;
-    b = this.denominator;
-    if (typeof b === &quot;undefined&quot;) {
-        b = 1;
-        if (typeof a === &quot;undefined&quot;) {
-            a = 0;
-        }
-    }
-    this.denominator = +Math.abs(b);
-    this.numerator = Ratio.getNumeratorWithSign(a, (b || 1));
-    if (this.denominator &amp;&amp; this.alwaysReduce) {
-        var arr = Ratio.reduce(this);
-        this.numerator = arr[0];
-        this.denominator = arr[1];
-    }
-    return this;
-};
-&#x2F;**
  * Version number of Ratio.js
  * @property Ratio.VERSION
  * @type String
  **&#x2F;
-Ratio.VERSION = &quot;0.3.2&quot;;
+Ratio.VERSION = &quot;0.3.3&quot;;
 &#x2F;**
  * Checks if value is a finite number. &lt;br&#x2F;&gt; Borrowed from jQuery 1.7.2 &lt;br&#x2F;&gt;
  *
@@ -427,7 +395,7 @@ Ratio.getPrimeFactors = function (num) {
         x = 2;
         if (num % x) {
             x = 3;
-            while ((num % x) &amp;&amp; ((x += 2) &lt; root));
+            while ((num % x) &amp;&amp; ((x += 2) &lt; root)){}
             
         }
         x = (root &lt; x) ? num : x;
@@ -459,424 +427,461 @@ Ratio.getCleanENotation = function (num) {
     }
     return num;
 };
-&#x2F;**
- * From the Ratio instance, returns the raw values of the numerator and denominator in the form [numerator, denominator].
- *
- * @method Ratio.prototype.toArray
- * @return {Array} an array of 2 numbers.
- * @example
-Ratio(1,2).toArray() &#x2F;&#x2F; returns [1,2]
- **&#x2F;
-Ratio.prototype.toArray = function () {
-    return [this.numerator, this.denominator];
-};
-&#x2F;**
- * From the Ratio instance, returns the computed value of numerator &#x2F; denominator.
- *
- * @method Ratio.prototype.valueOf
- * @param {Boolean} [showValue] Is one of the factors that determine if the return value is the computed value of the Ratio or the toString() value.
- * @return {Number|String}
- * @example
-Example 1:&lt;br&#x2F;&gt;
-Ratio(1,2).valueOf() == 0.5;
 
-Example 2:&lt;br&#x2F;&gt;
-Ratio(1,2).valueOf(true) == &quot;1&#x2F;2&quot;
- **&#x2F;
-Ratio.prototype.valueOf = function (showValue) {
-    var val = (this.numerator &#x2F; this.denominator);
-    if (!showValue &amp;&amp; this.type == &quot;string&quot;) {
-        val = this.toLocaleString();
-    }
-    return val;
-};
-&#x2F;**
- * From the Ratio instance, returns a string of the Ratio in fraction form if the numerator and denominator are Rational numbers.&lt;br&#x2F;&gt;
- * Note: If the computed value of (numerator &#x2F; denominator) is a whole number, then the whole number is returned.&lt;br&#x2F;&gt;
- * Note: If the computed value of (numerator &#x2F; denominator) is not a number, the result is returned. &lt;br&#x2F;&gt;
- *
- * @method Ratio.prototype.toLocaleString
- * @return {String}
- * @example
-Example 1:&lt;br&#x2F;&gt;
-Ratio(1,10).toLocaleString() == &quot;1&#x2F;10&quot;
+ Ratio.prototype = {
+    constructor : Ratio,
+        
+    &#x2F;**
+     * Adjusts the ratio in three ways:
+     *
+     * 1) Sets the numerator and denominator to default values if undefined. (Default fraction: 0&#x2F;1)
+     * 2) Places the sign on numerator.
+     * 3) Reduces the function if needed.
+     * This function is called after the instances is created.
+     *
+     * @method Ratio.prototype.correctRatio
+     * @param {Object} obj
+     * @return {Ratio}
+     * @example
+    Ratio().toString(); &#x2F;&#x2F; &#x60;.correctRatio()&#x60; was called internally.
+     **&#x2F;
+    correctRatio: function () {
+        var a = this.numerator;
+        b = this.denominator;
+        if (typeof b === &quot;undefined&quot;) {
+            b = 1;
+            if (typeof a === &quot;undefined&quot;) {
+                a = 0;
+            }
+        }
+        this.denominator = +Math.abs(b);
+        this.numerator = Ratio.getNumeratorWithSign(a, (b || 1));
+        if (this.denominator &amp;&amp; this.alwaysReduce) {
+            var arr = Ratio.reduce(this);
+            this.numerator = arr[0];
+            this.denominator = arr[1];
+        }
+        return this;
+    },
 
-Example 2:&lt;br&#x2F;&gt;
-Ratio(0,0).toLocaleString() == &quot;NaN&quot;
- **&#x2F;
-Ratio.prototype.toLocaleString = function () {
-    var val = this.valueOf(true),
-    x,
-    str,
-    errorSize = 1e-9;
-    
-    if (isNaN(val)) {
-        str = &quot;NaN&quot;;
-    } else if (val % 1 === 0 || this.denominator === 1 || !isFinite(val % 1)) {
-        str = &quot;&quot; + val;
-    } else if (1 &lt; Math.abs(val)) {
-        if (Math.abs(val - val.toFixed(0)) &lt; errorSize) {
-            str = val.toFixed(0);
+    &#x2F;**
+     * From the Ratio instance, returns the raw values of the numerator and denominator in the form [numerator, denominator].
+     *
+     * @method Ratio.prototype.toArray
+     * @return {Array} an array of 2 numbers.
+     * @example
+    Ratio(1,2).toArray() &#x2F;&#x2F; returns [1,2]
+     **&#x2F;
+    toArray: function () {
+        return [this.numerator, this.denominator];
+    },
+    &#x2F;**
+     * From the Ratio instance, returns the computed value of numerator &#x2F; denominator.
+     *
+     * @method Ratio.prototype.valueOf
+     * @param {Boolean} [showValue] Is one of the factors that determine if the return value is the computed value of the Ratio or the toString() value.
+     * @return {Number|String}
+     * @example
+    Example 1:&lt;br&#x2F;&gt;
+    Ratio(1,2).valueOf() == 0.5;
+
+    Example 2:&lt;br&#x2F;&gt;
+    Ratio(1,2).valueOf(true) == &quot;1&#x2F;2&quot;
+     **&#x2F;
+    valueOf : function (showValue) {
+        var val = (this.numerator &#x2F; this.denominator);
+        if (!showValue &amp;&amp; this.type == &quot;string&quot;) {
+            val = this.toLocaleString();
+        }
+        return val;
+    },
+    &#x2F;**
+     * From the Ratio instance, returns a string of the Ratio in fraction form if the numerator and denominator are Rational numbers.&lt;br&#x2F;&gt;
+     * Note: If the computed value of (numerator &#x2F; denominator) is a whole number, then the whole number is returned.&lt;br&#x2F;&gt;
+     * Note: If the computed value of (numerator &#x2F; denominator) is not a number, the result is returned. &lt;br&#x2F;&gt;
+     *
+     * @method Ratio.prototype.toLocaleString
+     * @return {String}
+     * @example
+    Example 1:&lt;br&#x2F;&gt;
+    Ratio(1,10).toLocaleString() == &quot;1&#x2F;10&quot;
+
+    Example 2:&lt;br&#x2F;&gt;
+    Ratio(0,0).toLocaleString() == &quot;NaN&quot;
+     **&#x2F;
+    toLocaleString: function () {
+        var val = this.valueOf(true),
+        x,
+        str,
+        errorSize = 1e-9;
+        
+        if (isNaN(val)) {
+            str = &quot;NaN&quot;;
+        } else if (val % 1 === 0 || this.denominator === 1 || !isFinite(val % 1)) {
+            str = &quot;&quot; + val;
+        } else if (1 &lt; Math.abs(val)) {
+            if (Math.abs(val - val.toFixed(0)) &lt; errorSize) {
+                str = val.toFixed(0);
+            } else {
+                x = parseInt(val, 10);
+                str = x + &quot; &quot; + Math.abs(this.numerator % this.denominator) + this.divSign + this.denominator;
+            }
         } else {
-            x = parseInt(val, 10);
-            str = x + &quot; &quot; + Math.abs(this.numerator % this.denominator) + this.divSign + this.denominator;
+            str = &quot;&quot; + this.numerator + this.divSign + this.denominator;
         }
-    } else {
-        str = &quot;&quot; + this.numerator + this.divSign + this.denominator;
-    }
-    return str;
-};
-&#x2F;**
- * From the Ratio instance, returns the raw values of the numerator and denominator in the form &quot;a&#x2F;b&quot;.&lt;br&#x2F;&gt;
- * Note: The division symbol can be change by the use of &#x60;divSign&#x60; property.
- *
- * @method Ratio.prototype.toString
- * @return {String}
- * @example
-Example 1:&lt;br&#x2F;&gt;
-Ratio(8,2).toString() == &quot;8&#x2F;2&quot;;
+        return str;
+    },
+    &#x2F;**
+     * From the Ratio instance, returns the raw values of the numerator and denominator in the form &quot;a&#x2F;b&quot;.&lt;br&#x2F;&gt;
+     * Note: The division symbol can be change by the use of &#x60;divSign&#x60; property.
+     *
+     * @method Ratio.prototype.toString
+     * @return {String}
+     * @example
+    Example 1:&lt;br&#x2F;&gt;
+    Ratio(8,2).toString() == &quot;8&#x2F;2&quot;;
 
-Example 2:&lt;br&#x2F;&gt;
-var a = Ratio(8,2);&lt;br&#x2F;&gt;
-a.divSign = &quot;:&quot;;&lt;br&#x2F;&gt;
-a.toString() == &quot;8:2&quot;;
- **&#x2F;
-Ratio.prototype.toString = function () {
-    return &quot;&quot; + this.numerator + this.divSign + this.denominator;
-};
-&#x2F;**
- * Returns a new instance of the current Ratio.&lt;br&#x2F;&gt;
- * The clone propery value can be changed if the appropriate argument value is supplied.
- *
- * @method Ratio.prototype.clone
- * @param {Number} [top]
- * @param {Number} [bottom]
- * @param {String} [type]
- * @param {Boolean} [alwaysReduce]
- * @return {Ratio}
- * @example
-var a = Ratio(2,4); &lt;br&#x2F;&gt;
-var b = a.clone(); &lt;br&#x2F;&gt;
-a.equals(b) === true;
- **&#x2F;
-Ratio.prototype.clone = function (top, bottom, type, alwaysReduce) {
-    var func = Ratio.getValueIfDefined;
-    top = func(this.numerator, top);
-    bottom = func(this.denominator, bottom);
-    alwaysReduce = func(this.alwaysReduce, alwaysReduce);
-    var obj = new Ratio(top, bottom, alwaysReduce);
-    obj.type = func(this.type, type);
-    return obj;
-};
-&#x2F;**
- * From the Ratio instance, returns a new instacne with a reduced ratio by factoring out the greatest common multiple.
- *
- * @method Ratio.prototype.reduce
- * @chainable
- * @return {Ratio}
- * @example
-Ratio(10,2).reduce().toString() == &quot;5&#x2F;1&quot;
- **&#x2F;
-Ratio.prototype.reduce = function () {
-    var arr = Ratio.reduce(this.numerator, this.denominator);
-    return this.clone(arr[0], arr[1]);
-};
-&#x2F;**
- * Adds the current Ratio by another Ratio.
- *
- * @method Ratio.prototype.add
- * @chainable
- * @param {Ratio|Number|String} obj
- * @param {Ratio|Number|String} [obj2]
- * @return {Ratio}
- * @example
-Ratio( 1, 3 ).add( 1,2 ).toString() == &quot;5&#x2F;6&quot;
- **&#x2F;
-Ratio.prototype.add = function (obj, obj2) {
-    if (!(obj instanceof Ratio) || typeof obj2 !== &quot;undefined&quot;) {
-        obj = Ratio.parse(obj, obj2);
-    }
-    var x,
-    top,
-    bottom;
-    if (this.denominator == obj.denominator) {
-        top = this.numerator + obj.numerator;
-        bottom = this.denominator;
-    } else {
-        x = Ratio.gcd(this.denominator, obj.denominator),
-        top = ((this.numerator * obj.denominator) + (this.denominator * obj.numerator)) &#x2F; x,
-        bottom = (this.denominator * obj.denominator) &#x2F; x;
-    }
-    return this.clone(top, bottom);
-};
-&#x2F;**
- * Divides the current Ratio by another Ratio.
- *
- * @method Ratio.prototype.divide
- * @chainable
- * @param {Ratio|Number|String} obj
- * @param {Ratio|Number|String} [obj2]
- * @return {Ratio}
- * @example
-Ratio( 1,2 ).divide( 3,4 ).toString() == &quot;2&#x2F;3&quot;
- **&#x2F;
-Ratio.prototype.divide = function (obj, obj2) {
-    if (!(obj instanceof Ratio) || typeof obj2 !== &quot;undefined&quot;) {
-        obj = Ratio.parse(obj, obj2);
-    }
-    return this.clone(this.numerator * obj.denominator, this.denominator * obj.numerator);
-};
-&#x2F;**
- * Compares if the current Ratio and another object have the same value.
- *
- * @method Ratio.prototype.equals
- * @param {Object} obj
- * @return {Boolean}
- * @example
-Ratio(1,2).equals( 1&#x2F;2 ) === true
- **&#x2F;
-Ratio.prototype.equals = function (obj) {
-    var val = (Ratio.isNumeric(obj) || obj instanceof Ratio) ? obj.valueOf(true) : Ratio.parse(obj).valueOf(true);
-    return (this.numerator &#x2F; this.denominator) == +val;
-};
-&#x2F;**
- * Performs a strict comparison to determine if the current instances and passed object are identical.
- *
- * @method Ratio.prototype.deepEquals
- * @param {Object} obj
- * @return {Boolean}
- * @example
-Ratio(1,2).deepEquals( 1&#x2F;2 ) === false
- *&#x2F;
-Ratio.prototype.deepEquals = function (obj) {
-    return (obj instanceof Ratio) &amp;&amp; (this.numerator === obj.numerator) &amp;&amp; (this.denominator === obj.denominator) &amp;&amp; (this.type === obj.type);
-};
-&#x2F;**
- * Multiply the current Ratio by another Ratio.
- *
- * @chainable
- * @method Ratio.prototype.multiply
- * @param {Ratio|Number|String} obj
- * @param {Ratio|Number|String} [obj2]
- * @return {Ratio}
- * @example
-Ratio(2,5).multiply( 1, 2 ).toString() == &quot;2&#x2F;10&quot;
- **&#x2F;
-Ratio.prototype.multiply = function (obj, obj2) {
-    if (!(obj instanceof Ratio) || typeof obj2 !== &quot;undefined&quot;) {
-        obj = Ratio.parse(obj, obj2);
-    }
-    return this.clone(this.numerator * obj.numerator, this.denominator * obj.denominator);
-};
-&#x2F;**
- * Subtracts the current Ratio by another Ratio.
- *
- * @method Ratio.prototype.subtract
- * @chainable
- * @param {Ratio|Number|String} obj
- * @param {Ratio|Number|String} [obj2]
- * @return {Ratio}
- * @example
-Ratio(2,3).subtract(1,7).toString() === &quot;-1&#x2F;3&quot;
- **&#x2F;
-Ratio.prototype.subtract = function (obj, obj2) {
-    if (!(obj instanceof Ratio) || typeof obj2 !== &quot;undefined&quot;) {
-        obj = Ratio.parse(obj, obj2);
-    }
-    obj.numerator = -obj.numerator;
-    return this.add(obj);
-};
-&#x2F;**
- * From the Ratio instance, returns an new Ratio scaled down by a factor.
- *
- * @method Ratio.prototype.descale
- * @chainable
- * @param {Number} factor
- * @return {Ratio}
- * @example
-Ratio(10,4).descale( 2 ).toString() === &quot;5&#x2F;2&quot;
- **&#x2F;
-Ratio.prototype.descale = function (factor) {
-    return this.clone(this.numerator &#x2F; factor, this.denominator &#x2F; factor);
-};
-&#x2F;**
- * From the Ratio instance, returns an new Ratio raised to a power.
- *
- * @method Ratio.prototype.pow
- * @chainable
- * @param {Number} power
- * @return {Ratio}
- * @example
-Ratio(2,4).pow(4).toString() === &quot;16&#x2F;256&quot;
- **&#x2F;
-Ratio.prototype.pow = function (power) {
-    return this.clone(Math.pow(this.numerator, +power), Math.pow(this.denominator, +power));
-};
-&#x2F;**
- * From the Ratio instance, returns a new Ratio scaled up by a factor.
- *
- * @method Ratio.prototype.scale
- * @chainable
- * @param {Number} factor
- * @return {Ratio}
- * @example
-Ratio(1,10).scale(10).toString() === &quot;10&#x2F;100&quot;
- **&#x2F;
-Ratio.prototype.scale = function (factor) {
-    return this.clone(this.numerator * +factor, this.denominator * +factor);
-};
-&#x2F;**
- * From the Ratio instance, returns a new Ratio by parsing the numerator and denominator.&lt;br&#x2F;&gt;
- * This is useful if want to ensure that the Ratio contains only whole numbers in the numerator and denominator after a caclulation.
- *
- * @method Ratio.prototype.cleanFormat
- * @chainable
- * @return {Ratio}
- * @example
-var a = Ratio(20,30).descale(3); &lt;br&#x2F;&gt;
-a.toString() == &quot;6.666666666666667&#x2F;10&quot;; &lt;br&#x2F;&gt;
-a.cleanFormat().toString() == &quot;6666666666666667&#x2F;10000000000000000&quot;
- **&#x2F;
-Ratio.prototype.cleanFormat = function () {
-    var re = &#x2F;^\d+\.\d+$&#x2F;;
-    if (re.test(this.numerator) || re.test(this.denominator)) {
-        return Ratio.parse(this.numerator, this.denominator);
-    }
-    var obj = this.clone();
-    obj.numerator = Ratio.getCleanENotation(obj.numerator);
-    obj.denominator = Ratio.getCleanENotation(obj.denominator);
-    return obj;
-};
-&#x2F;**
- * Returns a new instances that is the absolute value of the current Ratio.
- *
- * @method Ratio.prototype.abs
- * @chainable
- * @return {Ratio}
- * @example
-Ratio(-3,2).abs().toString() == &quot;3&#x2F;2&quot;
- **&#x2F;
-Ratio.prototype.abs = function () {
-    return this.clone(Math.abs(this.numerator));
-};
-&#x2F;**
- * From the Ratio instance, returns a new Ratio in the form of (numerator mod denominator)&#x2F;1.&lt;br&#x2F;&gt;
- * Which is the same as Ratio( (numerator % denominator), 1 ).
- *
- * @method Ratio.prototype.mod
- * @chainable
- * @return {Ratio}
- * @example
-Ratio(3,10).mod().toString() == &quot;3&quot;
- **&#x2F;
-Ratio.prototype.mod = function () {
-    return this.clone(this.numerator % this.denominator, 1);
-};
-&#x2F;**
- * Returns a new instance of the Ratio with the sign toggled.
- *
- * @method Ratio.prototype.negate
- * @chainable
- * @return {Ratio}
- * @example
-Ratio(1,2).negate().toString() == &quot;-1&#x2F;2&quot;
- **&#x2F;
-Ratio.prototype.negate = function () {
-    return this.clone(-this.numerator);
-};
-&#x2F;**
- * Determines if the current Ratio is a proper fraction.
- *
- * @method Ratio.prototype.isProper
- * @return {Boolean}
- * @example
-Ratio(12,3).isProper() == false;
- **&#x2F;
-Ratio.prototype.isProper = function () {
-    return Math.abs(this.numerator) &lt; this.denominator;
-};
-&#x2F;**
- * Determines the value of x. Solves the following equations.&lt;br&#x2F;&gt;
- * 1. &#x60;( a&#x2F;b = x&#x2F;n )&#x60; or
- * 2. &#x60;( a&#x2F;b = n&#x2F;x )&#x60; &lt;br&#x2F;&gt;
- * Where a, b are the numerator and denominator respectively of the current Ratio.&lt;br&#x2F;&gt;
- * Note: Returns null if the the string can&#x27;t be split into exactly 2 elements.
- *
- * @method Ratio.prototype.findX
- * @chainable
- * @return {Ratio}
- * @example
-Ratio(1,4).findX(&quot;x&#x2F;20&quot;) == 5;
- **&#x2F;
-Ratio.prototype.findX = function (str) {
-    var arr = (&quot;&quot; + str).split(&quot;&#x2F;&quot;);
-    if (arr.length !== 2) {
-        return null;
-    }
-    return (isNaN(arr[0]) ? Ratio(arr[1]).multiply(this) : Ratio(arr[0]).divide(this));
-};
-&#x2F;**
- * Switches the numerator and denominator positions.
- *
- * @method Ratio.prototype.flip
- * @chainable
- * @return {Ratio}
- * @example
-Ratio(1,2).flip().toString() == &quot;2&#x2F;1&quot;;
- **&#x2F;
-Ratio.prototype.reciprocal = Ratio.prototype.flip = function () {
-    return this.clone(this.denominator, this.numerator);
-};
-&#x2F;**
- * From the Ratio instance, approxiates the value to a new fraction with a provided denominator.
- * In otherwords, this method helps you find out what fraction with a given denominator will best
- * represent the current numeric value of the Ratio.
- *
- * @method Ratio.prototype.approximateTo
- * @chainable
- * @param {Number} base
- * @return {Ratio}
- * @example
-Ratio(27,100).approximateTo(&quot;3&quot;).toString() == &quot;1&#x2F;3&quot;;
- **&#x2F;
-Ratio.prototype.approximateTo = function (base) {
-    if (isNaN(base)) {
-        return this.clone();
-    }
-    return this.clone(Math.round(this.valueOf(true) * base), base);
-};
-&#x2F;**
- * Same as &#x60;Ratio.prototype.approximateTo()&#x60; but operates on a arbitary amount of arguments and returns the Ratio with the closest match amoung the quantities.
- * Note there is a error rate of 1e-9. &lt;br&#x2F;&gt;
- * Therefore, an approximated quantity is returned if the absolute value of the difference between the approximated quantity and actual value is smaller than the error rate.
- *
- * @method Ratio.prototype.toQuantityOf
- * @chainable
- * @see Ratio.prototype.approximateTo
- * @param {Number, ...} base
- * @return {Ratio}
- * @example
-Ratio(1,2).toQuantityOf(2,3,4).toString() === &quot;1&#x2F;3&quot;;
- **&#x2F;
-Ratio.prototype.toQuantityOf = function () {
-    var args = Array.prototype.slice.call(arguments);
-    if (args.length &lt; 1) {
-        return this.clone(NaN, 1);
-    }
-    var val = this.valueOf(true),
-    x = this.approximateTo(args[0]),
-    prevX,
-    errorRate = 1e-9;
-    for (var i = 1, len = args.length; i &lt; len &amp;&amp; errorRate &lt; Math.abs(x - val); i++) {
-        prevX = x;
-        x = this.approximateTo(args[i]);
-        if (Math.abs(prevX - val) &lt; Math.abs(x - val)) {
-            x = prevX;
+    Example 2:&lt;br&#x2F;&gt;
+    var a = Ratio(8,2);&lt;br&#x2F;&gt;
+    a.divSign = &quot;:&quot;;&lt;br&#x2F;&gt;
+    a.toString() == &quot;8:2&quot;;
+     **&#x2F;
+    toString: function () {
+        return &quot;&quot; + this.numerator + this.divSign + this.denominator;
+    },
+    &#x2F;**
+     * Returns a new instance of the current Ratio.&lt;br&#x2F;&gt;
+     * The clone propery value can be changed if the appropriate argument value is supplied.
+     *
+     * @method Ratio.prototype.clone
+     * @param {Number} [top]
+     * @param {Number} [bottom]
+     * @param {String} [type]
+     * @param {Boolean} [alwaysReduce]
+     * @return {Ratio}
+     * @example
+    var a = Ratio(2,4); &lt;br&#x2F;&gt;
+    var b = a.clone(); &lt;br&#x2F;&gt;
+    a.equals(b) === true;
+     **&#x2F;
+    clone : function (top, bottom, type, alwaysReduce) {
+        var func = Ratio.getValueIfDefined;
+        top = func(this.numerator, top);
+        bottom = func(this.denominator, bottom);
+        alwaysReduce = func(this.alwaysReduce, alwaysReduce);
+        var obj = new Ratio(top, bottom, alwaysReduce);
+        obj.type = func(this.type, type);
+        return obj;
+    },
+    &#x2F;**
+     * From the Ratio instance, returns a new instacne with a reduced ratio by factoring out the greatest common multiple.
+     *
+     * @method Ratio.prototype.reduce
+     * @chainable
+     * @return {Ratio}
+     * @example
+    Ratio(10,2).reduce().toString() == &quot;5&#x2F;1&quot;
+     **&#x2F;
+    reduce: function () {
+        var arr = Ratio.reduce(this.numerator, this.denominator);
+        return this.clone(arr[0], arr[1]);
+    },
+    &#x2F;**
+     * Adds the current Ratio by another Ratio.
+     *
+     * @method Ratio.prototype.add
+     * @chainable
+     * @param {Ratio|Number|String} obj
+     * @param {Ratio|Number|String} [obj2]
+     * @return {Ratio}
+     * @example
+    Ratio( 1, 3 ).add( 1,2 ).toString() == &quot;5&#x2F;6&quot;
+     **&#x2F;
+    add : function (obj, obj2) {
+        if (!(obj instanceof Ratio) || typeof obj2 !== &quot;undefined&quot;) {
+            obj = Ratio.parse(obj, obj2);
         }
+        var x,
+        top,
+        bottom;
+        if (this.denominator == obj.denominator) {
+            top = this.numerator + obj.numerator;
+            bottom = this.denominator;
+        } else {
+            x = Ratio.gcd(this.denominator, obj.denominator),
+            top = ((this.numerator * obj.denominator) + (this.denominator * obj.numerator)) &#x2F; x,
+            bottom = (this.denominator * obj.denominator) &#x2F; x;
+        }
+        return this.clone(top, bottom);
+    },
+    &#x2F;**
+     * Divides the current Ratio by another Ratio.
+     *
+     * @method Ratio.prototype.divide
+     * @chainable
+     * @param {Ratio|Number|String} obj
+     * @param {Ratio|Number|String} [obj2]
+     * @return {Ratio}
+     * @example
+    Ratio( 1,2 ).divide( 3,4 ).toString() == &quot;2&#x2F;3&quot;
+     **&#x2F;
+    divide : function (obj, obj2) {
+        if (!(obj instanceof Ratio) || typeof obj2 !== &quot;undefined&quot;) {
+            obj = Ratio.parse(obj, obj2);
+        }
+        return this.clone(this.numerator * obj.denominator, this.denominator * obj.numerator);
+    },
+    &#x2F;**
+     * Compares if the current Ratio and another object have the same value.
+     *
+     * @method Ratio.prototype.equals
+     * @param {Object} obj
+     * @return {Boolean}
+     * @example
+    Ratio(1,2).equals( 1&#x2F;2 ) === true
+     **&#x2F;
+    equals : function (obj) {
+        var val = (Ratio.isNumeric(obj) || obj instanceof Ratio) ? obj.valueOf(true) : Ratio.parse(obj).valueOf(true);
+        return (this.numerator &#x2F; this.denominator) == +val;
+    },
+    &#x2F;**
+     * Performs a strict comparison to determine if the current instances and passed object are identical.
+     *
+     * @method Ratio.prototype.deepEquals
+     * @param {Object} obj
+     * @return {Boolean}
+     * @example
+    Ratio(1,2).deepEquals( 1&#x2F;2 ) === false
+     *&#x2F;
+    deepEquals : function (obj) {
+        return (obj instanceof Ratio) &amp;&amp; (this.numerator === obj.numerator) &amp;&amp; (this.denominator === obj.denominator) &amp;&amp; (this.type === obj.type);
+    },
+    &#x2F;**
+     * Multiply the current Ratio by another Ratio.
+     *
+     * @chainable
+     * @method Ratio.prototype.multiply
+     * @param {Ratio|Number|String} obj
+     * @param {Ratio|Number|String} [obj2]
+     * @return {Ratio}
+     * @example
+    Ratio(2,5).multiply( 1, 2 ).toString() == &quot;2&#x2F;10&quot;
+     **&#x2F;
+    multiply : function (obj, obj2) {
+        if (!(obj instanceof Ratio) || typeof obj2 !== &quot;undefined&quot;) {
+            obj = Ratio.parse(obj, obj2);
+        }
+        return this.clone(this.numerator * obj.numerator, this.denominator * obj.denominator);
+    },
+    &#x2F;**
+     * Subtracts the current Ratio by another Ratio.
+     *
+     * @method Ratio.prototype.subtract
+     * @chainable
+     * @param {Ratio|Number|String} obj
+     * @param {Ratio|Number|String} [obj2]
+     * @return {Ratio}
+     * @example
+    Ratio(2,3).subtract(1,7).toString() === &quot;-1&#x2F;3&quot;
+     **&#x2F;
+    subtract : function (obj, obj2) {
+        if (!(obj instanceof Ratio) || typeof obj2 !== &quot;undefined&quot;) {
+            obj = Ratio.parse(obj, obj2);
+        }
+        obj.numerator = -obj.numerator;
+        return this.add(obj);
+    },
+    &#x2F;**
+     * From the Ratio instance, returns an new Ratio scaled down by a factor.
+     *
+     * @method Ratio.prototype.descale
+     * @chainable
+     * @param {Number} factor
+     * @return {Ratio}
+     * @example
+    Ratio(10,4).descale( 2 ).toString() === &quot;5&#x2F;2&quot;
+     **&#x2F;
+    descale : function (factor) {
+        return this.clone(this.numerator &#x2F; factor, this.denominator &#x2F; factor);
+    },
+    &#x2F;**
+     * From the Ratio instance, returns an new Ratio raised to a power.
+     *
+     * @method Ratio.prototype.pow
+     * @chainable
+     * @param {Number} power
+     * @return {Ratio}
+     * @example
+    Ratio(2,4).pow(4).toString() === &quot;16&#x2F;256&quot;
+     **&#x2F;
+    pow : function (power) {
+        return this.clone(Math.pow(this.numerator, +power), Math.pow(this.denominator, +power));
+    },
+    &#x2F;**
+     * From the Ratio instance, returns a new Ratio scaled up by a factor.
+     *
+     * @method Ratio.prototype.scale
+     * @chainable
+     * @param {Number} factor
+     * @return {Ratio}
+     * @example
+    Ratio(1,10).scale(10).toString() === &quot;10&#x2F;100&quot;
+     **&#x2F;
+    scale : function (factor) {
+        return this.clone(this.numerator * +factor, this.denominator * +factor);
+    },
+    &#x2F;**
+     * From the Ratio instance, returns a new Ratio by parsing the numerator and denominator.&lt;br&#x2F;&gt;
+     * This is useful if want to ensure that the Ratio contains only whole numbers in the numerator and denominator after a caclulation.
+     *
+     * @method Ratio.prototype.cleanFormat
+     * @chainable
+     * @return {Ratio}
+     * @example
+    var a = Ratio(20,30).descale(3); &lt;br&#x2F;&gt;
+    a.toString() == &quot;6.666666666666667&#x2F;10&quot;; &lt;br&#x2F;&gt;
+    a.cleanFormat().toString() == &quot;6666666666666667&#x2F;10000000000000000&quot;
+     **&#x2F;
+    cleanFormat: function () {
+        var re = &#x2F;^\d+\.\d+$&#x2F;;
+        if (re.test(this.numerator) || re.test(this.denominator)) {
+            return Ratio.parse(this.numerator, this.denominator);
+        }
+        var obj = this.clone();
+        obj.numerator = Ratio.getCleanENotation(obj.numerator);
+        obj.denominator = Ratio.getCleanENotation(obj.denominator);
+        return obj;
+    },
+    &#x2F;**
+     * Returns a new instances that is the absolute value of the current Ratio.
+     *
+     * @method Ratio.prototype.abs
+     * @chainable
+     * @return {Ratio}
+     * @example
+    Ratio(-3,2).abs().toString() == &quot;3&#x2F;2&quot;
+     **&#x2F;
+    abs: function () {
+        return this.clone(Math.abs(this.numerator));
+    },
+    &#x2F;**
+     * From the Ratio instance, returns a new Ratio in the form of (numerator mod denominator)&#x2F;1.&lt;br&#x2F;&gt;
+     * Which is the same as Ratio( (numerator % denominator), 1 ).
+     *
+     * @method Ratio.prototype.mod
+     * @chainable
+     * @return {Ratio}
+     * @example
+    Ratio(3,10).mod().toString() == &quot;3&quot;
+     **&#x2F;
+    mod: function () {
+        return this.clone(this.numerator % this.denominator, 1);
+    },
+    &#x2F;**
+     * Returns a new instance of the Ratio with the sign toggled.
+     *
+     * @method Ratio.prototype.negate
+     * @chainable
+     * @return {Ratio}
+     * @example
+    Ratio(1,2).negate().toString() == &quot;-1&#x2F;2&quot;
+     **&#x2F;
+    negate: function () {
+        return this.clone(-this.numerator);
+    },
+    &#x2F;**
+     * Determines if the current Ratio is a proper fraction.
+     *
+     * @method Ratio.prototype.isProper
+     * @return {Boolean}
+     * @example
+    Ratio(12,3).isProper() == false;
+     **&#x2F;
+    isProper: function () {
+        return Math.abs(this.numerator) &lt; this.denominator;
+    },
+    &#x2F;**
+     * Determines the value of x. Solves the following equations.&lt;br&#x2F;&gt;
+     * 1. &#x60;( a&#x2F;b = x&#x2F;n )&#x60; or
+     * 2. &#x60;( a&#x2F;b = n&#x2F;x )&#x60; &lt;br&#x2F;&gt;
+     * Where a, b are the numerator and denominator respectively of the current Ratio.&lt;br&#x2F;&gt;
+     * Note: Returns null if the the string can&#x27;t be split into exactly 2 elements.
+     *
+     * @method Ratio.prototype.findX
+     * @chainable
+     * @return {Ratio}
+     * @example
+    Ratio(1,4).findX(&quot;x&#x2F;20&quot;) == 5;
+     **&#x2F;
+    findX : function (str) {
+        var arr = (&quot;&quot; + str).split(&quot;&#x2F;&quot;);
+        if (arr.length !== 2) {
+            return null;
+        }
+        return (isNaN(arr[0]) ? Ratio(arr[1]).multiply(this) : Ratio(arr[0]).divide(this));
+    },
+    &#x2F;**
+     * Switches the numerator and denominator positions.
+     *
+     * @method Ratio.prototype.reciprocal
+     * @chainable
+     * @return {Ratio}
+     * @example
+    Ratio(1,2).reciprocal().toString() == &quot;2&#x2F;1&quot;;
+     **&#x2F;
+    reciprocal : function () {
+        return this.clone(this.denominator, this.numerator);
+    },
+    &#x2F;**
+     * From the Ratio instance, approxiates the value to a new fraction with a provided denominator.
+     * In otherwords, this method helps you find out what fraction with a given denominator will best
+     * represent the current numeric value of the Ratio.
+     *
+     * @method Ratio.prototype.approximateTo
+     * @chainable
+     * @param {Number} base
+     * @return {Ratio}
+     * @example
+    Ratio(27,100).approximateTo(&quot;3&quot;).toString() == &quot;1&#x2F;3&quot;;
+     **&#x2F;
+    approximateTo : function (base) {
+        if (isNaN(base)) {
+            return this.clone();
+        }
+        return this.clone(Math.round(this.valueOf(true) * base), base);
+    },
+    &#x2F;**
+     * Same as &#x60;Ratio.prototype.approximateTo()&#x60; but operates on a arbitary amount of arguments and returns the Ratio with the closest match among the quantities.
+     * Note there is a error rate of 1e-9. &lt;br&#x2F;&gt;
+     * Therefore, an approximated quantity is returned if the absolute value of the difference between the approximated quantity and actual value is smaller than the error rate.
+     *
+     * @method Ratio.prototype.toQuantityOf
+     * @chainable
+     * @see Ratio.prototype.approximateTo
+     * @param {Number, ...} base
+     * @return {Ratio}
+     * @example
+    Ratio(1,2).toQuantityOf(2,3,4).toString() === &quot;1&#x2F;3&quot;;
+     **&#x2F;
+    toQuantityOf: function () {
+        var args = Array.prototype.slice.call(arguments);
+        if (args.length &lt; 1) {
+            return this.clone(NaN, 1);
+        }
+        var val = this.valueOf(true),
+        x = this.approximateTo(args[0]),
+        prevX,
+        errorRate = 1e-9;
+        for (var i = 1, len = args.length; i &lt; len &amp;&amp; errorRate &lt; Math.abs(x - val); i++) {
+            prevX = x;
+            x = this.approximateTo(args[i]);
+            if (Math.abs(prevX - val) &lt; Math.abs(x - val)) {
+                x = prevX;
+            }
+        }
+        return x;
     }
-    return x;
 };
-
 &#x2F;&#x2F; Adds npm support
 if (typeof exports !== &#x27;undefined&#x27;) {
     if (typeof module !== &#x27;undefined&#x27; &amp;&amp; module.exports) {

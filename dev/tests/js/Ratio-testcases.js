@@ -947,8 +947,8 @@ var runTests = function () {
 		equal(func(11, -9, "10/x"), "-90/11");
 		equal(func(1, -201, "10/x"), "-2010/1");
 	});
-	test("test Ratio.prototype.flip()", function () {
-		equal(Ratio(1, 2).flip().toString(), "2/1");
+	test("test Ratio.prototype.reciprocal()", function () {
+		equal(Ratio(1, 2).reciprocal().toString(), "2/1");
 	});
 	test("test Ratio.getCleanENotation()", function () {
 		var func = Ratio.getCleanENotation;
