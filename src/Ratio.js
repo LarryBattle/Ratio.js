@@ -34,6 +34,14 @@ var Ratio = function (numerator, denominator, alwaysReduce) {
     this.numerator = numerator;
     return this.correctRatio();
 };
+Ratio.regex = {
+	divSignCheck : /\d\s*\//,
+	divSignSplit : /\//,
+	cleanFormat : /^\d+\.\d+$/,
+	mixedNumbers : /(\S+)\s+(\S.*)/,
+	repeatingDecimals : /(?:[^\.]+\.\d*)(\d{2,})+(?:\1)$/,
+	repeatingNumbers : /^(\d+)(?:\1)$/
+};
 /**
  * Version number of Ratio.js
  * @property Ratio.VERSION
@@ -122,7 +130,7 @@ Ratio.getTypeGuess = function (obj) {
         } else if (obj % 1) {
             type = "decimal";
         }
-	} else if (/\d\s*[^\s\d\w]/.test(obj)) {
+	} else if (Ratio.regex.divSignCheck.test(obj)) {
         if (/\d\s+[+\-]?\d/.test(obj)) {
             type = "mixed";
         } else {
@@ -147,13 +155,13 @@ Ratio.parseToArray = function (obj) {
     top;
     switch (Ratio.getTypeGuess(obj)) {
     case "mixed":
-        parts = obj.match(/(\S+)\s+(\S.*)/);
+        parts = obj.match(Ratio.regex.mixedNumbers);
         arr = Ratio.parseToArray(parts[2]);
         j = 0 < (parseFloat(parts[1]) * arr[0]) ? 1 : -1;
         arr[0] = j * (Math.abs(arr[0]) + Math.abs(parts[1] * arr[1]));
         break;
     case "fraction":
-        parts = obj.split(/[^\s\d\w]/);
+        parts = obj.split(Ratio.regex.divSignSplit);
         arr[0] = Ratio.getNumeratorWithSign(parts[0], parts[1]);
         arr[1] = Math.abs(+parts[1]);
         break;
@@ -265,11 +273,11 @@ Ratio.getRepeatProps( 22/7 ) // returns ["3", "14", "285714"]
  **/
 Ratio.getRepeatProps = function (val) {
     val = "" + (val || "");
-    var RE1_getRepeatDecimals = /(?:[^\.]+\.\d*)(\d{2,})+(?:\1)$/,
+    var RE1_getRepeatDecimals = Ratio.regex.repeatingDecimals,
     arr = [],
     match = RE1_getRepeatDecimals.exec(val),
     RE2_RE1AtEnd,
-    RE3_RepeatingNums = /^(\d+)(?:\1)$/;
+    RE3_RepeatingNums = Ratio.regex.repeatingNumbers;
     if (!match) {
         val = val.replace(/\d$/, "");
         match = RE1_getRepeatDecimals.exec(val);
@@ -641,7 +649,7 @@ Ratio.getCleanENotation = function (num) {
     a.cleanFormat().toString() == "6666666666666667/10000000000000000"
      **/
     cleanFormat: function () {
-        var re = /^\d+\.\d+$/;
+        var re = Ratio.regex.cleanFormat;
         if (re.test(this.numerator) || re.test(this.denominator)) {
             return Ratio.parse(this.numerator, this.denominator);
         }
