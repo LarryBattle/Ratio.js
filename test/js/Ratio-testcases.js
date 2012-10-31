@@ -77,22 +77,20 @@ exports.runTests = function () {
 		equal(c.equals(a), false);
 	});
 	test("test Ratio.prototype.clone with arguments", function () {
-		var func = function (a, b, c, d) {
-			var obj = new Ratio(a, b, d);
-			obj.type = c;
-			return obj;
-		};
+		var func = Ratio;
+
 		var a = Ratio(11, 12, true);
-		a.type = "string";
 		
 		deepEqual(a.clone(), a);
-		deepEqual(a.clone(7), func(7, 12, "string", true));
-		deepEqual(a.clone(null, 7), func(11, 7, "string", true));
-		deepEqual(a.clone(null, null, ""), func(11, 12, "", true));
-		deepEqual(a.clone(null, null, null, false), func(11, 12, "string", false));
-		deepEqual(a.clone(1, null, "", false), func(1, 12, "", false));
-		deepEqual(a.clone(1, 2, null, false), func(1, 2, "string", false));
-		deepEqual(a.clone(1, 2, "decimal", false), func(1, 2, "decimal", false));
+		deepEqual(a.clone(7), func(7, 12, true));
+		deepEqual(a.clone(null, 7), func(11, 7, true));
+		
+		deepEqual(a.clone(null, null), func(11, 12, true));
+		deepEqual(a.clone(null, null, false), func(11, 12, false));
+		deepEqual(a.clone(1, null, false), func(1, 12, false));
+		
+		deepEqual(a.clone(1, 2, false), func(1, 2, false));
+		deepEqual(a.clone(1, 2, false), func(1, 2, false));
 	});
 	test("test Ratio.prototype.clone with change to internal attributes", function () {
 		var a = Ratio(1, 3);
@@ -310,24 +308,6 @@ exports.runTests = function () {
 		equal(Ratio(1e100, 4), 1e100 / 4);
 		equal(Ratio(1e-4, 3), 1e-4 / 3);
 	});
-	test("test type enforcement", function () {
-		var a = Ratio(1, 4);
-		a.type = "string";
-		equal(1 + a, "11/4");
-		equal("Ratio = " + a, "Ratio = 1/4");
-		equal(isNaN(a), true);
-		
-		a.type = "decimal";
-		equal(1 + a, 1.25);
-		equal("Ratio = " + a, "Ratio = 0.25");
-		equal(isNaN(a), false);
-		
-		a.type = "";
-		equal(1 + a, 1.25);
-		equal("Ratio = " + a, "Ratio = 0.25");
-		equal("Ratio = " + a.toLocaleString(), "Ratio = 1/4");
-		equal(isNaN(a), false);
-	});
 	
 	module("Property Changes");
 	test("test Ratio.getValueIfDefined()", function () {
@@ -418,6 +398,8 @@ exports.runTests = function () {
 		equal(func( Math ), "NaN");
 		
 		equal(func( "o" ), "NaN");
+		
+//correct this...
 		equal(func( "1.1.1" ), "NaN");
 		equal(func( "1e1e" ), "NaN");
 		
@@ -433,6 +415,8 @@ exports.runTests = function () {
 		deepEqual(func("apples"), [NaN, 1]);
 		deepEqual(func(NaN), [NaN, 1]);
 		deepEqual(func("happy"), [NaN, 1]);
+		
+//correct this...
 		deepEqual(func("1.1e1.1"), [NaN, 1]);
 	});
 	test("test Ratio.parseToArray() with whole numbers", function () {
@@ -649,21 +633,17 @@ exports.runTests = function () {
 		equal( func(1,5, "5"), false);
 	});
 	test("test Ratio.prototype.deepEquals()", function(){
-		var func = function(a,b,type,c){
-			var d = Ratio.parse(a,b);
-			d.type = type;
-			return d.deepEquals(c);
+		var func = function(a, b, c){
+			return Ratio.parse(a, b).deepEquals(c);
 		};
 		var x = Ratio(1,2);
-		x.type = "string";
 		
-		equal(func(1,2, "string", x), true);
-		equal(func(1e40,2, "", Ratio.parse(1e40,2) ), true);
-		equal(func(4,4,"", Ratio.parse(4,4)), true);
+		equal(func(1,2, x), true);
+		equal(func(1e40, 2, Ratio.parse(1e40,2) ), true);
+		equal(func(4, 4, Ratio.parse(4,4)), true);
 		
-		equal(func(1,2, "decimal", x), false);
-		equal(func(1e20,1, "", Ratio.parse(1e40,2) ), false);
-		equal(func(2,2,"", Ratio.parse(4,4)), false);
+		equal(func(1e20, 1, Ratio.parse(1e40,2) ), false);
+		equal(func(2, 2, Ratio.parse(4,4)), false);
 	});
 	test("test equivalance using Ratio.prototype.equals and ==", function () {
 		var a,
@@ -856,7 +836,6 @@ exports.runTests = function () {
 	module("Use Cases");
 	test("test user case 1", function () {
 		var a = Ratio(1, 2);
-		a.type = "string";
 		
 		equal(a.toString(), "1/2");
 		a = a.add(3);
