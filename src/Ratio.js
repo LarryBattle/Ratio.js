@@ -6,7 +6,7 @@
 MIT License <http://www.opensource.org/licenses/mit-license>
 GPL v3 <http://opensource.org/licenses/GPL-3.0>
  * @info Project page: <https://github.com/LarryBattle/Ratio.js/>
- * @version 0.3.3
+ * @version 0.3.4
  * @note Uses YUI-DOC to generate documentation.
  **/
 /**
@@ -19,7 +19,6 @@ GPL v3 <http://opensource.org/licenses/GPL-3.0>
  * @chainable
  * @param {Ratio|String|Number} [numerator=0] can be a Ratio object or numeric value.
  * @param {Ratio|String|Number} [denominator=1] can be a Ratio object or numeric value.
- * @param {String} [type] can be either a "string" or "decimal". `type` forces a type on the Ratio object.
  * @param {Boolean} [alwaysReduce] if true, then the Ratio object and the child of it will always represent the simplified form of the rational.
  * @return {Ratio} object that has a numerator and denominator, corresponding to a/b.
  * @example
@@ -31,7 +30,6 @@ var Ratio = function (numerator, denominator, alwaysReduce) {
     }
     this.divSign = "/";
     this.alwaysReduce = !!alwaysReduce;
-    this.type = "";
     this.denominator = denominator;
     this.numerator = numerator;
     return this.correctRatio();
@@ -41,7 +39,7 @@ var Ratio = function (numerator, denominator, alwaysReduce) {
  * @property Ratio.VERSION
  * @type String
  **/
-Ratio.VERSION = "0.3.3";
+Ratio.VERSION = "0.3.4";
 /**
  * Checks if value is a finite number. <br/> Borrowed from jQuery 1.7.2 <br/>
  *
@@ -67,37 +65,6 @@ Ratio.getValueIfDefined( 4, null ) == 4
  **/
 Ratio.getValueIfDefined = function (backup, value) {
     return typeof value !== "undefined" && value !== null ? value : backup;
-};
-
-/**
- * Provides a quick way to find out the numeric type of an object.
- * Types include: `NaN`, `Ratio`, `number`, `e`, `decimal`, `mixed` and `fraction`
- *
- * @method Ratio.getTypeGuess
- * @param {Object} obj
- * @return {String} type
- * @example
-Ratio.getTypeGuess("1/3") == "fraction";
- **/
-Ratio.getTypeGuess = function (obj) {
-    var type = "NaN";
-    if (obj instanceof Ratio) {
-        type = "Ratio";
-    } else if (!isNaN(obj)) {
-        type = "number";
-        if (/e/i.test(+obj)) {
-            type = "e";
-        } else if (obj % 1) {
-            type = "decimal";
-        }
-    } else if (/\d\s*\//.test(obj)) {
-        if (/\d\s+[+\-]?\d/.test(obj)) {
-            type = "mixed";
-        } else {
-            type = "fraction";
-        }
-    }
-    return type;
 };
 /**
  * Find the Greatest Common Factor between two numbers using "Euler Method".
@@ -135,6 +102,36 @@ Ratio.getNumeratorWithSign = function (top, bottom) {
     return Math.abs(+top) * sign;
 };
 /**
+ * Provides a quick way to find out the numeric type of an object.
+ * Types include: `NaN`, `Ratio`, `number`, `e`, `decimal`, `mixed` and `fraction`
+ *
+ * @method Ratio.getTypeGuess
+ * @param {Object} obj
+ * @return {String} type
+ * @example
+Ratio.getTypeGuess("1/3") == "fraction";
+ **/
+Ratio.getTypeGuess = function (obj) {
+    var type = "NaN";
+    if (obj instanceof Ratio) {
+        type = "Ratio";
+    } else if (!isNaN(obj)) {
+        type = "number";
+        if (/e/i.test(+obj)) {
+            type = "e";
+        } else if (obj % 1) {
+            type = "decimal";
+        }
+	} else if (/\d\s*[^\s\d\w]/.test(obj)) {
+        if (/\d\s+[+\-]?\d/.test(obj)) {
+            type = "mixed";
+        } else {
+            type = "fraction";
+        }
+    }
+    return type;
+};
+/**
  * Converts a numeric value to a Ratio in the form of [top, bottom], such that top/bottom.
  *
  * @method Ratio.parseToArray
@@ -156,7 +153,7 @@ Ratio.parseToArray = function (obj) {
         arr[0] = j * (Math.abs(arr[0]) + Math.abs(parts[1] * arr[1]));
         break;
     case "fraction":
-        parts = obj.split(/\//);
+        parts = obj.split(/[^\s\d\w]/);
         arr[0] = Ratio.getNumeratorWithSign(parts[0], parts[1]);
         arr[1] = Math.abs(+parts[1]);
         break;
@@ -391,21 +388,13 @@ Ratio.getCleanENotation = function (num) {
      * From the Ratio instance, returns the computed value of numerator / denominator.
      *
      * @method Ratio.prototype.valueOf
-     * @param {Boolean} [showValue] Is one of the factors that determine if the return value is the computed value of the Ratio or the toString() value.
-     * @return {Number|String}
+     * @return {Number}
      * @example
     Example 1:<br/>
     Ratio(1,2).valueOf() == 0.5;
-
-    Example 2:<br/>
-    Ratio(1,2).valueOf(true) == "1/2"
      **/
-    valueOf : function (showValue) {
-        var val = (this.numerator / this.denominator);
-        if (!showValue && this.type == "string") {
-            val = this.toLocaleString();
-        }
-        return val;
+    valueOf : function () {
+		return this.numerator / this.denominator;
     },
     /**
      * From the Ratio instance, returns a string of the Ratio in fraction form if the numerator and denominator are Rational numbers.<br/>
@@ -468,7 +457,6 @@ Ratio.getCleanENotation = function (num) {
      * @method Ratio.prototype.clone
      * @param {Number} [top]
      * @param {Number} [bottom]
-     * @param {String} [type]
      * @param {Boolean} [alwaysReduce]
      * @return {Ratio}
      * @example
@@ -476,14 +464,12 @@ Ratio.getCleanENotation = function (num) {
     var b = a.clone(); <br/>
     a.equals(b) === true;
      **/
-    clone : function (top, bottom, type, alwaysReduce) {
+    clone : function (top, bottom, alwaysReduce) {
         var func = Ratio.getValueIfDefined;
         top = func(this.numerator, top);
         bottom = func(this.denominator, bottom);
         alwaysReduce = func(this.alwaysReduce, alwaysReduce);
-        var obj = new Ratio(top, bottom, alwaysReduce);
-        obj.type = func(this.type, type);
-        return obj;
+        return new Ratio(top, bottom, alwaysReduce);
     },
     /**
      * From the Ratio instance, returns a new instacne with a reduced ratio by factoring out the greatest common multiple.
@@ -566,7 +552,7 @@ Ratio.getCleanENotation = function (num) {
     Ratio(1,2).deepEquals( 1/2 ) === false
      */
     deepEquals : function (obj) {
-        return (obj instanceof Ratio) && (this.numerator === obj.numerator) && (this.denominator === obj.denominator) && (this.type === obj.type);
+        return (obj instanceof Ratio) && (this.numerator === obj.numerator) && (this.denominator === obj.denominator);
     },
     /**
      * Multiply the current Ratio by another Ratio.

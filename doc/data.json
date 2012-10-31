@@ -6,7 +6,7 @@
         "author": "Larry Battle , <http://bateru.com/news/>",
         "license": "MIT and GPL 3.0\nMIT License <http://www.opensource.org/licenses/mit-license>\nGPL v3 <http://opensource.org/licenses/GPL-3.0>",
         "info": "Project page: <https://github.com/LarryBattle/Ratio.js/>",
-        "version": "0.3.3",
+        "version": "0.3.4",
         "note": "Uses YUI-DOC to generate documentation.",
         "is_constructor": 1,
         "chainable": 1,
@@ -26,12 +26,6 @@
                 "optdefault": "1"
             },
             {
-                "name": "type",
-                "description": "can be either a \"string\" or \"decimal\". `type` forces a type on the Ratio object.",
-                "type": "String",
-                "optional": true
-            },
-            {
                 "name": "alwaysReduce",
                 "description": "if true, then the Ratio object and the child of it will always represent the simplified form of the rational.",
                 "type": "Boolean",
@@ -43,7 +37,7 @@
             "type": "Ratio"
         },
         "example": [
-            "\nRatio(2,4).toString() == Ratio(\"2/4\").toString() == \"2/4\"\n*/var Ratio=function(e,t,n){return this instanceof Ratio?(this.divSign=\"/\",this.alwaysReduce=!!n,this.type=\"\",this.denominator=t,this.numerator=e,this.correctRatio()):new Ratio(e,t,n)};Ratio.VERSION=\"0.3.3\",Ratio.isNumeric=function(e){return!isNaN(parseFloat(e))&&isFinite(e)},Ratio.getValueIfDefined=function(e,t){return typeof t!=\"undefined\"&&t!==null?t:e},Ratio.getTypeGuess=function(e){var t=\"NaN\";return e instanceof Ratio?t=\"Ratio\":isNaN(e)?/\\d\\s*\\//.test(e)&&(/\\d\\s+[+\\-]?\\d/.test(e)?t=\"mixed\":t=\"fraction\"):(t=\"number\",/e/i.test(+e)?t=\"e\":e%1&&(t=\"decimal\")),t},Ratio.gcd=function(e,t){var n;t=+t&&+e?+t:0,e=t?e:1;while(t)n=e%t,e=t,t=n;return Math.abs(e)},Ratio.getNumeratorWithSign=function(e,t){var n=+e*(+t||1)<0?-1:1;return Math.abs(+e)*n},Ratio.parseToArray=function(e){var t=[],n,r=[],i;switch(Ratio.getTypeGuess(e)){case\"mixed\":t=e.match(/(\\S+)\\s+(\\S.*)/),r=Ratio.parseToArray(t[2]),n=0<parseFloat(t[1])*r[0]?1:-1,r[0]=n*(Math.abs(r[0])+Math.abs(t[1]*r[1]));break;case\"fraction\":t=e.split(/\\//),r[0]=Ratio.getNumeratorWithSign(t[0],t[1]),r[1]=Math.abs(+t[1]);break;case\"decimal\":t=(+e).toString().split(/\\./),r[1]=Math.pow(10,t[1].length),r[0]=Math.abs(t[0])*r[1]+ +t[1],r[0]=/\\-/.test(t[0])?-r[0]:r[0];break;case\"number\":r=[+e,1];break;case\"e\":t=(+e).toString().split(/e/i),i=Ratio.parseToArray(t[0]),n=Math.abs(+e)<1?[0,1]:[1,0],r[n[0]]=i[n[0]],r[n[1]]=+(i[n[1]]+\"e\"+Math.abs(+t[1]));break;case\"Ratio\":r=[e.numerator,e.denominator];break;default:r=[NaN,1]}return r},Ratio.parse=function(e,t){var n=Ratio.parseToArray(e),r;return n.length&&typeof t!=\"undefined\"&&t!==null&&(r=Ratio.parseToArray(t),n[0]*=r[1],n[1]*=r[0]),new Ratio(n[0],n[1])},Ratio.reduce=function(e,t){e=Ratio.parse(e,t);var n=e.numerator,r=e.denominator,i=Ratio.getRepeatProps(n/r);i.length&&(n=+i.join(\"\")- +(i[0]+\"\"+i[1]),r=Math.pow(10,i[1].length)*(Math.pow(10,i[2].length)-1));var s=Ratio.gcd(n,r);return[n/s,r/s]},Ratio.getRepeatProps=function(e){e=\"\"+(e||\"\");var t=/(?:[^\\.]+\\.\\d*)(\\d{2,})+(?:\\1)$/,n=[],r=t.exec(e),i,s=/^(\\d+)(?:\\1)$/;return r||(e=e.replace(/\\d$/,\"\"),r=t.exec(e)),r&&1<r.length&&/\\.\\d{10}/.test(r[0])&&(r[1]=s.test(r[1])?s.exec(r[1])[1]:r[1],i=new RegExp(\"(\"+r[1]+\")+$\"),n=e.split(/\\./).concat(r[1]),n[1]=n[1].replace(i,\"\")),n},Ratio.getPrimeFactors=function(e){e=Math.floor(e);var t,n=[],r,i=Math.sqrt,s=1<e&&isFinite(e);while(s){t=i(e),r=2;if(e%r){r=3;while(e%r&&(r+=2)<t);}r=t<r?e:r,n.push(r),s=r!=e,e/=r}return n},Ratio.getCleanENotation=function(e){e=(+e||0).toString();if(/\\.\\d+(0|9){8,}\\d?e/.test(e)){var t=e.match(/(?:\\d+\\.)(\\d+)(?:e.*)/)[1].replace(/(0|9)+\\d$/,\"\").length+1;e=(+e).toPrecision(t).toString()}return e},Ratio.prototype={constructor:Ratio,correctRatio:function(){var e=this.numerator;b=this.denominator,typeof b==\"undefined\"&&(b=1,typeof e==\"undefined\"&&(e=0)),this.denominator=+Math.abs(b),this.numerator=Ratio.getNumeratorWithSign(e,b||1);if(this.denominator&&this.alwaysReduce){var t=Ratio.reduce(this);this.numerator=t[0],this.denominator=t[1]}return this},toArray:function(){return[this.numerator,this.denominator]},valueOf:function(e){var t=this.numerator/this.denominator;return!e&&this.type==\"string\"&&(t=this.toLocaleString()),t},toLocaleString:function(){var e=this.valueOf(!0),t,n,r=1e-9;return isNaN(e)?n=\"NaN\":e%1===0||this.denominator===1||!isFinite(e%1)?n=\"\"+e:1<Math.abs(e)?Math.abs(e-e.toFixed(0))<r?n=e.toFixed(0):(t=parseInt(e,10),n=t+\" \"+Math.abs(this.numerator%this.denominator)+this.divSign+this.denominator):n=\"\"+this.numerator+this.divSign+this.denominator,n},toString:function(){return\"\"+this.numerator+this.divSign+this.denominator},clone:function(e,t,n,r){var i=Ratio.getValueIfDefined;e=i(this.numerator,e),t=i(this.denominator,t),r=i(this.alwaysReduce,r);var s=new Ratio(e,t,r);return s.type=i(this.type,n),s},reduce:function(){var e=Ratio.reduce(this.numerator,this.denominator);return this.clone(e[0],e[1])},add:function(e,t){if(!(e instanceof Ratio)||typeof t!=\"undefined\")e=Ratio.parse(e,t);var n,r,i;return this.denominator==e.denominator?(r=this.numerator+e.numerator,i=this.denominator):(n=Ratio.gcd(this.denominator,e.denominator),r=(this.numerator*e.denominator+this.denominator*e.numerator)/n,i=this.denominator*e.denominator/n),this.clone(r,i)},divide:function(e,t){if(!(e instanceof Ratio)||typeof t!=\"undefined\")e=Ratio.parse(e,t);return this.clone(this.numerator*e.denominator,this.denominator*e.numerator)},equals:function(e){var t=Ratio.isNumeric(e)||e instanceof Ratio?e.valueOf(!0):Ratio.parse(e).valueOf(!0);return this.numerator/this.denominator==+t},deepEquals:function(e){return e instanceof Ratio&&this.numerator===e.numerator&&this.denominator===e.denominator&&this.type===e.type},multiply:function(e,t){if(!(e instanceof Ratio)||typeof t!=\"undefined\")e=Ratio.parse(e,t);return this.clone(this.numerator*e.numerator,this.denominator*e.denominator)},subtract:function(e,t){if(!(e instanceof Ratio)||typeof t!=\"undefined\")e=Ratio.parse(e,t);return e.numerator=-e.numerator,this.add(e)},descale:function(e){return this.clone(this.numerator/e,this.denominator/e)},pow:function(e){return this.clone(Math.pow(this.numerator,+e),Math.pow(this.denominator,+e))},scale:function(e){return this.clone(this.numerator*+e,this.denominator*+e)},cleanFormat:function(){var e=/^\\d+\\.\\d+$/;if(e.test(this.numerator)||e.test(this.denominator))return Ratio.parse(this.numerator,this.denominator);var t=this.clone();return t.numerator=Ratio.getCleanENotation(t.numerator),t.denominator=Ratio.getCleanENotation(t.denominator),t},abs:function(){return this.clone(Math.abs(this.numerator))},mod:function(){return this.clone(this.numerator%this.denominator,1)},negate:function(){return this.clone(-this.numerator)},isProper:function(){return Math.abs(this.numerator)<this.denominator},findX:function(e){var t=(\"\"+e).split(\"/\");return t.length!==2?null:isNaN(t[0])?Ratio(t[1]).multiply(this):Ratio(t[0]).divide(this)},reciprocal:function(){return this.clone(this.denominator,this.numerator)},approximateTo:function(e){return isNaN(e)?this.clone():this.clone(Math.round(this.valueOf(!0)*e),e)},toQuantityOf:function(){var e=Array.prototype.slice.call(arguments);if(e.length<1)return this.clone(NaN,1);var t=this.valueOf(!0),n=this.approximateTo(e[0]),r,i=1e-9;for(var s=1,o=e.length;s<o&&i<Math.abs(n-t);s++)r=n,n=this.approximateTo(e[s]),Math.abs(r-t)<Math.abs(n-t)&&(n=r);return n}},typeof exports!=\"undefined\"&&(typeof module!=\"undefined\"&&module.exports&&(exports=module.exports=Ratio),exports.Ratio=Ratio);"
+            "\nRatio(2,4).toString() == Ratio(\"2/4\").toString() == \"2/4\"\n*/var Ratio=function(e,t,n){return this instanceof Ratio?(this.divSign=\"/\",this.alwaysReduce=!!n,this.denominator=t,this.numerator=e,this.correctRatio()):new Ratio(e,t,n)};Ratio.VERSION=\"0.3.4\",Ratio.isNumeric=function(e){return!isNaN(parseFloat(e))&&isFinite(e)},Ratio.getValueIfDefined=function(e,t){return typeof t!=\"undefined\"&&t!==null?t:e},Ratio.gcd=function(e,t){var n;t=+t&&+e?+t:0,e=t?e:1;while(t)n=e%t,e=t,t=n;return Math.abs(e)},Ratio.getNumeratorWithSign=function(e,t){var n=+e*(+t||1)<0?-1:1;return Math.abs(+e)*n},Ratio.getTypeGuess=function(e){var t=\"NaN\";return e instanceof Ratio?t=\"Ratio\":isNaN(e)?/\\d\\s*[^\\s\\d\\w]/.test(e)&&(/\\d\\s+[+\\-]?\\d/.test(e)?t=\"mixed\":t=\"fraction\"):(t=\"number\",/e/i.test(+e)?t=\"e\":e%1&&(t=\"decimal\")),t},Ratio.parseToArray=function(e){var t=[],n,r=[],i;switch(Ratio.getTypeGuess(e)){case\"mixed\":t=e.match(/(\\S+)\\s+(\\S.*)/),r=Ratio.parseToArray(t[2]),n=0<parseFloat(t[1])*r[0]?1:-1,r[0]=n*(Math.abs(r[0])+Math.abs(t[1]*r[1]));break;case\"fraction\":t=e.split(/[^\\s\\d\\w]/),r[0]=Ratio.getNumeratorWithSign(t[0],t[1]),r[1]=Math.abs(+t[1]);break;case\"decimal\":t=(+e).toString().split(/\\./),r[1]=Math.pow(10,t[1].length),r[0]=Math.abs(t[0])*r[1]+ +t[1],r[0]=/\\-/.test(t[0])?-r[0]:r[0];break;case\"number\":r=[+e,1];break;case\"e\":t=(+e).toString().split(/e/i),i=Ratio.parseToArray(t[0]),n=Math.abs(+e)<1?[0,1]:[1,0],r[n[0]]=i[n[0]],r[n[1]]=+(i[n[1]]+\"e\"+Math.abs(+t[1]));break;case\"Ratio\":r=[e.numerator,e.denominator];break;default:r=[NaN,1]}return r},Ratio.parse=function(e,t){var n=Ratio.parseToArray(e),r;return n.length&&typeof t!=\"undefined\"&&t!==null&&(r=Ratio.parseToArray(t),n[0]*=r[1],n[1]*=r[0]),new Ratio(n[0],n[1])},Ratio.reduce=function(e,t){e=Ratio.parse(e,t);var n=e.numerator,r=e.denominator,i=Ratio.getRepeatProps(n/r);i.length&&(n=+i.join(\"\")- +(i[0]+\"\"+i[1]),r=Math.pow(10,i[1].length)*(Math.pow(10,i[2].length)-1));var s=Ratio.gcd(n,r);return[n/s,r/s]},Ratio.getRepeatProps=function(e){e=\"\"+(e||\"\");var t=/(?:[^\\.]+\\.\\d*)(\\d{2,})+(?:\\1)$/,n=[],r=t.exec(e),i,s=/^(\\d+)(?:\\1)$/;return r||(e=e.replace(/\\d$/,\"\"),r=t.exec(e)),r&&1<r.length&&/\\.\\d{10}/.test(r[0])&&(r[1]=s.test(r[1])?s.exec(r[1])[1]:r[1],i=new RegExp(\"(\"+r[1]+\")+$\"),n=e.split(/\\./).concat(r[1]),n[1]=n[1].replace(i,\"\")),n},Ratio.getPrimeFactors=function(e){e=Math.floor(e);var t,n=[],r,i=Math.sqrt,s=1<e&&isFinite(e);while(s){t=i(e),r=2;if(e%r){r=3;while(e%r&&(r+=2)<t);}r=t<r?e:r,n.push(r),s=r!=e,e/=r}return n},Ratio.getCleanENotation=function(e){e=(+e||0).toString();if(/\\.\\d+(0|9){8,}\\d?e/.test(e)){var t=e.match(/(?:\\d+\\.)(\\d+)(?:e.*)/)[1].replace(/(0|9)+\\d$/,\"\").length+1;e=(+e).toPrecision(t).toString()}return e},Ratio.prototype={constructor:Ratio,correctRatio:function(){var e=this.numerator;b=this.denominator,typeof b==\"undefined\"&&(b=1,typeof e==\"undefined\"&&(e=0)),this.denominator=+Math.abs(b),this.numerator=Ratio.getNumeratorWithSign(e,b||1);if(this.denominator&&this.alwaysReduce){var t=Ratio.reduce(this);this.numerator=t[0],this.denominator=t[1]}return this},toArray:function(){return[this.numerator,this.denominator]},valueOf:function(){return this.numerator/this.denominator},toLocaleString:function(){var e=this.valueOf(!0),t,n,r=1e-9;return isNaN(e)?n=\"NaN\":e%1===0||this.denominator===1||!isFinite(e%1)?n=\"\"+e:1<Math.abs(e)?Math.abs(e-e.toFixed(0))<r?n=e.toFixed(0):(t=parseInt(e,10),n=t+\" \"+Math.abs(this.numerator%this.denominator)+this.divSign+this.denominator):n=\"\"+this.numerator+this.divSign+this.denominator,n},toString:function(){return\"\"+this.numerator+this.divSign+this.denominator},clone:function(e,t,n){var r=Ratio.getValueIfDefined;return e=r(this.numerator,e),t=r(this.denominator,t),n=r(this.alwaysReduce,n),new Ratio(e,t,n)},reduce:function(){var e=Ratio.reduce(this.numerator,this.denominator);return this.clone(e[0],e[1])},add:function(e,t){if(!(e instanceof Ratio)||typeof t!=\"undefined\")e=Ratio.parse(e,t);var n,r,i;return this.denominator==e.denominator?(r=this.numerator+e.numerator,i=this.denominator):(n=Ratio.gcd(this.denominator,e.denominator),r=(this.numerator*e.denominator+this.denominator*e.numerator)/n,i=this.denominator*e.denominator/n),this.clone(r,i)},divide:function(e,t){if(!(e instanceof Ratio)||typeof t!=\"undefined\")e=Ratio.parse(e,t);return this.clone(this.numerator*e.denominator,this.denominator*e.numerator)},equals:function(e){var t=Ratio.isNumeric(e)||e instanceof Ratio?e.valueOf(!0):Ratio.parse(e).valueOf(!0);return this.numerator/this.denominator==+t},deepEquals:function(e){return e instanceof Ratio&&this.numerator===e.numerator&&this.denominator===e.denominator},multiply:function(e,t){if(!(e instanceof Ratio)||typeof t!=\"undefined\")e=Ratio.parse(e,t);return this.clone(this.numerator*e.numerator,this.denominator*e.denominator)},subtract:function(e,t){if(!(e instanceof Ratio)||typeof t!=\"undefined\")e=Ratio.parse(e,t);return e.numerator=-e.numerator,this.add(e)},descale:function(e){return this.clone(this.numerator/e,this.denominator/e)},pow:function(e){return this.clone(Math.pow(this.numerator,+e),Math.pow(this.denominator,+e))},scale:function(e){return this.clone(this.numerator*+e,this.denominator*+e)},cleanFormat:function(){var e=/^\\d+\\.\\d+$/;if(e.test(this.numerator)||e.test(this.denominator))return Ratio.parse(this.numerator,this.denominator);var t=this.clone();return t.numerator=Ratio.getCleanENotation(t.numerator),t.denominator=Ratio.getCleanENotation(t.denominator),t},abs:function(){return this.clone(Math.abs(this.numerator))},mod:function(){return this.clone(this.numerator%this.denominator,1)},negate:function(){return this.clone(-this.numerator)},isProper:function(){return Math.abs(this.numerator)<this.denominator},findX:function(e){var t=(\"\"+e).split(\"/\");return t.length!==2?null:isNaN(t[0])?Ratio(t[1]).multiply(this):Ratio(t[0]).divide(this)},reciprocal:function(){return this.clone(this.denominator,this.numerator)},approximateTo:function(e){return isNaN(e)?this.clone():this.clone(Math.round(this.valueOf(!0)*e),e)},toQuantityOf:function(){var e=Array.prototype.slice.call(arguments);if(e.length<1)return this.clone(NaN,1);var t=this.valueOf(!0),n=this.approximateTo(e[0]),r,i=1e-9;for(var s=1,o=e.length;s<o&&i<Math.abs(n-t);s++)r=n,n=this.approximateTo(e[s]),Math.abs(r-t)<Math.abs(n-t)&&(n=r);return n}},typeof exports!=\"undefined\"&&(typeof module!=\"undefined\"&&module.exports&&(exports=module.exports=Ratio),exports.Ratio=Ratio);"
         ]
     },
     "files": {
@@ -95,12 +89,6 @@
                     "optdefault": "1"
                 },
                 {
-                    "name": "type",
-                    "description": "can be either a \"string\" or \"decimal\". `type` forces a type on the Ratio object.",
-                    "type": "String",
-                    "optional": true
-                },
-                {
                     "name": "alwaysReduce",
                     "description": "if true, then the Ratio object and the child of it will always represent the simplified form of the rational.",
                     "type": "Boolean",
@@ -118,14 +106,14 @@
             "author": "Larry Battle , <http://bateru.com/news/>",
             "license": "MIT and GPL 3.0\nMIT License <http://www.opensource.org/licenses/mit-license>\nGPL v3 <http://opensource.org/licenses/GPL-3.0>",
             "info": "Project page: <https://github.com/LarryBattle/Ratio.js/>",
-            "version": "0.3.3",
+            "version": "0.3.4",
             "note": "Uses YUI-DOC to generate documentation.\n*//**\nRatio is an object that has a numerator and denominator, corresponding to a/b.<br/>\nNote that the keyword `new` is not required to create a new instance of the Ratio object, since this is done for you.<br/>\nIn otherwords, `new Ratio( value )` is the same as `Ratio( value )`."
         }
     },
     "classitems": [
         {
             "file": "..\\src\\Ratio.js",
-            "line": 39,
+            "line": 37,
             "description": "Version number of Ratio.js",
             "itemtype": "property",
             "name": "Ratio.VERSION",
@@ -134,7 +122,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 45,
+            "line": 43,
             "description": "Checks if value is a finite number. <br/> Borrowed from jQuery 1.7.2 <br/>",
             "itemtype": "method",
             "name": "Ratio.isNumeric",
@@ -156,7 +144,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 57,
+            "line": 55,
             "description": "Returns the default value is the provides new value is undefined or null.<br/>\nSimilar to `var a = (b || c)`.",
             "itemtype": "method",
             "name": "Ratio.getValueIfDefined",
@@ -183,29 +171,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 72,
-            "description": "Provides a quick way to find out the numeric type of an object.\nTypes include: `NaN`, `Ratio`, `number`, `e`, `decimal`, `mixed` and `fraction`",
-            "itemtype": "method",
-            "name": "Ratio.getTypeGuess",
-            "params": [
-                {
-                    "name": "obj",
-                    "description": "",
-                    "type": "Object"
-                }
-            ],
-            "return": {
-                "description": "type",
-                "type": "String"
-            },
-            "example": [
-                "\nRatio.getTypeGuess(\"1/3\") == \"fraction\";"
-            ],
-            "class": "Ratio"
-        },
-        {
-            "file": "..\\src\\Ratio.js",
-            "line": 102,
+            "line": 69,
             "description": "Find the Greatest Common Factor between two numbers using \"Euler Method\".",
             "itemtype": "method",
             "name": "Ratio.gcd",
@@ -227,7 +193,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 122,
+            "line": 89,
             "description": "Returns the numerator with the corresponding sign of (top/bottom).<br/>\nUsed to force `top` to represent the sign of the Ratio.",
             "itemtype": "method",
             "name": "Ratio.getNumeratorWithSign",
@@ -254,7 +220,29 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 137,
+            "line": 104,
+            "description": "Provides a quick way to find out the numeric type of an object.\nTypes include: `NaN`, `Ratio`, `number`, `e`, `decimal`, `mixed` and `fraction`",
+            "itemtype": "method",
+            "name": "Ratio.getTypeGuess",
+            "params": [
+                {
+                    "name": "obj",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "type",
+                "type": "String"
+            },
+            "example": [
+                "\nRatio.getTypeGuess(\"1/3\") == \"fraction\";"
+            ],
+            "class": "Ratio"
+        },
+        {
+            "file": "..\\src\\Ratio.js",
+            "line": 134,
             "description": "Converts a numeric value to a Ratio in the form of [top, bottom], such that top/bottom.",
             "itemtype": "method",
             "name": "Ratio.parseToArray",
@@ -276,7 +264,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 187,
+            "line": 184,
             "description": "Converts a numeric value to a Ratio object.\nSupports mixed numbers, whole numbers, decimals, scientific numbers and Ratio objects.",
             "itemtype": "method",
             "name": "Ratio.parse",
@@ -305,7 +293,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 222,
+            "line": 219,
             "description": "Given a numerator and denominator in the form of [a,b], returns as an array of numbers.",
             "itemtype": "method",
             "name": "Ratio.reduce",
@@ -333,7 +321,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 251,
+            "line": 248,
             "description": "This function divides a repeating decimal into 3 parts. If the value passed is not a repeating decimal then an empty array is returned.<br/>\nFor repeating decimals, the return value is an array which contains the numeric value split into 3 parts like, <br/>\n[ \"numbers before decimal\", \"numbers before repeating pattern\", \"repeating pattern.\" ].<br/>\nHere's another explanation. <br/>\nThe return value is [i, x, r] for the repeating decimal value.<br/>\nwhere i are the values to the left of the decimal point. <br/>\nx are the decimals to the right of the decimal point and to the left of the repeating pattern.<br/>\nr is the unique repeating patterns for the repeating decimal.<br/>\nExample. 22/7 = 3.142857142857143 = 3.14-285714-285714-3, i = 3, x = 14, r = 285714<br/>\nIt should be noted that the last digit might be removed to avoid rounding errors.",
             "itemtype": "method",
             "name": "Ratio.getRepeatProps",
@@ -355,7 +343,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 288,
+            "line": 285,
             "description": "Returns an array of the prime factors of a number. <br/>\nMore info <http://bateru.com/news/2012/05/code-of-the-day-javascript-prime-factors-of-a-number/>",
             "itemtype": "method",
             "name": "Ratio.getPrimeFactors",
@@ -377,7 +365,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 320,
+            "line": 317,
             "description": "Rounds up a scientific notated number with 8+ trailing 0s or 9s.<br/>\nNote: Returns number as string to preserve value.",
             "itemtype": "method",
             "name": "Ratio.getCleanENotation",
@@ -399,7 +387,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 346,
+            "line": 343,
             "description": "Adjusts the ratio in three ways:\n\n1) Sets the numerator and denominator to default values if undefined. (Default fraction: 0/1)\n2) Places the sign on numerator.\n3) Reduces the function if needed.\nThis function is called after the instances is created.",
             "itemtype": "method",
             "name": "Ratio.prototype.correctRatio",
@@ -421,7 +409,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 379,
+            "line": 376,
             "description": "From the Ratio instance, returns the raw values of the numerator and denominator in the form [numerator, denominator].",
             "itemtype": "method",
             "name": "Ratio.prototype.toArray",
@@ -436,30 +424,22 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 390,
+            "line": 387,
             "description": "From the Ratio instance, returns the computed value of numerator / denominator.",
             "itemtype": "method",
             "name": "Ratio.prototype.valueOf",
-            "params": [
-                {
-                    "name": "showValue",
-                    "description": "Is one of the factors that determine if the return value is the computed value of the Ratio or the toString() value.",
-                    "type": "Boolean",
-                    "optional": true
-                }
-            ],
             "return": {
                 "description": "",
-                "type": "Number|String"
+                "type": "Number"
             },
             "example": [
-                "\n   Example 1:<br/>\n   Ratio(1,2).valueOf() == 0.5;\n\n   Example 2:<br/>\n   Ratio(1,2).valueOf(true) == \"1/2\""
+                "\n   Example 1:<br/>\n   Ratio(1,2).valueOf() == 0.5;"
             ],
             "class": "Ratio"
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 410,
+            "line": 399,
             "description": "From the Ratio instance, returns a string of the Ratio in fraction form if the numerator and denominator are Rational numbers.<br/>\nNote: If the computed value of (numerator / denominator) is a whole number, then the whole number is returned.<br/>\nNote: If the computed value of (numerator / denominator) is not a number, the result is returned. <br/>",
             "itemtype": "method",
             "name": "Ratio.prototype.toLocaleString",
@@ -474,7 +454,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 446,
+            "line": 435,
             "description": "From the Ratio instance, returns the raw values of the numerator and denominator in the form \"a/b\".<br/>\nNote: The division symbol can be change by the use of `divSign` property.",
             "itemtype": "method",
             "name": "Ratio.prototype.toString",
@@ -489,7 +469,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 464,
+            "line": 453,
             "description": "Returns a new instance of the current Ratio.<br/>\nThe clone propery value can be changed if the appropriate argument value is supplied.",
             "itemtype": "method",
             "name": "Ratio.prototype.clone",
@@ -504,12 +484,6 @@
                     "name": "bottom",
                     "description": "",
                     "type": "Number",
-                    "optional": true
-                },
-                {
-                    "name": "type",
-                    "description": "",
-                    "type": "String",
                     "optional": true
                 },
                 {
@@ -530,7 +504,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 488,
+            "line": 474,
             "description": "From the Ratio instance, returns a new instacne with a reduced ratio by factoring out the greatest common multiple.",
             "itemtype": "method",
             "name": "Ratio.prototype.reduce",
@@ -546,7 +520,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 501,
+            "line": 487,
             "description": "Adds the current Ratio by another Ratio.",
             "itemtype": "method",
             "name": "Ratio.prototype.add",
@@ -575,7 +549,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 529,
+            "line": 515,
             "description": "Divides the current Ratio by another Ratio.",
             "itemtype": "method",
             "name": "Ratio.prototype.divide",
@@ -604,7 +578,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 546,
+            "line": 532,
             "description": "Compares if the current Ratio and another object have the same value.",
             "itemtype": "method",
             "name": "Ratio.prototype.equals",
@@ -626,7 +600,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 559,
+            "line": 545,
             "description": "Performs a strict comparison to determine if the current instances and passed object are identical.",
             "itemtype": "method",
             "name": "Ratio.prototype.deepEquals",
@@ -648,7 +622,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 571,
+            "line": 557,
             "description": "Multiply the current Ratio by another Ratio.",
             "chainable": 1,
             "itemtype": "method",
@@ -677,7 +651,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 588,
+            "line": 574,
             "description": "Subtracts the current Ratio by another Ratio.",
             "itemtype": "method",
             "name": "Ratio.prototype.subtract",
@@ -706,7 +680,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 606,
+            "line": 592,
             "description": "From the Ratio instance, returns an new Ratio scaled down by a factor.",
             "itemtype": "method",
             "name": "Ratio.prototype.descale",
@@ -729,7 +703,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 619,
+            "line": 605,
             "description": "From the Ratio instance, returns an new Ratio raised to a power.",
             "itemtype": "method",
             "name": "Ratio.prototype.pow",
@@ -752,7 +726,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 632,
+            "line": 618,
             "description": "From the Ratio instance, returns a new Ratio scaled up by a factor.",
             "itemtype": "method",
             "name": "Ratio.prototype.scale",
@@ -775,7 +749,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 645,
+            "line": 631,
             "description": "From the Ratio instance, returns a new Ratio by parsing the numerator and denominator.<br/>\nThis is useful if want to ensure that the Ratio contains only whole numbers in the numerator and denominator after a caclulation.",
             "itemtype": "method",
             "name": "Ratio.prototype.cleanFormat",
@@ -791,7 +765,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 667,
+            "line": 653,
             "description": "Returns a new instances that is the absolute value of the current Ratio.",
             "itemtype": "method",
             "name": "Ratio.prototype.abs",
@@ -807,7 +781,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 679,
+            "line": 665,
             "description": "From the Ratio instance, returns a new Ratio in the form of (numerator mod denominator)/1.<br/>\nWhich is the same as Ratio( (numerator % denominator), 1 ).",
             "itemtype": "method",
             "name": "Ratio.prototype.mod",
@@ -823,7 +797,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 692,
+            "line": 678,
             "description": "Returns a new instance of the Ratio with the sign toggled.",
             "itemtype": "method",
             "name": "Ratio.prototype.negate",
@@ -839,7 +813,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 704,
+            "line": 690,
             "description": "Determines if the current Ratio is a proper fraction.",
             "itemtype": "method",
             "name": "Ratio.prototype.isProper",
@@ -854,7 +828,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 715,
+            "line": 701,
             "description": "Determines the value of x. Solves the following equations.<br/>\n1. `( a/b = x/n )` or\n2. `( a/b = n/x )` <br/>\nWhere a, b are the numerator and denominator respectively of the current Ratio.<br/>\nNote: Returns null if the the string can't be split into exactly 2 elements.",
             "itemtype": "method",
             "name": "Ratio.prototype.findX",
@@ -870,7 +844,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 735,
+            "line": 721,
             "description": "Switches the numerator and denominator positions.",
             "itemtype": "method",
             "name": "Ratio.prototype.reciprocal",
@@ -886,7 +860,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 747,
+            "line": 733,
             "description": "From the Ratio instance, approxiates the value to a new fraction with a provided denominator.\nIn otherwords, this method helps you find out what fraction with a given denominator will best\nrepresent the current numeric value of the Ratio.",
             "itemtype": "method",
             "name": "Ratio.prototype.approximateTo",
@@ -909,7 +883,7 @@
         },
         {
             "file": "..\\src\\Ratio.js",
-            "line": 765,
+            "line": 751,
             "description": "Same as `Ratio.prototype.approximateTo()` but operates on a arbitary amount of arguments and returns the Ratio with the closest match among the quantities.\nNote there is a error rate of 1e-9. <br/>\nTherefore, an approximated quantity is returned if the absolute value of the difference between the approximated quantity and actual value is smaller than the error rate.",
             "itemtype": "method",
             "name": "Ratio.prototype.toQuantityOf",

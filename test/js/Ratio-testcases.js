@@ -4,12 +4,34 @@
  * @author Larry Battle , <http://bateru.com/news/>
  * @license MIT and GPL 3.0
  */
-
-// exports is used to test Ratio.js as a node module.
-var exports = {};
+ 
+// ----------------------------
+// start of node.js testing setup
+// ----------------------------
+if(typeof exports !== "object"){
+	var exports = {};
+}else{
+	var assert = require("assert");
+	var module = function(str){
+		console.log("\nModule: " + str);
+	}, test = function(name, fn){
+		var str =  "  " + name;
+		fn();
+		console.log( str );	
+	}, 
+	ok = assert.ok, 
+	equal = assert.equal, 
+	deepEqual = assert.deepEqual;
+}
+exports.setRatio = function(obj){
+	Ratio = obj;
+};
+// ----------------------------
+// end of node.js testing setup
+// ----------------------------
 
 // contains all tests.
-var runTests = function () {
+exports.runTests = function () {
 	module("Ratio Global Constants");
 	test("test for version number", function () {
 		ok(Ratio.VERSION, "Version number is detected.");
@@ -999,5 +1021,6 @@ var reRunTests = function () {
 	QUnit.reset(); // should clear the DOM
 	QUnit.init(); // resets the qunit test environment
 	QUnit.start(); // allows for the new test to be captured.
-	runTests();
+	exports.runTests();
 };
+var runTests = exports.runTests;

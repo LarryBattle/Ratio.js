@@ -1,12 +1,18 @@
 {
 	"name" : "lb-ratio",
-	"version" : "0.3.3",
+	"version" : "0.3.4",
 	"homepage" : "https://github.com/LarryBattle/Ratio.js",
 	"description" : "Provides a Fraction, Rational, and Ratio object for javascript.",
 	"keywords" : ["Ratio", "fraction", "rational", "numbers", "Math", "Mixed numbers"],
 	"author" : {
 		"name" : "Larry Battle",
 		"url" : "http://bateru.com/news/"
+	},
+	"scripts" : {
+		"test" : "node ./test/js/Ratio-node-testcases.js"
+	},
+	"bugs" : {
+		"url" : "https://github.com/LarryBattle/Ratio.js/issues?state=open"
 	},
 	"main" : "./src/Ratio.js",
 	"repository" : {
@@ -16,5 +22,5 @@
 	"engines" : {
 		"node" : "*"
 	},
-	"license": "MIT"
+	"license" : "MIT"
 }

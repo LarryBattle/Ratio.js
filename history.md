@@ -1,6 +1,12 @@
 ##Ratio.js Release Notes##
 __Project Page:__ <https://github.com/LarryBattle/Ratio.js>  <br/>
 
+__@Version: 0.3.4__ - 10/30/2012<br/>
+- Conformed to node.js module standards. [issue page](https://github.com/LarryBattle/Ratio.js/issues/14)<br/>
+- Added test script to `package.json`.<br/>
+- Removed the `type` property from Ratio instances.<br/>
+- `Ratio.getTypeGuess()` and `Ratio.parseToArray()` is more fuzzy when parsing fractions and mixed number.
+
 __@Version: 0.3.3__  - 10/25/2012 <br/>
 - Changed documentation to point to `Ratio.prototype.reciprocal` instead of `Ratio.prototype.flip`.
 - Refactored the Ratio prototype to an object literal to save space.
