@@ -15,9 +15,9 @@ var fs = require('fs'),
 	projectInfo = require( basePath + "package.json" ),
 	paths = {
 		doc : basePath + "doc",
-		min : basePath + "src/Ratio.min.js",
-		src : basePath + "src",
-		uncompressed : basePath + "src/Ratio.js",
+		min : basePath + "lib/Ratio.min.js",
+		lib : basePath + "lib",
+		uncompressed : basePath + "lib/Ratio.js",
 		readme : basePath + "readme.md"
 	};
 
@@ -61,7 +61,7 @@ task("updateVersion", function(){
 desc( "Using yuidoc.js to generate documentation." );
 task( "makeDoc", function(){
 	console.log( "\nGenerating documentation." );
-	jake.exec( "yuidoc " + paths.src + " -o " + paths.doc );
+	jake.exec( "yuidoc " + paths.lib + " -o " + paths.doc );
 });
 
 desc("Using uglify.js to minimize Ratio.js to Ratio.min.js.");

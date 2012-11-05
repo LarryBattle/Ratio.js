@@ -1,6 +1,34 @@
 ##Ratio.js Release Notes##
 __Project Page:__ <https://github.com/LarryBattle/Ratio.js>  <br/>
 
+__@Version: 0.3.5__ - 11/2/2012<br/>
+- Added: `Ratio.regex.*` to store all complex regular expressions.<br/>
+- Added: `Ratio.getCombinedRatio()`.<br/>
+<br/>
+- Changed: The `Ratio` object is now wrapped inside a closure to provided support for "user strict".<br/>
+- Changed: General methods with arguments now accept the same parameters.
+The methods are as followed.<br/>
+
+	Ratio.prototype.add()
+	Ratio.prototype.descale()
+	Ratio.prototype.divide()
+	Ratio.prototype.multiply()
+	Ratio.prototype.pow()
+	Ratio.prototype.scale()
+	Ratio.prototype.subtract()
+
+<br/>
+- Fixed: "`b`" was global.<br/>
+- Fixed: testcases removing the closure wrapper and "use strict".<br/>
+<br/>
+- Removed: node.js test script. Use browser instead to view test results.<br/>
+- Removed: `Ratio.prototype.approximateTo()` and merged it with `Ratio.prototype.toQuantityOf()`.<br/>
+<br/>
+- Updated: Documentation<br/>
+- Updated: README.md examples and removed refernces to `type`.<br/>
+- Updated: Passed JSHINT wiht 4 warnings.<br/>
+- Updated: testcases<br/>
+
 __@Version: 0.3.4__ - 10/30/2012<br/>
 - Conformed to node.js module standards. [issue page](https://github.com/LarryBattle/Ratio.js/issues/14)<br/>
 - Added test script to `package.json`.<br/>

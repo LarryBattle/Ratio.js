@@ -5,15 +5,14 @@ Provides a Fraction / Rational / Ratio object for javascript.
 
 By keeping values in a rational form, you can maintain precision and can avoid common floating point operation errors in Javascript.
 
-
-- [Simple Demo](http://larrybattle.github.com/Ratio.js/demo/demo-basic.html)
+- [Simple Demo](http://larrybattle.github.com/Ratio.js/examples/demo-basic.html)
 - [Documentation](http://larrybattle.github.com/Ratio.js/docs/classes/Ratio.html)
-- [Testcase](http://larrybattle.github.com/Ratio.js/dev/tests/Ratio.js_testcases.html)
+- [Testcase](http://larrybattle.github.com/Ratio.js/test/Ratio.js_testcases.html)
 - [Release Notes](http://larrybattle.github.com/Ratio.js/history.md)
 
 **Support:**
 
-Chrome 19, Firefox 12, IE 7+, and Opera 11+.
+Node.js, Chrome 19+, Firefox 12+, IE 7+, and Opera 11+.
 
 Note: Run the test cases to check for additional browser compatibility.
 
@@ -73,14 +72,13 @@ Thus `new Ratio()` and `Ratio()` are both valid to instantiate an object.<br/>
 	
 ### Ratio Properties ###
 
-All Ratio objects have a `numerator`, `denominator`, `type` and `divSign` property.
+All Ratio objects have a `numerator`, `denominator`, and `divSign` property.
 The default value of the numerator is 0 and denominator is 1.
 
 	var a = Ratio();
 	a.toString() == "0/1";
 	a.numerator == 0;
 	a.denominator == 1;
-	a.type == "";
 	a.divSign == "/";
 
 Examples:
@@ -107,12 +105,12 @@ To retrieve the value inside a Ratio object you can use `toString()`, `toLocaleS
 	a.toString() == "30/10";
 	a.toLocaleString() == "3";
 	a.toArray() == [30,10];
-	a.valueOf() == 3; // same as +a
+	a.valueOf() == 3; // same as +a or Number(a)
 	
 ### Ratio Comparison ###
 
 valueOf() is called when inequality comparisons are made on a Ratio object.<br/>
-However, Equalivances will compare the objects not values. Use `equals()` instead.<br/>
+However, equalivance( `==` ) will compare the object and not the value of the object. Use `.equals()` instead.<br/>
 Thus you can do the following.
 
 	var a = Ratio(15,3), b = Ratio(3,15);
@@ -126,29 +124,43 @@ Thus you can do the following.
 
 There are various ways to create a new Ratio object. Ratio.parse() is the prefered methods.
 
-	// accepts numbers as the numerator and denominator
-	var a = Ratio(1,2);
-	a.toString() == "1/2";
+**`Ratio()`**
 
-	// converts decimal values into the form of a fraction.
-	a = Ratio.parse(1/2);
-	a.toString() == "1/2";
+	// "0/1" is the default ratio
+	Ratio().toString() === "0/1";
+	
+	// Accepts whole numbers
+	Ratio(1).toString() === "1/1";
+	
+	// Accepts an numerator and denominator
+	Ratio(1,2).toString() === "1/2";
+	
+**`Ratio.parse( value )`**
 
-	// converts strings in the form of "a/b" to a fraction a/b.
-	a = Ratio.parse( "1/2" );
-	a.toString() == "1/2";
+	// Use Ratio.parse() to parse any other values that aren't whole numbers.
+	
+	// Accepts decimals
+	Ratio.parse(1/2).toString() === "1/2";
 
-	// Converts a Ratio object to a single fraction.
-	a = Ratio.parse( Ratio(1/2) );
-	a.toString() == "1/2";
+	// Accepts fractions as strings
+	Ratio.parse("1/2").toString() === "1/2";
 	
-	// Converts Ratio objects to a single fraction.
-	a = Ratio.parse( Ratio(1), Ratio(2) );
-	a.toString() == "1/2";
+	// Accepts mixed numbers as strings
+	Ratio.parse( "1 1/2" ).toString() === "3/2";
+
+	// Accepts a Ratio object
+	Ratio.parse( Ratio(1/2) ).toString() === "1/2";
 	
-	a = Ratio.parse( "1/2", "1/3" ); // same as (1/2) / (1/3)
-	a.toString() == "3/2";
+**`Ratio.parse( value1, value2 )`**<br/>
+This is the same as `value1 / value2` or `Ratio.parse(value1).divide(value2)`
 	
+	// Converts the Ratio objects to a single fraction.
+	Ratio.parse( Ratio(1), Ratio(2) ).toString() == "1/2";
+	
+	// Accepts 
+	// (1/2) / (1/3) = 3/2
+	Ratio.parse( "1/2", "1/3" ).toString() === "3/2";
+		
 ### Methods ###
 
 All proproty methods are non-destructive and return a new Ratio object.
@@ -200,7 +212,6 @@ Refer to the documentation for a complete method list.
 ## License ##
 
 License: [MIT License](http://www.opensource.org/licenses/mit-license) and [GPL v3](http://opensource.org/licenses/GPL-3.0)
-uld be a static method on the Ratio constructor.
 
 
 <hr/>
@@ -256,7 +267,7 @@ uld be a static method on the Ratio constructor.
 
 ###Special Operations:
 
-	Ratio.prototype.approximateTo()
+	Ratio.prototype.toQuantityOf()
 	Ratio.prototype.clone()
 	Ratio.prototype.correctRatio()
 	Ratio.prototype.findX()
