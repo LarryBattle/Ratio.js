@@ -17,7 +17,7 @@ Node.js, Chrome 19+, Firefox 12+, IE 7+, and Opera 11+.
 Note: Run the test cases to check for additional browser compatibility.
 
 ##Current version
-<span id="ratioVersion">0.3.4</span>
+<span id="ratioVersion">0.3.5</span>
 
 ## Installation ##
 Just include the Ratio.js script.
