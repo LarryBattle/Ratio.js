@@ -6,7 +6,7 @@ Provides a Fraction / Rational / Ratio object for javascript.
 By keeping values in a rational form, you can maintain precision and can avoid common floating point operation errors in Javascript.
 
 - [Simple Demo](http://larrybattle.github.com/Ratio.js/examples/demo-basic.html)
-- [Documentation](http://larrybattle.github.com/Ratio.js/docs/classes/Ratio.html)
+- [Documentation](http://larrybattle.github.com/Ratio.js/doc/classes/Ratio.html)
 - [Testcase](http://larrybattle.github.com/Ratio.js/test/Ratio.js_testcases.html)
 - [Release Notes](http://larrybattle.github.com/Ratio.js/history.md)
 
