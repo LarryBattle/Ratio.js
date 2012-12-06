@@ -1,6 +1,12 @@
 ##Ratio.js Release Notes##
 __Project Page:__ <https://github.com/LarryBattle/Ratio.js>  <br/>
 
+__@Version: 0.3.8__ - 12/6/2012<br/>
+- Added: Three new constants. `Ratio.MAX_PRECISION`, `Ratio.MAX_VALUE`, and `Ratio.MIN_VALUE`.
+- Removed: The vendor folder. Qunit will be downloaded from the qunit CDN link. Also YUI wasn't used.
+- Renamed: `Ratio.getTypeGuess` to `Ratio.guessType()`
+- Updated: Documentation text.
+
 __@Version: 0.3.7__ - 12/6/2012<br/>
 - Renamed: `lib/Ratio.js` and `lib/Ratio.min.js` files to include the version number at the end of the file names.<br/>
 - Changed: node example to point to `package.json` instead of `lib\Ratio.js`. <br/>
