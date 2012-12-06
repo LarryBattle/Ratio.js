@@ -17,24 +17,14 @@ Node.js, Chrome 19+, Firefox 12+, IE 7+, and Opera 11+.
 Note: Run the test cases to check for additional browser compatibility.
 
 ##Current version
-<span id="ratioVersion">0.3.6</span>
+<span id="ratioVersion">0.3.7</span>
 
 ## Installation ##
 Just include the Ratio.js script.
 
 <b>Browser:</b>
 
-	<script src="Ratio.js"/>
-
-<b>Node.js:</b>
-
-Install: 
-
-	npm install lb-ratio
-
-Import
-
-	var Ratio = require("lb-ratio");
+	<script src="Ratio-0.3.7.js">;
 
 ##Examples
 
@@ -213,73 +203,6 @@ Refer to the documentation for a complete method list.
 
 License: [MIT License](http://www.opensource.org/licenses/mit-license) and [GPL v3](http://opensource.org/licenses/GPL-3.0)
 
+## Known Issues ##
 
-<hr/>
-##Simple Overview of Ratio functions
-
-###Ratio creations:
-
-	Ratio()
-	Ratio.parse()
-	Ratio.VERSION
-
-###Ratio properties.
-
-	alwaysReduce
-	denominator
-	divSign
-	numerator
-	type
-
-###Ratio Utility methods
-
-	Ratio.gcd()
-	Ratio.getCleanENotation()
-	Ratio.getNumeratorWithSign()
-	Ratio.getPrimeFactors()
-	Ratio.getRepeatProps()
-	Ratio.getTypeGuess()
-	Ratio.getValueIfDefined()
-	Ratio.isNumeric()
-	Ratio.parseToArray()
-	Ratio.reduce()
-
-###Instance methods:
-
-###General methods without arguments:
-
-	Ratio.prototype.abs()
-	Ratio.prototype.reciprocal()
-	Ratio.prototype.isProper()
-	Ratio.prototype.mod()
-	Ratio.prototype.negate()
-	Ratio.prototype.reduce()
-
-###General methods with arguments:
-
-	Ratio.prototype.add()
-	Ratio.prototype.descale()
-	Ratio.prototype.divide()
-	Ratio.prototype.multiply()
-	Ratio.prototype.pow()
-	Ratio.prototype.scale()
-	Ratio.prototype.subtract()
-
-###Special Operations:
-
-	Ratio.prototype.toQuantityOf()
-	Ratio.prototype.clone()
-	Ratio.prototype.correctRatio()
-	Ratio.prototype.findX()
-	
-###Output Functions	
-
-	Ratio.prototype.valueOf()
-	Ratio.prototype.toString()
-	Ratio.prototype.toLocaleString()
-	Ratio.prototype.toArray()
-	
-###Comparison Functions	
-
-	Ratio.prototype.deepEquals()
-	Ratio.prototype.equals()
+- Precision is lost for values passed +/- 9007199254740992. <a href="http://stackoverflow.com/questions/307179/what-is-javascripts-max-int-whats-the-highest-integer-value-a-number-can-go-t">stackoverflow.com</a> <br/>

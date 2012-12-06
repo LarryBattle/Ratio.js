@@ -1,9 +1,14 @@
 ##Ratio.js Release Notes##
 __Project Page:__ <https://github.com/LarryBattle/Ratio.js>  <br/>
 
+__@Version: 0.3.7__ - 12/6/2012<br/>
+- Renamed: `lib/Ratio.js` and `lib/Ratio.min.js` files to include the version number at the end of the file names.<br/>
+- Changed: node example to point to `package.json` instead of `lib\Ratio.js`. <br/>
+- Added: `Ratio.random()` <br/>
+
 __@Version: 0.3.6__ - 12/5/2012<br/>
 - Added: `Ratio.prototype.floor()`, `Ratio.prototype.ceil()`, `Ratio.prototype.makeProper()`.<br/>
-- Bug Fix: Ratio.getTypeGuess() now accepts ratio string as "Infinity/x", where x is a numeric value, as a fraction.
+- Bug Fix: Ratio.getTypeGuess() now accepts ratio string as "Infinity/x", where x is a numeric value, as a fraction.<br/>
 - Bug Fix: The reduced ratio form of 0/x, where x is any non-zero, is 0/1.<br/>
 - Bug Fix: All methods can be called without arguments without an error being thrown.<br/>
 - Test cases were restructured and updated.<br/>

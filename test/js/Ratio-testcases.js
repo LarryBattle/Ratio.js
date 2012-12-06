@@ -545,6 +545,15 @@ var runTests = function () {
 		equal(func(new Ratio(4, 5).toString(), new Ratio(-3, 2).toString()), "-8/15");
 	});
 	
+	module( "Random Ratio" );
+	test("test Ratio.random()", function(){
+		var fn = function(){
+			return Ratio.random().valueOf();
+		};
+		
+		ok(fn() <= 1, "Must be less than or equal to 1");
+		ok( 0 <= fn(), "Must be greater than or equal to 0");
+	});
 	module( "Clean Scientific Notated Values" );
 	test("test Ratio.getCleanENotation()", function () {
 		var func = Ratio.getCleanENotation;
