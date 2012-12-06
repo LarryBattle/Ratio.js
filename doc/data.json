@@ -6,7 +6,7 @@
         "author": "Larry Battle , <http://bateru.com/news/>",
         "license": "MIT and GPL 3.0\nMIT License <http://www.opensource.org/licenses/mit-license>\nGPL v3 <http://opensource.org/licenses/GPL-3.0>",
         "info": "Project page: <https://github.com/LarryBattle/Ratio.js/>",
-        "version": "0.3.5.1",
+        "version": "0.3.6",
         "note": "Uses YUI-DOC to generate documentation."
     },
     "files": {
@@ -360,7 +360,7 @@
                 "type": "Ratio"
             },
             "example": [
-                "\n\tRatio.getCombinedRatio(\"1/2\",\"1/3\").toString() == \"3/2\""
+                "\n   Ratio.getCombinedRatio(\"1/2\",\"1/3\").toString() == \"3/2\""
             ],
             "class": "Ratio"
         },
@@ -875,6 +875,54 @@
             },
             "example": [
                 "\n       Ratio(27,100).toQuantityOf(3).toString() == \"1/3\";\n       Ratio(1,2).toQuantityOf(2,3,4).toString() === \"1/2\";"
+            ],
+            "class": "Ratio"
+        },
+        {
+            "file": "..\\lib\\Ratio.js",
+            "line": 782,
+            "description": "Returns a new Ratio from the floor of the current Ratio instance.",
+            "itemtype": "method",
+            "name": "Ratio.prototype.floor",
+            "chainable": 1,
+            "return": {
+                "description": "",
+                "type": "Ratio"
+            },
+            "example": [
+                "\n       Ratio.parse(4.2).floor().toString() === \"4/1\""
+            ],
+            "class": "Ratio"
+        },
+        {
+            "file": "..\\lib\\Ratio.js",
+            "line": 794,
+            "description": "Returns a new Ratio from the ceil of the current Ratio instance.",
+            "itemtype": "method",
+            "name": "Ratio.prototype.ceil",
+            "chainable": 1,
+            "return": {
+                "description": "",
+                "type": "Ratio"
+            },
+            "example": [
+                "\n       Ratio.parse(4.2).ceil().toString() === \"5/1\""
+            ],
+            "class": "Ratio"
+        },
+        {
+            "file": "..\\lib\\Ratio.js",
+            "line": 806,
+            "description": "Returns a new Ratio by removing the integer part of the current instance.\nIn otherwords, returns the decimal portion as a fraction.",
+            "itemtype": "method",
+            "name": "Ratio.prototype.makeProper",
+            "chainable": 1,
+            "return": {
+                "description": "",
+                "type": "Ratio"
+            },
+            "example": [
+                "\n       Ratio.parse(4.2).makeProper().toString() === \"2/100\""
             ],
             "class": "Ratio"
         }
