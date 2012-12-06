@@ -365,41 +365,41 @@ var runTests = function () {
 	});
 	
 	module("Guess Input Type");
-	test("test Ratio.getTypeGuess() for output as `Ratio`", function () {
-		var func = Ratio.getTypeGuess;
+	test("test Ratio.guessType() for output as `Ratio`", function () {
+		var func = Ratio.guessType;
 		equal(func(new Ratio()), "Ratio");
 		equal(func(new Ratio(1, 2)), "Ratio");
 		equal(func(new Ratio(2e3)), "Ratio");
 	});
-	test("test Ratio.getTypeGuess() for output as `number`", function () {
-		var func = Ratio.getTypeGuess;
+	test("test Ratio.guessType() for output as `number`", function () {
+		var func = Ratio.guessType;
 		equal(func(23), "number");
 		equal(func(+23), "number");
 		equal(func(-23), "number");
 	});
-	test("test Ratio.getTypeGuess() for output as `decimal`", function () {
-		var func = Ratio.getTypeGuess;
+	test("test Ratio.guessType() for output as `decimal`", function () {
+		var func = Ratio.guessType;
 		
 		equal(func(1.1), "decimal");
 		equal(func("-1.1"), "decimal");
 		equal(func("+1.1"), "decimal");
 	});
-	test("test Ratio.getTypeGuess() for output as `e`", function () {
-		var func = Ratio.getTypeGuess;
+	test("test Ratio.guessType() for output as `e`", function () {
+		var func = Ratio.guessType;
 		
 		equal(func(1.1e30), "e");
 		equal(func(-1.1e-23), "e");
 		equal(func(+1.1e+23), "e");
 	});
-	test("test Ratio.getTypeGuess() for output as `mixed`", function () {
-		var func = Ratio.getTypeGuess;
+	test("test Ratio.guessType() for output as `mixed`", function () {
+		var func = Ratio.guessType;
 		
 		equal(func("10 1/2"), "mixed");
 		equal(func("-10 -1/2"), "mixed");
 		equal(func("+10 -1/+2"), "mixed");
 	});
-	test("test Ratio.getTypeGuess() for output as `fraction`", function () {
-		var func = Ratio.getTypeGuess;
+	test("test Ratio.guessType() for output as `fraction`", function () {
+		var func = Ratio.guessType;
 		
 		equal(func("+1/2"), "fraction");
 		equal(func("-1e12/+2e103"), "fraction");
@@ -411,8 +411,8 @@ var runTests = function () {
 		
 		equal(func("-23/Infinity"), "fraction");
 	});
-	test("test Ratio.getTypeGuess() for output as `NaN`", function () {
-		var func = Ratio.getTypeGuess;
+	test("test Ratio.guessType() for output as `NaN`", function () {
+		var func = Ratio.guessType;
 		
 		equal(func(), "NaN");
 		equal(func(function () {}), "NaN");
