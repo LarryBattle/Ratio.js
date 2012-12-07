@@ -206,4 +206,4 @@ License: [MIT License](http://www.opensource.org/licenses/mit-license) and [GPL 
 ## Known Issues ##
 
 - Precision is lost for values passed +/- 9007199254740992. <a href="http://stackoverflow.com/questions/307179/what-is-javascripts-max-int-whats-the-highest-integer-value-a-number-can-go-t">stackoverflow.com</a> <br/>
-- It's best to collect `.correctRatio()` if you manually change the denominator. Alternatively you could use `.clone(null, new_denominator_value)` to get a new ratio with a modified denominator.
+- It's best to call `.correctRatio()` if you manually change the denominator. Alternatively you could use `.clone(null, new_denominator_value)` to get a new ratio with a modified denominator.
