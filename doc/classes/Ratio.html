@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.3.7</em>
+            <em>API Docs for: 0.3.9</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -90,7 +90,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.7.js.html#l14"><code>..\lib\Ratio-0.3.7.js:14</code></a>
+            Defined in: <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l14"><code>..\lib\Ratio-0.3.9.js:14</code></a>
         </div>
     
 
@@ -170,7 +170,7 @@ In otherwords, <code>new Ratio( value )</code> is the same as <code>Ratio( value
             
         
         
-        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.7.js.html#l14"><code>..\lib\Ratio-0.3.7.js:14</code></a>
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l14"><code>..\lib\Ratio-0.3.9.js:14</code></a>
         
         </p>
 
@@ -232,7 +232,7 @@ In otherwords, <code>new Ratio( value )</code> is the same as <code>Ratio( value
                     
 
                     <div class="param-description">
-                        <p>if true, then the Ratio object and the child of it will always represent the simplified form of the rational.</p>
+                        <p>if true, then the Ratio object and the children from it will always represent the simplified form of the rational.</p>
                     </div>
 
                     
@@ -338,14 +338,14 @@ In otherwords, <code>new Ratio( value )</code> is the same as <code>Ratio( value
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_Ratio.getTypeGuess">Ratio.getTypeGuess</a>
+                                <a href="#method_Ratio.getValueIfDefined">Ratio.getValueIfDefined</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_Ratio.getValueIfDefined">Ratio.getValueIfDefined</a>
+                                <a href="#method_Ratio.guessType">Ratio.guessType</a>
 
                                 
                                 
@@ -586,6 +586,34 @@ In otherwords, <code>new Ratio( value )</code> is the same as <code>Ratio( value
                     <ul class="index-list properties">
                         
                             <li class="index-item property">
+                                <a href="#property_Ratio.MAX_PRECISION">Ratio.MAX_PRECISION</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_Ratio.MAX_VALUE">Ratio.MAX_VALUE</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_Ratio.MIN_VALUE">Ratio.MIN_VALUE</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_Ratio.regex">Ratio.regex</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
                                 <a href="#property_Ratio.VERSION">Ratio.VERSION</a>
 
                                 
@@ -616,6 +644,12 @@ In otherwords, <code>new Ratio( value )</code> is the same as <code>Ratio( value
                 <li class="arg">
                     
                         <code>a</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>b</code>
                     
                 </li>
             
@@ -652,7 +686,7 @@ In otherwords, <code>new Ratio( value )</code> is the same as <code>Ratio( value
             
         
         
-        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.7.js.html#l79"><code>..\lib\Ratio-0.3.7.js:79</code></a>
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l109"><code>..\lib\Ratio-0.3.9.js:109</code></a>
         
         </p>
 
@@ -663,7 +697,7 @@ In otherwords, <code>new Ratio( value )</code> is the same as <code>Ratio( value
     </div>
 
     <div class="description">
-        <p>Find the Greatest Common Factor between two numbers using "Euler Method".</p>
+        <p>Find the Greatest Common Factor between two numbers using the Euler Method.</p>
     </div>
 
     
@@ -675,6 +709,21 @@ In otherwords, <code>new Ratio( value )</code> is the same as <code>Ratio( value
                 <li class="param">
                     
                         <code class="param-name">a</code>
+                        <span class="type">Number</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">b</code>
                         <span class="type">Number</span>
                     
 
@@ -700,7 +749,6 @@ In otherwords, <code>new Ratio( value )</code> is the same as <code>Ratio( value
                     
                         <span class="type">Number</span>:
                     
-                    b
                 
             </div>
         </div>
@@ -764,7 +812,7 @@ In otherwords, <code>new Ratio( value )</code> is the same as <code>Ratio( value
             
         
         
-        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.7.js.html#l327"><code>..\lib\Ratio-0.3.7.js:327</code></a>
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l357"><code>..\lib\Ratio-0.3.9.js:357</code></a>
         
         </p>
 
@@ -775,8 +823,7 @@ In otherwords, <code>new Ratio( value )</code> is the same as <code>Ratio( value
     </div>
 
     <div class="description">
-        <p>Rounds up a scientific notated number with 8+ trailing 0s or 9s.<br/>
-Note: Returns number as string to preserve value.</p>
+        <p>Rounds up a scientific notated number with 8+ trailing 0s or 9s.<br/></p>
     </div>
 
     
@@ -813,6 +860,9 @@ Note: Returns number as string to preserve value.</p>
                     
                         <span class="type">String</span>:
                     
+                    <ul>
+<li>Returns number as string to preserve value.</li>
+</ul>
                 
             </div>
         </div>
@@ -872,7 +922,7 @@ Note: Returns number as string to preserve value.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.7.js.html#l349"><code>..\lib\Ratio-0.3.7.js:349</code></a>
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l378"><code>..\lib\Ratio-0.3.9.js:378</code></a>
         
         </p>
 
@@ -966,7 +1016,7 @@ Note: Returns number as string to preserve value.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.7.js.html#l99"><code>..\lib\Ratio-0.3.7.js:99</code></a>
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l130"><code>..\lib\Ratio-0.3.9.js:130</code></a>
         
         </p>
 
@@ -977,8 +1027,7 @@ Note: Returns number as string to preserve value.</p>
     </div>
 
     <div class="description">
-        <p>Returns the numerator with the corresponding sign of (top/bottom).<br/>
-Used to force <code>top</code> to represent the sign of the Ratio.</p>
+        <p>Returns the numerator with the corresponding sign of (top/bottom).<br/></p>
     </div>
 
     
@@ -1093,7 +1142,7 @@ Used to force <code>top</code> to represent the sign of the Ratio.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.7.js.html#l296"><code>..\lib\Ratio-0.3.7.js:296</code></a>
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l326"><code>..\lib\Ratio-0.3.9.js:326</code></a>
         
         </p>
 
@@ -1104,7 +1153,7 @@ Used to force <code>top</code> to represent the sign of the Ratio.</p>
     </div>
 
     <div class="description">
-        <p>Returns an array of the prime factors of a number. <br/>
+        <p>Returns the prime factors of a number. <br/>
 More info <a href="http://bateru.com/news/2012/05/code-of-the-day-javascript-prime-factors-of-a-number/">http://bateru.com/news/2012/05/code-of-the-day-javascript-prime-factors-of-a-number/</a></p>
     </div>
 
@@ -1179,7 +1228,7 @@ More info <a href="http://bateru.com/news/2012/05/code-of-the-day-javascript-pri
 
     
         <span class="returns-inline">
-            <span class="type">Array</span>
+            <span class="type">ArrayString, String, String</span>
         </span>
     
 
@@ -1206,7 +1255,7 @@ More info <a href="http://bateru.com/news/2012/05/code-of-the-day-javascript-pri
             
         
         
-        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.7.js.html#l259"><code>..\lib\Ratio-0.3.7.js:259</code></a>
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l289"><code>..\lib\Ratio-0.3.9.js:289</code></a>
         
         </p>
 
@@ -1261,9 +1310,11 @@ It should be noted that the last digit might be removed to avoid rounding errors
             <div class="returns-description">
                 
                     
-                        <span class="type">Array</span>:
+                        <span class="type">ArrayString, String, String</span>:
                     
-                    an array of 3 numbers.
+                    <ul>
+<li>Must return strings because of zeros in pattern.</li>
+</ul>
                 
             </div>
         </div>
@@ -1281,8 +1332,142 @@ It should be noted that the last digit might be removed to avoid rounding errors
 </div>
 
                 
-                    <div id="method_Ratio.getTypeGuess" class="method item">
-    <h3 class="name"><code>Ratio.getTypeGuess</code></h3>
+                    <div id="method_Ratio.getValueIfDefined" class="method item">
+    <h3 class="name"><code>Ratio.getValueIfDefined</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>backup</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>value</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l96"><code>..\lib\Ratio-0.3.9.js:96</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns the default value if the provided new value is undefined or null.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">backup</code>
+                        <span class="type"></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <ul>
+<li>default value</li>
+</ul>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">value</code>
+                        <span class="type"></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"></span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <p>Ratio.getValueIfDefined( 4, null ) == 4</p>
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_Ratio.guessType" class="method item">
+    <h3 class="name"><code>Ratio.guessType</code></h3>
 
     
         <div class="args">
@@ -1327,7 +1512,7 @@ It should be noted that the last digit might be removed to avoid rounding errors
             
         
         
-        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.7.js.html#l114"><code>..\lib\Ratio-0.3.7.js:114</code></a>
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l144"><code>..\lib\Ratio-0.3.9.js:144</code></a>
         
         </p>
 
@@ -1351,7 +1536,7 @@ Types include: <code>NaN</code>, <code>Ratio</code>, <code>number</code>, <code>
                 <li class="param">
                     
                         <code class="param-name">obj</code>
-                        <span class="type">Object</span>
+                        <span class="type"></span>
                     
 
                     
@@ -1387,140 +1572,7 @@ Types include: <code>NaN</code>, <code>Ratio</code>, <code>number</code>, <code>
             <h4>Example:</h4>
 
             <div class="example-content">
-                <p>Ratio.getTypeGuess("1/3") == "fraction";</p>
-            </div>
-        </div>
-    
-</div>
-
-                
-                    <div id="method_Ratio.getValueIfDefined" class="method item">
-    <h3 class="name"><code>Ratio.getValueIfDefined</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>backup</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>value</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">Object</span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.7.js.html#l65"><code>..\lib\Ratio-0.3.7.js:65</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Returns the default value is the provides new value is undefined or null.<br/>
-Similar to <code>var a = (b || c)</code>.</p>
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">backup</code>
-                        <span class="type">Object</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                         
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">value</code>
-                        <span class="type">Object</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                         
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">Object</span>:
-                    
-                
-            </div>
-        </div>
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <p>Ratio.getValueIfDefined( 4, null ) == 4</p>
+                <p>Ratio.guessType("1/3") == "fraction";</p>
             </div>
         </div>
     
@@ -1573,7 +1625,7 @@ Similar to <code>var a = (b || c)</code>.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.7.js.html#l53"><code>..\lib\Ratio-0.3.7.js:53</code></a>
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l84"><code>..\lib\Ratio-0.3.9.js:84</code></a>
         
         </p>
 
@@ -1692,7 +1744,7 @@ Similar to <code>var a = (b || c)</code>.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.7.js.html#l194"><code>..\lib\Ratio-0.3.7.js:194</code></a>
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l224"><code>..\lib\Ratio-0.3.9.js:224</code></a>
         
         </p>
 
@@ -1837,7 +1889,7 @@ Supports mixed numbers, whole numbers, decimals, scientific numbers and Ratio ob
             
         
         
-        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.7.js.html#l144"><code>..\lib\Ratio-0.3.7.js:144</code></a>
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l174"><code>..\lib\Ratio-0.3.9.js:174</code></a>
         
         </p>
 
@@ -1848,7 +1900,7 @@ Supports mixed numbers, whole numbers, decimals, scientific numbers and Ratio ob
     </div>
 
     <div class="description">
-        <p>Converts a numeric value to a Ratio in the form of [top, bottom], such that top/bottom.</p>
+        <p>Converts a numeric value to an array in the form of [top, bottom], such that top/bottom evaluates to the passed value.</p>
     </div>
 
     
@@ -1940,7 +1992,7 @@ Supports mixed numbers, whole numbers, decimals, scientific numbers and Ratio ob
             
         
         
-        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.7.js.html#l689"><code>..\lib\Ratio-0.3.7.js:689</code></a>
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l716"><code>..\lib\Ratio-0.3.9.js:716</code></a>
         
         </p>
 
@@ -2037,7 +2089,7 @@ Supports mixed numbers, whole numbers, decimals, scientific numbers and Ratio ob
             
         
         
-        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.7.js.html#l524"><code>..\lib\Ratio-0.3.7.js:524</code></a>
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l551"><code>..\lib\Ratio-0.3.9.js:551</code></a>
         
         </p>
 
@@ -2048,7 +2100,7 @@ Supports mixed numbers, whole numbers, decimals, scientific numbers and Ratio ob
     </div>
 
     <div class="description">
-        <p>Adds the current Ratio by another Ratio.</p>
+        <p>Adds the current Ratio to another Ratio.</p>
     </div>
 
     
@@ -2157,7 +2209,7 @@ Supports mixed numbers, whole numbers, decimals, scientific numbers and Ratio ob
             
         
         
-        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.7.js.html#l813"><code>..\lib\Ratio-0.3.7.js:813</code></a>
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l840"><code>..\lib\Ratio-0.3.9.js:840</code></a>
         
         </p>
 
@@ -2238,7 +2290,7 @@ Supports mixed numbers, whole numbers, decimals, scientific numbers and Ratio ob
             
         
         
-        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.7.js.html#l666"><code>..\lib\Ratio-0.3.7.js:666</code></a>
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l693"><code>..\lib\Ratio-0.3.9.js:693</code></a>
         
         </p>
 
@@ -2342,7 +2394,7 @@ This is useful if want to ensure that the Ratio contains only whole numbers in t
             
         
         
-        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.7.js.html#l490"><code>..\lib\Ratio-0.3.7.js:490</code></a>
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l517"><code>..\lib\Ratio-0.3.9.js:517</code></a>
         
         </p>
 
@@ -2448,17 +2500,7 @@ The clone propery value can be changed if the appropriate argument value is supp
     <h3 class="name"><code>Ratio.prototype.correctRatio</code></h3>
 
     
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>obj</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
+        <span class="paren">()</span>
     
 
     
@@ -2490,7 +2532,7 @@ The clone propery value can be changed if the appropriate argument value is supp
             
         
         
-        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.7.js.html#l380"><code>..\lib\Ratio-0.3.7.js:380</code></a>
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l409"><code>..\lib\Ratio-0.3.9.js:409</code></a>
         
         </p>
 
@@ -2509,29 +2551,6 @@ The clone propery value can be changed if the appropriate argument value is supp
 This function is called after the instances is created.</p>
     </div>
 
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">obj</code>
-                        <span class="type">Object</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                         
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
     
 
     
@@ -2607,7 +2626,7 @@ This function is called after the instances is created.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.7.js.html#l578"><code>..\lib\Ratio-0.3.7.js:578</code></a>
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l605"><code>..\lib\Ratio-0.3.9.js:605</code></a>
         
         </p>
 
@@ -2727,7 +2746,7 @@ This function is called after the instances is created.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.7.js.html#l621"><code>..\lib\Ratio-0.3.7.js:621</code></a>
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l648"><code>..\lib\Ratio-0.3.9.js:648</code></a>
         
         </p>
 
@@ -2738,7 +2757,7 @@ This function is called after the instances is created.</p>
     </div>
 
     <div class="description">
-        <p>From the Ratio instance, returns an new Ratio scaled down by a factor.</p>
+        <p>Returns an new Ratio scaled down by a factor from the current instance.</p>
     </div>
 
     
@@ -2863,7 +2882,7 @@ This function is called after the instances is created.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.7.js.html#l550"><code>..\lib\Ratio-0.3.7.js:550</code></a>
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l577"><code>..\lib\Ratio-0.3.9.js:577</code></a>
         
         </p>
 
@@ -2991,7 +3010,7 @@ This function is called after the instances is created.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.7.js.html#l565"><code>..\lib\Ratio-0.3.7.js:565</code></a>
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l592"><code>..\lib\Ratio-0.3.9.js:592</code></a>
         
         </p>
 
@@ -3002,7 +3021,7 @@ This function is called after the instances is created.</p>
     </div>
 
     <div class="description">
-        <p>Compares if the current Ratio and another object have the same value.</p>
+        <p>Returns if the current Ratio and another object have the same numeric value.</p>
     </div>
 
     
@@ -3095,7 +3114,7 @@ This function is called after the instances is created.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.7.js.html#l737"><code>..\lib\Ratio-0.3.7.js:737</code></a>
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l764"><code>..\lib\Ratio-0.3.9.js:764</code></a>
         
         </p>
 
@@ -3180,7 +3199,7 @@ Note: Returns null if the the string can't be split into exactly 2 elements.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.7.js.html#l801"><code>..\lib\Ratio-0.3.7.js:801</code></a>
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l828"><code>..\lib\Ratio-0.3.9.js:828</code></a>
         
         </p>
 
@@ -3259,7 +3278,7 @@ Note: Returns null if the the string can't be split into exactly 2 elements.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.7.js.html#l726"><code>..\lib\Ratio-0.3.7.js:726</code></a>
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l753"><code>..\lib\Ratio-0.3.9.js:753</code></a>
         
         </p>
 
@@ -3340,7 +3359,7 @@ Note: Returns null if the the string can't be split into exactly 2 elements.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.7.js.html#l825"><code>..\lib\Ratio-0.3.7.js:825</code></a>
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l852"><code>..\lib\Ratio-0.3.9.js:852</code></a>
         
         </p>
 
@@ -3422,7 +3441,7 @@ In otherwords, returns the decimal portion as a fraction.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.7.js.html#l701"><code>..\lib\Ratio-0.3.7.js:701</code></a>
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l728"><code>..\lib\Ratio-0.3.9.js:728</code></a>
         
         </p>
 
@@ -3520,7 +3539,7 @@ Which is the same as Ratio( (numerator % denominator), 1 ).</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.7.js.html#l590"><code>..\lib\Ratio-0.3.7.js:590</code></a>
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l617"><code>..\lib\Ratio-0.3.9.js:617</code></a>
         
         </p>
 
@@ -3640,7 +3659,7 @@ Which is the same as Ratio( (numerator % denominator), 1 ).</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.7.js.html#l714"><code>..\lib\Ratio-0.3.7.js:714</code></a>
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l741"><code>..\lib\Ratio-0.3.9.js:741</code></a>
         
         </p>
 
@@ -3737,7 +3756,7 @@ Which is the same as Ratio( (numerator % denominator), 1 ).</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.7.js.html#l636"><code>..\lib\Ratio-0.3.7.js:636</code></a>
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l663"><code>..\lib\Ratio-0.3.9.js:663</code></a>
         
         </p>
 
@@ -3857,7 +3876,7 @@ Which is the same as Ratio( (numerator % denominator), 1 ).</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.7.js.html#l757"><code>..\lib\Ratio-0.3.7.js:757</code></a>
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l784"><code>..\lib\Ratio-0.3.9.js:784</code></a>
         
         </p>
 
@@ -3938,7 +3957,7 @@ Which is the same as Ratio( (numerator % denominator), 1 ).</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.7.js.html#l511"><code>..\lib\Ratio-0.3.7.js:511</code></a>
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l538"><code>..\lib\Ratio-0.3.9.js:538</code></a>
         
         </p>
 
@@ -3949,7 +3968,7 @@ Which is the same as Ratio( (numerator % denominator), 1 ).</p>
     </div>
 
     <div class="description">
-        <p>From the Ratio instance, returns a new instacne with a reduced ratio by factoring out the greatest common multiple.</p>
+        <p>Returns a reduced ratio from the current instance.</p>
     </div>
 
     
@@ -4035,7 +4054,7 @@ Which is the same as Ratio( (numerator % denominator), 1 ).</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.7.js.html#l651"><code>..\lib\Ratio-0.3.7.js:651</code></a>
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l678"><code>..\lib\Ratio-0.3.9.js:678</code></a>
         
         </p>
 
@@ -4171,7 +4190,7 @@ Which is the same as Ratio( (numerator % denominator), 1 ).</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.7.js.html#l605"><code>..\lib\Ratio-0.3.7.js:605</code></a>
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l632"><code>..\lib\Ratio-0.3.9.js:632</code></a>
         
         </p>
 
@@ -4182,7 +4201,7 @@ Which is the same as Ratio( (numerator % denominator), 1 ).</p>
     </div>
 
     <div class="description">
-        <p>Subtracts the current Ratio by another Ratio.</p>
+        <p>Subtracts the current Ratio from another Ratio.</p>
     </div>
 
     
@@ -4289,7 +4308,7 @@ Which is the same as Ratio( (numerator % denominator), 1 ).</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.7.js.html#l414"><code>..\lib\Ratio-0.3.7.js:414</code></a>
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l442"><code>..\lib\Ratio-0.3.9.js:442</code></a>
         
         </p>
 
@@ -4369,7 +4388,7 @@ Which is the same as Ratio( (numerator % denominator), 1 ).</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.7.js.html#l437"><code>..\lib\Ratio-0.3.7.js:437</code></a>
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l465"><code>..\lib\Ratio-0.3.9.js:465</code></a>
         
         </p>
 
@@ -4381,8 +4400,7 @@ Which is the same as Ratio( (numerator % denominator), 1 ).</p>
 
     <div class="description">
         <p>From the Ratio instance, returns a string of the Ratio in fraction form if the numerator and denominator are Rational numbers.<br/>
-Note: If the computed value of (numerator / denominator) is a whole number, then the whole number is returned.<br/>
-Note: If the computed value of (numerator / denominator) is not a number, the result is returned. <br/></p>
+The output format can be a whole number, mixed number, NaN, proper fraction depending on the computed value of (numerator / denominator).</p>
     </div>
 
     
@@ -4466,7 +4484,7 @@ Note: If the computed value of (numerator / denominator) is not a number, the re
             
         
         
-        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.7.js.html#l769"><code>..\lib\Ratio-0.3.7.js:769</code></a>
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l796"><code>..\lib\Ratio-0.3.9.js:796</code></a>
         
         </p>
 
@@ -4574,7 +4592,7 @@ smaller than the error rate.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.7.js.html#l472"><code>..\lib\Ratio-0.3.7.js:472</code></a>
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l499"><code>..\lib\Ratio-0.3.9.js:499</code></a>
         
         </p>
 
@@ -4660,7 +4678,7 @@ Note: The division symbol can be change by modification of the <code>divSign</co
             
         
         
-        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.7.js.html#l425"><code>..\lib\Ratio-0.3.7.js:425</code></a>
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l453"><code>..\lib\Ratio-0.3.9.js:453</code></a>
         
         </p>
 
@@ -4742,7 +4760,7 @@ Note: The division symbol can be change by modification of the <code>divSign</co
             
         
         
-        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.7.js.html#l364"><code>..\lib\Ratio-0.3.7.js:364</code></a>
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l393"><code>..\lib\Ratio-0.3.9.js:393</code></a>
         
         </p>
 
@@ -4837,7 +4855,7 @@ Values range from [0, 1]</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.7.js.html#l229"><code>..\lib\Ratio-0.3.7.js:229</code></a>
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l259"><code>..\lib\Ratio-0.3.9.js:259</code></a>
         
         </p>
 
@@ -4848,7 +4866,7 @@ Values range from [0, 1]</p>
     </div>
 
     <div class="description">
-        <p>Given a numerator and denominator in the form of [a,b], returns as an array of numbers.</p>
+        <p>Returns an array of two numbers that represent ratio of the passed values.</p>
     </div>
 
     
@@ -4918,7 +4936,7 @@ Values range from [0, 1]</p>
    Ratio.reduce( "9/12" ) // returns [3,4]</p>
 
 <p>Example 3:<br/>
-   Ratio.reduce( "10/4" ).toString() // returns [5,2]</p>
+   Ratio.reduce( "10/4", "5/3" ) // returns [5,2]</p>
             </div>
         </div>
     
@@ -4931,6 +4949,185 @@ Values range from [0, 1]</p>
         
             <div id="properties" class="api-class-tabpanel">
                 <h2 class="off-left">Properties</h2>
+
+                
+                    <div id="property_Ratio.MAX_PRECISION" class="property item">
+    <h3 class="name"><code>Ratio.MAX_PRECISION</code></h3>
+    <span class="type">Number</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l39"><code>..\lib\Ratio-0.3.9.js:39</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Represents the maximum amount of precision avaiable. <br/>
+Any value with more digits will become estimations.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_Ratio.MAX_VALUE" class="property item">
+    <h3 class="name"><code>Ratio.MAX_VALUE</code></h3>
+    <span class="type">Number</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l47"><code>..\lib\Ratio-0.3.9.js:47</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Represents the largest value that stored without loss of precision. <br/>
+Any value larger will become estimations.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_Ratio.MIN_VALUE" class="property item">
+    <h3 class="name"><code>Ratio.MIN_VALUE</code></h3>
+    <span class="type">Number</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l55"><code>..\lib\Ratio-0.3.9.js:55</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Represents the smallest value that stored without loss of precision. <br/>
+Any value smaller will become estimations.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_Ratio.regex" class="property item">
+    <h3 class="name"><code>Ratio.regex</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l63"><code>..\lib\Ratio-0.3.9.js:63</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Stores complex regular expressions.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
 
                 
                     <div id="property_Ratio.VERSION" class="property item">
@@ -4956,7 +5153,7 @@ Values range from [0, 1]</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.7.js.html#l47"><code>..\lib\Ratio-0.3.7.js:47</code></a>
+        <a href="..&#x2F;files&#x2F;.._lib_Ratio-0.3.9.js.html#l77"><code>..\lib\Ratio-0.3.9.js:77</code></a>
         
         </p>
 

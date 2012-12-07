@@ -3,20 +3,19 @@
  * Type `jake` to run the build.
  *
  * @author Larry Battle
- * @date Sept 09, 2012
  * @requires jake.js, yuidoc.js, uglify.js, node.js
  */
-// check for required modules
-// require('uglify-js');
-// require('yuidoc');
-
 var fs = require('fs'),
 basePath = "../",
 projectInfo = require(basePath + "package.json"),
 paths = {
+	packageInfo : basePath + "/package.json",
 	doc : basePath + "doc",
 	min : basePath + "lib/Ratio-" + projectInfo.version + ".min.js",
 	lib : basePath + "lib",
+	demo : basePath + "examples/demo-basic.html",
+	test : basePath + "test/Ratio.js_testcases.html",
+	metrics : basePath + "test/Ratio.js_metrics.html",
 	uncompressed : basePath + "lib/Ratio-" + projectInfo.version + ".js",
 	readme : basePath + "readme.md"
 };
@@ -37,21 +36,20 @@ var getMinimizedCode = function (orig_code) {
 	ast = ug.pro.ast_squeeze(ast);
 	return ug.pro.gen_code(ast);
 };
+
+var updateRatioFilePathFunc = function (str, version) {
+	str = ("" + str).replace(/(lib\/Ratio-)([\d.]+[^\.]+)(.js)/, "$1" + version + "$3");
+	return str;
+};
+
 desc("Default task");
 task("default", function () {
 	console.log("Starting build.");
 	jake.Task.updateVersion.invoke();
 	jake.Task.makeDoc.invoke();
 	jake.Task.compress.invoke();
-	console.log("All task complete.");
+	console.log("Build complete.");
 });
-
-// need to update Ratio.js path for HTML files (demo, test, and metric)
-// desc( "Update Ratio file with version number in package.json" );
-// task("", function(){
-// fs.writeStream("","", function(){
-// });
-// });
 
 desc("Updated version information in Ratio-*.js");
 task("updateVersion", function () {
@@ -62,8 +60,10 @@ task("updateVersion", function () {
 	});
 	readAndUpdateVersion(paths.readme, function (str, version) {
 		str = ("" + str).replace(/("ratioVersion"\s*>)([^<]+)(<\/)/, "$1" + version + "$3");
-		str = str.replace( /(src=")([^"]+)(")/, "$1Ratio-0.3.7.js$3");
 		return str;
+	});
+	"packageInfo,readme,demo,test,metrics".split(",").forEach(function (pathName) {
+		readAndUpdateVersion(paths[pathName], updateRatioFilePathFunc);
 	});
 });
 
@@ -76,10 +76,5 @@ task("makeDoc", function () {
 desc("Using uglify.js to minimize Ratio-*.js to Ratio-*.min.js.");
 task("compress", function () {
 	console.log("\nCompressing %s to %s", paths.uncompressed, paths.min);
-	//jake.exec("rm " + paths.lib + "/Ratio-*.min.js");
 	jake.exec("uglifyjs " + paths.uncompressed + " > " + paths.min);
-	// var file = fs.readFileSync( paths.uncompressed ).toString(),
-	// updatedFile = getMinimizedCode( file );
-	
-	// fs.writeFileSync( paths.uncompressed, updatedFile );
 });

@@ -1,13 +1,13 @@
 /**
-* @project Ratio.js
-* @purpose Testcases for new Ratio.js
-* @author Larry Battle , <http://bateru.com/news/>
-* @license MIT and GPL 3.0
-*/
+ * @project Ratio.js
+ * @purpose Testcases for new Ratio.js
+ * @author Larry Battle , <http://bateru.com/news/>
+ * @license MIT and GPL 3.0
+ */
 var exports = {};
 // contains all tests.
 var runTests = function () {
-
+	
 	module("Required Static Ratio Functions");
 	test("test Ratio.isNumeric()", function () {
 		var func = Ratio.isNumeric;
@@ -54,7 +54,7 @@ var runTests = function () {
 		equal(func(4, 8), 4);
 		equal(func(10, 20), 10);
 		equal(func(41329375731, 82658751462), 41329375731);
-	});	
+	});
 	test("test Ratio.getValueIfDefined()", function () {
 		var func = Ratio.getValueIfDefined,
 		a;
@@ -71,7 +71,10 @@ var runTests = function () {
 	
 	module("Ratio Global Constants");
 	test("test for version number", function () {
-		ok(Ratio.VERSION, "Version number is detected.");
+		equal(typeof Ratio.VERSION, "string", "Ratio.VERISON is detected.");
+		equal(typeof Ratio.MIN_VALUE, "number", "Ratio.MIN_VALUE is detected.");
+		equal(typeof Ratio.MAX_VALUE, "number", "Ratio.MAX_VALUE is detected.");
+		equal(typeof Ratio.MAX_PRECISION, "number", "Ratio.MAX_PRECISION is detected.");
 	});
 	module("Instantiation");
 	test("test new Ratio creation", function () {
@@ -131,7 +134,7 @@ var runTests = function () {
 		equal((func(Infinity, Infinity)), "NaN");
 		equal((func(NaN, 0)), "NaN");
 	});
-	module( "Cloning" );
+	module("Cloning");
 	test("test Ratio.prototype.clone with no arguments", function () {
 		var a = new Ratio(1, 3),
 		b = a.clone(),
@@ -431,7 +434,7 @@ var runTests = function () {
 		equal(func("a/b"), "NaN");
 	});
 	
-	module( "Parse Value to Array" );
+	module("Parse Value to Array");
 	test("test Ratio.parseToArray() with invalid input", function () {
 		var func = Ratio.parseToArray;
 		
@@ -518,7 +521,7 @@ var runTests = function () {
 		deepEqual(func(" -1 1  / 2 "), [-3, 2]);
 	});
 	
-	module( "Parsing Value to Ratio" );
+	module("Parsing Value to Ratio");
 	test("test Ratio.parse() with single arguments.", function () {
 		var func = function (a) {
 			return Ratio.parse(a).toLocaleString();
@@ -545,16 +548,16 @@ var runTests = function () {
 		equal(func(new Ratio(4, 5).toString(), new Ratio(-3, 2).toString()), "-8/15");
 	});
 	
-	module( "Random Ratio" );
-	test("test Ratio.random()", function(){
-		var fn = function(){
+	module("Random Ratio");
+	test("test Ratio.random()", function () {
+		var fn = function () {
 			return Ratio.random().valueOf();
 		};
 		
 		ok(fn() <= 1, "Must be less than or equal to 1");
-		ok( 0 <= fn(), "Must be greater than or equal to 0");
+		ok(0 <= fn(), "Must be greater than or equal to 0");
 	});
-	module( "Clean Scientific Notated Values" );
+	module("Clean Scientific Notated Values");
 	test("test Ratio.getCleanENotation()", function () {
 		var func = Ratio.getCleanENotation;
 		equal(func(null), "0");
@@ -573,7 +576,7 @@ var runTests = function () {
 		equal(func(-1.2e-10, 1.5e15), new Ratio(-1.2e-10, 1.5e15).toString());
 	});
 	
-	module( "Comparison Functions" );
+	module("Comparison Functions");
 	test("test Ratio.prototype.equals() against self using `.valueOf()`, `.toString()`, and `.toLocaleString()`", function () {
 		var func = function (a, b) {
 			var x = new Ratio(a, b),
@@ -891,7 +894,7 @@ var runTests = function () {
 		};
 		equal(func(), "NaN/1");
 		equal(func(0), "0/1");
-		equal(func(0,200), "0/1");
+		equal(func(0, 200), "0/1");
 		
 		equal(func(1), "1/1");
 		equal(func(1, 3), "1/3");
@@ -901,7 +904,7 @@ var runTests = function () {
 		equal(func(7 / 3), "7/3");
 		equal(func(1 / 111), "1/111");
 		equal(func(1 / 333), "1/333");
-	});	
+	});
 	
 	module("Use Cases");
 	test("test user case 1", function () {
@@ -917,8 +920,13 @@ var runTests = function () {
 		equal(a.multiply(12).reduce().toLocaleString(), 12);
 		equal(a.toLocaleString(), "1");
 	});
-	// test("test user case 2: Calculate PI", function () {
-	// });
+	test("test user case 2: Calculate PI", function () {
+		var a = Ratio(16).multiply(	Ratio(Math.atan(Ratio(1) / Ratio(5)))),
+			b = Ratio(4).multiply( Ratio(Math.atan(Ratio(1) / Ratio(239)))),
+			computedPI = a.subtract(b);
+					
+		equal( Math.PI <= computedPI, true, "Math.PI("+Math.PI+") <= computedPI(" + computedPI + ")");
+	});
 	// test("test user case 3: 2x2 Matrix of Ratios ", function () {
 	// });
 	// test("test user case 4: ?", function () {
@@ -975,7 +983,7 @@ var runTests = function () {
 		deepEqual(func("103103103"), [3, 103, 333667]);
 	});
 	
-	module( "Find x" );
+	module("Find x");
 	test("test Ratio.prototype.findX() with invalid input", function () {
 		var func = function (a, b, str) {
 			return (new Ratio(a, b)).findX(str);
@@ -1004,7 +1012,7 @@ var runTests = function () {
 		};
 		equal(func(1, 3, {}), "NaN/3");
 		equal(func(1, 3, "ten"), "NaN/3");
-		equal(Ratio.parse(1,3).toQuantityOf().toString(), "NaN/3");
+		equal(Ratio.parse(1, 3).toQuantityOf().toString(), "NaN/3");
 	});
 	test("test Ratio.prototype.toQuantityOf() with single arguments", function () {
 		var func = function (a, b, base) {
@@ -1037,31 +1045,31 @@ var runTests = function () {
 		ok(exports.Ratio.VERSION, "Ratio was added to exports.");
 	});
 	
-	module( "Empty Argument Calls" );
-	test("test Ratio static methods for errors when functions with required arguments aren't supplied when called.", function(){
+	module("Empty Argument Calls");
+	test("test Ratio static methods for errors when functions with required arguments aren't supplied when called.", function () {
 		var fn;
 		for (var fnName in Ratio) {
 			fn = Ratio[fnName];
 			if (typeof fn !== "function" || fn.length === 0) {
 				continue;
 			}
-			try{
-				equal(true,true,"Ratio." + fnName + "() returns " + String(fn()));
-			}catch(e){
-				equal(true,false,"Ratio." + fnName + "() throw an error. Error = " + e.toString());
+			try {
+				equal(true, true, "Ratio." + fnName + "() returns " + String(fn()));
+			} catch (e) {
+				equal(true, false, "Ratio." + fnName + "() throw an error. Error = " + e.toString());
 			}
 		}
 	});
-	test("test Ratio.prototype methods for errors when functions with required arguments aren't supplied when called.", function(){
+	test("test Ratio.prototype methods for errors when functions with required arguments aren't supplied when called.", function () {
 		var a = new Ratio();
 		for (var fnName in a) {
 			if (typeof a[fnName] !== "function" || a[fnName].length === 0) {
 				continue;
 			}
-			try{
-				equal(true,true,"Ratio.prototype." + fnName + "() returns " + String(a[fnName]()));
-			}catch(e){
-				equal(true,false,"Ratio.prototype." + fnName + "() throw an error. Error = " + e.toString());
+			try {
+				equal(true, true, "Ratio.prototype." + fnName + "() returns " + String(a[fnName]()));
+			} catch (e) {
+				equal(true, false, "Ratio.prototype." + fnName + "() throw an error. Error = " + e.toString());
 			}
 		}
 	});

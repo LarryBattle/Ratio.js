@@ -17,14 +17,14 @@ Node.js, Chrome 19+, Firefox 12+, IE 7+, and Opera 11+.
 Note: Run the test cases to check for additional browser compatibility.
 
 ##Current version
-<span id="ratioVersion">0.3.8</span>
+<span id="ratioVersion">0.3.9</span>
 
 ## Installation ##
 Just include the Ratio.js script.
 
 <b>Browser:</b>
 
-	<script src="Ratio-0.3.8.js">;
+	<script src="./lib/Ratio-0.3.9.js">;
 
 ##Examples
 
@@ -206,3 +206,4 @@ License: [MIT License](http://www.opensource.org/licenses/mit-license) and [GPL 
 ## Known Issues ##
 
 - Precision is lost for values passed +/- 9007199254740992. <a href="http://stackoverflow.com/questions/307179/what-is-javascripts-max-int-whats-the-highest-integer-value-a-number-can-go-t">stackoverflow.com</a> <br/>
+- It's best to collect `.correctRatio()` if you manually change the denominator. Alternatively you could use `.clone(null, new_denominator_value)` to get a new ratio with a modified denominator.

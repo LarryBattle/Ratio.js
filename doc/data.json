@@ -1,17 +1,17 @@
 {
     "project": {
-        "file": "..\\lib\\Ratio-0.3.7.js",
+        "file": "..\\lib\\Ratio-0.3.9.js",
         "line": 1,
         "purpose": "Provides a Ratio(Fraction) object for Javascript. Similar to Fraction.py for Python.",
         "author": "Larry Battle , <http://bateru.com/news/>",
         "license": "MIT and GPL 3.0\nMIT License <http://www.opensource.org/licenses/mit-license>\nGPL v3 <http://opensource.org/licenses/GPL-3.0>",
         "info": "Project page: <https://github.com/LarryBattle/Ratio.js/>",
-        "version": "0.3.7",
+        "version": "0.3.9",
         "note": "Uses YUI-DOC to generate documentation."
     },
     "files": {
-        "..\\lib\\Ratio-0.3.7.js": {
-            "name": "..\\lib\\Ratio-0.3.7.js",
+        "..\\lib\\Ratio-0.3.9.js": {
+            "name": "..\\lib\\Ratio-0.3.9.js",
             "modules": {},
             "classes": {
                 "Ratio": 1
@@ -30,7 +30,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "file": "..\\lib\\Ratio-0.3.7.js",
+            "file": "..\\lib\\Ratio-0.3.9.js",
             "line": 14,
             "description": "Ratio is an object that has a numerator and denominator, corresponding to a/b.<br/>\nNote that the keyword `new` is not required to create a new instance of the Ratio object, since this is done for you.<br/>\nIn otherwords, `new Ratio( value )` is the same as `Ratio( value )`.",
             "is_constructor": 1,
@@ -52,7 +52,7 @@
                 },
                 {
                     "name": "alwaysReduce",
-                    "description": "if true, then the Ratio object and the child of it will always represent the simplified form of the rational.",
+                    "description": "if true, then the Ratio object and the children from it will always represent the simplified form of the rational.",
                     "type": "Boolean",
                     "optional": true
                 }
@@ -68,8 +68,44 @@
     },
     "classitems": [
         {
-            "file": "..\\lib\\Ratio-0.3.7.js",
+            "file": "..\\lib\\Ratio-0.3.9.js",
+            "line": 39,
+            "description": "Represents the maximum amount of precision avaiable. <br/>\nAny value with more digits will become estimations.",
+            "itemtype": "property",
+            "name": "Ratio.MAX_PRECISION",
+            "type": "{Number}",
+            "class": "Ratio"
+        },
+        {
+            "file": "..\\lib\\Ratio-0.3.9.js",
             "line": 47,
+            "description": "Represents the largest value that stored without loss of precision. <br/>\nAny value larger will become estimations.",
+            "itemtype": "property",
+            "name": "Ratio.MAX_VALUE",
+            "type": "{Number}",
+            "class": "Ratio"
+        },
+        {
+            "file": "..\\lib\\Ratio-0.3.9.js",
+            "line": 55,
+            "description": "Represents the smallest value that stored without loss of precision. <br/>\nAny value smaller will become estimations.",
+            "itemtype": "property",
+            "name": "Ratio.MIN_VALUE",
+            "type": "{Number}",
+            "class": "Ratio"
+        },
+        {
+            "file": "..\\lib\\Ratio-0.3.9.js",
+            "line": 63,
+            "description": "Stores complex regular expressions.",
+            "itemtype": "property",
+            "name": "Ratio.regex",
+            "type": "{Object}",
+            "class": "Ratio"
+        },
+        {
+            "file": "..\\lib\\Ratio-0.3.9.js",
+            "line": 77,
             "description": "Version number of Ratio.js",
             "itemtype": "property",
             "name": "Ratio.VERSION",
@@ -77,8 +113,8 @@
             "class": "Ratio"
         },
         {
-            "file": "..\\lib\\Ratio-0.3.7.js",
-            "line": 53,
+            "file": "..\\lib\\Ratio-0.3.9.js",
+            "line": 84,
             "description": "Checks if value is a finite number. <br/> Borrowed from jQuery 1.7.2 <br/>",
             "itemtype": "method",
             "name": "Ratio.isNumeric",
@@ -99,26 +135,26 @@
             "class": "Ratio"
         },
         {
-            "file": "..\\lib\\Ratio-0.3.7.js",
-            "line": 65,
-            "description": "Returns the default value is the provides new value is undefined or null.<br/>\nSimilar to `var a = (b || c)`.",
+            "file": "..\\lib\\Ratio-0.3.9.js",
+            "line": 96,
+            "description": "Returns the default value if the provided new value is undefined or null.",
             "itemtype": "method",
             "name": "Ratio.getValueIfDefined",
             "params": [
                 {
                     "name": "backup",
-                    "description": "",
-                    "type": "Object"
+                    "description": "- default value",
+                    "type": "*"
                 },
                 {
                     "name": "value",
                     "description": "",
-                    "type": "Object"
+                    "type": "*"
                 }
             ],
             "return": {
                 "description": "",
-                "type": "Object"
+                "type": "*"
             },
             "example": [
                 "\n   Ratio.getValueIfDefined( 4, null ) == 4"
@@ -126,9 +162,9 @@
             "class": "Ratio"
         },
         {
-            "file": "..\\lib\\Ratio-0.3.7.js",
-            "line": 79,
-            "description": "Find the Greatest Common Factor between two numbers using \"Euler Method\".",
+            "file": "..\\lib\\Ratio-0.3.9.js",
+            "line": 109,
+            "description": "Find the Greatest Common Factor between two numbers using the Euler Method.",
             "itemtype": "method",
             "name": "Ratio.gcd",
             "params": [
@@ -136,10 +172,15 @@
                     "name": "a",
                     "description": "",
                     "type": "Number"
+                },
+                {
+                    "name": "b",
+                    "description": "",
+                    "type": "Number"
                 }
             ],
             "return": {
-                "description": "b",
+                "description": "",
                 "type": "Number"
             },
             "example": [
@@ -148,9 +189,9 @@
             "class": "Ratio"
         },
         {
-            "file": "..\\lib\\Ratio-0.3.7.js",
-            "line": 99,
-            "description": "Returns the numerator with the corresponding sign of (top/bottom).<br/>\nUsed to force `top` to represent the sign of the Ratio.",
+            "file": "..\\lib\\Ratio-0.3.9.js",
+            "line": 130,
+            "description": "Returns the numerator with the corresponding sign of (top/bottom).<br/>",
             "itemtype": "method",
             "name": "Ratio.getNumeratorWithSign",
             "params": [
@@ -175,16 +216,16 @@
             "class": "Ratio"
         },
         {
-            "file": "..\\lib\\Ratio-0.3.7.js",
-            "line": 114,
+            "file": "..\\lib\\Ratio-0.3.9.js",
+            "line": 144,
             "description": "Provides a quick way to find out the numeric type of an object.\nTypes include: `NaN`, `Ratio`, `number`, `e`, `decimal`, `mixed` and `fraction`",
             "itemtype": "method",
-            "name": "Ratio.getTypeGuess",
+            "name": "Ratio.guessType",
             "params": [
                 {
                     "name": "obj",
                     "description": "",
-                    "type": "Object"
+                    "type": "*"
                 }
             ],
             "return": {
@@ -192,14 +233,14 @@
                 "type": "String"
             },
             "example": [
-                "\n   Ratio.getTypeGuess(\"1/3\") == \"fraction\";"
+                "\n   Ratio.guessType(\"1/3\") == \"fraction\";"
             ],
             "class": "Ratio"
         },
         {
-            "file": "..\\lib\\Ratio-0.3.7.js",
-            "line": 144,
-            "description": "Converts a numeric value to a Ratio in the form of [top, bottom], such that top/bottom.",
+            "file": "..\\lib\\Ratio-0.3.9.js",
+            "line": 174,
+            "description": "Converts a numeric value to an array in the form of [top, bottom], such that top/bottom evaluates to the passed value.",
             "itemtype": "method",
             "name": "Ratio.parseToArray",
             "params": [
@@ -219,8 +260,8 @@
             "class": "Ratio"
         },
         {
-            "file": "..\\lib\\Ratio-0.3.7.js",
-            "line": 194,
+            "file": "..\\lib\\Ratio-0.3.9.js",
+            "line": 224,
             "description": "Converts a numeric value to a Ratio object.\nSupports mixed numbers, whole numbers, decimals, scientific numbers and Ratio objects.",
             "itemtype": "method",
             "name": "Ratio.parse",
@@ -248,9 +289,9 @@
             "class": "Ratio"
         },
         {
-            "file": "..\\lib\\Ratio-0.3.7.js",
-            "line": 229,
-            "description": "Given a numerator and denominator in the form of [a,b], returns as an array of numbers.",
+            "file": "..\\lib\\Ratio-0.3.9.js",
+            "line": 259,
+            "description": "Returns an array of two numbers that represent ratio of the passed values.",
             "itemtype": "method",
             "name": "Ratio.reduce",
             "params": [
@@ -271,13 +312,13 @@
                 "type": "Array[ Number, Number ]"
             },
             "example": [
-                "\n   Example 1:<br/>\n   Ratio.reduce( Ratio(36,-36) ) // returns [-1,1]\n   \n   Example 2:<br/>\n   Ratio.reduce( \"9/12\" ) // returns [3,4]\n   \n   Example 3:<br/>\n   Ratio.reduce( \"10/4\" ).toString() // returns [5,2]"
+                "\n   Example 1:<br/>\n   Ratio.reduce( Ratio(36,-36) ) // returns [-1,1]\n   \n   Example 2:<br/>\n   Ratio.reduce( \"9/12\" ) // returns [3,4]\n   \n   Example 3:<br/>\n   Ratio.reduce( \"10/4\", \"5/3\" ) // returns [5,2]"
             ],
             "class": "Ratio"
         },
         {
-            "file": "..\\lib\\Ratio-0.3.7.js",
-            "line": 259,
+            "file": "..\\lib\\Ratio-0.3.9.js",
+            "line": 289,
             "description": "This function divides a repeating decimal into 3 parts. If the value passed is not a repeating decimal then an empty array is returned.<br/>\nFor repeating decimals, the return value is an array which contains the numeric value split into 3 parts like, <br/>\n[ \"numbers before decimal\", \"numbers before repeating pattern\", \"repeating pattern.\" ].<br/>\nHere's another explanation. <br/>\nThe return value is [i, x, r] for the repeating decimal value.<br/>\nwhere i are the values to the left of the decimal point. <br/>\nx are the decimals to the right of the decimal point and to the left of the repeating pattern.<br/>\nr is the unique repeating patterns for the repeating decimal.<br/>\nExample. 22/7 = 3.142857142857143 = 3.14-285714-285714-3, i = 3, x = 14, r = 285714<br/>\nIt should be noted that the last digit might be removed to avoid rounding errors.",
             "itemtype": "method",
             "name": "Ratio.getRepeatProps",
@@ -289,8 +330,8 @@
                 }
             ],
             "return": {
-                "description": "an array of 3 numbers.",
-                "type": "Array"
+                "description": "- Must return strings because of zeros in pattern.",
+                "type": "Array[String, String, String]"
             },
             "example": [
                 "\n   Ratio.getRepeatProps( 22/7 ) // returns [\"3\", \"14\", \"285714\"]"
@@ -298,9 +339,9 @@
             "class": "Ratio"
         },
         {
-            "file": "..\\lib\\Ratio-0.3.7.js",
-            "line": 296,
-            "description": "Returns an array of the prime factors of a number. <br/>\nMore info <http://bateru.com/news/2012/05/code-of-the-day-javascript-prime-factors-of-a-number/>",
+            "file": "..\\lib\\Ratio-0.3.9.js",
+            "line": 326,
+            "description": "Returns the prime factors of a number. <br/>\nMore info <http://bateru.com/news/2012/05/code-of-the-day-javascript-prime-factors-of-a-number/>",
             "itemtype": "method",
             "name": "Ratio.getPrimeFactors",
             "params": [
@@ -320,9 +361,9 @@
             "class": "Ratio"
         },
         {
-            "file": "..\\lib\\Ratio-0.3.7.js",
-            "line": 327,
-            "description": "Rounds up a scientific notated number with 8+ trailing 0s or 9s.<br/>\nNote: Returns number as string to preserve value.",
+            "file": "..\\lib\\Ratio-0.3.9.js",
+            "line": 357,
+            "description": "Rounds up a scientific notated number with 8+ trailing 0s or 9s.<br/>",
             "itemtype": "method",
             "name": "Ratio.getCleanENotation",
             "params": [
@@ -333,7 +374,7 @@
                 }
             ],
             "return": {
-                "description": "",
+                "description": "- Returns number as string to preserve value.",
                 "type": "String"
             },
             "example": [
@@ -342,8 +383,8 @@
             "class": "Ratio"
         },
         {
-            "file": "..\\lib\\Ratio-0.3.7.js",
-            "line": 349,
+            "file": "..\\lib\\Ratio-0.3.9.js",
+            "line": 378,
             "description": "Used to combine two ratios into one.",
             "itemtype": "method",
             "name": "Ratio.getCombinedRatio",
@@ -358,8 +399,8 @@
             "class": "Ratio"
         },
         {
-            "file": "..\\lib\\Ratio-0.3.7.js",
-            "line": 364,
+            "file": "..\\lib\\Ratio-0.3.9.js",
+            "line": 393,
             "description": "Returns a new Ratio with random values for the numerator and denominator.\nValues range from [0, 1]",
             "itemtype": "method",
             "name": "Ratio.random",
@@ -374,18 +415,11 @@
             "class": "Ratio"
         },
         {
-            "file": "..\\lib\\Ratio-0.3.7.js",
-            "line": 380,
+            "file": "..\\lib\\Ratio-0.3.9.js",
+            "line": 409,
             "description": "Adjusts the ratio in three ways:\n\n1) Sets the numerator and denominator to default values if undefined. (Default fraction: 0/1)\n2) Places the sign on numerator.\n3) Reduces the function if needed.\nThis function is called after the instances is created.",
             "itemtype": "method",
             "name": "Ratio.prototype.correctRatio",
-            "params": [
-                {
-                    "name": "obj",
-                    "description": "",
-                    "type": "Object"
-                }
-            ],
             "return": {
                 "description": "",
                 "type": "Ratio"
@@ -396,8 +430,8 @@
             "class": "Ratio"
         },
         {
-            "file": "..\\lib\\Ratio-0.3.7.js",
-            "line": 414,
+            "file": "..\\lib\\Ratio-0.3.9.js",
+            "line": 442,
             "description": "From the Ratio instance, returns the raw values of the numerator and denominator in the form [numerator, denominator].",
             "itemtype": "method",
             "name": "Ratio.prototype.toArray",
@@ -411,8 +445,8 @@
             "class": "Ratio"
         },
         {
-            "file": "..\\lib\\Ratio-0.3.7.js",
-            "line": 425,
+            "file": "..\\lib\\Ratio-0.3.9.js",
+            "line": 453,
             "description": "From the Ratio instance, returns the result of the numerator divided by the denominator.",
             "itemtype": "method",
             "name": "Ratio.prototype.valueOf",
@@ -426,9 +460,9 @@
             "class": "Ratio"
         },
         {
-            "file": "..\\lib\\Ratio-0.3.7.js",
-            "line": 437,
-            "description": "From the Ratio instance, returns a string of the Ratio in fraction form if the numerator and denominator are Rational numbers.<br/>\nNote: If the computed value of (numerator / denominator) is a whole number, then the whole number is returned.<br/>\nNote: If the computed value of (numerator / denominator) is not a number, the result is returned. <br/>",
+            "file": "..\\lib\\Ratio-0.3.9.js",
+            "line": 465,
+            "description": "From the Ratio instance, returns a string of the Ratio in fraction form if the numerator and denominator are Rational numbers.<br/>\nThe output format can be a whole number, mixed number, NaN, proper fraction depending on the computed value of (numerator / denominator).",
             "itemtype": "method",
             "name": "Ratio.prototype.toLocaleString",
             "return": {
@@ -441,8 +475,8 @@
             "class": "Ratio"
         },
         {
-            "file": "..\\lib\\Ratio-0.3.7.js",
-            "line": 472,
+            "file": "..\\lib\\Ratio-0.3.9.js",
+            "line": 499,
             "description": "From the Ratio instance, returns the raw values of the numerator and denominator in the form \"a/b\".<br/>\nNote: The division symbol can be change by modification of the `divSign` property.",
             "itemtype": "method",
             "name": "Ratio.prototype.toString",
@@ -456,8 +490,8 @@
             "class": "Ratio"
         },
         {
-            "file": "..\\lib\\Ratio-0.3.7.js",
-            "line": 490,
+            "file": "..\\lib\\Ratio-0.3.9.js",
+            "line": 517,
             "description": "Returns a new instance of the current Ratio.<br/>\nThe clone propery value can be changed if the appropriate argument value is supplied.",
             "itemtype": "method",
             "name": "Ratio.prototype.clone",
@@ -491,9 +525,9 @@
             "class": "Ratio"
         },
         {
-            "file": "..\\lib\\Ratio-0.3.7.js",
-            "line": 511,
-            "description": "From the Ratio instance, returns a new instacne with a reduced ratio by factoring out the greatest common multiple.",
+            "file": "..\\lib\\Ratio-0.3.9.js",
+            "line": 538,
+            "description": "Returns a reduced ratio from the current instance.",
             "itemtype": "method",
             "name": "Ratio.prototype.reduce",
             "chainable": 1,
@@ -507,9 +541,9 @@
             "class": "Ratio"
         },
         {
-            "file": "..\\lib\\Ratio-0.3.7.js",
-            "line": 524,
-            "description": "Adds the current Ratio by another Ratio.",
+            "file": "..\\lib\\Ratio-0.3.9.js",
+            "line": 551,
+            "description": "Adds the current Ratio to another Ratio.",
             "itemtype": "method",
             "name": "Ratio.prototype.add",
             "chainable": 1,
@@ -536,8 +570,8 @@
             "class": "Ratio"
         },
         {
-            "file": "..\\lib\\Ratio-0.3.7.js",
-            "line": 550,
+            "file": "..\\lib\\Ratio-0.3.9.js",
+            "line": 577,
             "description": "Divides the current Ratio by another Ratio.",
             "itemtype": "method",
             "name": "Ratio.prototype.divide",
@@ -565,9 +599,9 @@
             "class": "Ratio"
         },
         {
-            "file": "..\\lib\\Ratio-0.3.7.js",
-            "line": 565,
-            "description": "Compares if the current Ratio and another object have the same value.",
+            "file": "..\\lib\\Ratio-0.3.9.js",
+            "line": 592,
+            "description": "Returns if the current Ratio and another object have the same numeric value.",
             "itemtype": "method",
             "name": "Ratio.prototype.equals",
             "params": [
@@ -587,8 +621,8 @@
             "class": "Ratio"
         },
         {
-            "file": "..\\lib\\Ratio-0.3.7.js",
-            "line": 578,
+            "file": "..\\lib\\Ratio-0.3.9.js",
+            "line": 605,
             "description": "Performs a strict comparison to determine if the current instances and passed object are identical.",
             "itemtype": "method",
             "name": "Ratio.prototype.deepEquals",
@@ -609,8 +643,8 @@
             "class": "Ratio"
         },
         {
-            "file": "..\\lib\\Ratio-0.3.7.js",
-            "line": 590,
+            "file": "..\\lib\\Ratio-0.3.9.js",
+            "line": 617,
             "description": "Multiply the current Ratio by another Ratio.",
             "chainable": 1,
             "itemtype": "method",
@@ -638,9 +672,9 @@
             "class": "Ratio"
         },
         {
-            "file": "..\\lib\\Ratio-0.3.7.js",
-            "line": 605,
-            "description": "Subtracts the current Ratio by another Ratio.",
+            "file": "..\\lib\\Ratio-0.3.9.js",
+            "line": 632,
+            "description": "Subtracts the current Ratio from another Ratio.",
             "itemtype": "method",
             "name": "Ratio.prototype.subtract",
             "chainable": 1,
@@ -667,9 +701,9 @@
             "class": "Ratio"
         },
         {
-            "file": "..\\lib\\Ratio-0.3.7.js",
-            "line": 621,
-            "description": "From the Ratio instance, returns an new Ratio scaled down by a factor.",
+            "file": "..\\lib\\Ratio-0.3.9.js",
+            "line": 648,
+            "description": "Returns an new Ratio scaled down by a factor from the current instance.",
             "itemtype": "method",
             "name": "Ratio.prototype.descale",
             "chainable": 1,
@@ -696,8 +730,8 @@
             "class": "Ratio"
         },
         {
-            "file": "..\\lib\\Ratio-0.3.7.js",
-            "line": 636,
+            "file": "..\\lib\\Ratio-0.3.9.js",
+            "line": 663,
             "description": "From the Ratio instance, returns an new Ratio raised to a power.",
             "itemtype": "method",
             "name": "Ratio.prototype.pow",
@@ -725,8 +759,8 @@
             "class": "Ratio"
         },
         {
-            "file": "..\\lib\\Ratio-0.3.7.js",
-            "line": 651,
+            "file": "..\\lib\\Ratio-0.3.9.js",
+            "line": 678,
             "description": "From the Ratio instance, returns a new Ratio scaled up by a factor.",
             "itemtype": "method",
             "name": "Ratio.prototype.scale",
@@ -754,8 +788,8 @@
             "class": "Ratio"
         },
         {
-            "file": "..\\lib\\Ratio-0.3.7.js",
-            "line": 666,
+            "file": "..\\lib\\Ratio-0.3.9.js",
+            "line": 693,
             "description": "From the Ratio instance, returns a new Ratio by parsing the numerator and denominator.<br/>\nThis is useful if want to ensure that the Ratio contains only whole numbers in the numerator and denominator after a caclulation.",
             "itemtype": "method",
             "name": "Ratio.prototype.cleanFormat",
@@ -770,8 +804,8 @@
             "class": "Ratio"
         },
         {
-            "file": "..\\lib\\Ratio-0.3.7.js",
-            "line": 689,
+            "file": "..\\lib\\Ratio-0.3.9.js",
+            "line": 716,
             "description": "Returns a new instances that is the absolute value of the current Ratio.",
             "itemtype": "method",
             "name": "Ratio.prototype.abs",
@@ -786,8 +820,8 @@
             "class": "Ratio"
         },
         {
-            "file": "..\\lib\\Ratio-0.3.7.js",
-            "line": 701,
+            "file": "..\\lib\\Ratio-0.3.9.js",
+            "line": 728,
             "description": "From the Ratio instance, returns a new Ratio in the form of (numerator mod denominator)/1.<br/>\nWhich is the same as Ratio( (numerator % denominator), 1 ).",
             "itemtype": "method",
             "name": "Ratio.prototype.mod",
@@ -802,8 +836,8 @@
             "class": "Ratio"
         },
         {
-            "file": "..\\lib\\Ratio-0.3.7.js",
-            "line": 714,
+            "file": "..\\lib\\Ratio-0.3.9.js",
+            "line": 741,
             "description": "Returns a new instance of the Ratio with the sign toggled.",
             "itemtype": "method",
             "name": "Ratio.prototype.negate",
@@ -818,8 +852,8 @@
             "class": "Ratio"
         },
         {
-            "file": "..\\lib\\Ratio-0.3.7.js",
-            "line": 726,
+            "file": "..\\lib\\Ratio-0.3.9.js",
+            "line": 753,
             "description": "Determines if the current Ratio is a proper fraction.",
             "itemtype": "method",
             "name": "Ratio.prototype.isProper",
@@ -833,8 +867,8 @@
             "class": "Ratio"
         },
         {
-            "file": "..\\lib\\Ratio-0.3.7.js",
-            "line": 737,
+            "file": "..\\lib\\Ratio-0.3.9.js",
+            "line": 764,
             "description": "Determines the value of x. Solves the following equations.<br/>\n1. `( a/b = x/n )` or\n2. `( a/b = n/x )` <br/>\nWhere a, b are the numerator and denominator respectively of the current Ratio.<br/>\nNote: Returns null if the the string can't be split into exactly 2 elements.",
             "itemtype": "method",
             "name": "Ratio.prototype.findX",
@@ -849,8 +883,8 @@
             "class": "Ratio"
         },
         {
-            "file": "..\\lib\\Ratio-0.3.7.js",
-            "line": 757,
+            "file": "..\\lib\\Ratio-0.3.9.js",
+            "line": 784,
             "description": "Switches the numerator and denominator positions.",
             "itemtype": "method",
             "name": "Ratio.prototype.reciprocal",
@@ -865,8 +899,8 @@
             "class": "Ratio"
         },
         {
-            "file": "..\\lib\\Ratio-0.3.7.js",
-            "line": 769,
+            "file": "..\\lib\\Ratio-0.3.9.js",
+            "line": 796,
             "description": "From the Ratio instance, approxiates the value to a new fraction with a provided denominator.\nIn otherwords, this method helps you find out what fraction with a given denominator will best\nrepresent the current numeric value of the Ratio.\nOperates on a arbitary amount of arguments and returns the Ratio with the closest match among the quantities.\nTherefore, an approximated quantity is returned if the absolute value of the difference between the approximated quantity and actual value is\nsmaller than the error rate.",
             "itemtype": "method",
             "name": "Ratio.prototype.toQuantityOf",
@@ -888,8 +922,8 @@
             "class": "Ratio"
         },
         {
-            "file": "..\\lib\\Ratio-0.3.7.js",
-            "line": 801,
+            "file": "..\\lib\\Ratio-0.3.9.js",
+            "line": 828,
             "description": "Returns a new Ratio from the floor of the current Ratio instance.",
             "itemtype": "method",
             "name": "Ratio.prototype.floor",
@@ -904,8 +938,8 @@
             "class": "Ratio"
         },
         {
-            "file": "..\\lib\\Ratio-0.3.7.js",
-            "line": 813,
+            "file": "..\\lib\\Ratio-0.3.9.js",
+            "line": 840,
             "description": "Returns a new Ratio from the ceil of the current Ratio instance.",
             "itemtype": "method",
             "name": "Ratio.prototype.ceil",
@@ -920,8 +954,8 @@
             "class": "Ratio"
         },
         {
-            "file": "..\\lib\\Ratio-0.3.7.js",
-            "line": 825,
+            "file": "..\\lib\\Ratio-0.3.9.js",
+            "line": 852,
             "description": "Returns a new Ratio by removing the integer part of the current instance.\nIn otherwords, returns the decimal portion as a fraction.",
             "itemtype": "method",
             "name": "Ratio.prototype.makeProper",
