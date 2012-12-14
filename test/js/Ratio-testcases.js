@@ -291,6 +291,7 @@ var runTests = function () {
 		};
 		equal(func(1e2, 2e4), "100/20000");
 		equal(func(-1e100, 4), "-2.5e+99");
+		
 		equal(func(-1e22, 21), "1e+22/21");
 		equal(func(-3e+23, 29), "-3e+23/29");
 		equal(func(-7e30, 3e25), "-233333 1e+30/3e+25");
@@ -988,6 +989,10 @@ var runTests = function () {
 		var func = function (a, b, str) {
 			return (new Ratio(a, b)).findX(str);
 		};
+		equal(func(1, 2, "10"), null);
+		equal(func(1, 2, "10/10"), null);
+		equal(func(1, 2, "Infinity"), null);
+		equal(func(1, 2, "Infinity/1e40"), null);
 		equal(func(1, 2, "x10"), null);
 		equal(func(1, 2, "x/1/2"), null);
 		equal(func(1, 2, "I like turtles"), null);
@@ -1003,6 +1008,10 @@ var runTests = function () {
 		equal(func(3, 7, "10/x"), "70/3");
 		equal(func(11, -9, "10/x"), "-90/11");
 		equal(func(1, -201, "10/x"), "-2010/1");
+		equal(func(1, 4, "-1e+8/x"), "-400000000/1");
+		
+		equal(func(1, 4, "Infinity / x"), "Infinity/1");
+		equal(func(1, -4, "Infinity / -x"), "-Infinity/1");
 	});
 	
 	module("Quantify Approximation");

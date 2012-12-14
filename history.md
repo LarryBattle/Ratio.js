@@ -1,6 +1,17 @@
 ##Ratio.js Release Notes##
 __Project Page:__ <https://github.com/LarryBattle/Ratio.js>  <br/>
 
+__@Version: 0.3.10__ - 12/10/2012<br/>
+- Added: `.\dev\jake removeMin`, removes old min files in `.\lib`.<br/>
+- Added: `vendors` and `vendors/qunit`. This makes it's easier to develop offline.<br/>
+- Added: `Ratio.simplifyENotation()`.<br/>
+- Bug Fix: `index.html` now shows the latest version of Ratio.js.<br/>
+- Buf Fix: `test\Ratio-benchmark.html` now points to the ratio benchmark script.<br/>
+- Updated: Corrected examples in documentation.<br/>
+- Updated: Increase the iterations for the benchmarks to 10,000<br/>
+- Updated: `Ratio.prototype.valueOf()` to use `Ratio.simplifyENotation()`
+
+
 __@Version: 0.3.9__ - 12/7/2012<br/>
 - Updated: Build script to change the main scripts location for dependent pages.<br/>
 - Added: Calculate PI user case test and additional constant testcases.<br/>

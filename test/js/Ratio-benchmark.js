@@ -49,7 +49,7 @@
 	};
 	Suite.prototype.add = function( name, func ){
 		this.tests.push( 
-			new Test( name, func, (this.tests.length + 1) * 300 ) 
+			new Test( name, func, (this.tests.length + 1) * 2000 ) 
 		);
 	};
 	Suite.prototype.run = function(){
@@ -61,7 +61,7 @@
 	// ********************** //
 	var tests = new Suite();
 	tests.add( "Ratio()", function(){
-		var i = 1e2;
+		var i = 1e5;
 		while( i-- ){
 			Ratio(3);
 			Ratio(1,3);
@@ -72,7 +72,7 @@
 	});
 	tests.add( "Ratio.gcd()", function(){
 		var func = Ratio.gcd,
-			i = 1e2;
+			i = 1e5;
 		while( i-- ){
 			func(1,20);
 			func(111,111);
@@ -82,10 +82,8 @@
 		}
 	});
 	tests.add( "Ratio.parse()", function(){
-		var func = function(a,b){
-			Ratio.parse(a,b);
-		},
-			i = 1e2;
+		var func = Ratio.parse,
+			i = 1e5;
 		while( i-- ){
 			func("1/2");
 			func("1/-2");
@@ -99,7 +97,7 @@
 		var func = function(a,b){
 			Ratio(a,b).clone()
 		},
-			i = 1e2;
+			i = 1e5;
 		while( i-- ){
 			func(1,20);
 			func(111,111);
@@ -109,46 +107,40 @@
 		}
 	});
 	tests.add( "Ratio.prototype.add()", function(){
-		var func = function(a,b){
-			Ratio().add(a,b)
-		},
-		i = 1e2;
+		var a = Ratio(),
+		i = 1e5;
 		while( i-- ){
-			Ratio().add(1,20);
-			Ratio().add(111,111);
-			Ratio().add(4e3,20e3);
-			Ratio().add(1e3,270);
-			Ratio().add(134,200);
+			a.add(1,20);
+			a.add(111,111);
+			a.add(4e3,20e3);
+			a.add(1e3,270);
+			a.add(134,200);
 		}
 	});
 	tests.add( "Ratio.prototype.subtract()", function(){
-		var func = function(a,b){
-			Ratio().subtract(a,b)
-		},
-			i = 1e2;
+		var a = Ratio(),
+			i = 1e5;
 		while( i-- ){
-			func(1,20);
-			func(111,111);
-			func(4e3,20e3);
-			func(1e3,270);
-			func(134,200);
+			a.subtract(1,20);
+			a.subtract(111,111);
+			a.subtract(4e3,20e3);
+			a.subtract(1e3,270);
+			a.subtract(134,200);
 		}
 	});
 	tests.add( "Ratio.prototype.divide()", function(){
-		var func = function(a,b){
-			Ratio().divide(a,b)
-		},
-			i = 1e2;
+		var a = Ratio(),
+			i = 1e5;
 		while( i-- ){
-			func(1,20);
-			func(111,111);
-			func(4e3,20e3);
-			func(1e3,270);
-			func(134,200);
+			a.divide(1,20);
+			a.divide(111,111);
+			a.divide(4e3,20e3);
+			a.divide(1e3,270);
+			a.divide(134,200);
 		}
 	});
 	tests.add( "Ratio Use case", function(){
-		var i = 1e2;
+		var i = 1e5;
 		while( i-- ){
 			Ratio.parse(1/3).negate().add("-0.1").multiply(0xF3).divide(1,2).divide(1e-4).abs().toString()
 		}

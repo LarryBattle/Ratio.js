@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>..\lib\Ratio-0.3.9.js</title>
+    <title>..\lib\Ratio-0.3.10.js</title>
     <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.3.9</em>
+            <em>API Docs for: 0.3.10</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -82,7 +82,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: ..\lib\Ratio-0.3.9.js</h1>
+                        <h1 class="file-heading">File: ..\lib\Ratio-0.3.10.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -94,7 +94,7 @@
 MIT License &lt;http:&#x2F;&#x2F;www.opensource.org&#x2F;licenses&#x2F;mit-license&gt;
 GPL v3 &lt;http:&#x2F;&#x2F;opensource.org&#x2F;licenses&#x2F;GPL-3.0&gt;
  * @info Project page: &lt;https:&#x2F;&#x2F;github.com&#x2F;LarryBattle&#x2F;Ratio.js&#x2F;&gt;
- * @version 0.3.9
+ * @version 0.3.10
  * @note Uses YUI-DOC to generate documentation.
  **&#x2F;
 var Ratio = (function () {
@@ -112,7 +112,8 @@ var Ratio = (function () {
      * @param {Boolean} [alwaysReduce] if true, then the Ratio object and the children from it will always represent the simplified form of the rational.
      * @return {Ratio} object that has a numerator and denominator, corresponding to a&#x2F;b.
      * @example
-    Ratio(2,4).toString() == Ratio(&quot;2&#x2F;4&quot;).toString() == &quot;2&#x2F;4&quot;
+    Ratio(2,4).toString() === &quot;2&#x2F;4&quot;
+    Ratio(&quot;2&#x2F;4&quot;).toString() === &quot;NaN&#x2F;1&quot; &#x2F;&#x2F; Use Ratio.parse()!
      **&#x2F;
     var Ratio = function (numerator, denominator, alwaysReduce) {
         if (!(this instanceof Ratio)) {
@@ -168,7 +169,7 @@ var Ratio = (function () {
      * @property Ratio.VERSION
      * @type String
      **&#x2F;
-    Ratio.VERSION = &quot;0.3.9&quot;;
+    Ratio.VERSION = &quot;0.3.10&quot;;
     &#x2F;**
      * Checks if value is a finite number. &lt;br&#x2F;&gt; Borrowed from jQuery 1.7.2 &lt;br&#x2F;&gt;
      *
@@ -176,7 +177,7 @@ var Ratio = (function () {
      * @param {Object} obj
      * @return {Boolean}
      * @example
-    Ratio.isNumeric(&quot;1.0e3&quot;) == true
+    Ratio.isNumeric(&quot;1.0e3&quot;) === true
      **&#x2F;
     Ratio.isNumeric = function (obj) {
         return !isNaN(parseFloat(obj)) &amp;&amp; isFinite(obj);
@@ -189,7 +190,7 @@ var Ratio = (function () {
      * @param {*} value
      * @return {*}
      * @example
-    Ratio.getValueIfDefined( 4, null ) == 4
+    Ratio.getValueIfDefined( 4, null ) === 4
      **&#x2F;
     Ratio.getValueIfDefined = function (backup, value) {
         return typeof value !== &quot;undefined&quot; &amp;&amp; value !== null ? value : backup;
@@ -202,7 +203,7 @@ var Ratio = (function () {
      * @param {Number} b
      * @return {Number}
      * @example
-    Ratio.gcd(20,12) == 4
+    Ratio.gcd(20,12) === 4
      **&#x2F;
     Ratio.gcd = function (a, b) {
         var c;
@@ -223,7 +224,7 @@ var Ratio = (function () {
      * @param {Number} bottom
      * @return {Number}
      * @example
-    Ratio.getNumeratorWithSign(1,-2) == -1
+    Ratio.getNumeratorWithSign(1,-2) === -1
      **&#x2F;
     Ratio.getNumeratorWithSign = function (top, bottom) {
         var sign = (+top * (+bottom || 1)) &lt; 0 ? -1 : 1;
@@ -237,7 +238,7 @@ var Ratio = (function () {
      * @param {*} obj
      * @return {String} type
      * @example
-    Ratio.guessType(&quot;1&#x2F;3&quot;) == &quot;fraction&quot;;
+    Ratio.guessType(&quot;1&#x2F;3&quot;) === &quot;fraction&quot;;
      **&#x2F;
     Ratio.guessType = function (obj) {
         var type = &quot;NaN&quot;;
@@ -320,19 +321,19 @@ var Ratio = (function () {
      * @return {Ratio}
      * @example
     &#x2F;&#x2F;whole numbers &lt;br&#x2F;&gt;
-    Ratio.parse(22,7).toString() == &quot;22&#x2F;7&quot;;
+    Ratio.parse(22,7).toString() === &quot;22&#x2F;7&quot;;
     
     &#x2F;&#x2F; mixed numbers &lt;br&#x2F;&gt;
-    Ratio.parse(&quot;3 1&#x2F;7&quot;).toString() == &quot;22&#x2F;7&quot;;
+    Ratio.parse(&quot;3 1&#x2F;7&quot;).toString() === &quot;22&#x2F;7&quot;;
     
     &#x2F;&#x2F; decimals &lt;br&#x2F;&gt;
-    Ratio.parse(22&#x2F;7).reduce().toLocaleString() == &quot;3 1&#x2F;7&quot;;
+    Ratio.parse(22&#x2F;7).reduce().toLocaleString() === &quot;3 1&#x2F;7&quot;;
     
     &#x2F;&#x2F; fractions &lt;br&#x2F;&gt;
-    Ratio.parse(&quot;22&#x2F;7&quot;).toLocaleString() == &quot;3 1&#x2F;7&quot;;
+    Ratio.parse(&quot;22&#x2F;7&quot;).toLocaleString() === &quot;3 1&#x2F;7&quot;;
     
     &#x2F;&#x2F; scientific notated numbers &lt;br&#x2F;&gt;
-    Ratio.parse(&quot;22e31&#x2F;70e30&quot;).reduce().toLocaleString() == &quot;3 1&#x2F;7&quot;;
+    Ratio.parse(&quot;22e31&#x2F;70e30&quot;).reduce().toLocaleString() === &quot;3 1&#x2F;7&quot;;
      **&#x2F;
     Ratio.parse = function (obj, obj2) {
         var arr = Ratio.parseToArray(obj),
@@ -359,7 +360,9 @@ var Ratio = (function () {
     Ratio.reduce( &quot;9&#x2F;12&quot; ) &#x2F;&#x2F; returns [3,4]
     
     Example 3:&lt;br&#x2F;&gt;
-    Ratio.reduce( &quot;10&#x2F;4&quot;, &quot;5&#x2F;3&quot; ) &#x2F;&#x2F; returns [5,2]
+    &#x2F;&#x2F; (&quot;10&#x2F;4&quot;, &quot;5&#x2F;3&quot;) =&gt; (&quot;6&#x2F;4&quot;)
+    Ratio.reduce( &quot;10&#x2F;4&quot;, &quot;5&#x2F;3&quot; ) &#x2F;&#x2F; returns [3,2]
+    Ratio.reduce( &quot;6&#x2F;4&quot; ) &#x2F;&#x2F; returns [3,2]
      **&#x2F;
     Ratio.reduce = function (obj, obj2) {
         obj = Ratio.parse(obj, obj2);
@@ -419,7 +422,7 @@ var Ratio = (function () {
      * @param {Number} num
      * @return {Array} an array of numbers
      * @example
-    Ratio.getPrimeFactors(20) &#x2F;&#x2F; returns [2,2,5]
+    Ratio.getPrimeFactors(20).join(&#x27;,&#x27;) === &quot;2,2,5&quot;
      **&#x2F;
     Ratio.getPrimeFactors = function (num) {
         num = Math.floor(num);
@@ -463,14 +466,43 @@ var Ratio = (function () {
         }
         return num;
     };
+	&#x2F;**
+	* Moves all the zeros for scientific numbers to the first or second element.&lt;&#x2F;br&gt;
+	* The most takes all. This helps reduce computational errors with &#x60;SN&#x60;s. *Need to reword* 
+	*
+	* @param {Number}
+	* @param {Number}
+	* @return {Array[Number, Number]}
+	* @method Ratio.simplifyENotation
+	* @example Ratio.simplifyENotation(3e80,3e35); &#x2F;&#x2F; returns [3e45,3]
+	*&#x2F;
+    Ratio.simplifyENotation = function(top, bottom){
+        var val = top&#x2F;bottom, re = &#x2F;[eE]&#x2F;;
+        if( !isNaN(val) &amp;&amp; re.test(top) &amp;&amp; re.test(bottom) ){
+            var arr = (top).toString().split(&quot;e&quot;),
+                arr2 = (bottom).toString().split(&quot;e&quot;);
+            if( Number( arr2[1] ) &lt; Number(arr[1]) ){
+                arr[1] = Number(arr[1]) + (-1 * arr2[1]);
+                arr2[1] = 0;
+            }else{
+                arr2[1] = Number(arr2[1]) + (-1 * arr[1]);
+                arr[1] = 0;
+            }
+            top = Number( arr.join(&quot;e&quot;) );
+            bottom = Number(arr2.join(&quot;e&quot;) );
+        }
+        return [top, bottom];
+    };
     &#x2F;**
      * Used to combine two ratios into one.
      *
      * @method Ratio.getCombinedRatio
      * @chainable
-     * @return {Ratio}
+     * @param {Ratio|String|Number} [obj]
+     * @param {Ratio|String|Number} [obj]
+     * @return {Ratio} [obj]
      * @example
-    Ratio.getCombinedRatio(&quot;1&#x2F;2&quot;,&quot;1&#x2F;3&quot;).toString() == &quot;3&#x2F;2&quot;
+    Ratio.getCombinedRatio(&quot;1&#x2F;2&quot;,&quot;1&#x2F;3&quot;).toString() === &quot;3&#x2F;2&quot;
      **&#x2F;
     Ratio.getCombinedRatio = function (obj, obj2) {
         if (!(obj instanceof Ratio) || obj2 !== undefined) {
@@ -486,7 +518,7 @@ var Ratio = (function () {
      * @chainable
      * @return {Ratio}
      * @example
-    Ratio.random().toString() === &quot;1&#x2F;4&quot; &#x2F;&#x2F; possible ratio
+    Ratio.random().toString(); &#x2F;&#x2F; might return &quot;1&#x2F;4&quot;
      *&#x2F;
     Ratio.random = function () {
         var value = (Math.random()).toFixed(Math.floor(Math.random() * 16));
@@ -495,17 +527,15 @@ var Ratio = (function () {
     Ratio.prototype = {
         constructor : Ratio,
         &#x2F;**
-         * Adjusts the ratio in three ways:
-         *
+         * For each ratio instance, corrects three main problems:
          * 1) Sets the numerator and denominator to default values if undefined. (Default fraction: 0&#x2F;1)
          * 2) Places the sign on numerator.
-         * 3) Reduces the function if needed.
-         * This function is called after the instances is created.
+         * 3) Reduces the ratio if needed.
          *
          * @method Ratio.prototype.correctRatio
          * @return {Ratio}
          * @example
-        Ratio().toString(); &#x2F;&#x2F; &#x60;.correctRatio()&#x60; was called internally.
+        Ratio().toString() === &quot;0&#x2F;1&quot;; &#x2F;&#x2F; &#x60;.correctRatio()&#x60; was called internally.
          **&#x2F;
         correctRatio : function () {
             var a = this.numerator,
@@ -526,14 +556,13 @@ var Ratio = (function () {
             }
             return this;
         },
-        
         &#x2F;**
          * From the Ratio instance, returns the raw values of the numerator and denominator in the form [numerator, denominator].
          *
          * @method Ratio.prototype.toArray
          * @return {Array} an array of 2 numbers.
          * @example
-        Ratio(1,2).toArray() &#x2F;&#x2F; returns [1,2]
+        Ratio(1,2).toArray().join(&#x27;,&#x27;) === &quot;1,2&quot;
          **&#x2F;
         toArray : function () {
             return [this.numerator, this.denominator];
@@ -545,10 +574,11 @@ var Ratio = (function () {
          * @return {Number}
          * @example
         Example 1:&lt;br&#x2F;&gt;
-        Ratio(1,2).valueOf() == 0.5;
+        Ratio(1,2).valueOf() === 0.5;
          **&#x2F;
         valueOf : function () {
-            return this.numerator &#x2F; this.denominator;
+			var arr = Ratio.simplifyENotation(this.numerator, this.denominator);
+            return arr[0]&#x2F;arr[1];
         },
         &#x2F;**
          * From the Ratio instance, returns a string of the Ratio in fraction form if the numerator and denominator are Rational numbers.&lt;br&#x2F;&gt;
@@ -558,29 +588,24 @@ var Ratio = (function () {
          * @return {String}
          * @example
         Example 1:&lt;br&#x2F;&gt;
-        Ratio(1,10).toLocaleString() == &quot;1&#x2F;10&quot;
+        Ratio(1,10).toLocaleString() === &quot;1&#x2F;10&quot;
         
         Example 2:&lt;br&#x2F;&gt;
-        Ratio(0,0).toLocaleString() == &quot;NaN&quot;
+        Ratio(0,0).toLocaleString() === &quot;NaN&quot;
          **&#x2F;
         toLocaleString : function () {
             var val = this.valueOf(),
             x,
-            str,
-            errorSize = 1e-9;
+            str;
             if (isNaN(val)) {
                 str = &quot;NaN&quot;;
             } else if (val % 1 === 0 || this.denominator === 1 || !isFinite(val % 1)) {
                 str = String(val);
             } else if (1 &lt; Math.abs(val)) {
-                if (Math.abs(val - val.toFixed(0)) &lt; errorSize) {
-                    str = val.toFixed(0);
-                } else {
-                    x = parseInt(val, 10);
-                    str = x + &quot; &quot; + Math.abs(this.numerator % this.denominator) + this.divSign + this.denominator;
-                }
+				x = parseInt(val, 10);
+				str = x + &quot; &quot; + Math.abs(this.numerator % this.denominator) + String(this.divSign) + this.denominator;
             } else {
-                str = String(this.numerator + this.divSign + this.denominator);
+                str = this.numerator + String(this.divSign) + this.denominator;
             }
             return str;
         },
@@ -592,7 +617,7 @@ var Ratio = (function () {
          * @return {String}
          * @example
         Example 1:&lt;br&#x2F;&gt;
-        Ratio(8,2).toString() == &quot;8&#x2F;2&quot;;
+        Ratio(8,2).toString() === &quot;8&#x2F;2&quot;;
         
         Example 2:&lt;br&#x2F;&gt;
         var a = Ratio(8,2);&lt;br&#x2F;&gt;
@@ -630,7 +655,7 @@ var Ratio = (function () {
          * @chainable
          * @return {Ratio}
          * @example
-        Ratio(10,2).reduce().toString() == &quot;5&#x2F;1&quot;
+        Ratio(10,2).reduce().toString() === &quot;5&#x2F;1&quot;
          **&#x2F;
         reduce : function () {
             var arr = Ratio.reduce(this.numerator, this.denominator);
@@ -645,7 +670,7 @@ var Ratio = (function () {
          * @param {Ratio|Number|String} [obj2]
          * @return {Ratio}
          * @example
-        Ratio( 1, 3 ).add( 1,2 ).toString() == &quot;5&#x2F;6&quot;
+        Ratio( 1, 3 ).add( 1,2 ).toString() === &quot;5&#x2F;6&quot;
          **&#x2F;
         add : function (obj, obj2) {
             obj = Ratio.getCombinedRatio(obj, obj2);
@@ -671,7 +696,7 @@ var Ratio = (function () {
          * @param {Ratio|Number|String} [obj2]
          * @return {Ratio}
          * @example
-        Ratio( 1,2 ).divide( 3,4 ).toString() == &quot;2&#x2F;3&quot;
+        Ratio( 1,2 ).divide( 3,4 ).toString() === &quot;4&#x2F;6&quot;
          **&#x2F;
         divide : function (obj, obj2) {
             obj = Ratio.getCombinedRatio(obj, obj2);
@@ -711,7 +736,7 @@ var Ratio = (function () {
          * @param {Ratio|Number|String} [obj2]
          * @return {Ratio}
          * @example
-        Ratio(2,5).multiply( 1, 2 ).toString() == &quot;2&#x2F;10&quot;
+        Ratio(2,5).multiply( 1, 2 ).toString() === &quot;2&#x2F;10&quot;
          **&#x2F;
         multiply : function (obj, obj2) {
             obj = Ratio.getCombinedRatio(obj, obj2);
@@ -726,7 +751,7 @@ var Ratio = (function () {
          * @param {Ratio|Number|String} [obj2]
          * @return {Ratio}
          * @example
-        Ratio(2,3).subtract(1,7).toString() === &quot;-1&#x2F;3&quot;
+        Ratio(2,3).subtract(1,7).toString() === &quot;11&#x2F;21&quot;
          **&#x2F;
         subtract : function (obj, obj2) {
             obj = Ratio.getCombinedRatio(obj, obj2);
@@ -808,7 +833,7 @@ var Ratio = (function () {
          * @chainable
          * @return {Ratio}
          * @example
-        Ratio(-3,2).abs().toString() == &quot;3&#x2F;2&quot;
+        Ratio(-3,2).abs().toString() === &quot;3&#x2F;2&quot;
          **&#x2F;
         abs : function () {
             return this.clone(Math.abs(this.numerator));
@@ -821,7 +846,7 @@ var Ratio = (function () {
          * @chainable
          * @return {Ratio}
          * @example
-        Ratio(3,10).mod().toString() == &quot;3&quot;
+        Ratio(3,10).mod().toString() === &quot;3&#x2F;1&quot;
          **&#x2F;
         mod : function () {
             return this.clone(this.numerator % this.denominator, 1);
@@ -833,7 +858,7 @@ var Ratio = (function () {
          * @chainable
          * @return {Ratio}
          * @example
-        Ratio(1,2).negate().toString() == &quot;-1&#x2F;2&quot;
+        Ratio(1,2).negate().toString() === &quot;-1&#x2F;2&quot;
          **&#x2F;
         negate : function () {
             return this.clone(-this.numerator);
@@ -858,13 +883,14 @@ var Ratio = (function () {
          *
          * @method Ratio.prototype.findX
          * @chainable
+         * @param {String} str a string representing a fraction with a &#x27;x&#x27; in the numerator or denominator.
          * @return {Ratio}
          * @example
         Ratio(1,4).findX(&quot;x&#x2F;20&quot;) == 5;
          **&#x2F;
         findX : function (str) {
             var arr = String(str).split(&quot;&#x2F;&quot;);
-            if (arr.length !== 2) {
+            if (arr.length !== 2 || ( !isNaN(arr[0] ) &amp;&amp; !isNaN( arr[1]))) {
                 return null;
             }
             return (isNaN(arr[0]) ? new Ratio(arr[1]).multiply(this) : new Ratio(arr[0]).divide(this));
@@ -945,7 +971,7 @@ var Ratio = (function () {
          * @chainable
          * @return {Ratio}
          * @example
-        Ratio.parse(4.2).makeProper().toString() === &quot;2&#x2F;100&quot;
+        Ratio.parse(4.2).makeProper().toString() === &quot;2&#x2F;10&quot;
          *&#x2F;
         makeProper : function () {
             return this.clone(this.numerator % this.denominator, this.denominator);

@@ -11,13 +11,15 @@
 		<li><a href="test/Ratio.js_testcases.html">Test Cases</a></li>
 		<li><a href="https://github.com/LarryBattle/Ratio.js/issues?state=open">Report Issues</a></li>
 	</ul>
-	<p id="ratioVersion"></p>
-	<script src="src/Ratio.js"></script>
+	<p id="ratioVersion">Error loading Ratio.js</p>
+	<script src="./lib/Ratio-0.3.10.js"></script>
 	<script type="text/javascript">
-	var $ = function( id ){
+	var $id = function( id ){
 		return document.getElementById( id ) || {};
 	}
-	$("ratioVersion").innerHTML = "Current Version is <b>" + (Ratio.VERSION || "Error") + "</b>";
+	if(typeof Ratio !== "undefined"){
+		$id("ratioVersion").innerHTML = "Current Version is <b>" + (Ratio.VERSION || "Error") + "</b>";
+	}
 	</script>
 </body>
 </html>

@@ -6,16 +6,19 @@
  * @requires jake.js, yuidoc.js, uglify.js, node.js
  */
 var fs = require('fs'),
+spawn = require('child_process').spawn,
 basePath = "../",
 projectInfo = require(basePath + "package.json"),
 paths = {
-	packageInfo : basePath + "/package.json",
+	packageInfo : basePath + "package.json",
 	doc : basePath + "doc",
 	min : basePath + "lib/Ratio-" + projectInfo.version + ".min.js",
 	lib : basePath + "lib",
 	demo : basePath + "examples/demo-basic.html",
 	test : basePath + "test/Ratio.js_testcases.html",
 	metrics : basePath + "test/Ratio.js_metrics.html",
+	index : basePath + "index.html",
+	oldMinJS : basePath + "lib/Ratio-*.min.js",
 	uncompressed : basePath + "lib/Ratio-" + projectInfo.version + ".js",
 	readme : basePath + "readme.md"
 };
@@ -24,7 +27,7 @@ var readAndUpdateVersion = function (filePath, updateFunc) {
 	var file = fs.readFileSync(filePath).toString(),
 	updatedFile = updateFunc(file, projectInfo.version);
 	
-	console.log("\nUpdating version number in %s", filePath);
+	console.log("Updating version number in %s", filePath);
 	
 	fs.writeFileSync(filePath, updatedFile);
 };
@@ -47,6 +50,7 @@ task("default", function () {
 	console.log("Starting build.");
 	jake.Task.updateVersion.invoke();
 	jake.Task.makeDoc.invoke();
+	jake.Task.removeMin.invoke();
 	jake.Task.compress.invoke();
 	console.log("Build complete.");
 });
@@ -62,7 +66,7 @@ task("updateVersion", function () {
 		str = ("" + str).replace(/("ratioVersion"\s*>)([^<]+)(<\/)/, "$1" + version + "$3");
 		return str;
 	});
-	"packageInfo,readme,demo,test,metrics".split(",").forEach(function (pathName) {
+	"packageInfo,readme,demo,test,metrics,index".split(",").forEach(function (pathName) {
 		readAndUpdateVersion(paths[pathName], updateRatioFilePathFunc);
 	});
 });
@@ -77,4 +81,10 @@ desc("Using uglify.js to minimize Ratio-*.js to Ratio-*.min.js.");
 task("compress", function () {
 	console.log("\nCompressing %s to %s", paths.uncompressed, paths.min);
 	jake.exec("uglifyjs " + paths.uncompressed + " > " + paths.min);
+});
+
+desc("Remove Ratio-*.min.js.");
+task("removeMin", function () {
+	console.log("Removing " + paths.oldMinJS);
+	spawn("rm", [paths.oldMinJS]);
 });
