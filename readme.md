@@ -26,6 +26,17 @@ Just include the Ratio.js script.
 
 	<script src="./lib/Ratio-0.3.10.js">;
 
+<b>Node.js</b>
+
+Install from npm
+
+	npm install lb-ratio
+
+Include in project 
+
+	var Ratio = require("lb-ratio");
+
+
 ##Examples
 
 1. What is `12.12121212121212` as a fraction?
