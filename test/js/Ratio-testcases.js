@@ -966,7 +966,7 @@ var runTests = function () {
 	});
 	
 	module("Find Prime Factors");
-	test("test Ratio.prototype.getPrimeFactors", function () {
+	test("test Ratio.getPrimeFactors", function () {
 		var func = Ratio.getPrimeFactors;
 		deepEqual(func(Infinity), []);
 		deepEqual(func({}), []);
