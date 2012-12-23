@@ -1,6 +1,14 @@
 ##Ratio.js Release Notes##
 __Project Page:__ <https://github.com/LarryBattle/Ratio.js>  <br/>
 
+__@Version: 0.3.11__ - 12/18/2012<br/>
+- Added: `.gitignore`<br/>
+- Added: `devDependencies` to `.\package.json`<br/>
+- Added: `Ratio.prototype.isNaN()`<br/>
+- Bugfix: `Ratio.prototype.deepEquals` now compares `this.divSign` and `this.alwaysReduce`.<br/>
+- Bugfix: [Issue 33](https://github.com/LarryBattle/Ratio.js/issues/33), `Ratio.parse(0,0).reduce().toString()` now returns `0/0`.<br/>
+- Updated: documentation.<br/>
+
 __@Version: 0.3.10__ - 12/10/2012<br/>
 - Added: `.\dev\jake removeMin`, removes old min files in `.\lib`.<br/>
 - Added: `vendors` and `vendors/qunit`. This makes it's easier to develop offline.<br/>

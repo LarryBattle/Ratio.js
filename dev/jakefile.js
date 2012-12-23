@@ -1,6 +1,9 @@
 /**
  * Build for Ratio.js
- * Type `jake` to run the build.
+ * How to build Ratio.js:
+ * 1) Update the `version` attribute in `./package.json`
+ * 2) Ensure that `.lib\Ratio-x.x.x.js` matches the `version` attribute.
+ * 3) In a console, cd to `.\dev` and type `jake` to run the build.
  *
  * @author Larry Battle
  * @requires jake.js, yuidoc.js, uglify.js, node.js

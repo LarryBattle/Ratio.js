@@ -76,6 +76,7 @@ var runTests = function () {
 		equal(typeof Ratio.MAX_VALUE, "number", "Ratio.MAX_VALUE is detected.");
 		equal(typeof Ratio.MAX_PRECISION, "number", "Ratio.MAX_PRECISION is detected.");
 	});
+	
 	module("Instantiation");
 	test("test new Ratio creation", function () {
 		var func = function (a, b) {
@@ -682,7 +683,19 @@ var runTests = function () {
 		ok(b < a);
 		ok(b <= c);
 	});
-	
+	test("test Ratio.prototype.isNaN()", function(){
+		var fn = function(a,b){
+			return Ratio.parse(a,b).isNaN();
+		}
+		equal(fn(1,0), true);
+		equal(fn(Infinity,0), true);
+		equal(fn(Infinity, -Infinity), true);
+		equal(fn("apples", "oranges"), true);
+		equal(fn(1,2), false);
+		equal(fn(1e49,22.34), false);
+		equal(fn(1,-2), false);
+		equal(fn(-1e-50), false);
+	});
 	module("Math Operations Requiring Extra Terms");
 	test("test addition with +, Ratio.prototype.valueOf() is called", function () {
 		var func = function (a, b, c, d) {
@@ -966,7 +979,7 @@ var runTests = function () {
 	});
 	
 	module("Find Prime Factors");
-	test("test Ratio.getPrimeFactors", function () {
+	test("test Ratio.getPrimeFactors()", function () {
 		var func = Ratio.getPrimeFactors;
 		deepEqual(func(Infinity), []);
 		deepEqual(func({}), []);
