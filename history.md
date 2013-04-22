@@ -1,6 +1,19 @@
 ##Ratio.js Release Notes##
 __Project Page:__ <https://github.com/LarryBattle/Ratio.js>  <br/>
 
+__@Version: 0.4__ - 4/21/2013<br/>
+- Added a logo for Ratio.js, located at `images/ratiojs-logo.png`<br/>
+- Added `Ratio.getStandardRatioArray()`<br/>
+- Added: `Ratio.prototype.numerator()` [Issue 37](https://github.com/LarryBattle/Ratio.js/issues/37)<br/>
+- Added: `Ratio.prototype.denominator()` [Issue 37](https://github.com/LarryBattle/Ratio.js/issues/37)<br/>
+- Bugfix: [Issue 43](https://github.com/LarryBattle/Ratio.js/issues/43), Subtraction modifies subtrahend Ratio object<br/>
+- Bugfix: [Issue 41](https://github.com/LarryBattle/Ratio.js/issues/41), Ratio object visibility<br/>
+- Bugfix: [issued 35](https://github.com/LarryBattle/Ratio.js/issues/35) Ratio.parse("0 a/b").toString() returns -a/b<br/>
+- BugFix: [Issue 38](https://github.com/LarryBattle/Ratio.js/issues/38) Reexamine Ratio.regex<br/>
+- <b>Deprecated</b> `Ratio.prototype.reduce()`, renamed to to `Ratio.prototype.simplify()`.<br>
+- <b>Deprecated</b> the instance properties `.numerator` and `.denominator`. They are now functions. This helps to hide implemtation.<br/>
+- <b>Note</b>: The instance `.divSign` will soon be deprecated.
+
 __@Version: 0.3.11__ - 12/18/2012<br/>
 - Added: `.gitignore`<br/>
 - Added: `devDependencies` to `.\package.json`<br/>

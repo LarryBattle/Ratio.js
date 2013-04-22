@@ -357,7 +357,7 @@ var runTests = function () {
 		b;
 		a = new Ratio(1, 2);
 		b = new Ratio(3, 2);
-		a.numerator = 3;
+		a.numerator( 3 );
 		equal(a.equals(b), true);
 	});
 	test("test changing denominator", function () {
@@ -365,7 +365,7 @@ var runTests = function () {
 		b;
 		a = new Ratio(1, 2);
 		b = new Ratio(1, 3);
-		a.denominator = 3;
+		a.denominator(3);
 		equal(a.equals(b), true);
 	});
 	
@@ -434,6 +434,7 @@ var runTests = function () {
 		
 		equal(func("10 a/b"), "NaN");
 		equal(func("a/b"), "NaN");
+
 	});
 	
 	module("Parse Value to Array");
@@ -514,13 +515,16 @@ var runTests = function () {
 	test("test Ratio.parseToArray() with mixed numbers for sign correction", function () {
 		var func = Ratio.parseToArray;
 		
+		deepEqual(func("0 1/2"), [1,2]);
+		deepEqual(func("-0 1/2"), [1,2]);
+		deepEqual(func("0 -1/2"), [-1,2]);
+		deepEqual(func("-0 -1/2"), [-1,2]);
+
 		deepEqual(func("1 1/2"), [3, 2]);
-		deepEqual(func("1 -1/  -2   "), [3, 2]);
-		deepEqual(func("-1 -1/2"), [3, 2]);
+		deepEqual(func("-1 1/2"), [-3, 2]);
+		deepEqual(func("1 -1/2"), [-3, 2], "Invalid expression, assume negative.");
+		deepEqual(func("-1 -1/2"), [-3, 2], "Invalid expression, assume negative.");
 		
-		deepEqual(func(" 1 -1 /  2 "), [-3, 2]);
-		deepEqual(func("1 1/-2"), [-3, 2]);
-		deepEqual(func(" -1 1  / 2 "), [-3, 2]);
 	});
 	
 	module("Parsing Value to Ratio");
@@ -893,8 +897,8 @@ var runTests = function () {
 	});
 	
 	module("Ratio Reduction Functions");
-	test("test Ratio.reduce()", function () {
-		var func = Ratio.reduce;
+	test("test Ratio.simplify()", function () {
+		var func = Ratio.simplify;
 		deepEqual(func(0, 200), [0, 1]);
 		deepEqual(func(1, 2), [1, 2]);
 		deepEqual(func(4, 8), [1, 2]);
@@ -902,9 +906,9 @@ var runTests = function () {
 		deepEqual(func(-42, 42), [-1, 1]);
 		deepEqual(func(134, -3), [-134, 3]);
 	});
-	test("test Ratio.prototype.reduce()", function () {
+	test("test Ratio.prototype.simplify()", function () {
 		var func = function (a, b) {
-			return Ratio.parse(a, b).reduce().toString();
+			return Ratio.parse(a, b).simplify().toString();
 		};
 		equal(func(), "NaN/1");
 		equal(func(0), "0/1");
@@ -931,7 +935,7 @@ var runTests = function () {
 		equal(a.toString(), "3/2");
 		a = a.divide("3/2");
 		equal(a.toLocaleString(), "1");
-		equal(a.multiply(12).reduce().toLocaleString(), 12);
+		equal(a.multiply(12).simplify().toLocaleString(), 12);
 		equal(a.toLocaleString(), "1");
 	});
 	test("test user case 2: Calculate PI", function () {
@@ -1012,7 +1016,7 @@ var runTests = function () {
 	});
 	test("test Ratio.prototype.findX() with valid input", function () {
 		var func = function (a, b, str) {
-			return (new Ratio(a, b)).findX(str).reduce().toString();
+			return (new Ratio(a, b)).findX(str).simplify().toString();
 		};
 		equal(func(1, 2, "x/10"), "5/1");
 		equal(func(1, 2, "x/1"), "1/2");
@@ -1094,6 +1098,30 @@ var runTests = function () {
 				equal(true, false, "Ratio.prototype." + fnName + "() throw an error. Error = " + e.toString());
 			}
 		}
+	});
+	module("Non-destructive Method Calls");
+	test("test that non-destructive methods don't modify passed objects", function(){
+		var makeStatement = function(a,b,c){
+			return a.toString() + " + " + b.toString() + " = " + c.toString();
+		};
+		var avoidThese = {
+			numerator : 1, denominator : 1
+		};
+		var a = new Ratio(5,4), 
+			b = new Ratio(1,2),
+			c = new Ratio(3,4),
+			str = makeStatement(a,b,c);
+
+		for (var fnName in Ratio.prototype){
+			if( avoidThese[fnName] || typeof a[fnName] !== "function" || a[fnName].length === 0 || a[fnName] === Ratio){
+				continue;
+			}
+			a = new Ratio(5,4);
+			b = new Ratio(1,2);
+			c = new Ratio(3,4);
+			a[fnName](b,c);
+			equal( str, makeStatement(a,b,c), "Ratio.prototype."+fnName+" is non-destructive." );
+		}	
 	});
 };
 var reRunTests = function () {

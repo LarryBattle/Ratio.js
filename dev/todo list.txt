@@ -8,6 +8,5 @@ Todo List
 // testing
 @todo Add at least 5 user cases. a.add(4).toFraction() doesn't copy over the divSign.
 	Ex: Ratio.parse(1/3).negate().add("-0.1").multiply(0xF3).divide(1,2).divide(1e-4).abs().toString()
-	
-//jake - build script
-@todo Need to update docs in both repositories.
+@todo Add to benchmark each main api.
+@todo Create an algebric table for toString() and toLocaleString()

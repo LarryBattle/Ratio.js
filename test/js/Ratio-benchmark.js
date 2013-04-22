@@ -1,47 +1,23 @@
 /**
 * Quick hack to provides benchmark data for Ratio.js
-*
 * @author Larry Battle <bateru.com/news>
-* @date July 11, 2012
-* @requires Ratio.js and Browser with console.time and console.profile.
-* @todo Make metrics browser independent. 
-*	Try using YUI 3 profiler<http://yuilibrary.com/yui/docs/profiler/> and benchmark.js <https://github.com/bestiejs/benchmark.js>.
+* @date April 21, 2013
+* @requires Ratio.js
 */
 (function(){
-	var checkDependencies = (function(){
-		// Sorry but right now the tests are dependent of a browser.
-		if( !((typeof console === "object" ) && console.log && console.profile ) ){
-			alert( "Oh no... console wasn't found.\n Try using 'Google Chrome Dev tools' or 'Firefox with Firebug'." );
-			return false;
-		}
-		if( !(Ratio() instanceof Ratio) || typeof Ratio !== "function"){
-			alert("Where's Ratio.js? Include Ratio.js to run this script.");
-			return false;
-		}
-		return true;
-	}());
-	var benchmarkIt = function( name, func ){
-		console.time( name );
-		func();
-		console.timeEnd( name );
-	};
-	var profileIt = function( name, func ){
-		console.profile( name );		
-		func();
-		console.profileEnd( name );
-	};
 	// Test Class
 	var Test = function( name, func, delay){
 		this.name = name || "";
 		this.func = func;
-		this.delay = delay;
+		this.startTime = 0;
+		this.endTime = 0;
+		this.duration = 0;
 	};
 	Test.prototype.run = function(){
-		var that = this;
-		setTimeout(function(){
-			//profileIt( that.name, that.func );
-			benchmarkIt( that.name, that.func );
-		}, this.delay );
+		this.startTime = +(new Date());
+		this.func();
+		this.endTime = +(new Date());
+		this.duration = this.endTime - this.startTime;
 	};
 	// Suite Class
 	var Suite = function(){
@@ -49,16 +25,43 @@
 	};
 	Suite.prototype.add = function( name, func ){
 		this.tests.push( 
-			new Test( name, func, (this.tests.length + 1) * 2000 ) 
+			new Test( name, func ) 
 		);
 	};
 	Suite.prototype.run = function(){
+		this.forEachTest(function(test){
+			test.run();
+		});
+	};
+	Suite.prototype.forEachTest = function(fn){
 		var i, len;
 		for( i = 0, len = this.tests.length; i < len; i++){
-			this.tests[i].run();
+			fn( this.tests[i] );
 		}
 	};
-	// ********************** //
+	var createRow = function(arr){
+		var row = "<tr>";
+		for(var i = 0, len = arr.length; i < len; i++){
+			row += "<td>";
+			row += arr[i];
+			row += "</td>";
+		}
+		row += "</tr>";
+		return row;
+	};
+	var createTableHeader = function(){
+		return "<thead>" + createRow(["Name", "Description"]) + "</thead>"; 
+	};
+	Suite.prototype.printResults = function(){
+		var el = document.getElementById("results");
+		var html = "<table>" + createTableHeader();
+		this.forEachTest(function(test){
+			// html += "<li>"+test.name + " : " + test.duration + "ms </li>";
+			html += createRow([test.name, test.duration+" ms"]);
+		});
+		el.innerHTML = html + "</table>";
+	};
+	
 	var tests = new Suite();
 	tests.add( "Ratio()", function(){
 		var i = 1e5;
@@ -95,7 +98,7 @@
 	});
 	tests.add( "Ratio.prototype.clone()", function(){
 		var func = function(a,b){
-			Ratio(a,b).clone()
+			Ratio(a,b).clone();
 		},
 			i = 1e5;
 		while( i-- ){
@@ -128,11 +131,19 @@
 			a.subtract(134,200);
 		}
 	});
+	tests.add("add and subtract", function () {
+		var addAndSubtract = function (a) {
+			return Ratio.parse(a).add(a).subtract(a).equals(a);
+		};	
+		for (var i = 0, len = 1e5; i < len; i++) {
+			addAndSubtract((Math.random() * 1e4).toFixed(3));
+		}
+	});
 	tests.add( "Ratio.prototype.divide()", function(){
 		var a = Ratio(),
 			i = 1e5;
-		while( i-- ){
 			a.divide(1,20);
+		while( i-- ){
 			a.divide(111,111);
 			a.divide(4e3,20e3);
 			a.divide(1e3,270);
@@ -142,8 +153,9 @@
 	tests.add( "Ratio Use case", function(){
 		var i = 1e5;
 		while( i-- ){
-			Ratio.parse(1/3).negate().add("-0.1").multiply(0xF3).divide(1,2).divide(1e-4).abs().toString()
+			Ratio.parse(1/3).negate().add("-0.1").multiply(0xF3).divide(1,2).divide(1e-4).abs().toString();
 		}
 	});
 	tests.run();
+	tests.printResults();
 }());
