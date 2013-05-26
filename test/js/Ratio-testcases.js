@@ -724,6 +724,9 @@ var runTests = function () {
 		x;
 		equal(func(), "0");
 		equal(func(0, x, 0, x), "0");
+		equal(func(0, x, 1, 2), "1/2");
+		equal(func(1, 2, 0, x), "1/2");
+		equal(func(2, 4, 4, 8), "1");
 		equal(func(2, 4, 4, 8), "1");
 		equal(func(1, 2, 1, 2), "1");
 		equal(func(1, x, 1, x), "2");
@@ -749,7 +752,16 @@ var runTests = function () {
 		},
 		x;
 		equal(func(), "0");
+		equal(func(0, x, 0, 0), "0");
 		equal(func(0, x, 0, x), "0");
+		
+		equal(func(0, 0, 1, 2), "NaN");
+		equal(func(0, 0, 0, 0), "NaN");
+		equal(func(1, 2, 0, 0), "NaN");
+		equal(func(1, 2, 0, x), "NaN");
+		
+		equal(func(0, x, 1, 2), "-1/2");
+		equal(func(1, 2, 0, x), "1/2");
 		equal(func(1, 3, 3, 9), "0");
 		equal(func(2, 4, 4, 8), "0");
 		equal(func(1, x, 1, 2), "1/2");
