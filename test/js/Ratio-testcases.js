@@ -752,13 +752,13 @@ var runTests = function () {
 		},
 		x;
 		equal(func(), "0");
-		equal(func(0, x, 0, 0), "0");
+		equal(func(0, x, 0, 0), "NaN", "0 - 0/0 is NaN");
 		equal(func(0, x, 0, x), "0");
 		
 		equal(func(0, 0, 1, 2), "NaN");
 		equal(func(0, 0, 0, 0), "NaN");
 		equal(func(1, 2, 0, 0), "NaN");
-		equal(func(1, 2, 0, x), "NaN");
+		equal(func(1, 2, 0, x), "1/2");
 		
 		equal(func(0, x, 1, 2), "-1/2");
 		equal(func(1, 2, 0, x), "1/2");
