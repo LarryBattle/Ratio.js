@@ -42,7 +42,7 @@ Include in project
 
 	Solution:
 
-		var result = Ratio.parse( 12.12121212121212 ).reduce().toString();
+		var result = Ratio.parse( 12.12121212121212 ).simplify().toString();
 		result === "400/33";
 
 2. Evaluate ( 0.1 + 0.2 )/( 1/3 * 12 )?
