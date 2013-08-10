@@ -6,7 +6,7 @@
 MIT License <http://www.opensource.org/licenses/mit-license>
 GPL v3 <http://opensource.org/licenses/GPL-3.0>
  * @info Project page: <https://github.com/LarryBattle/Ratio.js/>
- * @version 0.4.0
+ * @version 0.4.2-beta
  * @note Uses YUI-DOC to generate documentation.
  **/
 var Ratio = (function () {
@@ -84,7 +84,7 @@ var Ratio = (function () {
      * @property Ratio.VERSION
      * @type String
      **/
-    Ratio.VERSION = "0.4.0";
+    Ratio.VERSION = "0.4.2-beta";
     /**
      * Checks if value is a finite number. <br/> Borrowed from jQuery 1.7.2 <br/>
      *
@@ -223,12 +223,12 @@ var Ratio = (function () {
         }
         return arr;
     };
-    var _splitE = function(obj){
-        if(-1 == (+obj).toString().indexOf(".")){
+    var _splitE = function (obj) {
+        if (-1 == (+obj).toString().indexOf(".")) {
             return [+obj, 1];
         }
         var arr = [],
-            parts = (+obj).toString().split(".");
+        parts = (+obj).toString().split(".");
         arr[1] = Math.pow(10, parts[1].length);
         arr[0] = Math.abs(parts[0]) * arr[1] + (+parts[1]);
         arr[0] = (-1 < (parts[0]).indexOf("-")) ? -arr[0] : arr[0];
@@ -245,13 +245,13 @@ var Ratio = (function () {
      * @return {Ratio}
      * @example
     Ratio.parse(22,7).toString() === "22/7"; //whole numbers
-
+    
     Ratio.parse("3 1/7").toString() === "22/7"; // mixed numbers
-
+    
     Ratio.parse(22/7).simplify().toLocaleString() === "3 1/7"; // decimals
-
+    
     Ratio.parse("22/7").toLocaleString() === "3 1/7"; // fractions
-
+    
     Ratio.parse("22e31/70e30").simplify().toLocaleString() === "3 1/7"; // scientific notated numbers
      **/
     Ratio.parse = function (obj, obj2) {
@@ -264,7 +264,7 @@ var Ratio = (function () {
         }
         return new Ratio(arr[0], arr[1]);
     };
-  var _simplify = function(obj){
+    var _simplify = function (obj) {
         var top = obj._n,
         bottom = top || !obj._d ? obj._d : 1,
         arr = Ratio.getRepeatProps(top / bottom),
@@ -285,54 +285,54 @@ var Ratio = (function () {
      * @return {Array[ Number, Number ]}
      * @example
     Example 1:
-
+    
     Ratio.simplify( Ratio(36,-36) ); // returns [-1,1]
-
+    
     Example 2:
-
+    
     Ratio.simplify( "9/12" ); // returns [3,4]
-
+    
     Example 3:
-
+    
     Ratio.simplify( "10/4", "5/3" ); // returns [3,2] because ("10/4", "5/3") => ("6/4")
     Ratio.simplify( "6/4" ); // returns [3,2]
      **/
     Ratio.simplify = function (obj, obj2) {
         return _simplify(
-			Ratio.parse(obj, obj2)
-		);
+            Ratio.parse(obj, obj2));
     };
-    Ratio.getApprox = function(d) {
-        var a,
-        b,
-        pN = 1,
-        pD = 0,
-        gN = 0,
-        gD = 1,
-        d2 = d,
-        L2,
-        val,
-        oldVal = NaN,
-        lim = 1e3;
-        
-        while (lim--) {
-            L2 = Math.floor(d2);
-            a = L2 * pN + gN;
-            b = L2 * pD + gD;
-            val = a / b;
-            if (val == d || val == oldVal) {
+    Ratio.getApprox = function (val) {
+        val = +val;
+        var midN,
+        midD,
+        rightFracN = 1,
+        rightFracD = 0,
+        leftFracN = 0,
+        leftFracD = 1,
+        val2 = val,
+        floorOfMid,
+        result,
+        oldResult = NaN,
+        limit = 1e3;
+        while (limit--) {
+            floorOfMid = Math.floor(val2);
+            midN = floorOfMid * rightFracN + leftFracN;
+            midD = floorOfMid * rightFracD + leftFracD;
+            result = midN / midD;
+            if (result == val || result == oldResult) {
                 break;
             }
-            oldVal = val;
+            oldResult = result;
             
-            d2 = 1 / (d2 - L2);
-            gN = pN;
-            gD = pD;
-            pN = a;
-            pD = b;
+            val2 = 1 / (val2 - floorOfMid);
+            leftFracN = rightFracN;
+            leftFracD = rightFracD;
+            rightFracN = midN;
+            rightFracD = midD;
         }
-        return [a, b];
+        return [midN, midD];
     };
+    
     /**
      * This function divides a repeating decimal into 3 parts. If the value passed is not a repeating decimal then an empty array is returned.<br/>
      * For repeating decimals, the return value is an array which contains the numeric value split into 3 parts like, <br/>
@@ -409,7 +409,7 @@ var Ratio = (function () {
      * @example
     Example 1
     Ratio.getCleanENotation( "1.1000000000000003e-30" ) === "1.1e-30";
-
+    
     Example 2
     Ratio.getCleanENotation( "9.999999999999999e+22" ) === "1e+23";
      **/
@@ -582,7 +582,7 @@ var Ratio = (function () {
          * @example
         Example 1:
         Ratio(1,10).toLocaleString() === "1/10"
-
+        
         Example 2:
         Ratio(0,0).toLocaleString() === "NaN"
          **/
@@ -611,7 +611,7 @@ var Ratio = (function () {
          * @example
         Example 1:
         Ratio(8,2).toString() === "8/2";
-
+        
         Example 2:
         var a = Ratio(8,2);
         a.divSign = ":";
@@ -665,7 +665,7 @@ var Ratio = (function () {
             var arr = _simplify(this);
             return this.clone(arr[0], arr[1]);
         },
-        approx : function(){
+        approx : function () {
             var arr = Ratio.getApprox(this.valueOf());
             return this.clone(arr[0], arr[1]);
         },
@@ -846,7 +846,7 @@ var Ratio = (function () {
             obj._d = Ratio.getCleanENotation(obj._d);
             return obj;
         },
-        deepClean : function(){
+        deepClean : function () {
             return this.approx().cleanFormat();
         },
         /**
