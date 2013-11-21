@@ -121,16 +121,25 @@ var Ratio = (function () {
     Ratio.gcd(20,12) === 4
      **/
     Ratio.gcd = function (a, b) {
-        var c;
-        b = (+b && +a) ? +b : 0;
-        a = b ? a : 1;
-        while (b) {
-            c = a % b;
-            a = b;
-            b = c;
-        }
-        return Math.abs(a);
-    };
+	var c;
+	a = +a;
+	b = +b;
+	// Checks for NaN
+	if ( a !== a || b !== b) {
+		return NaN;
+	}
+	// Checks if you're only operating on integers.
+	if((a % 1 !== 0) || (b % 1 !== 0)){
+		throw new Error("Can only operate on integers");
+	}
+	
+	while (b !== 0) {
+		c = a % b;
+		a = b;
+		b = c;
+	}
+	return (0 < a) ? a : -a;
+};
     /**
      * Returns the numerator with the corresponding sign of (top/bottom).<br/>
      *
