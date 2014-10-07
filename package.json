@@ -1,28 +1,36 @@
 {
-	"name" : "lb-ratio",
-	"version" : "0.4.0",
-	"homepage" : "https://github.com/LarryBattle/Ratio.js",
-	"description" : "Provides a Fraction, Rational, and Ratio object for javascript.",
-	"keywords" : ["Ratio", "fraction", "rational", "numbers", "Math", "Mixed numbers"],
-	"author" : {
-		"name" : "Larry Battle",
-		"url" : "http://bateru.com/news/"
-	},
-	"bugs" : {
-		"url" : "https://github.com/LarryBattle/Ratio.js/issues?state=open"
-	},
-	"main" : "./lib/Ratio-0.4.0.js",
-	"repository" : {
-		"type" : "git",
-		"url" : "https://github.com/LarryBattle/Ratio.js.git"
-	},
-	"engines" : {
-		"node" : "*"
-	},
-	"devDependencies" : {
-		"jake" : "~0.5.8",
-		"uglify-js" : "~2.2.2",
-		"yuidocjs" : "~0.3.35"
-	},
-	"license" : "MIT"
+  "name": "lb-ratio",
+  "version": "0.4.0",
+  "homepage": "https://github.com/LarryBattle/Ratio.js",
+  "description": "Provides a Fraction, Rational, and Ratio object for javascript.",
+  "keywords": [
+    "Ratio",
+    "fraction",
+    "rational",
+    "numbers",
+    "Math",
+    "Mixed numbers"
+  ],
+  "author": {
+    "name": "Larry Battle",
+    "url": "https://github.com/LarryBattle"
+  },
+  "bugs": {
+    "url": "https://github.com/LarryBattle/Ratio.js/issues?state=open"
+  },
+  "main": "./lib/Ratio-0.4.0.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LarryBattle/Ratio.js.git"
+  },
+  "engines": {
+    "node": "*"
+  },
+  "devDependencies": {
+    "gulp": "~3.8.8"
+  },
+   "scripts" : {
+     "build" : "gulp build"
+   },
+  "license": "MIT"
 }
