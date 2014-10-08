@@ -52,7 +52,6 @@ desc("Default task");
 task("default", function () {
 	console.log("Starting build.");
 	jake.Task.updateVersion.invoke();
-	jake.Task.makeDoc.invoke();
 	jake.Task.removeMin.invoke();
 	jake.Task.compress.invoke();
 	console.log("Build complete.");
@@ -72,12 +71,6 @@ task("updateVersion", function () {
 	"packageInfo,readme,demo,test,metrics,index".split(",").forEach(function (pathName) {
 		readAndUpdateVersion(paths[pathName], updateRatioFilePathFunc);
 	});
-});
-
-desc("Using yuidoc.js to generate documentation.");
-task("makeDoc", function () {
-	console.log("\nGenerating documentation.");
-	jake.exec("yuidoc " + paths.lib + " -o " + paths.doc);
 });
 
 desc("Using uglify.js to minimize Ratio-*.js to Ratio-*.min.js.");

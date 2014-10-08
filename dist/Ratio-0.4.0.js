@@ -1,13 +1,10 @@
 /**
- * @project Ratio.js
- * @purpose Provides a Ratio(Fraction) object for Javascript. Similar to Fraction.py for Python.
- * @author Larry Battle , <http://bateru.com/news/>
- * @license MIT and GPL 3.0
-MIT License <http://www.opensource.org/licenses/mit-license>
-GPL v3 <http://opensource.org/licenses/GPL-3.0>
- * @info Project page: <https://github.com/LarryBattle/Ratio.js/>
- * @version 0.4.0
- * @note Uses YUI-DOC to generate documentation.
+ * Ratio.js, provides a Ratio(Fraction) object for Javascript. 
+ * Created by Larry Battle, https://github.com/LarryBattle
+ * license MIT, http://www.opensource.org/licenses/mit-license
+ * Project Page: https://github.com/LarryBattle/Ratio.js
+ *
+ * @module Ratio
  **/
 var Ratio = (function () {
     "use strict";
@@ -439,7 +436,9 @@ var Ratio = (function () {
         return Ratio.parse(value).simplify();
     };
     /**
-     * @see Ratio.prototype.correctRatio()
+     * Returns an ratio as an array with the first element containing the sign of the fraction. 
+     * @method Ratio.getStandardRatioArray()
+     *
      * @param {Number} a - numerator
      * @param {Number} b - denominator
      * @param {Boolean} alwaysReduce - if true, then returns the simplify fraction.
