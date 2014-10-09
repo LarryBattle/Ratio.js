@@ -10,7 +10,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Ratio",
             "name": "Ratio",
-            "description": "Ratio.js, provides a Ratio(Fraction) object for Javascript. \nCreated by Larry Battle, https://github.com/LarryBattle\nlicense MIT, http://www.opensource.org/licenses/mit-license\nProject Page: https://github.com/LarryBattle/Ratio.js"
+            "description": "Ratio.js, provides a Ratio(Fraction) object for Javascript.\nCreated by Larry Battle, https://github.com/LarryBattle\nlicense MIT, http://www.opensource.org/licenses/mit-license\nProject Page: https://github.com/LarryBattle/Ratio.js"
         }
     ]
 } };

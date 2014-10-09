@@ -1,4 +1,4 @@
-## Ratio.js ##
+## Ratio.js 
 Provides a Fraction / Rational / Ratio object for javascript.
 
 **Why use Ratio.js?**
@@ -19,12 +19,12 @@ Note: Run the test cases to check for additional browser compatibility.
 ##Current version
 <span id="ratioVersion">0.4.0</span>
 
-## Installation ##
+## Installation 
 Just include the Ratio.js script. There are no dependencies.
 
 <b>Browser:</b>
 
-	<script src="./lib/Ratio-0.4.0.js</b>
+	<script src="./dist/Ratio-0.4.0.js</b>
 
 Install from npm
 
@@ -34,9 +34,14 @@ Include in project
 
 	var Ratio = require("lb-ratio");
 
+## Development
+Useful npm scripts.
+First run `npm install` on the root directory.
+- `npm run format` : Format the javascript code in `./lib` with jsbeautifier.
+- `npm run lint` : Lint code with jshint and find errors in the code.
+- `npm run build` : Build a release based on base package.json version number and the beta js.
 
-
-##Examples
+## Examples
 
 1. What is `12.12121212121212` as a fraction?
 
@@ -60,16 +65,16 @@ Include in project
 		var result = Ratio.parse( "22/7" ).equals( Math.PI );
 		result === false;
 		
-## Short Tutorial ##
+## Short Tutorial
 
-### Ratio Constructor ###
+### Ratio Constructor
 
 Ratio.js introduces a global constructor called `Ratio`.
 
 `new` is not require to make a new object since it's done for you. <br/>
 Thus `new Ratio()` and `Ratio()` are both valid to instantiate an object.<br/>
 	
-### Ratio Properties ###
+### Ratio Properties
 
 The default value of the numerator is 0 and denominator is 1.
 
@@ -90,7 +95,7 @@ Examples:
 	Ratio(1,"ten").toString() === "1/NaN"
 	Ratio("five","ten").toString() === "NaN/NaN"
 
-### Ratio values ###
+### Ratio values
 
 To retrieve the value inside a Ratio object you can use `toString()`, `toLocaleString()`, `toArray()` or `valueOf()`.<br/>
 `toString()` - returns string "numerator/denominator".<br/>
@@ -104,7 +109,7 @@ To retrieve the value inside a Ratio object you can use `toString()`, `toLocaleS
 	a.toArray() // returns [30,10];
 	a.valueOf() === 3; // same as +a or Number(a)
 	
-### Ratio Comparison ###
+### Ratio Comparison
 
 valueOf() is called when inequality comparisons are made on a Ratio object.<br/>
 However, equalivance( `==` ) will compare the object and not the value of the object. Use `.equals()` instead.<br/>
@@ -119,7 +124,7 @@ Thus you can do the following.
 	a.equals( a ) === true;
 	a.equals( b ) === false;
 
-### Creating new Ratio Objects ###
+### Creating new Ratio Objects
 
 There are various ways to create a new Ratio object. Ratio.parse() is the prefered methods.
 
@@ -160,7 +165,7 @@ This is the same as `value1 / value2` or `Ratio.parse(value1).divide(value2)`
 	// (1/2) / (1/3) = 3/2
 	Ratio.parse( "1/2", "1/3" ).toString() === "3/2";
 		
-### Methods ###
+### Methods 
 
 All proproty methods are non-destructive and return a new Ratio object.
 
@@ -171,7 +176,7 @@ All proproty methods are non-destructive and return a new Ratio object.
 	
 Refer to the documentation for a complete method list.
 
-## Additional Examples ##
+## Additional Examples 
 
 	// in Javascript
     var a = 0.1 + 0.2;
@@ -206,10 +211,10 @@ Refer to the documentation for a complete method list.
     a.toArray(); // returns [ 1, 10 ]
 
 
-## License ##
+## License 
 
 [MIT License](http://www.opensource.org/licenses/mit-license) 
 
-## Known Issues ##
+## Known Issues
 
 - Precision is lost for values passed +/- 9007199254740992. <a href="http://stackoverflow.com/questions/307179/what-is-javascripts-max-int-whats-the-highest-integer-value-a-number-can-go-t">stackoverflow.com</a> <br/>
