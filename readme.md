@@ -208,7 +208,7 @@ Refer to the documentation for a complete method list.
 
 ## License ##
 
-License: [MIT License](http://www.opensource.org/licenses/mit-license) and [GPL v3](http://opensource.org/licenses/GPL-3.0)
+[MIT License](http://www.opensource.org/licenses/mit-license) 
 
 ## Known Issues ##
 
