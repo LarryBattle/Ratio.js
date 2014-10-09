@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ratio.js - Fractions for Javascript</title>
+</head>
+<body>
+	<a href="https://github.com/LarryBattle/Ratio.js"><img src="images/ratiojs-logo.png"/></a><br/>
+	<b><a href="https://github.com/LarryBattle/Ratio.js">Ratio.js</a> <span id="ratioVersion">Loading...</span> - Fractions for Javascript</b><br/>
+	By <a href="http://www.bateru.com/news">Larry Battle</a>
+	<ul>
+		<li><a href="doc/classes/Ratio.html">Documentation</a></li>
+		<li><a href="../test/Ratio.js_testcases.html">Test Cases</a></li>
+		<li><a href="https://github.com/LarryBattle/Ratio.js/issues?state=open">Report Issues</a></li>
+	</ul>
+	<h3>
+		Demo
+	</h3>
+	<hr>
+	var x = Ratio.parse( <input type="text" id="userInput" placeholder="type a fraction"/> ); <input type="button" id="generateRandomInput" value="Generate Input"/>
+	<table>
+		<tr>
+			<td align="right">x.toString() = </td>
+			<td id="xToString"></td>
+		</tr>
+		<tr>
+			<td align="right">x.simplify().toString() = </td>
+			<td id="xsimplifyToString"></td>
+		</tr>
+		<tr>
+			<td align="right">x.toLocaleString() = </td>
+			<td id="xToLocaleString"></td>
+		</tr>
+		<tr>
+			<td align="right">x.simplify().toLocaleString() = </td>
+			<td id="xsimplifyToLocaleString"></td>
+		</tr>
+		<tr>
+			<td align="right">x.valueOf() = </td>
+			<td id="xValueOf"></td>
+		</tr>
+	</table>
+	<script src="../dist/Ratio-0.4.0.js"></script>
+	<script type="text/javascript">
+	var generateRandomInput = function(max){
+		var a = ~~(Math.random() * max), b = ~~(Math.random() * max), c = ~~(Math.random() * max);
+		var str = "";
+		switch( ~~(Math.random() * 3) ){
+			case 0:
+				str = "" + a/b;
+				break;
+			case 1:
+				str = a + "/" + b;
+				break;
+			case 2:
+				str = a + " " + b + "/" + c;
+				break;
+		}
+		return str;
+	};
+	var $ = function( id ){
+		return document.getElementById( id ) || {};
+	};
+	var displayRatioOutput = function(){
+		var x = Ratio.parse( $("userInput").value );
+		
+		$("xToString").innerHTML = x.toString();
+		$("xsimplifyToString").innerHTML = x.simplify().toString();
+		$("xToLocaleString").innerHTML = x.toLocaleString();
+		$("xsimplifyToLocaleString").innerHTML = x.simplify().toLocaleString();
+		$("xValueOf").innerHTML = x.valueOf();
+	};
+	var generateRatioInput = function(){
+		$("userInput").value = generateRandomInput(200);
+		displayRatioOutput();
+	};
+	$("userInput").onkeyup = displayRatioOutput;
+	$("generateRandomInput").onclick = generateRatioInput;
+	$("ratioVersion").innerHTML = Ratio.VERSION;
+	generateRatioInput();
+	</script>
+	</body>
+</html>
