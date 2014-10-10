@@ -24,7 +24,7 @@ Just include the Ratio.js script. There are no dependencies.
 
 <b>Browser:</b>
 
-	<script src="./dist/Ratio-0.4.1.js</b>
+	<script src="./dist/Ratio-0.4.1.js"></script>
 
 Install from npm
 
