@@ -1,6 +1,21 @@
 ##Ratio.js Release Notes##
 __Project Page:__ <https://github.com/LarryBattle/Ratio.js>  <br/>
 
+__@Version: 0.4.1__ - 09/10/2014<br/>
+
+- Bug Fix: Ratio.gcd() now returns the correct value for when one input is 0.
+- Bug Fix: Ratio.gcd() now returns the first argument for when one of the arguments is 0.
+- Note: Ratio.gcd() will now return the first element if the argument.length is < 2.
+- Bug fix: fixed corrupted .gitignore
+- Enhancement: npm run format now formats gulpfile.js and all js files in ./test.
+- Enhancement: Switched from jake to gulp
+- Enhancement: Added npm run build to build new releases
+- Enhancement: Added npm run lint to run jshint on ./lib/Ratio-beta.js
+- Enhancement: Added npm run format to format js in ./lib
+- Project Structure: Switched from MIT and GPL 3 license to only MIT license.
+- Project Structure: The dist folder will now contain the release files
+- Project Structure: ./lib/Ratio-beta.js will now contain the latest edge release of Ratio.js
+
 __@Version: 0.4__ - 4/21/2013<br/>
 - Added a logo for Ratio.js, located at `images/ratiojs-logo.png`<br/>
 - Added `Ratio.getStandardRatioArray()`<br/>

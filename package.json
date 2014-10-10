@@ -1,6 +1,6 @@
 {
   "name": "lb-ratio",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "homepage": "https://github.com/LarryBattle/Ratio.js",
   "description": "Provides a Fraction, Rational, and Ratio object for javascript.",
   "keywords": [
@@ -18,7 +18,7 @@
   "bugs": {
     "url": "https://github.com/LarryBattle/Ratio.js/issues?state=open"
   },
-  "main": "./dist/Ratio-0.4.0.js",
+  "main": "./dist/Ratio-0.4.1.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/LarryBattle/Ratio.js.git"

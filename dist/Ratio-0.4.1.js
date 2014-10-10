@@ -81,7 +81,7 @@ var Ratio = (function() {
      * @property Ratio.VERSION
      * @type String
      **/
-    Ratio.VERSION = "0.4.0";
+    Ratio.VERSION = "0.4.1";
     /**
      * Checks if value is a finite number. <br/> Borrowed from jQuery 1.7.2 <br/>
      *
@@ -109,6 +109,7 @@ var Ratio = (function() {
     };
     /**
      * Find the Greatest Common Factor between two numbers using the Euler Method.
+     * Will return the first argument if only one argument is passed.
      *
      * @method Ratio.gcd
      * @param {Number} a
@@ -118,15 +119,30 @@ var Ratio = (function() {
     Ratio.gcd(20,12) === 4
      **/
     Ratio.gcd = function(a, b) {
+      if (arguments.length < 2) {
+        return a;
+      }
       var c;
-      b = (+b && +a) ? +b : 0;
-      a = b ? a : 1;
+      a = +a;
+      b = +b;
+      // Same as isNaN() but faster
+      if (a !== a || b !== b) {
+        return NaN;
+      }
+      //Same as !isFinite() but faster
+      if (a === Infinity || a === -Infinity || b === Infinity || b === -Infinity) {
+        return Infinity;
+      }
+      // Checks if a or b are decimals
+      if ((a % 1 !== 0) || (b % 1 !== 0)) {
+        throw new Error("Can only operate on integers");
+      }
       while (b) {
         c = a % b;
         a = b;
         b = c;
       }
-      return Math.abs(a);
+      return (0 < a) ? a : -a;
     };
     /**
      * Returns the numerator with the corresponding sign of (top/bottom).<br/>
