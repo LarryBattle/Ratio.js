@@ -1,6 +1,7 @@
 var del = require("del");
 var fs = require("fs");
 var info = require("./package.json");
+var git = require("gulp-git");
 var gulp = require("gulp");
 var jshint = require("gulp-jshint");
 var stylish = require('jshint-stylish');
@@ -95,3 +96,19 @@ gulp.task("updateLinks", function() {
 });
 
 gulp.task("build", ["lint", "format", "makeDist", "makeMin", "buildDoc", "updateLinks"]);
+
+gulp.task("repo:updatePages", function() {
+  git.pull('origin', 'master', function(err) {
+    if (err) throw err;
+    git.checkout('gh-pages', function(err) {
+      if (err) throw err;
+      git.merge('master', function(err) {
+        if (err) throw err;
+        git.push('origin', 'master', function(err) {
+          if (err) throw err;
+        });
+      });
+    });
+  });
+
+});

@@ -36,7 +36,8 @@
     "gulp-wrapper": "~0.1.5",
     "gulp-jsbeautifier": "0.0.3",
     "gulp-jshint": "~1.8.5",
-    "jshint-stylish": "~1.0.0"
+    "jshint-stylish": "~1.0.0",
+    "gulp-git": "~0.5.2"
   },
   "scripts": {
     "build": "gulp build",
