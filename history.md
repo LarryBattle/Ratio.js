@@ -1,7 +1,7 @@
 ##Ratio.js Release Notes##
 __Project Page:__ <https://github.com/LarryBattle/Ratio.js>  <br/>
 
-__@Version: 0.4.1__ - 09/10/2014<br/>
+__@Version: 0.4.1__ - 10/10/2014<br/>
 
 - Bug Fix: Ratio.gcd() now returns the correct value for when one input is 0.
 - Bug Fix: Ratio.gcd() now returns the first argument for when one of the arguments is 0.
