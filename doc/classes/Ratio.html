@@ -1,0 +1,6073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Ratio</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title=""></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/Ratio.html">Ratio</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/Ratio.html">Ratio</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1>Ratio Class</h1>
+<div class="box meta">
+    
+
+    
+
+    
+        <div class="foundat">
+            Defined in: <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l11"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:11</code></a>
+        </div>
+    
+
+    
+        
+            Module: <a href="../modules/Ratio.html">Ratio</a>
+        
+    
+
+    
+</div>
+
+
+
+<div class="box intro">
+    <p>Ratio is an object that has a numerator and denominator, corresponding to a/b.<br/>
+Note that the keyword <code>new</code> is not required to create a new instance of the Ratio object, since this is done for you.<br/>
+In otherwords, <code>new Ratio( value )</code> is the same as <code>Ratio( value )</code>.</p>
+
+</div>
+
+
+    <div class="constructor">
+        <h2>Constructor</h2>
+        <div id="method_Ratio" class="method item">
+    <h3 class="name"><code>Ratio</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code class="optional">[numerator=0]</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code class="optional">[denominator=1]</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code class="optional">[alwaysReduce]</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l11"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:11</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[numerator=0]</code>
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a> | String | Number</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>can be a Ratio object or numeric value.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[denominator=1]</code>
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a> | String | Number</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>can be a Ratio object or numeric value.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[alwaysReduce]</code>
+                        <span class="type">Boolean</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>if true, then the Ratio object and the children from it will always represent the simplified form of the rational.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>:
+                    
+                    <p>object that has a numerator and denominator, corresponding to a/b.</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <p>   Ratio(2,4).toString() === &quot;2/4&quot;;
+   Ratio(&quot;2/4&quot;).toString() === &quot;NaN/1&quot; // Use Ratio.parse()!</p>
+
+            </div>
+        </div>
+    
+</div>
+
+    </div>
+
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+        
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+        
+        
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
+        
+        
+        
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+            
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.gcd">Ratio.gcd</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.getCleanENotation">Ratio.getCleanENotation</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.getCombinedRatio">Ratio.getCombinedRatio</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.getNumeratorWithSign">Ratio.getNumeratorWithSign</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.getPrimeFactors">Ratio.getPrimeFactors</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.getRepeatProps">Ratio.getRepeatProps</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.getStandardRatioArray()">Ratio.getStandardRatioArray()</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.getValueIfDefined">Ratio.getValueIfDefined</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.guessType">Ratio.guessType</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.isNumeric">Ratio.isNumeric</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.parse">Ratio.parse</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.parseToArray">Ratio.parseToArray</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.prototype.abs">Ratio.prototype.abs</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.prototype.add">Ratio.prototype.add</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.prototype.ceil">Ratio.prototype.ceil</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.prototype.cleanFormat">Ratio.prototype.cleanFormat</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.prototype.clone">Ratio.prototype.clone</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.prototype.correctRatio">Ratio.prototype.correctRatio</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.prototype.deepEquals">Ratio.prototype.deepEquals</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.prototype.denominator">Ratio.prototype.denominator</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.prototype.descale">Ratio.prototype.descale</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.prototype.divide">Ratio.prototype.divide</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.prototype.equals">Ratio.prototype.equals</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.prototype.findX">Ratio.prototype.findX</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.prototype.floor">Ratio.prototype.floor</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.prototype.isNaN">Ratio.prototype.isNaN</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.prototype.isProper">Ratio.prototype.isProper</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.prototype.makeProper">Ratio.prototype.makeProper</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.prototype.mod">Ratio.prototype.mod</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.prototype.multiply">Ratio.prototype.multiply</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.prototype.negate">Ratio.prototype.negate</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.prototype.numerator">Ratio.prototype.numerator</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.prototype.pow">Ratio.prototype.pow</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.prototype.reciprocal">Ratio.prototype.reciprocal</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method deprecated">
+                                <a href="#method_Ratio.prototype.reduce">Ratio.prototype.reduce</a>
+
+                                
+                                
+                                    <span class="flag deprecated">deprecated</span>
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.prototype.scale">Ratio.prototype.scale</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.prototype.simplify">Ratio.prototype.simplify</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.prototype.subtract">Ratio.prototype.subtract</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.prototype.toArray">Ratio.prototype.toArray</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.prototype.toLocaleString">Ratio.prototype.toLocaleString</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.prototype.toQuantityOf">Ratio.prototype.toQuantityOf</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.prototype.toString">Ratio.prototype.toString</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.prototype.valueOf">Ratio.prototype.valueOf</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.random">Ratio.random</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.simplify">Ratio.simplify</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_Ratio.simplifyENotation">Ratio.simplifyENotation</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties">
+                        
+                            <li class="index-item property">
+                                <a href="#property_Ratio.MAX_PRECISION">Ratio.MAX_PRECISION</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_Ratio.MAX_VALUE">Ratio.MAX_VALUE</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_Ratio.MIN_VALUE">Ratio.MIN_VALUE</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_Ratio.regex">Ratio.regex</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_Ratio.VERSION">Ratio.VERSION</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+
+            
+        </div>
+
+        
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method_Ratio.gcd" class="method item">
+    <h3 class="name"><code>Ratio.gcd</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>a</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>b</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Number</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l110"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:110</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Find the Greatest Common Factor between two numbers using the Euler Method.
+Will return the first argument if only one argument is passed.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">a</code>
+                        <span class="type">Number</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">b</code>
+                        <span class="type">Number</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Number</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <p>   Ratio.gcd(20,12) === 4</p>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_Ratio.getCleanENotation" class="method item">
+    <h3 class="name"><code>Ratio.getCleanENotation</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>num</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l373"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:373</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Rounds up a scientific notated number with 8+ trailing 0s or 9s.<br/></p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">num</code>
+                        <span class="type">Number</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">String</span>:
+                    
+                    <ul>
+<li>Returns number as string to preserve value.</li>
+</ul>
+
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <p>   Example 1
+   Ratio.getCleanENotation( &quot;1.1000000000000003e-30&quot; ) === &quot;1.1e-30&quot;;</p>
+<p>   Example 2
+   Ratio.getCleanENotation( &quot;9.999999999999999e+22&quot; ) === &quot;1e+23&quot;;</p>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_Ratio.getCombinedRatio" class="method item">
+    <h3 class="name"><code>Ratio.getCombinedRatio</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code class="optional">[obj]</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code class="optional">[obj]</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l423"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:423</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Used to combine two ratios into one.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[obj]</code>
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a> | String | Number</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[obj]</code>
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a> | String | Number</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>:
+                    
+                    <p>[obj]</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <p>   Ratio.getCombinedRatio(&quot;1/2&quot;,&quot;1/3&quot;).toString() === &quot;3/2&quot;</p>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_Ratio.getNumeratorWithSign" class="method item">
+    <h3 class="name"><code>Ratio.getNumeratorWithSign</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>top</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>bottom</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Number</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l147"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:147</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns the numerator with the corresponding sign of (top/bottom).<br/></p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">top</code>
+                        <span class="type">Number</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">bottom</code>
+                        <span class="type">Number</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Number</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <p>   Ratio.getNumeratorWithSign(1,-2) === -1</p>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_Ratio.getPrimeFactors" class="method item">
+    <h3 class="name"><code>Ratio.getPrimeFactors</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>num</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Array</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l342"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:342</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns the prime factors of a number. <br/>
+More info <a href="http://bateru.com/news/2012/05/code-of-the-day-javascript-prime-factors-of-a-number/">http://bateru.com/news/2012/05/code-of-the-day-javascript-prime-factors-of-a-number/</a></p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">num</code>
+                        <span class="type">Number</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Array</span>:
+                    
+                    <p>an array of numbers</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <p>   Ratio.getPrimeFactors(20).join(&#39;,&#39;) === &quot;2,2,5&quot;</p>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_Ratio.getRepeatProps" class="method item">
+    <h3 class="name"><code>Ratio.getRepeatProps</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>val</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">ArrayString, String, String</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l306"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:306</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>This function divides a repeating decimal into 3 parts. If the value passed is not a repeating decimal then an empty array is returned.<br/>
+For repeating decimals, the return value is an array which contains the numeric value split into 3 parts like, <br/>
+[ &quot;numbers before decimal&quot;, &quot;numbers before repeating pattern&quot;, &quot;repeating pattern.&quot; ].<br/>
+Here&#39;s another explanation. <br/>
+The return value is [i, x, r] for the repeating decimal value.<br/>
+where i are the values to the left of the decimal point. <br/>
+x are the decimals to the right of the decimal point and to the left of the repeating pattern.<br/>
+r is the unique repeating patterns for the repeating decimal.<br/>
+Example. 22/7 = 3.142857142857143 = 3.14-285714-285714-3, i = 3, x = 14, r = 285714<br/>
+It should be noted that the last digit might be removed to avoid rounding errors.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">val</code>
+                        <span class="type">Number</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">ArrayString, String, String</span>:
+                    
+                    <ul>
+<li>Must return strings because of zeros in pattern.</li>
+</ul>
+
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <p>   Ratio.getRepeatProps( 22/7 ) // returns [&quot;3&quot;, &quot;14&quot;, &quot;285714&quot;]</p>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_Ratio.getStandardRatioArray()" class="method item">
+    <h3 class="name"><code>Ratio.getStandardRatioArray()</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>a</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>b</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>alwaysReduce</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Array</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l454"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:454</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns an ratio as an array with the first element containing the sign of the fraction.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">a</code>
+                        <span class="type">Number</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <ul>
+<li>numerator</li>
+</ul>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">b</code>
+                        <span class="type">Number</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <ul>
+<li>denominator</li>
+</ul>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">alwaysReduce</code>
+                        <span class="type">Boolean</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <ul>
+<li>if true, then returns the simplify fraction.</li>
+</ul>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Array</span>:
+                    
+                    <p>[numerator, denominator]</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <p>   Ratio.getStandardRatioArray(-10,-20, true); // returns [1,2]</p>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_Ratio.getValueIfDefined" class="method item">
+    <h3 class="name"><code>Ratio.getValueIfDefined</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>backup</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>value</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l97"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:97</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns the default value if the provided new value is undefined or null.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">backup</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <ul>
+<li>default value</li>
+</ul>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">value</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <p>   Ratio.getValueIfDefined( 4, null ) === 4</p>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_Ratio.guessType" class="method item">
+    <h3 class="name"><code>Ratio.guessType</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>obj</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l161"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:161</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Provides a quick way to find out the numeric type of an object.
+Types include: <code>NaN</code>, <code>Ratio</code>, <code>number</code>, <code>e</code>, <code>decimal</code>, <code>mixed</code> and <code>fraction</code></p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">obj</code>
+                        <span class="type"></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">String</span>:
+                    
+                    <p>type</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <p>   Ratio.guessType(&quot;1/3&quot;) === &quot;fraction&quot;;</p>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_Ratio.isNumeric" class="method item">
+    <h3 class="name"><code>Ratio.isNumeric</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>obj</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Boolean</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l85"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:85</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Checks if value is a finite number. <br/> Borrowed from jQuery 1.7.2 <br/></p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">obj</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Boolean</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <p>   Ratio.isNumeric(&quot;1.0e3&quot;) === true</p>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_Ratio.parse" class="method item">
+    <h3 class="name"><code>Ratio.parse</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>obj</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code class="optional">[obj]</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l242"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:242</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Converts a numeric value to a Ratio object.
+Supports mixed numbers, whole numbers, decimals, scientific numbers and Ratio objects.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">obj</code>
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a> | Number | String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <ul>
+<li>numerator</li>
+</ul>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[obj]</code>
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a> | Number | String</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <ul>
+<li>denominator</li>
+</ul>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <p>   Ratio.parse(22,7).toString() === &quot;22/7&quot;; //whole numbers</p>
+<p>   Ratio.parse(&quot;3 1/7&quot;).toString() === &quot;22/7&quot;; // mixed numbers</p>
+<p>   Ratio.parse(22/7).simplify().toLocaleString() === &quot;3 1/7&quot;; // decimals</p>
+<p>   Ratio.parse(&quot;22/7&quot;).toLocaleString() === &quot;3 1/7&quot;; // fractions</p>
+<p>   Ratio.parse(&quot;22e31/70e30&quot;).simplify().toLocaleString() === &quot;3 1/7&quot;; // scientific notated numbers</p>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_Ratio.parseToArray" class="method item">
+    <h3 class="name"><code>Ratio.parseToArray</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>obj</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">ArrayNumber, Number</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l191"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:191</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Converts a numeric value to an array in the form of [top, bottom], such that top/bottom evaluates to the passed value.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">obj</code>
+                        <span class="type">Number | String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Numeric Object.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">ArrayNumber, Number</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <p>   Ratio.parseToArray( 0.125 ) // returns [125, 1000]</p>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_Ratio.prototype.abs" class="method item">
+    <h3 class="name"><code>Ratio.prototype.abs</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l817"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:817</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns a new instances that is the absolute value of the current Ratio.</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   Ratio(-3,2).abs().toString() === &quot;3/2&quot;</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_Ratio.prototype.add" class="method item">
+    <h3 class="name"><code>Ratio.prototype.add</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>obj</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code class="optional">[obj2]</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l640"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:640</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Adds the current Ratio to another Ratio.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">obj</code>
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a> | Number | String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[obj2]</code>
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a> | Number | String</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   Ratio( 1, 3 ).add( 1,2 ).toString() === &quot;5/6&quot;</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_Ratio.prototype.ceil" class="method item">
+    <h3 class="name"><code>Ratio.prototype.ceil</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l942"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:942</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns a new Ratio from the ceil of the current Ratio instance.</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   Ratio.parse(4.2).ceil().toString() === &quot;5/1&quot;</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_Ratio.prototype.cleanFormat" class="method item">
+    <h3 class="name"><code>Ratio.prototype.cleanFormat</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l794"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:794</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>From the Ratio instance, returns a new Ratio by parsing the numerator and denominator.<br/>
+This is useful if want to ensure that the Ratio contains only whole numbers in the numerator and denominator after a caclulation.</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   var a = Ratio(20,30).descale(3);
+   a.toString() == &quot;6.666666666666667/10&quot;;
+   a.cleanFormat().toString() == &quot;6666666666666667/10000000000000000&quot;</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_Ratio.prototype.clone" class="method item">
+    <h3 class="name"><code>Ratio.prototype.clone</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code class="optional">[top]</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code class="optional">[bottom]</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code class="optional">[alwaysReduce]</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l595"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:595</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns a new instance of the current Ratio.<br/>
+The clone propery value can be changed if the appropriate argument value is supplied.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[top]</code>
+                        <span class="type">Number</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[bottom]</code>
+                        <span class="type">Number</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[alwaysReduce]</code>
+                        <span class="type">Boolean</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   var a = Ratio(2,4);
+   var b = a.clone();
+   a.equals(b) === true;</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_Ratio.prototype.correctRatio" class="method item">
+    <h3 class="name"><code>Ratio.prototype.correctRatio</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l507"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:507</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>For each ratio instance, corrects three main problems:
+1) Sets the numerator and denominator to default values if undefined. (Default fraction: 0/1)
+2) Places the sign on numerator.
+3) Reduces the ratio if needed.</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   Ratio().toString() === &quot;0/1&quot;; // <code>.correctRatio()</code> was called internally.</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_Ratio.prototype.deepEquals" class="method item">
+    <h3 class="name"><code>Ratio.prototype.deepEquals</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>obj</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Boolean</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l694"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:694</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Performs a strict comparison to determine if the current instances and passed object are identical.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">obj</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Boolean</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   Ratio(1,2).deepEquals( 1/2 ) === false</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_Ratio.prototype.denominator" class="method item">
+    <h3 class="name"><code>Ratio.prototype.denominator</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>val</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Number</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l494"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:494</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>A setter and getter for the denominator</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">val</code>
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a> | String | Number</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <ul>
+<li>denominator</li>
+</ul>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Number</span>:
+                    
+                    <ul>
+<li>denominator</li>
+</ul>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_Ratio.prototype.descale" class="method item">
+    <h3 class="name"><code>Ratio.prototype.descale</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>obj</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code class="optional">[obj2]</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l749"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:749</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns an new Ratio scaled down by a factor from the current instance.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">obj</code>
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a> | Number | String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[obj2]</code>
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a> | Number | String</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   Ratio(10,4).descale( 2 ).toString() === &quot;5/2&quot;</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_Ratio.prototype.divide" class="method item">
+    <h3 class="name"><code>Ratio.prototype.divide</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>obj</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code class="optional">[obj2]</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l666"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:666</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Divides the current Ratio by another Ratio.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">obj</code>
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a> | Number | String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[obj2]</code>
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a> | Number | String</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   Ratio( 1,2 ).divide( 3,4 ).toString() === &quot;4/6&quot;</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_Ratio.prototype.equals" class="method item">
+    <h3 class="name"><code>Ratio.prototype.equals</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>obj</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Boolean</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l681"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:681</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns if the current Ratio and another object have the same numeric value.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">obj</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Boolean</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   Ratio(1,2).equals( 1/2 ) === true</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_Ratio.prototype.findX" class="method item">
+    <h3 class="name"><code>Ratio.prototype.findX</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>str</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l865"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:865</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Determines the value of x. Solves the following equations.<br/></p>
+<ol>
+<li><code>( a/b = x/n )</code> or</li>
+<li><code>( a/b = n/x )</code> <br/>
+Where a, b are the numerator and denominator respectively of the current Ratio.<br/>
+Note: Returns null if the the string can&#39;t be split into exactly 2 elements.</li>
+</ol>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">str</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>a string representing a fraction with a &#39;x&#39; in the numerator or denominator.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   Ratio(1,4).findX(&quot;x/20&quot;) == 5;</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_Ratio.prototype.floor" class="method item">
+    <h3 class="name"><code>Ratio.prototype.floor</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l930"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:930</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns a new Ratio from the floor of the current Ratio instance.</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   Ratio.parse(4.2).floor().toString() === &quot;4/1&quot;</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_Ratio.prototype.isNaN" class="method item">
+    <h3 class="name"><code>Ratio.prototype.isNaN</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Boolean</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l616"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:616</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Determines if a current instance value is not a number.</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Boolean</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   Ratio(1,2).isNaN() === false;</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_Ratio.prototype.isProper" class="method item">
+    <h3 class="name"><code>Ratio.prototype.isProper</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Boolean</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l854"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:854</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Determines if the current Ratio is a proper fraction.</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Boolean</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   Ratio(12,3).isProper() == false;</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_Ratio.prototype.makeProper" class="method item">
+    <h3 class="name"><code>Ratio.prototype.makeProper</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l954"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:954</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns a new Ratio by removing the integer part of the current instance.
+In otherwords, returns the decimal portion as a fraction.</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   Ratio.parse(4.2).makeProper().toString() === &quot;2/10&quot;</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_Ratio.prototype.mod" class="method item">
+    <h3 class="name"><code>Ratio.prototype.mod</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l829"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:829</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>From the Ratio instance, returns a new Ratio in the form of (numerator mod denominator)/1.<br/>
+Which is the same as Ratio( (numerator % denominator), 1 ).</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   Ratio(3,10).mod().toString() === &quot;3/1&quot;</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_Ratio.prototype.multiply" class="method item">
+    <h3 class="name"><code>Ratio.prototype.multiply</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>obj</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code class="optional">[obj2]</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l708"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:708</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Multiply the current Ratio by another Ratio.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">obj</code>
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a> | Number | String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[obj2]</code>
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a> | Number | String</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   Ratio(2,5).multiply( 1, 2 ).toString() === &quot;2/10&quot;</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_Ratio.prototype.negate" class="method item">
+    <h3 class="name"><code>Ratio.prototype.negate</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l842"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:842</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns a new instance of the Ratio with the sign toggled.</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   Ratio(1,2).negate().toString() === &quot;-1/2&quot;</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_Ratio.prototype.numerator" class="method item">
+    <h3 class="name"><code>Ratio.prototype.numerator</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>val</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Number</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l482"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:482</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>A setter and getter for the numerator</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">val</code>
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a> | String | Number</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <ul>
+<li>numerator</li>
+</ul>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Number</span>:
+                    
+                    <ul>
+<li>numerator</li>
+</ul>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_Ratio.prototype.pow" class="method item">
+    <h3 class="name"><code>Ratio.prototype.pow</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>obj</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code class="optional">[obj2]</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l764"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:764</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>From the Ratio instance, returns an new Ratio raised to a power.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">obj</code>
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a> | Number | String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[obj2]</code>
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a> | Number | String</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   Ratio(2,4).pow(4).toString() === &quot;16/256&quot;</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_Ratio.prototype.reciprocal" class="method item">
+    <h3 class="name"><code>Ratio.prototype.reciprocal</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l886"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:886</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Switches the numerator and denominator positions.</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   Ratio(1,2).reciprocal().toString() == &quot;2/1&quot;;</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_Ratio.prototype.reduce" class="method item deprecated">
+    <h3 class="name"><code>Ratio.prototype.reduce</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+        <span class="flag deprecated">deprecated</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l967"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:967</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Use Ratio.prototype.simplify() instead.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_Ratio.prototype.scale" class="method item">
+    <h3 class="name"><code>Ratio.prototype.scale</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>obj</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code class="optional">[obj2]</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l779"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:779</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>From the Ratio instance, returns a new Ratio scaled up by a factor.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">obj</code>
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a> | Number | String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[obj2]</code>
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a> | Number | String</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   Ratio(1,10).scale(10).toString() === &quot;10/100&quot;</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_Ratio.prototype.simplify" class="method item">
+    <h3 class="name"><code>Ratio.prototype.simplify</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l627"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:627</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns a simplifyd ratio from the current instance.</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   Ratio(10,2).simplify().toString() === &quot;5/1&quot;</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_Ratio.prototype.subtract" class="method item">
+    <h3 class="name"><code>Ratio.prototype.subtract</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>obj</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code class="optional">[obj2]</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l723"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:723</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Subtracts the current Ratio from another Ratio.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">obj</code>
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a> | Number | String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[obj2]</code>
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a> | Number | String</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   Ratio(2,3).subtract(1,7).toString() === &quot;11/21&quot;</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_Ratio.prototype.toArray" class="method item">
+    <h3 class="name"><code>Ratio.prototype.toArray</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Array</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l524"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:524</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>From the Ratio instance, returns the raw values of the numerator and denominator in the form [numerator, denominator].</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Array</span>:
+                    
+                    <p>an array of 2 numbers.</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   Ratio(1,2).toArray().join(&#39;,&#39;) === &quot;1,2&quot;</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_Ratio.prototype.toLocaleString" class="method item">
+    <h3 class="name"><code>Ratio.prototype.toLocaleString</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l548"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:548</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>From the Ratio instance, returns a string of the Ratio in fraction form if the numerator and denominator are Rational numbers.<br/>
+The output format can be a whole number, mixed number, NaN, proper fraction depending on the computed value of (numerator / denominator).</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">String</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   Example 1:
+   Ratio(1,10).toLocaleString() === &quot;1/10&quot;
+
+   Example 2:
+   Ratio(0,0).toLocaleString() === &quot;NaN&quot;</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_Ratio.prototype.toQuantityOf" class="method item">
+    <h3 class="name"><code>Ratio.prototype.toQuantityOf</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>base</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l898"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:898</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>From the Ratio instance, approxiates the value to a new fraction with a provided denominator.
+In otherwords, this method helps you find out what fraction with a given denominator will best
+represent the current numeric value of the Ratio.
+Operates on a arbitary amount of arguments and returns the Ratio with the closest match among the quantities.
+Therefore, an approximated quantity is returned if the absolute value of the difference between the approximated quantity and actual value is
+smaller than the error rate.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">base</code>
+                        <span class="type">Number, ...</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   Ratio(27,100).toQuantityOf(3).toString() == &quot;1/3&quot;;
+   Ratio(1,2).toQuantityOf(2,3,4).toString() === &quot;1/2&quot;;</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_Ratio.prototype.toString" class="method item">
+    <h3 class="name"><code>Ratio.prototype.toString</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l577"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:577</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>From the Ratio instance, returns the raw values of the numerator and denominator in the form &quot;a/b&quot;.<br/>
+Note: The division symbol can be change by modification of the <code>divSign</code> property.</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">String</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   Example 1:
+   Ratio(8,2).toString() === &quot;8/2&quot;;
+
+   Example 2:
+   var a = Ratio(8,2);
+   a.divSign = &quot;:&quot;;
+   a.toString() == &quot;8:2&quot;;</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_Ratio.prototype.valueOf" class="method item">
+    <h3 class="name"><code>Ratio.prototype.valueOf</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Number</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l535"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:535</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>From the Ratio instance, returns the result of the numerator divided by the denominator.</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Number</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   Example 1:
+   Ratio(1,2).valueOf() === 0.5;</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_Ratio.random" class="method item">
+    <h3 class="name"><code>Ratio.random</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l440"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:440</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns a new Ratio with random values for the numerator and denominator.
+Values range from [0, 1]</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a></span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <p>   Ratio.random().toString(); // might return &quot;1/4&quot;</p>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_Ratio.simplify" class="method item">
+    <h3 class="name"><code>Ratio.simplify</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>obj</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code class="optional">[obj]</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Array Number, Number </span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l272"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:272</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns an array of two numbers that represent ratio of the passed values.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">obj</code>
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a> | Number | String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[obj]</code>
+                        <span class="type"><a href="../classes/Ratio.html" class="crosslink">Ratio</a> | Number | String</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Array Number, Number </span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <p>   Example 1:</p>
+<p>   Ratio.simplify( Ratio(36,-36) ); // returns [-1,1]</p>
+<p>   Example 2:</p>
+<p>   Ratio.simplify( &quot;9/12&quot; ); // returns [3,4]</p>
+<p>   Example 3:</p>
+<p>   Ratio.simplify( &quot;10/4&quot;, &quot;5/3&quot; ); // returns [3,2] because (&quot;10/4&quot;, &quot;5/3&quot;) =&gt; (&quot;6/4&quot;)
+   Ratio.simplify( &quot;6/4&quot; ); // returns [3,2]</p>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_Ratio.simplifyENotation" class="method item">
+    <h3 class="name"><code>Ratio.simplifyENotation</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>top</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>bottom</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Array</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l394"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:394</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Moves all the zeros for scientific numbers to the first or second element.</br>
+The most takes all. This helps simplify computational errors with <code>SN</code>s. <em>Need to reword</em></p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">top</code>
+                        <span class="type">Number</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">bottom</code>
+                        <span class="type">Number</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Array</span>:
+                    
+                    <ul>
+<li>Pair of numbers</li>
+</ul>
+
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <p>   Ratio.simplifyENotation(3e80,3e35); // returns [3e45,3]</p>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+            </div>
+        
+
+        
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
+
+                
+                    <div id="property_Ratio.MAX_PRECISION" class="property item">
+    <h3 class="name"><code>Ratio.MAX_PRECISION</code></h3>
+    <span class="type">Number</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l38"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:38</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Represents the maximum amount of precision avaiable. <br/>
+Any value with more digits will become estimations.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_Ratio.MAX_VALUE" class="property item">
+    <h3 class="name"><code>Ratio.MAX_VALUE</code></h3>
+    <span class="type">Number</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l46"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:46</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Represents the largest value that stored without loss of precision. <br/>
+Any value larger will become estimations.
+Source: &quot;<a href="http://stackoverflow.com/questions/307179/what-is-javascripts-max-int-whats-the-highest-integer-value-a-number-can-go-t">http://stackoverflow.com/questions/307179/what-is-javascripts-max-int-whats-the-highest-integer-value-a-number-can-go-t</a>&quot;</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_Ratio.MIN_VALUE" class="property item">
+    <h3 class="name"><code>Ratio.MIN_VALUE</code></h3>
+    <span class="type">Number</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l55"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:55</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Represents the smallest value that stored without loss of precision. <br/>
+Any value smaller will become estimations.
+Source: &quot;<a href="http://stackoverflow.com/questions/307179/what-is-javascripts-max-int-whats-the-highest-integer-value-a-number-can-go-t">http://stackoverflow.com/questions/307179/what-is-javascripts-max-int-whats-the-highest-integer-value-a-number-can-go-t</a>&quot;</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_Ratio.regex" class="property item">
+    <h3 class="name"><code>Ratio.regex</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l64"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:64</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Stores complex regular expressions.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_Ratio.VERSION" class="property item">
+    <h3 class="name"><code>Ratio.VERSION</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/_home_dev_wip_github_Ratio.js_dist_Ratio-0.4.1.js.html#l78"><code>&#x2F;home&#x2F;dev&#x2F;wip&#x2F;github&#x2F;Ratio.js&#x2F;dist&#x2F;Ratio-0.4.1.js:78</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Version number of Ratio.js</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+
+        
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>
