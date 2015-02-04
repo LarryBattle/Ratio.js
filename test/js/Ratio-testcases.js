@@ -360,6 +360,19 @@ var runTests = function() {
     equal(new Ratio(1e100, 4), 1e100 / 4);
     equal(new Ratio(1e-4, 3), 1e-4 / 3);
   });
+  test("test Ratio.prototype.toTeX()", function() {
+    var func = function(a, b, c) {
+      return new Ratio(a, b).toTeX(c);
+    };
+    equal(func(1, 2), "\\frac{1}{2}");
+    equal(func(-1, 2), "-\\frac{1}{2}");
+    equal(func(1, 2, 1), "\\frac{1}{2}");
+    equal(func(-1, 2, 1), "-\\frac{1}{2}");
+    equal(func(3, 2), "\\frac{3}{2}");
+    equal(func(-3, 2), "-\\frac{3}{2}");
+    equal(func(3, 2, 1), "1\\frac{1}{2}");
+    equal(func(-3, 2, 1), "-1\\frac{1}{2}");
+  });
 
   module("Ratio Instance Property Change");
   test("test divider sign change", function() {
