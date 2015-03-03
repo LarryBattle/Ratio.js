@@ -1,3 +1,6 @@
+## Note:
+Project is retired and not under active development.
+
 ## Ratio.js 
 Provides a Fraction / Rational / Ratio object for javascript.
 
