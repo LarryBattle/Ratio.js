@@ -1,5 +1,11 @@
 ## Note:
 Project is retired and not under active development.
+Please checkout these alternative libraries.
+
+    https://github.com/MikeMcl/decimal.js
+    https://github.com/dtrebbien/BigDecimal.js
+
+
 
 ## Ratio.js 
 Provides a Fraction / Rational / Ratio object for javascript.
