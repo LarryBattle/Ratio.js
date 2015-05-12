@@ -5,7 +5,7 @@ Please checkout these alternative libraries.
 - https://github.com/MikeMcl/decimal.js
 - https://github.com/dtrebbien/BigDecimal.js
 
-
+Open up a ticket if you want to take over the project.
 
 ## Ratio.js 
 Provides a Fraction / Rational / Ratio object for javascript.
