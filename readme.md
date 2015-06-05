@@ -3,7 +3,7 @@ Project is retired and not under active development.
 Please checkout these alternative libraries.
 
 - https://github.com/ekg/fraction.js
-- https://github.com/ekg/fraction.js
+- https://github.com/infusion/Fraction.js
 - https://github.com/MikeMcl/decimal.js
 - https://github.com/dtrebbien/BigDecimal.js
 
